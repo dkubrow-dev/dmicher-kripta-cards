@@ -1,0 +1,156 @@
+# =========================
+# Visual Studio / .NET
+# =========================
+
+.vs/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+artifacts/
+publish/
+*.nupkg
+*.snupkg
+packages/
+
+# Rider / ReSharper, если вдруг появятся
+.idea/
+_ReSharper*/
+*.DotSettings.user
+
+# =========================
+# Build / тесты / coverage
+# =========================
+
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+coverage.xml
+lcov.info
+
+# =========================
+# ASP.NET / локальные настройки / секреты
+# =========================
+
+.env
+.env.*
+!.env.example
+
+appsettings.Local.json
+appsettings.*.Local.json
+appsettings.Development.local.json
+appsettings.Production.json
+
+secrets.json
+*.pfx
+*.key
+*.pem
+*.crt
+
+# Локальные БД сервера
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+
+# Всё содержимое папки "Content": SQLite, артефакт сборки, изображения карточек.
+#    Пример репозитория остаётся.
+**/Content/artifacts/
+**/Content/SQLite/
+**/Content/Cards/
+
+# Логи сервера
+logs/
+Logs/
+*.log
+
+
+# =========================
+# Node / Foundry frontend tooling
+# =========================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+.cache/
+.parcel-cache/
+.vite/
+.eslintcache
+
+# Сборочные артефакты фронта.
+# Если dist/build являются публикуемой частью модуля и должны храниться в git — убери эти строки.
+dist/
+build/
+.temp/
+tmp/
+
+
+# =========================
+# Foundry VTT
+# =========================
+
+# НЕ игнорируем module.json, scripts/, templates/, styles/, lang/, assets/
+# Они обычно должны быть в репозитории модуля.
+
+# Локальная пользовательская папка Foundry, если случайно положили репозиторий рядом
+Data/
+Config/
+Logs/
+worlds/
+systems/
+
+# Но сам модуль можно хранить в репозитории.
+# Если репозиторий лежит прямо в Data/modules/<module-id>, эти правила не мешают.
+
+# Runtime/lock-файлы compendium packs Foundry
+packs/**/CURRENT
+packs/**/LOCK
+packs/**/*.ldb
+packs/**/*.log
+packs/**/*.sqlite
+packs/**/*.sqlite3
+packs/**/*.sqlite-shm
+packs/**/*.sqlite-wal
+
+# Экспортированные релизы модуля
+*.zip
+*.tgz
+
+# Локальные manifest/package файлы для проверки, если создаёшь их скриптами
+manifest.local.json
+module.local.json
+
+
+# =========================
+# Windows / редакторы
+# =========================
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+*.swp
+*.swo
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json

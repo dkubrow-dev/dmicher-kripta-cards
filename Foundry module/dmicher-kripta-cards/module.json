@@ -1,0 +1,33 @@
+{
+  "id": "dmicher-kripta-cards",
+  "title": "Карточки Крипты",
+  "description": "Модуль Foundry VTT для игры с выдаваемыми карточками.",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "dmicher abathur kubrow"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+  "esmodules": [
+    "scripts/module.js"
+  ],
+  "styles": [
+    "styles/module.css"
+  ],
+  "languages": [
+    {
+      "lang": "ru",
+      "name": "Русский",
+      "path": "lang/ru.json"
+    }
+  ],
+  "manifest": "",
+  "download": "",
+  "url": "",
+  "bugs": "",
+  "readme": ""
+}
