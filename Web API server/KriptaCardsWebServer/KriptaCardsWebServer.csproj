@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>KriptaCards.WebApi</RootNamespace>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>$(MSBuildProjectDirectory)\Content\artifacts\docs\$(MSBuildProjectName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<AssemblyName>KriptaCardsWebServer</AssemblyName>
+		<Version>1.0.0</Version>
+		<InformationalVersion>1.0.0</InformationalVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <NoWarn>1701;1702;CA1873;CA2254</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <NoWarn>1701;1702;CA1873;CA2254</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Content\artifacts\docs\KriptaCardsWebServer.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Content\artifacts\docs\KriptaCardsWebServer.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.5" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.5" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="10.0.5" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="6.1.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
+		<PackageReference Include="Markdig" Version="0.37.0" />
+	</ItemGroup>
+
+</Project>

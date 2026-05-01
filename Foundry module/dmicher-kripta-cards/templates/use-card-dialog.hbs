@@ -1,0 +1,24 @@
+<form class="kripta-sheet-form">
+  {{#if isMissing}}
+  <p>эта карточка больше не зарегистрирована на сервере.</p>
+
+  <footer class="sheet-footer flexrow">
+    <button type="button" onclick="this.closest('.app').querySelector('.header-button.close')?.click()">Закрыть</button>
+  </footer>
+  {{else}}
+  <p>Выбрана карточка для использования: <strong>{{meta.name}}</strong>.</p>
+
+  <div class="form-group">
+    <label>Режим</label>
+    <div class="kripta-radio-row">
+      <label><input type="radio" name="mode" value="spend" checked> Потратить</label>
+      <label><input type="radio" name="mode" value="show"> Показать</label>
+    </div>
+  </div>
+
+  <footer class="sheet-footer flexrow">
+    <button type="submit" class="default">Да</button>
+    <button type="button" onclick="this.closest('.app').querySelector('.header-button.close')?.click()">Нет</button>
+  </footer>
+  {{/if}}
+</form>

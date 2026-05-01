@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="KriptaCardsWebServer/KriptaCardsWebServer.csproj" />
+  <Project Path="KriptaCardsWinServiceManager/KriptaCardsWinServiceManager.csproj" Id="18877188-909d-4f03-b2af-47aa8c618fdc" />
+</Solution>
