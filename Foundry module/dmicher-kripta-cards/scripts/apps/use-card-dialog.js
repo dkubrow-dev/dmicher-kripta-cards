@@ -32,7 +32,7 @@ export class KriptaUseCardDialog extends FormApplication {
   async getData() {
     try {
       this.meta = await KriptaApiClient.getCardMeta(this.level, this.number);
-      const blob = await KriptaApiClient.getCardImageBlob(this.level, this.number).catch(() => null);
+      const blob = await KriptaApiClient.getCardImageBlob(this.meta.imagePath).catch(() => null);
       this.imageUrl = blob ? URL.createObjectURL(blob) : "";
       this.isMissing = false;
 

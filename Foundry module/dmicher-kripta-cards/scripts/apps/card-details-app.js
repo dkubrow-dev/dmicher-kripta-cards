@@ -47,11 +47,12 @@ export class KriptaCardDetailsApp extends Application {
     const ref = assertLocalCardRef(this.level, this.number);
 
 
-    const [meta, levels, imageBlob] = await Promise.all([
-      KriptaApiClient.getCardMeta(ref.level, ref.number),
-      KriptaApiClient.getLevelsList(),
-      KriptaApiClient.getCardImageBlob(ref.level, ref.number).catch(() => null)
+    const [meta, levels] = await Promise.all([
+        KriptaApiClient.getCardMeta(ref.level, ref.number),
+        KriptaApiClient.getLevelsList()
     ]);
+
+    const imageBlob = await KriptaApiClient.getCardImageBlob(meta.imagePath).catch(() => null);
 
     this.meta = meta;
     this.levels = levels;

@@ -59,7 +59,7 @@ export function normalizeCardMeta(value, fallback = {}) {
     number: Number(firstOf(source, ["number", "Number", "card", "Card", "cardNumber", "CardNumber"], fallback.number ?? 0)),
     name: String(firstOf(source, ["name", "Name"], fallback.name ?? "")),
     description: String(firstOf(source, ["description", "Description"], fallback.description ?? "")),
-    image: String(firstOf(source, ["image", "Image", "imageUrl", "ImageUrl"], fallback.image ?? ""))
+    imagePath: String(firstOf(source, ["imagePath", "ImagePath", "image", "Image", "imageUrl", "ImageUrl"], fallback.imagePath ?? fallback.image ?? "")),
   };
 }
 
@@ -174,6 +174,6 @@ export function normalizeRollCard(value, fallbackLevel = 0) {
     number: Number(firstOf(rolledCard, ["number", "Number", "card", "Card", "cardNumber", "CardNumber"], 0)),
     name: "",
     description: "",
-    image: ""
+    imagePath: ""
   });
 }

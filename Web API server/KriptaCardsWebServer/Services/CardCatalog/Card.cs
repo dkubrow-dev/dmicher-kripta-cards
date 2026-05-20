@@ -15,4 +15,10 @@ public sealed record Card(
     int Level,
     int Number,
     string Name,
-    string Description);
+    string Description)
+{
+    /// <summary>
+    /// Путь до изображения
+    /// </summary>
+    public string? ImagePath { get; set; }
+}

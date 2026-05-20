@@ -261,12 +261,12 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
 
         await message.delete();
 
-        const [meta, levels, blob] = await Promise.all([
-          KriptaApiClient.getCardMeta(payload.level, payload.number),
-          KriptaApiClient.getLevelsList(),
-          KriptaApiClient.getCardImageBlob(payload.level, payload.number).catch(() => null)
+        const [meta, levels] = await Promise.all([
+            KriptaApiClient.getCardMeta(payload.level, payload.number),
+            KriptaApiClient.getLevelsList()
         ]);
 
+        const blob = await KriptaApiClient.getCardImageBlob(meta.imagePath).catch(() => null);
         const imageUrl = blob ? URL.createObjectURL(blob) : "";
         const ownerUser = game.users.get(payload.ownerFoundryUserId);
         const levelName = levels.find((item) => item.id === payload.level)?.name ?? String(payload.level);

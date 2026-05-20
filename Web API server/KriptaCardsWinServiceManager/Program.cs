@@ -180,22 +180,25 @@ void UninstallService()
         return;
     }
 
-    try
+    if (OperatingSystem.IsWindows())
     {
-        using var controller = new ServiceController(ServiceName);
-
-        if (controller.Status is ServiceControllerStatus.Running or ServiceControllerStatus.StartPending or ServiceControllerStatus.Paused)
+        try
         {
-            WriteInfo($"Останавливаю службу {ServiceName}...");
-            controller.Stop();
-            controller.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(20));
-            WriteOk("Служба остановлена.");
+            using ServiceController controller = new(ServiceName);
+
+            if (controller.Status is ServiceControllerStatus.Running or ServiceControllerStatus.StartPending or ServiceControllerStatus.Paused)
+            {
+                WriteInfo($"Останавливаю службу {ServiceName}...");
+                controller.Stop();
+                controller.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(20));
+                WriteOk("Служба остановлена.");
+            }
         }
-    }
-    catch (Exception ex)
-    {
-        WriteWarning("Не удалось штатно остановить службу. Попробую удалить регистрацию.");
-        Console.WriteLine(ex.Message);
+        catch (Exception ex)
+        {
+            WriteWarning("Не удалось штатно остановить службу. Попробую удалить регистрацию.");
+            Console.WriteLine(ex.Message);
+        }
     }
 
     var deleteResult = RunSc("delete", ServiceName);

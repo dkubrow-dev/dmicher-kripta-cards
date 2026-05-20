@@ -2,9 +2,11 @@
 // Copyright (c) 2026 dmicher abathur kubrow
 // Original project: https://github.com/dkubrow-dev/kripta-cards
 
-using System.Collections.Concurrent;
-using System.Text.Json;
 using KriptaCards.WebApi.Services.Interfaces;
+using System.Collections.Concurrent;
+using System.Reflection.Emit;
+using System.Text.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KriptaCards.WebApi.Services.CardCatalog;
 
@@ -21,14 +23,14 @@ public class SimpleCardCatalogService : ICardCatalogService
     /// <summary>
     /// Путь к корневой папке с изображениями
     /// </summary>
-    private static readonly string _cardsRootPath = Path.Combine(AppContext.BaseDirectory, "Content", "Cards");
+    private static readonly string _cardsRootPath = Path.Combine("Content", "Cards");
 
     /// <summary>
     /// Опции сериализации JSON файла с реестром
     /// </summary>
     private static readonly JsonSerializerOptions jsonOptions = new()
     {
-        PropertyNameCaseInsensitive = false,
+        PropertyNameCaseInsensitive = true,
         ReadCommentHandling = JsonCommentHandling.Skip
     };
 
@@ -94,26 +96,33 @@ public class SimpleCardCatalogService : ICardCatalogService
             throw new FormatException("Regustry is not valid: there is some cards, withs levels not exist.");
         }
 
-        string cardsImageDirPath = Path.Combine(AppContext.BaseDirectory, "Content", "Cards");
         foreach (Card card in registry.Cards)
         {
             int level = card.Level;
             int number = card.Number;
-            string imageDirectory = Path.Combine(cardsImageDirPath, level.ToString());
-            if (!Directory.Exists(imageDirectory))
+            bool getCommonImage = !string.IsNullOrWhiteSpace(card.ImagePath);
+
+            string imageLevelName = getCommonImage ? "Common" : level.ToString();
+            string imageDirectory = Path.Combine(_cardsRootPath, imageLevelName);
+            string imageAbsDirecroty = Path.Combine(AppContext.BaseDirectory, imageDirectory);
+
+            if (!Directory.Exists(imageAbsDirecroty))
             {
-                throw new FileNotFoundException($"{imageDirectory} does not exist");
+                throw new FileNotFoundException($"{imageAbsDirecroty} does not exist");
             }
 
-            string[] imageFilePaths = [.. Directory.EnumerateFiles(imageDirectory, $"{number}.*")];
+            string[] imageFilePaths = [.. Directory.EnumerateFiles(imageAbsDirecroty, $"{(getCommonImage ? card.ImagePath : number.ToString())}.*")];
             if (imageFilePaths == null || imageFilePaths.Length < 1)
             {
                 throw new FileNotFoundException($"{imageFilePaths} does not exist");
             }
             if (imageFilePaths.Length > 1)
             {
-                throw new FormatException($"There is more than 1 image file for card l:{level} n:{number}.");
+                throw getCommonImage
+                    ? new FormatException($"There is more than 1 image file for image name in:{card.ImagePath}")
+                    : new FormatException($"There is more than 1 image file for card l:{level} n:{number}.");
             }
+            card.ImagePath = Path.Combine(imageLevelName, Path.GetFileName(imageFilePaths[0])).Replace('\\', '/');
         }
 
         ConcurrentDictionary<int, CardLevel> newLevels = new(
@@ -121,7 +130,6 @@ public class SimpleCardCatalogService : ICardCatalogService
 
         ConcurrentDictionary<(int Level, int Number), Card> newCards = new(
             registry.Cards.Select(card => new KeyValuePair<(int Level, int Number), Card>((card.Level, card.Number), card)));
-
 
         lock (_sycnLock)
         {
@@ -172,26 +180,39 @@ public class SimpleCardCatalogService : ICardCatalogService
     }
 
     /// <summary>
-    /// Выдать ссылку на скачивание изображения для переданной карты
+    /// Получить информацию о файле по пути до него
     /// </summary>
-    /// <param name="card">Карта, для которой нужен путь к изображению</param>
-    public string ImagePathById(Card card)
+    /// <param name="path">Путь до файла изображения (записан в карточке)</param>
+    public FileInfo GetFile(string path)
     {
-        string dirPath = Path.Combine(
-            _cardsRootPath,
-            card.Level.ToString());
-
-        if (!Directory.Exists(dirPath))
+        if (string.IsNullOrWhiteSpace(path))
         {
-            throw new FileNotFoundException();
+            throw new FileNotFoundException("Image path is empty.");
         }
 
-        string? filePath = Directory.EnumerateFiles(dirPath, $"{card.Number}.*").FirstOrDefault();
-        if (!File.Exists(filePath))
+        string normalizedPath = path
+            .Replace('\\', Path.DirectorySeparatorChar)
+            .Replace('/', Path.DirectorySeparatorChar);
+        
+        string cardsRootFullPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, _cardsRootPath));
+
+        if (!cardsRootFullPath.EndsWith(Path.DirectorySeparatorChar))
         {
-            throw new FileNotFoundException();
+            cardsRootFullPath += Path.DirectorySeparatorChar;
         }
 
-        return filePath;
+        string fullPath = Path.GetFullPath(Path.Combine(cardsRootFullPath, normalizedPath));
+
+        if (!fullPath.StartsWith(cardsRootFullPath, StringComparison.OrdinalIgnoreCase))
+        {
+            throw new FileNotFoundException("Image path is outside cards directory.");
+        }
+
+        if (!File.Exists(fullPath))
+        {
+            throw new FileNotFoundException(fullPath);
+        }
+
+        return new FileInfo(fullPath);
     }
 }

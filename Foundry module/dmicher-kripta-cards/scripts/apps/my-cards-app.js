@@ -38,19 +38,19 @@ function buildMissingMeta(item) {
   };
 }
 
-function getMyCardsImageCacheKey(level, number) {
-  return `${Number(level)}:${Number(number)}`;
+function getMyCardsImageCacheKey(imagePath) {
+    return String(imagePath ?? "");
 }
 
-async function loadMyCardsImageUrl(level, number) {
-  const cacheKey = getMyCardsImageCacheKey(level, number);
+async function loadMyCardsImageUrl(imagePath) {
+  const cacheKey = getMyCardsImageCacheKey(imagePath);
 
   if (MY_CARDS_IMAGE_URL_CACHE.has(cacheKey)) {
     return MY_CARDS_IMAGE_URL_CACHE.get(cacheKey) || "";
   }
 
   if (!MY_CARDS_IMAGE_PROMISE_CACHE.has(cacheKey)) {
-    const promise = KriptaApiClient.getCardImageBlob(level, number)
+    const promise = KriptaApiClient.getCardImageBlob(imagePath)
       .then((blob) => blob ? URL.createObjectURL(blob) : "")
       .catch(() => "")
       .then((url) => {
@@ -193,7 +193,7 @@ export class KriptaMyCardsApp extends Application {
       const name = String(metaResults[index]?.meta?.name ?? item?.name ?? "");
       const cachedImageUrl = metaResults[index]?.isMissing
         ? ""
-        : (MY_CARDS_IMAGE_URL_CACHE.get(getMyCardsImageCacheKey(item.level, item.number)) || "");
+        : (MY_CARDS_IMAGE_URL_CACHE.get(getMyCardsImageCacheKey(metaResults[index]?.meta?.imagePath)) || "");
 
       return {
         ...item,
@@ -488,7 +488,7 @@ export class KriptaMyCardsApp extends Application {
 
     if (!imageContainer || imageContainer.querySelector("img")) return;
 
-    const imageUrl = item.imageUrl || await loadMyCardsImageUrl(item.level, item.number);
+    const imageUrl = item.imageUrl || await loadMyCardsImageUrl(item.imagePath);
     if (!imageUrl) return;
 
     item.imageUrl = imageUrl;

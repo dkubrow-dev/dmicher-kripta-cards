@@ -67,7 +67,7 @@ public class CardsController(ICardCatalogService cardsService, ILogger<CardsCont
         if (!string.IsNullOrWhiteSpace(requestConstraints.NameConstraint))
         {
             string nameConstraint = requestConstraints.NameConstraint.ToUpper().Trim();
-            cards = cards.Where(x => x.Name.ToUpper().Trim().Contains(nameConstraint));
+            cards = cards.Where(x => x.Name != null && x.Name.ToUpper().Trim().Contains(nameConstraint));
         }
 
         List<CardResponseRow> responseInfo = [.. cards
@@ -107,12 +107,11 @@ public class CardsController(ICardCatalogService cardsService, ILogger<CardsCont
     }
 
     /// <summary>
-    /// (Reader) Возвращает изображение карточки по идентификатору
+    /// (Reader) Возвращает изображение карточки по пути до изображения
     /// </summary>
-    /// <param name="level">Уровень карточки</param>
-    /// <param name="card">Номер карточки в уровне</param>
+    /// <param name="imagePath">Путь до карточки</param>
     /// <returns>Файл изображения карточки</returns>
-    [HttpGet("getCardImage/{level:int}/{card:int}")]
+    [HttpGet("getCardImage/{**imagePath}")]
     [Base64Authorize(UserRoles.Reader, UserRoles.Writer)]
     [ProducesResponseType<FileStreamResult>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status304NotModified)]
@@ -121,26 +120,11 @@ public class CardsController(ICardCatalogService cardsService, ILogger<CardsCont
     [ProducesResponseType<ObjectResult>(StatusCodes.Status403Forbidden)]
     [ProducesResponseType<NotFoundObjectResult>(StatusCodes.Status404NotFound)]
     [ProducesResponseType<ObjectResult>(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetCardImage(int level, int card)
+    public async Task<IActionResult> GetCardImage([FromRoute] string imagePath)
     {
-        if (level < 0 || card < 0)
-        {
-            _logger.LogInformation($"No level or card id is in request l:{level}, c:{card}");
-            return BadRequest("No level or card id is in request.");
-        }
-
-        Card? cardMeta = _cardsService.GetCardById(level, card);
-        if (cardMeta == null)
-        {
-            _logger.LogInformation($"Card is not registered l:{level}, c:{card}");
-            return NotFound("Card is not registered.");
-        }
-
         try
         {
-            string imagePath = _cardsService.ImagePathById(cardMeta);
-
-            FileInfo fileInfo = new FileInfo(imagePath);
+            FileInfo fileInfo = _cardsService.GetFile(Uri.UnescapeDataString(imagePath));
             DateTimeOffset fileLastModified = fileInfo.LastWriteTimeUtc;
             long length = fileInfo.Length;
             string eTag = $"\"{fileLastModified.ToUnixTimeSeconds()}-{length}\"";
@@ -167,23 +151,23 @@ public class CardsController(ICardCatalogService cardsService, ILogger<CardsCont
                 contentType = "application/octet-stream";
             }
 
-            return File(System.IO.File.OpenRead(imagePath), contentType);
+            return File(fileInfo.OpenRead(), contentType);
         }
         catch (FileNotFoundException ex)
         {
-            string message = $"Card not found for level:{level} id:{card}. ";
+            string message = $"Card not found for path:{imagePath}. ";
             _logger.LogError(message, ex);
             return NotFound(message);
         }
         catch (IOException ex)
         {
-            string message = $"IO Exception:{level} id:{card}. ";
+            string message = $"IO Exception for path:{imagePath}. ";
             _logger.LogError(message, ex);
             return BadRequest(message + ex.Message);
         }
         catch (Exception ex)
         {
-            string message = $"Inner exception:{level} id:{card}. ";
+            string message = $"Inner exception for path:{imagePath}. ";
             _logger.LogError(message, ex);
             return Problem(message + ex.Message);
         }
