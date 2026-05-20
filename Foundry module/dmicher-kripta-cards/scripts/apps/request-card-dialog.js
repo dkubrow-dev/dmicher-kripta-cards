@@ -13,7 +13,7 @@ function pickRandomCard(cards) {
 }
 
 function needsMetaHydration(card) {
-  return !card || !String(card.name ?? "").trim() || !String(card.description ?? "").trim();
+  return !card || !String(card.name ?? "").trim() || !String(card.description ?? "").trim() || !String(card.imagePath ?? "").trim();
 }
 
 export class KriptaRequestCardDialog extends FormApplication {
@@ -202,7 +202,7 @@ export class KriptaRequestCardDialog extends FormApplication {
         levelName: resolvedLevelName,
         imageUrl: "",
         imageResolver: async () => {
-          const blob = await KriptaApiClient.getCardImageBlob(chosenCard.level, chosenCard.number).catch(() => null);
+          const blob = await KriptaApiClient.getCardImageBlob(chosenCard.imagePath).catch(() => null);
           return blob ? URL.createObjectURL(blob) : "";
         },
         description: chosenCard.description ?? "",

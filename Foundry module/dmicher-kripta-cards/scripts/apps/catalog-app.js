@@ -37,22 +37,22 @@ function buildCatalogFallbackMeta(card) {
   };
 }
 
-function getCatalogImageCacheKey(level, number) {
-  return `${Number(level)}:${Number(number)}`;
+function getCatalogImageCacheKey(imagePath) {
+    return String(imagePath ?? "");
 }
 
-async function loadCatalogImageUrl(level, number) {
-  const cacheKey = getCatalogImageCacheKey(level, number);
+async function loadCatalogImageUrl(imagePath) {
+  const cacheKey = getCatalogImageCacheKey(imagePath);
 
   if (CATALOG_IMAGE_URL_CACHE.has(cacheKey)) {
     return CATALOG_IMAGE_URL_CACHE.get(cacheKey) || "";
   }
 
   if (!CATALOG_IMAGE_PROMISE_CACHE.has(cacheKey)) {
-    const promise = KriptaApiClient.getCardImageBlob(level, number)
+    const promise = KriptaApiClient.getCardImageBlob(imagePath)
       .then((blob) => blob ? URL.createObjectURL(blob) : "")
       .catch((error) => {
-        console.warn("kripta image load failed", { card: { level, number }, error });
+        console.warn("kripta image load failed", { imagePath, error });
         return "";
       })
       .then((url) => {
@@ -183,7 +183,7 @@ export class KriptaCatalogApp extends Application {
       const description = String(meta?.description ?? card?.description ?? "");
       const descriptionText = stripHtml(description);
       const cachedImageUrl = isValidCardRef(card)
-        ? (CATALOG_IMAGE_URL_CACHE.get(getCatalogImageCacheKey(card.level, card.number)) || "")
+        ? CATALOG_IMAGE_URL_CACHE.get(getCatalogImageCacheKey(meta.imagePath))
         : "";
 
       return {
@@ -249,7 +249,7 @@ export class KriptaCatalogApp extends Application {
           imageUrl: item.imageUrl,
           imageResolver: item.imageUrl
             ? null
-            : async () => loadCatalogImageUrl(item.level, item.number),
+            : async () => loadCatalogImageUrl(item.imagePath),
           description: item.description,
           speakerUser: game.user
         });
@@ -426,7 +426,7 @@ export class KriptaCatalogApp extends Application {
 
     if (!imageContainer || imageContainer.querySelector("img")) return;
 
-    const imageUrl = item.imageUrl || await loadCatalogImageUrl(item.level, item.number);
+    const imageUrl = item.imageUrl || await loadCatalogImageUrl(item.imagePath);
     if (!imageUrl) return;
 
     item.imageUrl = imageUrl;

@@ -13,7 +13,7 @@ function pickRandomCard(cards) {
 }
 
 function needsMetaHydration(card) {
-  return !card || !String(card.name ?? "").trim() || !String(card.description ?? "").trim();
+  return !card || !String(card.name ?? "").trim() || !String(card.description ?? "").trim() || !String(card.imagePath ?? "").trim();
 }
 
 export class KriptaGiveCardDialog extends FormApplication {
@@ -200,7 +200,7 @@ export class KriptaGiveCardDialog extends FormApplication {
         title: `Игрок ${snapshot.playerName} получает карточку ${card.name} (${levelName})`,
         imageUrl: "",
         imageResolver: async () => {
-          const blob = await KriptaApiClient.getCardImageBlob(card.level, card.number).catch(() => null);
+          const blob = await KriptaApiClient.getCardImageBlob(card.imagePath).catch(() => null);
           return blob ? URL.createObjectURL(blob) : "";
         },
         description: card.description,

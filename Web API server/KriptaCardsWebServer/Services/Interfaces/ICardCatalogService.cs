@@ -29,7 +29,8 @@ public interface ICardCatalogService
     public Card? GetCardById(int levelId, int cardId);
 
     /// <summary>
-    /// Выдать ссылку на скачивание изображения для переданной карты
+    /// Получить информацию о файле по пути до него
     /// </summary>
-    public string ImagePathById(Card card);
+    /// <param name="path">Путь до файла изображения (записан в карточке)</param>
+    public FileInfo GetFile(string path);
 }

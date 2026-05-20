@@ -70,11 +70,11 @@ export class KriptaApiClient {
     return url.toString();
   }
 
-  static async request(role, path, { method = "GET", body, query, binary = false, headers = {}, useAuth = true } = {}) {
+  static async request(role, path, { method = "GET", body, query, binary = false, headers = {}, useAuth = true, cacheMode = "no-store" } = {}) {
     const response = await fetch(this.buildUrl(path, query), {
       method,
       mode: "cors",
-      cache: "no-store",
+      cache: cacheMode,
       headers: this.buildHeaders(role, headers, { useAuth }),
       body: body !== undefined ? JSON.stringify(body) : undefined
     });
@@ -169,14 +169,22 @@ export class KriptaApiClient {
     return normalized;
   }
 
-  static async getCardImageBlob(level, number) {
-    const addr = assertValidCardAddress(level, number, "getCardImage");
+  static buildCardImagePath(imagePath) {
+      return String(imagePath ?? "")
+          .replace(/\\/g, "/")
+          .replace(/^\/+/, "")
+          .split("/")
+          .map(encodeURIComponent)
+          .join("/");
+  }
 
-    return this.request(ROLES.READER, `/api/Cards/getCardImage/${addr.level}/${addr.number}`, {
-      method: "GET",
-      binary: true,
-      headers: { "Content-Type": undefined }
-    });
+  static async getCardImageBlob(imagePath) {
+      return this.request(ROLES.READER, `/api/Cards/getCardImage/${this.buildCardImagePath(imagePath)}`, {
+          method: "GET",
+          cacheMode: "default",
+          binary: true,
+          headers: { "Content-Type": undefined }
+      });
   }
 
   static async getPlayersList() {
