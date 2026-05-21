@@ -127,21 +127,6 @@ app.MapGet("/readme", async () =>
     return Results.Content(html, "text/html; charset=utf-8");
 });
 
-
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI(options =>
-//    {
-//        options.DocumentTitle = "Kripta Cards Web API";
-//    });
-//    app.MapGet("/", () => Results.Redirect("/swagger"));
-//}
-//else
-//{
-//    app.MapGet("/", () => Results.Redirect("/readme"));
-//}
-
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
