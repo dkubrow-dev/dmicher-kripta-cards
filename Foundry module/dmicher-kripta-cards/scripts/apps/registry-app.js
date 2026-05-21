@@ -42,59 +42,6 @@ async function fetchPlayersUntilDeleted(guid, attempts = 5, delayMs = 250) {
   return freshPlayers;
 }
 
-function extractJsonTail(text) {
-  const raw = String(text ?? "").trim();
-  if (!raw) return null;
-
-  try {
-    return JSON.parse(raw);
-  } catch (_error) {
-    // ignore
-  }
-
-  const match = raw.match(/(\{.*\})$/);
-  if (!match) return null;
-
-  try {
-    return JSON.parse(match[1]);
-  } catch (_error) {
-    return null;
-  }
-}
-
-function normalizeRegistryError(error, fallback) {
-  const rawMessage = String(error?.message ?? error ?? "").trim();
-  if (!rawMessage) return fallback;
-
-  const apiMatch = rawMessage.match(/^api\s+(\d+)\s*:\s*(.*)$/i);
-  const status = apiMatch?.[1] ?? "";
-  const tail = apiMatch?.[2] ?? rawMessage;
-  const parsed = extractJsonTail(tail);
-
-  if (parsed?.errors && typeof parsed.errors === "object") {
-    const firstField = Object.keys(parsed.errors)[0];
-    const firstValue = parsed.errors[firstField];
-
-    if (Array.isArray(firstValue) && firstValue.length) {
-      return status ? `api ${status}: ${firstValue[0]}` : String(firstValue[0]);
-    }
-
-    if (typeof firstValue === "string" && firstValue.trim()) {
-      return status ? `api ${status}: ${firstValue.trim()}` : firstValue.trim();
-    }
-  }
-
-  if (parsed?.message && String(parsed.message).trim()) {
-    return status ? `api ${status}: ${String(parsed.message).trim()}` : String(parsed.message).trim();
-  }
-
-  if (parsed?.title && String(parsed.title).trim()) {
-    return status ? `api ${status}: ${String(parsed.title).trim()}` : String(parsed.title).trim();
-  }
-
-  return rawMessage || fallback;
-}
-
 function validatePlayerPayload(payload) {
   const name = String(payload?.name ?? "").trim();
   if (!name) return localize("Error.NameRequired");
@@ -203,9 +150,7 @@ export class KriptaPlayerRegistryApp extends Application {
         this.onChange();
         this.render();
       } catch (error) {
-        const message = normalizeRegistryError(error, localize("Notification.PlayerAddFailed"));
-        ui.notifications.error(message);
-        console.error(error);
+        notifyError(error, localize("Notification.PlayerAddFailed"));
       }
     });
 
@@ -235,9 +180,7 @@ export class KriptaPlayerRegistryApp extends Application {
         this.onChange();
         this.render();
       } catch (error) {
-        const message = normalizeRegistryError(error, localize("Notification.PlayerUpdateFailed"));
-        ui.notifications.error(message);
-        console.error(error);
+        notifyError(error, localize("Notification.PlayerUpdateFailed"));
       }
     });
 
