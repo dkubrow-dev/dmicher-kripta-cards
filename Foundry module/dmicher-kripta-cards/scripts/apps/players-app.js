@@ -71,7 +71,7 @@ export class KriptaPlayersApp extends Application {
       const foundryUserId = event.currentTarget.dataset.userId;
       const row = this.rows.find((item) => item.foundryUserId === foundryUserId);
       const currentGuid = row?.binding?.guid ?? "";
-      const chosenGuid = await chooseServerPlayerDialog(this.serverPlayers, currentGuid);
+      const chosenGuid = await chooseServerPlayerDialog(this.serverPlayers, currentGuid, row?.foundryUserName ?? "");
       if (!chosenGuid) return;
       const player = this.serverPlayers.find((item) => item.guid === chosenGuid);
       if (!player) return;

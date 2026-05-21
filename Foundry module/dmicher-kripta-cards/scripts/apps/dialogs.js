@@ -14,9 +14,10 @@ async function waitDialog(config, fallback = null) {
   }
 }
 
-export async function chooseServerPlayerDialog(players, currentGuid = "") {
+export async function chooseServerPlayerDialog(players, currentGuid = "", foundryUserName = "") {
   const normalizedCurrentGuid = String(currentGuid ?? "").trim();
-  const hasCurrentSelection = players.some((player) => String(player.guid ?? "").trim() === normalizedCurrentGuid);
+  const hasCurrentSelection = !!normalizedCurrentGuid && players.some((player) => String(player.guid ?? "").trim() === normalizedCurrentGuid);
+  const escapedFoundryUserName = escapeHtml(foundryUserName || "пользователя Foundry");
 
   const options = players.map((player) => {
     const playerGuid = String(player.guid ?? "").trim();
@@ -42,7 +43,7 @@ export async function chooseServerPlayerDialog(players, currentGuid = "") {
           name="guid"
           value="${escapeHtml(playerGuid)}"
           ${isChecked ? "checked" : ""}
-          style="margin-top: 4px; flex: 0 0 auto;"
+          style="display: inline-block; width: 16px; height: 16px; margin-top: 4px; flex: 0 0 auto;"
         >
         <span
           style="
@@ -94,8 +95,8 @@ export async function chooseServerPlayerDialog(players, currentGuid = "") {
           box-sizing: border-box;
         "
       >
+        <h4>Выбрать игрока для ${escapedFoundryUserName}</h4>
         <div class="form-group">
-          <label>Игрок сервера</label>
           <div
             style="
               width: 100%;
