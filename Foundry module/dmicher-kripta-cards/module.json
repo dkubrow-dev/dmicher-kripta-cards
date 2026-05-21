@@ -20,6 +20,11 @@
   ],
   "languages": [
     {
+      "lang": "am",
+      "name": "አማርኛ",
+      "path": "lang/am.json"
+    },
+    {
       "lang": "ar",
       "name": "العربية",
       "path": "lang/ar.json"
@@ -85,6 +90,11 @@
       "path": "lang/fr.json"
     },
     {
+      "lang": "ha",
+      "name": "Hausa",
+      "path": "lang/ha.json"
+    },
+    {
       "lang": "hi",
       "name": "हिन्दी",
       "path": "lang/hi.json"
@@ -103,6 +113,11 @@
       "lang": "id",
       "name": "Bahasa Indonesia",
       "path": "lang/id.json"
+    },
+    {
+      "lang": "ig",
+      "name": "Igbo",
+      "path": "lang/ig.json"
     },
     {
       "lang": "ja",
@@ -135,6 +150,11 @@
       "path": "lang/ky.json"
     },
     {
+      "lang": "om",
+      "name": "Afaan Oromoo",
+      "path": "lang/om.json"
+    },
+    {
       "lang": "pl",
       "name": "Polski",
       "path": "lang/pl.json"
@@ -158,6 +178,11 @@
       "lang": "sv",
       "name": "Svenska",
       "path": "lang/sv.json"
+    },
+    {
+      "lang": "sw",
+      "name": "Kiswahili",
+      "path": "lang/sw.json"
     },
     {
       "lang": "tg",
@@ -188,6 +213,11 @@
       "lang": "uz",
       "name": "Oʻzbekcha",
       "path": "lang/uz.json"
+    },
+    {
+      "lang": "yo",
+      "name": "Yorùbá",
+      "path": "lang/yo.json"
     },
     {
       "lang": "zh-CN",
