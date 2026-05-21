@@ -4,7 +4,8 @@ import { KriptaCardDetailsApp } from "./card-details-app.js";
 import { KriptaGiveCardDialog } from "./give-card-dialog.js";
 import { createKriptaChatMessage } from "../helpers/chat.js";
 import { chooseBoundUserDialog } from "./dialogs.js";
-import { getBindings, getUiPrefs, notifyError, notifyWarn, setUiPref, stripHtml, truncateHtmlDescription } from "../helpers/utils.js";
+import { getBindings, getUiPrefs, notifyError, notifyWarn, setUiPref } from "../helpers/utils.js";
+import { sanitizeCardHtml, stripHtml, truncateHtmlDescription } from "../helpers/html-sanitizer.js";
 
 const WINDOW_MIN_WIDTH = 450;
 const SIDEBAR_MIN_WIDTH = 200;
@@ -180,6 +181,8 @@ export class KriptaCatalogApp extends Application {
     this.items = this.cards.map((card, index) => {
       const meta = metaResults[index]?.meta ?? buildCatalogFallbackMeta(card);
       const name = String(meta?.name ?? card?.name ?? "");
+      const nameText = stripHtml(name);
+      const nameHtml = sanitizeCardHtml(name);
       const description = String(meta?.description ?? card?.description ?? "");
       const descriptionText = stripHtml(description);
       const descriptionPreviewHtml = truncateHtmlDescription(description, 250);
@@ -192,10 +195,12 @@ export class KriptaCatalogApp extends Application {
         ...card,
         ...meta,
         imageUrl: cachedImageUrl,
+        nameText,
+        nameHtml,
         descriptionText,
         descriptionPreviewHtml,
         descriptionTablePreviewHtml,
-        searchText: `${name} ${descriptionText}`.toLowerCase(),
+        searchText: `${nameText} ${descriptionText}`.toLowerCase(),
         isBroken: !isValidCardRef(card) || (metaResults[index]?.isBroken ?? false)
       };
     });
@@ -249,7 +254,7 @@ export class KriptaCatalogApp extends Application {
         const levelName = this.levels.find((level) => Number(level.id) === Number(item.level))?.name ?? String(item.level);
         await createKriptaChatMessage({
           title: "Справка",
-          subtitle: `${item.name} (${levelName})`,
+          subtitle: `${item.nameText ?? stripHtml(item.name)} (${levelName})`,
           imageUrl: item.imageUrl,
           imageResolver: item.imageUrl
             ? null
@@ -447,7 +452,7 @@ export class KriptaCatalogApp extends Application {
 
     const img = document.createElement("img");
     img.src = imageUrl;
-    img.alt = item.name ?? "";
+    img.alt = item.nameText ?? stripHtml(item.name);
 
     currentContainer.innerHTML = "";
     currentContainer.appendChild(img);

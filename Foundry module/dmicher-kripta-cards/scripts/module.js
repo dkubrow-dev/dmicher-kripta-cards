@@ -9,6 +9,7 @@ import {
   notifyInfo,
   notifyWarn
 } from "./helpers/utils.js";
+import { stripHtml } from "./helpers/html-sanitizer.js";
 import { KriptaCatalogApp } from "./apps/catalog-app.js";
 import { KriptaMyCardsApp } from "./apps/my-cards-app.js";
 import { KriptaPlayersApp } from "./apps/players-app.js";
@@ -272,7 +273,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         const levelName = levels.find((item) => item.id === payload.level)?.name ?? String(payload.level);
 
         await createKriptaChatMessage({
-          title: `Игрок ${ownerUser?.name ?? payload.playerName ?? "игрок"} получает карточку ${meta.name} (${levelName})`,
+          title: `Игрок ${ownerUser?.name ?? payload.playerName ?? "игрок"} получает карточку ${stripHtml(meta.name)} (${levelName})`,
           imageUrl,
           description: meta.description,
           speakerUser: game.user

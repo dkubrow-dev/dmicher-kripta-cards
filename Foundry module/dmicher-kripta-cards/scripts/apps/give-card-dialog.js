@@ -1,6 +1,7 @@
 import { KriptaApiClient } from "../api/client.js";
 import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
 import { createKriptaChatMessage } from "../helpers/chat.js";
+import { stripHtml } from "../helpers/html-sanitizer.js";
 import { getBinding, notifyError, notifyInfo } from "../helpers/utils.js";
 
 function isValidCard(card) {
@@ -68,7 +69,7 @@ export class KriptaGiveCardDialog extends FormApplication {
 
     return {
       levels: this.levels,
-      cards: this.cards,
+      cards: this.cards.map((card) => ({ ...card, nameText: stripHtml(card?.name) })),
       selectedLevel: this.selectedLevel,
       selectedNumber: this.selectedNumber ?? "",
       isManual: this.mode === "manual"
@@ -196,8 +197,10 @@ export class KriptaGiveCardDialog extends FormApplication {
       const levels = snapshot.levels.length ? snapshot.levels : await KriptaApiClient.getLevelsList();
       const levelName = levels.find((item) => Number(item.id) === Number(card.level))?.name ?? String(card.level);
 
+      const cardName = stripHtml(card.name);
+
       await createKriptaChatMessage({
-        title: `Игрок ${snapshot.playerName} получает карточку ${card.name} (${levelName})`,
+        title: `Игрок ${snapshot.playerName} получает карточку ${cardName} (${levelName})`,
         imageUrl: "",
         imageResolver: async () => {
           const blob = await KriptaApiClient.getCardImageBlob(card.imagePath).catch(() => null);

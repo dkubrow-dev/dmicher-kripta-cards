@@ -33,10 +33,10 @@
         {{#each items}}
         <article class="kripta-row-card" data-card-key="{{level}}:{{number}}" data-search-text="{{searchText}}">
           <div class="kripta-row-card__image">
-            {{#if imageUrl}}<img src="{{imageUrl}}" alt="{{name}}">{{/if}}
+            {{#if imageUrl}}<img src="{{imageUrl}}" alt="{{nameText}}">{{/if}}
           </div>
           <div class="kripta-row-card__content">
-            <h3>{{name}}</h3>
+            <h3>{{{nameHtml}}}</h3>
             {{#if descriptionTablePreviewHtml}}<div class="kripta-html">{{{descriptionTablePreviewHtml}}}</div>{{/if}}
           </div>
           <div class="kripta-row-card__actions">
@@ -51,8 +51,8 @@
       <div class="kripta-tile-grid">
         {{#each items}}
         <article class="kripta-card-tile" data-card-key="{{level}}:{{number}}" data-search-text="{{searchText}}" title="{{descriptionText}}">
-          <div class="kripta-card-tile__image-wrap">{{#if imageUrl}}<img src="{{imageUrl}}" alt="{{name}}">{{/if}}</div>
-          <div class="kripta-card-tile__name">{{name}}</div>
+          <div class="kripta-card-tile__image-wrap">{{#if imageUrl}}<img src="{{imageUrl}}" alt="{{nameText}}">{{/if}}</div>
+          <div class="kripta-card-tile__name">{{{nameHtml}}}</div>
           {{#if descriptionPreviewHtml}}<div class="notes kripta-card-tile__description">{{{descriptionPreviewHtml}}}</div>{{/if}}
           <div class="kripta-inline-actions">
             <button type="button" data-action="output">Вывести</button>

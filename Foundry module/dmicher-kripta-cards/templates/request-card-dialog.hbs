@@ -21,7 +21,7 @@
     <label>Карточка</label>
     <select name="cardNumber">
       {{#each cards}}
-      <option value="{{number}}" {{#if (eq ../selectedNumber number)}}selected{{/if}}>{{name}}</option>
+      <option value="{{number}}" {{#if (eq ../selectedNumber number)}}selected{{/if}}>{{nameText}}</option>
       {{/each}}
     </select>
   </div>

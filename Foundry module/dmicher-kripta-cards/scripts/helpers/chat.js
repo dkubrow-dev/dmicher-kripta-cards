@@ -1,4 +1,5 @@
 import { CHAT_ACTIONS, MODULE_ID } from "../constants.js";
+import { sanitizeCardHtml } from "./html-sanitizer.js";
 import { escapeHtml } from "./utils.js";
 
 export function getActionPayloadFromElement(element) {
@@ -72,12 +73,14 @@ function buildKriptaChatContent({
   footerHtml = "",
   buttonsHtml = ""
 }) {
+  const safeDescription = sanitizeCardHtml(description);
+
   return `
     <div class="kripta-chat-card">
       <div class="kripta-chat-card__title">${escapeHtml(title)}</div>
       ${subtitle ? `<div class="kripta-chat-card__subtitle">${escapeHtml(subtitle)}</div>` : ""}
       ${imageUrl ? `<div class="kripta-chat-card__image-wrap"><img class="kripta-chat-card__image" src="${imageUrl}" alt="${escapeHtml(title)}"></div>` : ""}
-      ${description ? `<div class="kripta-chat-card__description">${description}</div>` : ""}
+      ${safeDescription ? `<div class="kripta-chat-card__description">${safeDescription}</div>` : ""}
       ${buttonsHtml ? `<div class="kripta-chat-card__actions">${buttonsHtml}</div>` : ""}
       ${footerHtml ? `<div class="kripta-chat-card__footer">${footerHtml}</div>` : ""}
     </div>
