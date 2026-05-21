@@ -25,6 +25,16 @@
       "path": "lang/ar.json"
     },
     {
+      "lang": "az",
+      "name": "Azərbaycanca",
+      "path": "lang/az.json"
+    },
+    {
+      "lang": "be",
+      "name": "Беларуская",
+      "path": "lang/be.json"
+    },
+    {
       "lang": "bn",
       "name": "বাংলা",
       "path": "lang/bn.json"
@@ -55,6 +65,11 @@
       "path": "lang/hi.json"
     },
     {
+      "lang": "hy",
+      "name": "Հայերեն",
+      "path": "lang/hy.json"
+    },
+    {
       "lang": "id",
       "name": "Bahasa Indonesia",
       "path": "lang/id.json"
@@ -65,9 +80,24 @@
       "path": "lang/ja.json"
     },
     {
+      "lang": "ka",
+      "name": "ქართული",
+      "path": "lang/ka.json"
+    },
+    {
+      "lang": "kk",
+      "name": "Қазақша",
+      "path": "lang/kk.json"
+    },
+    {
       "lang": "ko",
       "name": "한국어",
       "path": "lang/ko.json"
+    },
+    {
+      "lang": "ky",
+      "name": "Кыргызча",
+      "path": "lang/ky.json"
     },
     {
       "lang": "pt",
@@ -75,9 +105,19 @@
       "path": "lang/pt.json"
     },
     {
+      "lang": "ro-MD",
+      "name": "Română (Moldova)",
+      "path": "lang/ro-MD.json"
+    },
+    {
       "lang": "ru",
       "name": "Русский",
       "path": "lang/ru.json"
+    },
+    {
+      "lang": "tg",
+      "name": "Тоҷикӣ",
+      "path": "lang/tg.json"
     },
     {
       "lang": "th",
@@ -85,9 +125,19 @@
       "path": "lang/th.json"
     },
     {
+      "lang": "uk",
+      "name": "Українська",
+      "path": "lang/uk.json"
+    },
+    {
       "lang": "ur",
       "name": "اردو",
       "path": "lang/ur.json"
+    },
+    {
+      "lang": "uz",
+      "name": "Oʻzbekcha",
+      "path": "lang/uz.json"
     },
     {
       "lang": "zh-CN",
