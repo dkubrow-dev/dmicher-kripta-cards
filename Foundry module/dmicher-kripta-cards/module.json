@@ -25,6 +25,11 @@
       "path": "lang/ar.json"
     },
     {
+      "lang": "bn",
+      "name": "বাংলা",
+      "path": "lang/bn.json"
+    },
+    {
       "lang": "de",
       "name": "Deutsch",
       "path": "lang/de.json"
@@ -50,6 +55,11 @@
       "path": "lang/hi.json"
     },
     {
+      "lang": "id",
+      "name": "Bahasa Indonesia",
+      "path": "lang/id.json"
+    },
+    {
       "lang": "ja",
       "name": "日本語",
       "path": "lang/ja.json"
@@ -60,9 +70,24 @@
       "path": "lang/ko.json"
     },
     {
+      "lang": "pt",
+      "name": "Português",
+      "path": "lang/pt.json"
+    },
+    {
       "lang": "ru",
       "name": "Русский",
       "path": "lang/ru.json"
+    },
+    {
+      "lang": "th",
+      "name": "ไทย",
+      "path": "lang/th.json"
+    },
+    {
+      "lang": "ur",
+      "name": "اردو",
+      "path": "lang/ur.json"
     },
     {
       "lang": "zh-CN",
