@@ -1,6 +1,7 @@
 import { KriptaApiClient } from "../api/client.js";
 import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
 import { addEditPlayerDialog, deletePlayerDialog } from "./dialogs.js";
+import { localize } from "../helpers/lang.js";
 import { notifyError, notifyInfo } from "../helpers/utils.js";
 
 const WINDOW_MIN_WIDTH = 450;
@@ -96,7 +97,7 @@ function normalizeRegistryError(error, fallback) {
 
 function validatePlayerPayload(payload) {
   const name = String(payload?.name ?? "").trim();
-  if (!name) return "api 400: The Name field is required.";
+  if (!name) return localize("Error.NameRequired");
   return "";
 }
 
@@ -111,7 +112,7 @@ export class KriptaPlayerRegistryApp extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-registry`,
-      title: "Реестр игроков",
+      title: localize("Window.Registry"),
       template: `${TEMPLATE_ROOT}/registry-app.hbs`,
       classes: [MODULE_ID, "sheet"],
       width: 760,
@@ -124,7 +125,7 @@ export class KriptaPlayerRegistryApp extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-registry`,
-      title: "Реестр игроков",
+      title: localize("Window.Registry"),
       template: `${TEMPLATE_ROOT}/registry-app.hbs`,
       classes: [MODULE_ID, "sheet"],
       width: 760,
@@ -198,11 +199,11 @@ export class KriptaPlayerRegistryApp extends Application {
 
       try {
         await KriptaApiClient.addPlayer(payload.name, payload.comment);
-        notifyInfo("Игрок добавлен.");
+        notifyInfo(localize("Notification.PlayerAdded"));
         this.onChange();
         this.render();
       } catch (error) {
-        const message = normalizeRegistryError(error, "Не удалось добавить игрока");
+        const message = normalizeRegistryError(error, localize("Notification.PlayerAddFailed"));
         ui.notifications.error(message);
         console.error(error);
       }
@@ -230,11 +231,11 @@ export class KriptaPlayerRegistryApp extends Application {
       try {
         await KriptaApiClient.updatePlayer(player.guid, payload.name, payload.comment);
         this.selectedGuid = player.guid;
-        notifyInfo("Игрок обновлен.");
+        notifyInfo(localize("Notification.PlayerUpdated"));
         this.onChange();
         this.render();
       } catch (error) {
-        const message = normalizeRegistryError(error, "Не удалось обновить игрока");
+        const message = normalizeRegistryError(error, localize("Notification.PlayerUpdateFailed"));
         ui.notifications.error(message);
         console.error(error);
       }
@@ -248,7 +249,7 @@ export class KriptaPlayerRegistryApp extends Application {
 
       if (!deleteDecision?.valid) {
         if (deleteDecision?.action === "confirm") {
-          ui.notifications.error("Удаление отменено. Неверно заполнено контрольное поле.");
+          ui.notifications.error(localize("Notification.DeleteCanceledBadCode"));
         }
         return;
       }
@@ -258,18 +259,18 @@ export class KriptaPlayerRegistryApp extends Application {
         const freshPlayers = await fetchPlayersUntilDeleted(player.guid);
 
         if (freshPlayers.some((item) => item.guid === player.guid)) {
-          throw new Error("сервер вернул игрока в реестре после удаления.");
+          throw new Error(localize("Error.RegistryDeleteReturned"));
         }
 
         this.players = freshPlayers;
         this.selectedGuid = this.players[0]?.guid ?? null;
 
-        notifyInfo("Игрок удален.");
+        notifyInfo(localize("Notification.PlayerDeleted"));
 
         await this.onChange();
         await this.render(true);
       } catch (error) {
-        notifyError(error, "Не удалось удалить игрока");
+        notifyError(error, localize("Notification.PlayerDeleteFailed"));
       }
     });
   }

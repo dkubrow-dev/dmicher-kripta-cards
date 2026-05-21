@@ -1,5 +1,6 @@
 import { KriptaApiClient } from "../api/client.js";
 import { AUTHOR_THANKS_URL, MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
+import { format, localize } from "../helpers/lang.js";
 import { getServerUrl, getTechUsers, notifyError, notifyInfo, notifyWarn, setServerUrl, setTechUsers } from "../helpers/utils.js";
 
 function canManageKriptaSettings(user = game.user) {
@@ -32,7 +33,9 @@ function stringifyServerResult(result) {
 
 function formatServerSuccessMessage(result) {
   const tail = stringifyServerResult(result);
-  return tail ? `Успешное подключение. ${tail}` : "Успешное подключение.";
+  return tail
+    ? format("Notification.ServerSuccessWithDetails", { details: tail })
+    : localize("Notification.ServerSuccess");
 }
 
 function formatServerCheckError(error, rawServerUrl = "") {
@@ -47,9 +50,9 @@ function formatServerCheckError(error, rawServerUrl = "") {
     /URL constructor/i.test(rawMessage)
   ) {
     if (normalizedUrl) {
-      return `URL constructor: ${normalizedUrl} is not a valid URL`;
+      return format("Notification.InvalidServerUrl", { url: normalizedUrl });
     }
-    return rawMessage || "Invalid URL";
+    return rawMessage || localize("Notification.ServerCheckFailedFallback");
   }
 
   if (
@@ -62,10 +65,10 @@ function formatServerCheckError(error, rawServerUrl = "") {
     /ERR_NAME_NOT_RESOLVED/i.test(rawMessage) ||
     /ERR_CERT/i.test(rawMessage)
   ) {
-    return "Не удалось подключиться к серверу. Проверьте адрес, доступность сервера и настройки CORS/HTTPS.";
+    return localize("Notification.ServerConnectionFailed");
   }
 
-  return rawMessage || "Не удалось проверить сервер.";
+  return rawMessage || localize("Notification.ServerCheckFailedFallback");
 }
 
 function tryExtractJsonMessage(text) {
@@ -112,7 +115,7 @@ function tryExtractJsonMessage(text) {
 
 function normalizeApiErrorText(error) {
   const rawMessage = String(error?.message ?? error ?? "").trim();
-  if (!rawMessage) return "unknown error";
+  if (!rawMessage) return localize("Error.Unknown");
 
   const apiMatch = rawMessage.match(/^api\s+(\d+)\s*:\s*(.+)$/i);
   if (apiMatch) {
@@ -132,7 +135,7 @@ function openAuthorThanksPage() {
   const url = String(AUTHOR_THANKS_URL ?? "").trim();
 
   if (!url) {
-    ui.notifications.warn("Ссылка для кнопки «Сказать спасибо автору» не настроена.");
+    ui.notifications.warn(localize("Notification.AuthorThanksUrlMissing"));
     return;
   }
 
@@ -143,7 +146,7 @@ export class KriptaSettingsApp extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-settings`,
-      title: "Карточки Крипты - настройки",
+      title: localize("Window.Settings"),
       template: `${TEMPLATE_ROOT}/settings-app.hbs`,
       classes: [MODULE_ID, "sheet"],
       width: 620,
@@ -156,7 +159,7 @@ export class KriptaSettingsApp extends FormApplication {
 
   async _render(force, options) {
     if (!canManageKriptaSettings()) {
-      notifyWarn("Раздел настроек «Карточки крипты» доступен только ролям «Ведущий» и «Ассистент ведущего».");
+      notifyWarn(localize("Notification.SettingsAccessDenied"));
       return this;
     }
 
@@ -187,7 +190,7 @@ export class KriptaSettingsApp extends FormApplication {
         const injectedButton = $(`
           <button type="button" data-action="thanks-author">
             <i class="fas fa-heart"></i>
-            Сказать спасибо автору
+            ${localize("Button.ThanksAuthor")}
           </button>
         `);
 
@@ -210,7 +213,7 @@ export class KriptaSettingsApp extends FormApplication {
       event.preventDefault();
 
       if (!canManageKriptaSettings()) {
-        notifyWarn("Раздел настроек «Карточки крипты» доступен только ролям «Ведущий» и «Ассистент ведущего».");
+        notifyWarn(localize("Notification.SettingsAccessDenied"));
         return;
       }
 
@@ -222,7 +225,7 @@ export class KriptaSettingsApp extends FormApplication {
         const result = await KriptaApiClient.healthCheck();
         notifyInfo(formatServerSuccessMessage(result));
       } catch (error) {
-        notifyError(new Error(formatServerCheckError(error, rawServerUrl)), "Проверка сервера не удалась");
+        notifyError(new Error(formatServerCheckError(error, rawServerUrl)), localize("Notification.ServerCheckFailed"));
       }
     });
 
@@ -230,7 +233,7 @@ export class KriptaSettingsApp extends FormApplication {
       event.preventDefault();
 
       if (!canManageKriptaSettings()) {
-        notifyWarn("Раздел настроек «Карточки крипты» доступен только ролям «Ведущий» и «Ассистент ведущего».");
+        notifyWarn(localize("Notification.SettingsAccessDenied"));
         return;
       }
 
@@ -239,7 +242,7 @@ export class KriptaSettingsApp extends FormApplication {
       try {
         await KriptaApiClient.checkMe();
       } catch (error) {
-        const message = formatTechUserCheckError("Читатель", error);
+        const message = formatTechUserCheckError(localize("Notification.TechUserReader"), error);
         ui.notifications.error(message);
         console.error(message);
         return;
@@ -248,13 +251,13 @@ export class KriptaSettingsApp extends FormApplication {
       try {
         await KriptaApiClient.testWriterAccess();
       } catch (error) {
-        const message = formatTechUserCheckError("Писатель", error);
+        const message = formatTechUserCheckError(localize("Notification.TechUserWriter"), error);
         ui.notifications.error(message);
         console.error(message);
         return;
       }
 
-      notifyInfo("Reader и Writer успешно проходят проверку.");
+      notifyInfo(localize("Notification.TechUsersCheckSuccess"));
     });
   }
 
@@ -282,7 +285,7 @@ export class KriptaSettingsApp extends FormApplication {
 
   async _updateObject(_event, formData) {
     if (!canManageKriptaSettings()) {
-      notifyWarn("Раздел настроек «Карточки крипты» доступен только ролям «Ведущий» и «Ассистент ведущего».");
+      notifyWarn(localize("Notification.SettingsAccessDenied"));
       return;
     }
 
@@ -294,6 +297,6 @@ export class KriptaSettingsApp extends FormApplication {
       reader: { id: expanded.readerId ?? "", key: expanded.readerKey ?? "" }
     });
 
-    notifyInfo("Настройки подключения сохранены.");
+    notifyInfo(localize("Notification.SettingsSaved"));
   }
 }

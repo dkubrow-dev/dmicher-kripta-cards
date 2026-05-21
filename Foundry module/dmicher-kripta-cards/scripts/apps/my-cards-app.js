@@ -4,7 +4,8 @@ import { countPromptDialog } from "./dialogs.js";
 import { KriptaCardDetailsApp } from "./card-details-app.js";
 import { KriptaRequestCardDialog } from "./request-card-dialog.js";
 import { KriptaUseCardDialog } from "./use-card-dialog.js";
-import { getUiPrefs, notifyError, notifyInfo, notifyWarn, setUiPref } from "../helpers/utils.js";
+import { format, formatCardNameFallback, formatMissingCardDescription, formatMissingLevelName, localize } from "../helpers/lang.js";
+import { escapeHtml, getUiPrefs, notifyError, notifyInfo, notifyWarn, setUiPref } from "../helpers/utils.js";
 import { sanitizeCardHtml, stripHtml, truncateHtmlDescription } from "../helpers/html-sanitizer.js";
 
 const MISSING_CARD_CACHE = new Set();
@@ -34,8 +35,8 @@ function buildMissingMeta(item) {
   return {
     level: Number(item.level),
     number: Number(item.number),
-    name: `Карточка ${item.number}`,
-    description: `Карточка ${item.level}/${item.number} отсутствует в текущем каталоге сервера.`
+    name: formatCardNameFallback(item.number),
+    description: formatMissingCardDescription(item.level, item.number)
   };
 }
 
@@ -100,7 +101,7 @@ export class KriptaMyCardsApp extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-my-cards-${foundry.utils.randomID()}`,
-      title: "Карточки игрока",
+      title: localize("Window.MyCards"),
       template: `${TEMPLATE_ROOT}/my-cards-app.hbs`,
       classes: [MODULE_ID, "sheet"],
       width: 1040,
@@ -129,8 +130,8 @@ export class KriptaMyCardsApp extends Application {
       .filter((levelId) => !serverLevels.some((item) => Number(item.id) === levelId))
       .map((levelId) => ({
         id: levelId,
-        name: `Уровень ${levelId}`,
-        description: "Уровень присутствует в инвентаре игрока, но отсутствует в текущем каталоге сервера."
+        name: formatMissingLevelName(levelId),
+        description: localize("Level.MissingDescription")
       }));
 
     this.levels = [...serverLevels, ...extraLevels].sort((a, b) => Number(a.id) - Number(b.id));
@@ -220,6 +221,7 @@ export class KriptaMyCardsApp extends Application {
     return {
       emptyState: false,
       playerName: this.playerName,
+      playerTitle: format("Template.MyCardsTitle", { playerName: this.playerName }),
       levels: this.levels.map((item) => ({ ...item, isActive: Number(item.id) === Number(activeLevel.id) })),
       activeLevel,
       items: this.items,
@@ -271,7 +273,7 @@ export class KriptaMyCardsApp extends Application {
       if (!item) return;
 
       if (item.isMissing) {
-        return notifyWarn("Эта карточка больше не зарегистрирована на сервере. Использование недоступно.");
+        return notifyWarn(localize("Notification.CannotUseMissingCard"));
       }
 
       new KriptaUseCardDialog({
@@ -289,7 +291,7 @@ export class KriptaMyCardsApp extends Application {
       if (!item) return;
 
       if (item.isMissing) {
-        return notifyWarn("Эта карточка больше не зарегистрирована на сервере.");
+        return notifyWarn(localize("Notification.MissingCard"));
       }
 
       new KriptaCardDetailsApp({ level: item.level, number: item.number }).render(true);
@@ -300,8 +302,11 @@ export class KriptaMyCardsApp extends Application {
       if (!item) return;
 
       const count = await countPromptDialog({
-        title: "Забрать карточку",
-        message: `Игрок ${this.playerName} будет лишён карточки ${item.nameText ?? stripHtml(item.name)}.`,
+        title: localize("Dialog.TakeCard.Title"),
+        message: format("Dialog.TakeCard.Message", {
+          playerName: escapeHtml(this.playerName),
+          cardName: escapeHtml(item.nameText ?? stripHtml(item.name))
+        }),
         max: item.count,
         defaultValue: 1
       });
@@ -312,10 +317,10 @@ export class KriptaMyCardsApp extends Application {
 
       try {
         await KriptaApiClient.takeCard(this.playerGuid, item.level, item.number, normalizedCount);
-        notifyInfo("Карточка списана.");
+        notifyInfo(localize("Notification.CardWrittenOff"));
         this.render();
       } catch (error) {
-        notifyError(error, "Не удалось списать карточку");
+        notifyError(error, localize("Notification.CardTakeFailed"));
       }
     });
 
@@ -329,7 +334,7 @@ export class KriptaMyCardsApp extends Application {
       if (!item) return;
 
       if (item.isMissing) {
-        return notifyWarn("Эта карточка больше не зарегистрирована на сервере.");
+        return notifyWarn(localize("Notification.MissingCard"));
       }
 
       new KriptaCardDetailsApp({ level: item.level, number: item.number }).render(true);

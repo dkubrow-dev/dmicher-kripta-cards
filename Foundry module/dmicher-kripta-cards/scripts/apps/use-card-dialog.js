@@ -1,6 +1,7 @@
 import { KriptaApiClient } from "../api/client.js";
 import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
 import { buildCardSubtitle, createKriptaChatMessage } from "../helpers/chat.js";
+import { format, formatCardAddressFallback, formatCardNameFallback, localize } from "../helpers/lang.js";
 import { notifyError, notifyInfo, notifyWarn } from "../helpers/utils.js";
 import { sanitizeCardHtml, stripHtml } from "../helpers/html-sanitizer.js";
 
@@ -35,7 +36,7 @@ export class KriptaUseCardDialog extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-use-card`,
-      title: "Использовать карточку",
+      title: localize("Window.UseCard"),
       template: `${TEMPLATE_ROOT}/use-card-dialog.hbs`,
       classes: [MODULE_ID, "sheet"],
       width: 480,
@@ -73,8 +74,8 @@ export class KriptaUseCardDialog extends FormApplication {
         this.meta = decorateCardMeta({
           level: this.level,
           number: this.number,
-          name: `Карточка ${this.number}`,
-          description: `Карточка ${this.level}/${this.number} больше не зарегистрирована на сервере.`
+          name: formatCardNameFallback(this.number),
+          description: format("Card.NotRegisteredDescription", { level: this.level, number: this.number })
         });
 
         return {
@@ -90,7 +91,7 @@ export class KriptaUseCardDialog extends FormApplication {
 
   async _updateObject(_event, formData) {
     if (this.isMissing) {
-      notifyWarn("Эта карточка больше не зарегистрирована на сервере. Использование недоступно.");
+      notifyWarn(localize("Notification.CannotUseMissingCard"));
       return;
     }
 
@@ -103,19 +104,19 @@ export class KriptaUseCardDialog extends FormApplication {
       }
 
       await createKriptaChatMessage({
-        title: spend ? "Карта потрачена" : "Справка по карте",
-        subtitle: buildCardSubtitle(this.meta?.name ?? `Карта ${this.level}/${this.number}`, this.levelName || this.level),
+        title: spend ? localize("Chat.CardSpentTitle") : localize("Chat.ShowCardTitle"),
+        subtitle: buildCardSubtitle(this.meta?.name ?? formatCardAddressFallback(this.level, this.number), this.levelName || this.level),
         imageUrl: this.imageUrl,
         description: this.meta?.description ?? "",
-        footerHtml: spend ? '<div class="kripta-spent-note">КАРТА ПОТРАЧЕНА</div>' : "",
+        footerHtml: spend ? `<div class="kripta-spent-note">${localize("Chat.CardSpentFooter")}</div>` : "",
         speakerUser: game.users.get(this.ownerFoundryUserId) ?? game.user,
         rollModeUser: game.user
       });
 
-      if (spend) notifyInfo("Карточка использована и списана.");
+      if (spend) notifyInfo(localize("Notification.CardUsed"));
       await this.onComplete();
     } catch (error) {
-      notifyError(error, "Не удалось использовать карточку");
+      notifyError(error, localize("Notification.CardUseFailed"));
     }
   }
 }

@@ -4,6 +4,7 @@ import { KriptaGiveCardDialog } from "./give-card-dialog.js";
 import { KriptaRequestCardDialog } from "./request-card-dialog.js";
 import { buildCardSubtitle, createKriptaChatMessage } from "../helpers/chat.js";
 import { chooseBoundUserDialog } from "./dialogs.js";
+import { format, formatCardAddressFallback, localize } from "../helpers/lang.js";
 import { getBinding, getBindings, notifyError, notifyWarn } from "../helpers/utils.js";
 import { sanitizeCardHtml, stripHtml } from "../helpers/html-sanitizer.js";
 
@@ -12,11 +13,11 @@ function assertLocalCardRef(level, number) {
   const normalizedNumber = Number(number);
 
   if (!Number.isInteger(normalizedLevel) || normalizedLevel < 0) {
-    throw new Error(`некорректный level карточки: ${level}`);
+    throw new Error(format("Error.InvalidLocalCardLevel", { level }));
   }
 
   if (!Number.isInteger(normalizedNumber) || normalizedNumber < 0) {
-    throw new Error(`некорректный number карточки: ${number}`);
+    throw new Error(format("Error.InvalidLocalCardNumber", { number }));
   }
 
   return { level: normalizedLevel, number: normalizedNumber };
@@ -35,7 +36,7 @@ export class KriptaCardDetailsApp extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-card-details-${foundry.utils.randomID()}`,
-      title: "Карточка каталога",
+      title: localize("Window.CardDetails"),
       template: `${TEMPLATE_ROOT}/card-details-app.hbs`,
       classes: [MODULE_ID, "sheet"],
       width: 640,
@@ -81,9 +82,9 @@ export class KriptaCardDetailsApp extends Application {
     html.find('[data-action="output"]').on("click", async () => {
       try {
         await createKriptaChatMessage({
-          title: "Справка",
+          title: localize("Chat.ReferenceTitle"),
           subtitle: buildCardSubtitle(
-            this.meta?.name ?? `Карта ${this.level}/${this.number}`,
+            this.meta?.name ?? formatCardAddressFallback(this.level, this.number),
             this.levels.find((item) => Number(item.id) === Number(this.level))?.name ?? this.level
           ),
           imageUrl: this.imageUrl,
@@ -91,13 +92,13 @@ export class KriptaCardDetailsApp extends Application {
           speakerUser: game.user
         });
       } catch (error) {
-        notifyError(error, "Не удалось вывести карточку в чат");
+        notifyError(error, localize("Notification.CardOutputFailed"));
       }
     });
 
     html.find('[data-action="request"]').on("click", () => {
       const binding = getBinding(game.user.id);
-      if (!binding?.guid) return notifyWarn(game.i18n.localize("KRIPTA.NoBinding"));
+      if (!binding?.guid) return notifyWarn(localize("NoBinding"));
 
       try {
         const ref = assertLocalCardRef(this.level, this.number);
@@ -108,7 +109,7 @@ export class KriptaCardDetailsApp extends Application {
           initialNumber: ref.number
         }).render(true);
       } catch (error) {
-        notifyWarn(error.message ?? "Некорректная карточка для запроса");
+        notifyWarn(error.message ?? localize("Error.InvalidRequestCard"));
       }
     });
 
@@ -125,10 +126,10 @@ export class KriptaCardDetailsApp extends Application {
       if (dialogResult?.action !== "confirm") return;
 
       const foundryUserId = String(dialogResult?.foundryUserId ?? "");
-      if (!foundryUserId) return notifyWarn("Игрок для выдачи не выбран");
+      if (!foundryUserId) return notifyWarn(localize("Notification.PlayerNotSelected"));
 
       const binding = bindings[foundryUserId];
-      if (!binding?.guid) return notifyWarn("Не удалось определить привязку игрока для выдачи");
+      if (!binding?.guid) return notifyWarn(localize("Notification.PlayerBindingMissing"));
 
       const playerName = game.users.get(foundryUserId)?.name ?? binding?.name ?? "";
 
@@ -142,7 +143,7 @@ export class KriptaCardDetailsApp extends Application {
           initialNumber: ref.number
         }).render(true);
       } catch (error) {
-        notifyWarn(error.message ?? "Некорректная карточка для выдачи");
+        notifyWarn(error.message ?? localize("Error.InvalidGiveCard"));
       }
     });
   }

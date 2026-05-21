@@ -1,6 +1,6 @@
 <form class="kripta-sheet-form">
   <div class="form-group">
-    <label>Категория</label>
+    <label>{{localize 'KRIPTA.Label.Category'}}</label>
     <select name="level">
       {{#each levels}}
       <option value="{{id}}" {{#if (eq ../selectedLevel id)}}selected{{/if}}>{{name}}</option>
@@ -9,16 +9,16 @@
   </div>
 
   <div class="form-group">
-    <label>Режим</label>
+    <label>{{localize 'KRIPTA.Label.Mode'}}</label>
     <div class="kripta-radio-row">
-      <label><input type="radio" name="mode" value="random" {{#unless isManual}}checked{{/unless}}> Случайная</label>
-      <label><input type="radio" name="mode" value="manual" {{#if isManual}}checked{{/if}}> На выбор</label>
+      <label><input type="radio" name="mode" value="random" {{#unless isManual}}checked{{/unless}}> {{localize 'KRIPTA.Mode.Random'}}</label>
+      <label><input type="radio" name="mode" value="manual" {{#if isManual}}checked{{/if}}> {{localize 'KRIPTA.Mode.Manual'}}</label>
     </div>
   </div>
 
   {{#if isManual}}
   <div class="form-group">
-    <label>Карточка</label>
+    <label>{{localize 'KRIPTA.Label.Card'}}</label>
     <select name="cardNumber">
       {{#each cards}}
       <option value="{{number}}" {{#if (eq ../selectedNumber number)}}selected{{/if}}>{{nameText}}</option>
@@ -28,7 +28,7 @@
   {{/if}}
 
   <footer class="sheet-footer flexrow">
-    <button type="submit" class="default">Выдать</button>
-    <button type="button" onclick="this.closest('.app').querySelector('.header-button.close')?.click()">Отмена</button>
+    <button type="submit" class="default">{{localize 'KRIPTA.Button.Give'}}</button>
+    <button type="button" onclick="this.closest('.app').querySelector('.header-button.close')?.click()">{{localize 'KRIPTA.Button.Cancel'}}</button>
   </footer>
 </form>

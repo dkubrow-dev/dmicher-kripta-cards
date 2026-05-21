@@ -3,6 +3,7 @@ import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
 import { buildCardReceiveSubtitle, createKriptaChatMessage } from "../helpers/chat.js";
 import { sortCardsByName } from "../helpers/card-sort.js";
 import { stripHtml } from "../helpers/html-sanitizer.js";
+import { localize } from "../helpers/lang.js";
 import { getBinding, notifyError, notifyInfo } from "../helpers/utils.js";
 
 function isValidCard(card) {
@@ -43,7 +44,7 @@ export class KriptaGiveCardDialog extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-give-card`,
-      title: "Выдать карточку",
+      title: localize("Window.GiveCard"),
       template: `${TEMPLATE_ROOT}/give-card-dialog.hbs`,
       classes: [MODULE_ID, "sheet"],
       width: 520,
@@ -172,7 +173,7 @@ export class KriptaGiveCardDialog extends FormApplication {
         const selectedNumber = Number(rawSelectedNumber);
 
         if (!Number.isInteger(selectedNumber) || selectedNumber < 0) {
-          throw new Error("Не удалось определить выбранную карточку для выдачи.");
+          throw new Error(localize("Error.MissingSelectedCardForGive"));
         }
 
         card = await KriptaApiClient.getCardMeta(selectedLevel, selectedNumber);
@@ -190,11 +191,11 @@ export class KriptaGiveCardDialog extends FormApplication {
       }
 
       if (!playerGuid) {
-        throw new Error("Не удалось определить игрока для выдачи карточки.");
+        throw new Error(localize("Error.MissingGivePlayer"));
       }
 
       if (!isValidCard(card)) {
-        throw new Error("Не удалось определить карточку для выдачи.");
+        throw new Error(localize("Error.MissingGiveCard"));
       }
 
       await KriptaApiClient.giveCard(playerGuid, card.level, card.number, 1);
@@ -203,7 +204,7 @@ export class KriptaGiveCardDialog extends FormApplication {
       const levelName = levels.find((item) => Number(item.id) === Number(card.level))?.name ?? String(card.level);
 
       await createKriptaChatMessage({
-        title: "Выдана карточка",
+        title: localize("Chat.CardGivenTitle"),
         subtitle: buildCardReceiveSubtitle({
           playerName: snapshot.playerName,
           cardName: card.name,
@@ -218,10 +219,10 @@ export class KriptaGiveCardDialog extends FormApplication {
         speakerUser: game.user
       });
 
-      notifyInfo("Карточка выдана.");
+      notifyInfo(localize("Notification.CardGiven"));
       await Promise.resolve(this.onComplete());
     } catch (error) {
-      notifyError(error, "Не удалось выдать карточку");
+      notifyError(error, localize("Notification.CardGiveFailed"));
     }
   }
 }

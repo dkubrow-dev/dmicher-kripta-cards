@@ -1,6 +1,7 @@
 import { KriptaApiClient } from "./api/client.js";
 import { MODULE_ID, CHAT_ACTIONS } from "./constants.js";
 import { buildCardReceiveSubtitle, createKriptaChatMessage, getActionPayloadFromElement } from "./helpers/chat.js";
+import { localize } from "./helpers/lang.js";
 import {
   getBinding,
   getServerUrl,
@@ -74,21 +75,21 @@ function ensureKriptaMenuSettings() {
   const users = getTechUsers();
 
   if (!serverUrl) {
-    throw new Error("Отсутствует настройка пути к серверу.");
+    throw new Error(localize("Error.MissingServerUrl"));
   }
 
   if (!hasKriptaTechUserCredentials(users?.reader)) {
-    throw new Error("Некорректно настроен тех.пользователь Reader.");
+    throw new Error(localize("Error.InvalidReader"));
   }
 
   if (!hasKriptaTechUserCredentials(users?.writer)) {
-    throw new Error("Некорректно настроен тех.пользователь Writer.");
+    throw new Error(localize("Error.InvalidWriter"));
   }
 }
 
 function notifyKriptaMenuUnavailable(error) {
   console.error("KRIPTA menu open failed", error);
-  ui.notifications.error("Функционал не работает. Проверьте настройки модуля. Подробности - в консоли браузера.");
+  ui.notifications.error(localize("Error.MenuUnavailable"));
 }
 
 async function openKriptaMenuWindow(openWindow) {
@@ -117,7 +118,7 @@ Hooks.once("ready", () => {
 Hooks.on("getSceneControlButtons", (controls) => {
   controls[MODULE_ID] = {
     name: MODULE_ID,
-    title: "Карточки крипты",
+    title: localize("Menu.Title"),
     icon: "fas fa-id-card",
     order: 90,
     visible: true,
@@ -125,7 +126,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
     tools: {
       [MENU_ROOT_TOOL]: {
         name: MENU_ROOT_TOOL,
-        title: "Карточки крипты",
+        title: localize("Menu.Title"),
         icon: "fas fa-id-card",
         order: -1,
         button: false,
@@ -134,7 +135,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
       },
       catalog: {
         name: "catalog",
-        title: "Каталог карточек",
+        title: localize("Menu.Catalog"),
         icon: "fas fa-book-open",
         order: 0,
         button: true,
@@ -147,7 +148,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
       },
       "get-card": {
         name: "get-card",
-        title: "Получить карточку",
+        title: localize("Menu.GetCard"),
         icon: "fas fa-hand-holding-medical",
         order: 1,
         button: true,
@@ -157,7 +158,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
           const playerGuid = binding?.guid ?? binding?.playerGuid ?? "";
 
           if (!playerGuid) {
-            notifyWarn(game.i18n.localize("KRIPTA.NoBinding"));
+            notifyWarn(localize("NoBinding"));
             return;
           }
 
@@ -171,7 +172,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
       },
       "my-cards": {
         name: "my-cards",
-        title: "Мои карточки",
+        title: localize("Menu.MyCards"),
         icon: "fas fa-images",
         order: 2,
         button: true,
@@ -181,7 +182,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
           const playerGuid = binding?.guid ?? binding?.playerGuid ?? "";
 
           if (!playerGuid) {
-            notifyWarn(game.i18n.localize("KRIPTA.NoBinding"));
+            notifyWarn(localize("NoBinding"));
             return;
           }
 
@@ -196,7 +197,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
       },
       players: {
         name: "players",
-        title: "Управление игроками",
+        title: localize("Menu.Players"),
         icon: "fas fa-users-cog",
         order: 3,
         button: true,
@@ -223,7 +224,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
       event.preventDefault();
 
       if (!game.user.isGM) {
-        notifyWarn(game.i18n.localize("KRIPTA.GMOnly"));
+        notifyWarn(localize("GMOnly"));
         return;
       }
 
@@ -235,13 +236,13 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
       const decision = target.dataset.kriptaDecision;
 
       if (!payload) {
-        notifyWarn("Не удалось прочитать данные запроса.");
+        notifyWarn(localize("Chat.CardRequestPayloadUnreadable"));
         return;
       }
 
       if (decision === "cancel") {
         await message.delete();
-        notifyInfo("Запрос карточки отменен.");
+        notifyInfo(localize("Chat.CardRequestCanceled"));
         return;
       }
 
@@ -249,7 +250,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         const resolvedPlayerGuid = await resolvePlayerGuid(payload);
 
         if (!resolvedPlayerGuid) {
-          throw new Error("Не удалось определить playerGuid для выдачи карточки.");
+          throw new Error(localize("Error.MissingRequestPlayerGuid"));
         }
 
         await KriptaApiClient.giveCard(
@@ -272,9 +273,9 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         const levelName = levels.find((item) => Number(item.id) === Number(payload.level))?.name ?? String(payload.level);
 
         await createKriptaChatMessage({
-          title: "Запрос карты подтверждён",
+          title: localize("Chat.CardRequestConfirmedTitle"),
           subtitle: buildCardReceiveSubtitle({
-            playerName: ownerUser?.name ?? payload.playerName ?? "игрок",
+            playerName: ownerUser?.name ?? payload.playerName ?? localize("Chat.FallbackPlayer"),
             cardName: meta.name,
             levelName
           }),
@@ -283,9 +284,9 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
           speakerUser: game.user
         });
 
-        notifyInfo("Карточка выдана.");
+        notifyInfo(localize("Notification.CardGiven"));
       } catch (error) {
-        notifyError(error, "Не удалось подтвердить выдачу карточки");
+        notifyError(error, localize("Notification.CardRequestConfirmFailed"));
       }
     });
   }

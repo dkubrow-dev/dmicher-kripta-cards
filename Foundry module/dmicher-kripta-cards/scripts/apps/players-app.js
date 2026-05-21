@@ -4,7 +4,8 @@ import { KriptaMyCardsApp } from "./my-cards-app.js";
 import { KriptaPlayerRegistryApp } from "./registry-app.js";
 import { chooseServerPlayerDialog } from "./dialogs.js";
 import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
-import { clearBinding, getBinding, getFoundryUsersForBinding, notifyError, notifyInfo, setBinding } from "../helpers/utils.js";
+import { localize } from "../helpers/lang.js";
+import { clearBinding, getBinding, getFoundryUsersForBinding, notifyInfo, notifyWarn, setBinding } from "../helpers/utils.js";
 
 const WINDOW_MIN_WIDTH = 450;
 
@@ -18,7 +19,7 @@ export class KriptaPlayersApp extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-players`,
-      title: "Управление игроками",
+      title: localize("Window.Players"),
       template: `${TEMPLATE_ROOT}/players-app.hbs`,
       classes: [MODULE_ID, "sheet"],
       width: 820,
@@ -76,21 +77,21 @@ export class KriptaPlayersApp extends Application {
       const player = this.serverPlayers.find((item) => item.guid === chosenGuid);
       if (!player) return;
       await setBinding(foundryUserId, player);
-      notifyInfo("Привязка сохранена.");
+      notifyInfo(localize("Notification.BindingSaved"));
       this.render();
     });
 
     html.find('[data-action="unbind"]').on("click", async (event) => {
       const foundryUserId = event.currentTarget.dataset.userId;
       await clearBinding(foundryUserId);
-      notifyInfo("Привязка удалена.");
+      notifyInfo(localize("Notification.BindingDeleted"));
       this.render();
     });
 
     html.find('[data-action="open-cards"]').on("click", (event) => {
       const foundryUserId = event.currentTarget.dataset.userId;
       const row = this.rows.find((item) => item.foundryUserId === foundryUserId);
-      if (!row?.binding?.guid) return ui.notifications.warn(game.i18n.localize("KRIPTA.NoBinding"));
+      if (!row?.binding?.guid) return notifyWarn(localize("NoBinding"));
       new KriptaMyCardsApp({
         playerGuid: row.binding.guid,
         playerName: row.foundryUserName,
@@ -101,7 +102,7 @@ export class KriptaPlayersApp extends Application {
     html.find('[data-action="give-card"]').on("click", (event) => {
       const foundryUserId = event.currentTarget.dataset.userId;
       const row = this.rows.find((item) => item.foundryUserId === foundryUserId);
-      if (!row?.binding?.guid) return ui.notifications.warn(game.i18n.localize("KRIPTA.NoBinding"));
+      if (!row?.binding?.guid) return notifyWarn(localize("NoBinding"));
       new KriptaGiveCardDialog({
         playerGuid: row.binding.guid,
         ownerFoundryUserId: foundryUserId,

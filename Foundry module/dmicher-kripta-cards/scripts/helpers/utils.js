@@ -1,4 +1,5 @@
 import { DEFAULT_UI_PREFS, MODULE_ID, SETTINGS } from "../constants.js";
+import { localize } from "./lang.js";
 
 function normalizeBindingRecord(binding) {
   if (!binding) return null;
@@ -95,7 +96,7 @@ export function notifyWarn(message) {
   ui.notifications?.warn(message);
 }
 
-export function notifyError(error, fallback = "Произошла ошибка") {
+export function notifyError(error, fallback = localize("Error.Generic")) {
   console.error(error);
   const message = error?.message || error?.toString?.() || fallback;
   ui.notifications?.error(message);
