@@ -1,5 +1,4 @@
 {
-  "KRIPTA.SettingsTitle": "Карточки Крипты",
   "KRIPTA.NoBinding": "Ваш Участник Foundry не привязан к Игроку Сервера в модуле Карточки крипты. Обратитесь к мастеру игры.",
   "KRIPTA.GMOnly": "Это действие доступно только мастеру.",
 
@@ -18,7 +17,7 @@
   "KRIPTA.Window.Players": "Управление игроками",
   "KRIPTA.Window.Registry": "Реестр игроков",
   "KRIPTA.Window.RequestCard": "Получить карточку",
-  "KRIPTA.Window.Settings": "Карточки Крипты - настройки",
+  "KRIPTA.Window.Settings": "Карточки Крипты - Настройки",
   "KRIPTA.Window.UseCard": "Использовать карточку",
 
   "KRIPTA.Menu.Title": "Карточки крипты",
@@ -89,7 +88,6 @@
 
   "KRIPTA.Template.EmptyCatalog": "На сервере нет зарегистрированных категорий или карточек.",
   "KRIPTA.Template.MyCardsTitle": "Карточки игрока: {playerName}",
-  "KRIPTA.Template.CardCount": "Количество: {count}",
   "KRIPTA.Template.UseCardMissing": "Эта карточка больше не зарегистрирована на сервере.",
   "KRIPTA.Template.UseCardPrompt": "Будет использована карта:",
 
@@ -100,7 +98,7 @@
   "KRIPTA.Level.FallbackName": "Уровень {level}",
   "KRIPTA.Level.MissingDescription": "Уровень присутствует в инвентаре игрока, но отсутствует в текущем каталоге сервера.",
 
-  "KRIPTA.Chat.BlobReadFailed": "Не удалось прочитать blob",
+  "KRIPTA.Chat.BlobReadFailed": "Не удалось прочитать BLOB",
   "KRIPTA.Chat.CardGivenTitle": "Выдана карточка",
   "KRIPTA.Chat.CardReceiveSubtitle": "Игрок {playerName} получает карточку {cardSubtitle}",
   "KRIPTA.Chat.CardRequestCanceled": "Запрос карточки отменен.",
@@ -121,7 +119,7 @@
   "KRIPTA.Dialog.Player.AddTitle": "Добавить игрока",
   "KRIPTA.Dialog.Player.EditTitle": "Изменить игрока",
   "KRIPTA.Dialog.Player.DeleteTitle": "Удалить игрока",
-  "KRIPTA.Dialog.Player.DeleteWarning": "Удаление игрока \"{playerName}\" необратимо. Введите {code} и подтвердите удаление.",
+  "KRIPTA.Dialog.Player.DeleteWarning": "Удаление игрока \"{playerName}\" необратимо. Введите \"{code}\" и подтвердите удаление.",
   "KRIPTA.Dialog.Count.TotalCards": "всего карточек этого типа - {max}",
 
   "KRIPTA.Error.InvalidCardLevel": "Некорректный level для {context}: {level}",
@@ -141,7 +139,7 @@
   "KRIPTA.Error.MenuUnavailable": "Функционал не работает. Проверьте настройки модуля. Подробности - в консоли браузера.",
   "KRIPTA.Error.Generic": "Произошла ошибка",
   "KRIPTA.Error.Unknown": "неизвестная ошибка",
-  "KRIPTA.Error.NameRequired": "api 400: Поле имени обязательно.",
+  "KRIPTA.Error.NameRequired": "Поле имени обязательно.",
   "KRIPTA.Error.RegistryDeleteReturned": "сервер вернул игрока в реестре после удаления.",
 
   "KRIPTA.Notification.CardGiven": "Карточка выдана.",
@@ -162,7 +160,7 @@
   "KRIPTA.Notification.ServerCheckFailed": "Проверка сервера не удалась",
   "KRIPTA.Notification.TechUserReader": "Читатель",
   "KRIPTA.Notification.TechUserWriter": "Писатель",
-  "KRIPTA.Notification.TechUsersCheckSuccess": "Reader и Writer успешно проходят проверку.",
+  "KRIPTA.Notification.TechUsersCheckSuccess": "Тех.пользователи \"Reader\" и \"Writer\" успешно проходят проверку.",
   "KRIPTA.Notification.SettingsSaved": "Настройки подключения сохранены.",
   "KRIPTA.Notification.PlayerAdded": "Игрок добавлен.",
   "KRIPTA.Notification.PlayerUpdated": "Игрок обновлен.",
