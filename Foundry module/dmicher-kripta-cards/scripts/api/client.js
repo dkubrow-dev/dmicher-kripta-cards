@@ -1,5 +1,5 @@
 import { ROLES } from "../constants.js";
-import { format } from "../helpers/lang.js";
+import { format, localize } from "../helpers/lang.js";
 import { getServerUrl, getTechUsers, objectWithoutUndefined } from "../helpers/utils.js";
 import {
   normalizeCardMeta,
@@ -26,6 +26,16 @@ function assertValidCardAddress(level, number, context = "card request") {
     level: normalizedLevel,
     number: normalizedNumber
   };
+}
+
+function createApiError(response, details) {
+  const error = new Error(localize("Error.Generic"));
+  error.name = "KriptaApiError";
+  error.isApiError = true;
+  error.status = response.status;
+  error.statusText = response.statusText;
+  error.details = details;
+  return error;
 }
 
 export class KriptaApiClient {
@@ -85,7 +95,7 @@ export class KriptaApiClient {
       try {
         details = await response.text();
       } catch (_error) {}
-      throw new Error(`api ${response.status}: ${details || response.statusText}`);
+      throw createApiError(response, details);
     }
 
     if (binary) return response.blob();

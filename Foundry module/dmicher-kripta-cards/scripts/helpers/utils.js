@@ -96,10 +96,21 @@ export function notifyWarn(message) {
   ui.notifications?.warn(message);
 }
 
+function isTechnicalErrorMessage(message) {
+  return (
+    /^api\s+\d+\s*:/i.test(message) ||
+    /Failed to fetch/i.test(message) ||
+    /NetworkError/i.test(message) ||
+    /Load failed/i.test(message) ||
+    /ERR_[A-Z_]+/i.test(message)
+  );
+}
+
 export function notifyError(error, fallback = localize("Error.Generic")) {
   console.error(error);
   const message = error?.message || error?.toString?.() || fallback;
-  ui.notifications?.error(message);
+  const useFallback = error?.isApiError || error?.name === "KriptaApiError" || isTechnicalErrorMessage(message);
+  ui.notifications?.error(useFallback ? fallback : message);
 }
 
 export function escapeHtml(value) {

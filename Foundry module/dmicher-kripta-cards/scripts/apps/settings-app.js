@@ -7,37 +7,6 @@ function canManageKriptaSettings(user = game.user) {
   return Number(user?.role ?? 0) >= Number(CONST.USER_ROLES.ASSISTANT ?? 3);
 }
 
-function stringifyServerResult(result) {
-  if (result === null || result === undefined) return "";
-
-  if (typeof result === "string") {
-    return result.trim();
-  }
-
-  if (typeof result === "object") {
-    const entries = Object.entries(result)
-      .filter(([, value]) => value !== undefined && value !== null && value !== "")
-      .map(([key, value]) => `${key}: ${value}`);
-
-    if (entries.length) return entries.join(" ");
-
-    try {
-      return JSON.stringify(result);
-    } catch (_error) {
-      return String(result);
-    }
-  }
-
-  return String(result).trim();
-}
-
-function formatServerSuccessMessage(result) {
-  const tail = stringifyServerResult(result);
-  return tail
-    ? format("Notification.ServerSuccessWithDetails", { details: tail })
-    : localize("Notification.ServerSuccess");
-}
-
 function formatServerCheckError(error, rawServerUrl = "") {
   const rawMessage = String(error?.message ?? error ?? "").trim();
   const normalizedUrl = String(rawServerUrl ?? "").trim();
@@ -52,7 +21,7 @@ function formatServerCheckError(error, rawServerUrl = "") {
     if (normalizedUrl) {
       return format("Notification.InvalidServerUrl", { url: normalizedUrl });
     }
-    return rawMessage || localize("Notification.ServerCheckFailedFallback");
+    return localize("Notification.ServerCheckFailedFallback");
   }
 
   if (
@@ -68,67 +37,11 @@ function formatServerCheckError(error, rawServerUrl = "") {
     return localize("Notification.ServerConnectionFailed");
   }
 
-  return rawMessage || localize("Notification.ServerCheckFailedFallback");
+  return localize("Notification.ServerCheckFailedFallback");
 }
 
-function tryExtractJsonMessage(text) {
-  const normalized = String(text ?? "").trim();
-  if (!normalized) return "";
-
-  try {
-    const parsed = JSON.parse(normalized);
-
-    if (parsed && typeof parsed === "object") {
-      if (typeof parsed.message === "string" && parsed.message.trim()) {
-        return parsed.message.trim();
-      }
-
-      if (typeof parsed.title === "string" && parsed.title.trim()) {
-        return parsed.title.trim();
-      }
-    }
-  } catch (_error) {
-    // ignore
-  }
-
-  const jsonCandidateMatch = normalized.match(/(\{.*\})$/);
-  if (jsonCandidateMatch) {
-    try {
-      const parsed = JSON.parse(jsonCandidateMatch[1]);
-
-      if (parsed && typeof parsed === "object") {
-        if (typeof parsed.message === "string" && parsed.message.trim()) {
-          return parsed.message.trim();
-        }
-
-        if (typeof parsed.title === "string" && parsed.title.trim()) {
-          return parsed.title.trim();
-        }
-      }
-    } catch (_error) {
-      // ignore
-    }
-  }
-
-  return normalized;
-}
-
-function normalizeApiErrorText(error) {
-  const rawMessage = String(error?.message ?? error ?? "").trim();
-  if (!rawMessage) return localize("Error.Unknown");
-
-  const apiMatch = rawMessage.match(/^api\s+(\d+)\s*:\s*(.+)$/i);
-  if (apiMatch) {
-    const code = apiMatch[1];
-    const payload = tryExtractJsonMessage(apiMatch[2]);
-    return `api ${code}: ${payload}`;
-  }
-
-  return tryExtractJsonMessage(rawMessage);
-}
-
-function formatTechUserCheckError(stageLabel, error) {
-  return `${stageLabel}: ${normalizeApiErrorText(error)}`;
+function formatTechUserCheckError(stageLabel, fallback) {
+  return `${stageLabel}: ${fallback}`;
 }
 
 function openAuthorThanksPage() {
@@ -222,8 +135,8 @@ export class KriptaSettingsApp extends FormApplication {
       await this._persistFromHtml(html);
 
       try {
-        const result = await KriptaApiClient.healthCheck();
-        notifyInfo(formatServerSuccessMessage(result));
+        await KriptaApiClient.healthCheck();
+        notifyInfo(localize("Notification.ServerSuccess"));
       } catch (error) {
         notifyError(new Error(formatServerCheckError(error, rawServerUrl)), localize("Notification.ServerCheckFailed"));
       }
@@ -242,18 +155,18 @@ export class KriptaSettingsApp extends FormApplication {
       try {
         await KriptaApiClient.checkMe();
       } catch (error) {
-        const message = formatTechUserCheckError(localize("Notification.TechUserReader"), error);
+        const message = formatTechUserCheckError(localize("Notification.TechUserReader"), localize("Error.InvalidReader"));
         ui.notifications.error(message);
-        console.error(message);
+        console.error(error);
         return;
       }
 
       try {
         await KriptaApiClient.testWriterAccess();
       } catch (error) {
-        const message = formatTechUserCheckError(localize("Notification.TechUserWriter"), error);
+        const message = formatTechUserCheckError(localize("Notification.TechUserWriter"), localize("Error.InvalidWriter"));
         ui.notifications.error(message);
-        console.error(message);
+        console.error(error);
         return;
       }
 
