@@ -1,5 +1,6 @@
 import { CHAT_ACTIONS, MODULE_ID } from "../constants.js";
 import { sanitizeCardHtml, stripHtml } from "./html-sanitizer.js";
+import { formatCardReceiveSubtitle, localize } from "./lang.js";
 import { escapeHtml } from "./utils.js";
 
 export function getActionPayloadFromElement(element) {
@@ -21,7 +22,7 @@ function blobToDataUrl(blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(String(reader.result || ""));
-    reader.onerror = () => reject(reader.error || new Error("Не удалось прочитать blob"));
+    reader.onerror = () => reject(reader.error || new Error(localize("Chat.BlobReadFailed")));
     reader.readAsDataURL(blob);
   });
 }
@@ -97,8 +98,11 @@ export function buildCardSubtitle(cardName, levelName = "") {
 }
 
 export function buildCardReceiveSubtitle({ playerName = "", cardName = "", levelName = "" } = {}) {
-  const normalizedPlayerName = String(playerName ?? "").trim() || "игрок";
-  return `Игрок ${escapeHtml(normalizedPlayerName)} получает карточку ${buildCardSubtitle(cardName, levelName)}`;
+  const normalizedPlayerName = String(playerName ?? "").trim() || localize("Chat.FallbackPlayer");
+  return formatCardReceiveSubtitle(
+    escapeHtml(normalizedPlayerName),
+    buildCardSubtitle(cardName, levelName)
+  );
 }
 
 async function resolveChatImageUrl({ imageUrl = "", imageResolver = null }) {
@@ -230,8 +234,8 @@ export async function createCardRequestMessage({
   };
 
   const buttonsHtml = [
-    createActionButtonHtml(CHAT_ACTIONS.REQUEST_CARD, "confirm", "Подтвердить", payload, "is-confirm"),
-    createActionButtonHtml(CHAT_ACTIONS.REQUEST_CARD, "cancel", "Отменить", payload, "is-cancel")
+    createActionButtonHtml(CHAT_ACTIONS.REQUEST_CARD, "confirm", localize("Button.Confirm"), payload, "is-confirm"),
+    createActionButtonHtml(CHAT_ACTIONS.REQUEST_CARD, "cancel", localize("Button.Cancel"), payload, "is-cancel")
   ].join("");
 
   const subtitleLevelName = String(levelName ?? "").trim() || String(level ?? "");

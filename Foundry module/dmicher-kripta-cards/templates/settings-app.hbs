@@ -1,33 +1,33 @@
 <form class="kripta-sheet-form">
   <div class="form-group">
-    <label>Путь к серверу</label>
+    <label>{{localize 'KRIPTA.Label.ServerUrl'}}</label>
     <input type="text" name="serverUrl" value="{{serverUrl}}" autocomplete="off">
   </div>
 
   <fieldset class="kripta-fieldset">
-    <legend>Писатель (Writer)</legend>
+    <legend>{{localize 'KRIPTA.Label.Writer'}}</legend>
 
     <div class="form-group">
-      <label>Id</label>
+      <label>{{localize 'KRIPTA.Label.Id'}}</label>
       <input type="text" name="writerId" value="{{writerId}}" autocomplete="off">
     </div>
 
     <div class="form-group">
-      <label>Key</label>
+      <label>{{localize 'KRIPTA.Label.Key'}}</label>
       <input type="password" name="writerKey" value="{{writerKey}}" autocomplete="off">
     </div>
   </fieldset>
 
   <fieldset class="kripta-fieldset">
-    <legend>Читатель (Reader)</legend>
+    <legend>{{localize 'KRIPTA.Label.Reader'}}</legend>
 
     <div class="form-group">
-      <label>Id</label>
+      <label>{{localize 'KRIPTA.Label.Id'}}</label>
       <input type="text" name="readerId" value="{{readerId}}" autocomplete="off">
     </div>
 
     <div class="form-group">
-      <label>Key</label>
+      <label>{{localize 'KRIPTA.Label.Key'}}</label>
       <input type="password" name="readerKey" value="{{readerKey}}" autocomplete="off">
     </div>
   </fieldset>
@@ -35,22 +35,22 @@
   <footer class="sheet-footer flexrow">
     <button type="button" data-action="test-server">
       <i class="fas fa-heartbeat"></i>
-      Проверить сервер
+      {{localize 'KRIPTA.Button.TestServer'}}
     </button>
 
     <button type="button" data-action="test-auth">
       <i class="fas fa-user-check"></i>
-      Проверить тех.пользователей
+      {{localize 'KRIPTA.Button.TestAuth'}}
     </button>
 
     <button type="button" data-action="thanks-author">
       <i class="fas fa-hand-holding-heart"></i>
-      Сказать спасибо автору
+      {{localize 'KRIPTA.Button.ThanksAuthor'}}
     </button>
 
     <button type="submit" class="default">
       <i class="fas fa-save"></i>
-      Сохранить изменения
+      {{localize 'KRIPTA.Button.SaveChanges'}}
     </button>
   </footer>
 </form>

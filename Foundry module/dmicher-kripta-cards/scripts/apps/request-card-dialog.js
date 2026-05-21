@@ -3,6 +3,7 @@ import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
 import { createCardRequestMessage } from "../helpers/chat.js";
 import { sortCardsByName } from "../helpers/card-sort.js";
 import { stripHtml } from "../helpers/html-sanitizer.js";
+import { localize } from "../helpers/lang.js";
 import { getBinding, notifyError, notifyInfo } from "../helpers/utils.js";
 
 function isValidCard(card) {
@@ -44,7 +45,7 @@ export class KriptaRequestCardDialog extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-request-card`,
-      title: "Получить карточку",
+      title: localize("Window.RequestCard"),
       template: `${TEMPLATE_ROOT}/request-card-dialog.hbs`,
       classes: [MODULE_ID, "sheet"],
       width: 520,
@@ -168,7 +169,7 @@ export class KriptaRequestCardDialog extends FormApplication {
         const selectedNumber = Number(rawSelectedNumber);
 
         if (!Number.isInteger(selectedNumber) || selectedNumber < 0) {
-          ui.notifications.warn("Не удалось определить выбранную карточку.");
+          ui.notifications.warn(localize("Error.MissingSelectedCard"));
           return;
         }
 
@@ -187,7 +188,7 @@ export class KriptaRequestCardDialog extends FormApplication {
       }
 
       if (!isValidCard(chosenCard)) {
-        ui.notifications.warn("Не удалось получить карточку.");
+        ui.notifications.warn(localize("Notification.CardRollFailed"));
         return;
       }
 
@@ -201,7 +202,7 @@ export class KriptaRequestCardDialog extends FormApplication {
         playerName: game.users.get(ownerFoundryUserId)?.name ?? game.user.name,
         level: chosenCard.level,
         number: chosenCard.number,
-        title: mode === "manual" ? "Запрос выбранной карты" : "Запрос случайной карты",
+        title: mode === "manual" ? localize("Chat.RequestManualTitle") : localize("Chat.RequestRandomTitle"),
         cardName: chosenCard.name,
         levelName: resolvedLevelName,
         imageUrl: "",
@@ -210,13 +211,13 @@ export class KriptaRequestCardDialog extends FormApplication {
           return blob ? URL.createObjectURL(blob) : "";
         },
         description: chosenCard.description ?? "",
-        footerHtml: mode === "manual" ? '<div class="kripta-chat-footer-note">РУЧНОЙ ВЫБОР</div>' : "",
+        footerHtml: mode === "manual" ? `<div class="kripta-chat-footer-note">${localize("Chat.ManualChoiceFooter")}</div>` : "",
         speakerUser: game.user
       });
 
-      notifyInfo("Запрос карточки отправлен в чат.");
+      notifyInfo(localize("Notification.RequestSent"));
     } catch (error) {
-      notifyError(error, "Не удалось отправить запрос карточки");
+      notifyError(error, localize("Notification.CardRequestFailed"));
     }
   }
 }

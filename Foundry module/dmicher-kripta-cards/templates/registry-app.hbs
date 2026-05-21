@@ -4,9 +4,9 @@
       <table class="kripta-grid" style="width: max-content; min-width: 100%; border-collapse: collapse;">
         <thead>
           <tr>
-            <th style="white-space: nowrap;">Имя</th>
-            <th style="white-space: nowrap;">Комментарий</th>
-            <th style="white-space: nowrap;">Типов карточек</th>
+            <th style="white-space: nowrap;">{{localize 'KRIPTA.Label.Name'}}</th>
+            <th style="white-space: nowrap;">{{localize 'KRIPTA.Label.Comment'}}</th>
+            <th style="white-space: nowrap;">{{localize 'KRIPTA.Label.CardTypes'}}</th>
           </tr>
         </thead>
         <tbody>
@@ -23,9 +23,9 @@
   </div>
 
   <footer class="sheet-footer flexrow kripta-fixed-footer">
-    <button type="button" data-action="add">Добавить</button>
-    <button type="button" data-action="edit" {{#unless hasPlayers}}disabled{{/unless}}>Изменить</button>
-    <button type="button" data-action="delete" {{#unless hasPlayers}}disabled{{/unless}}>Удалить</button>
-    <button type="button" data-action="refresh">Обновить</button>
+    <button type="button" data-action="add">{{localize 'KRIPTA.Button.Add'}}</button>
+    <button type="button" data-action="edit" {{#unless hasPlayers}}disabled{{/unless}}>{{localize 'KRIPTA.Button.Edit'}}</button>
+    <button type="button" data-action="delete" {{#unless hasPlayers}}disabled{{/unless}}>{{localize 'KRIPTA.Button.Delete'}}</button>
+    <button type="button" data-action="refresh">{{localize 'KRIPTA.Button.Refresh'}}</button>
   </footer>
 </div>

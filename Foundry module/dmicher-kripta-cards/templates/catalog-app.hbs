@@ -1,5 +1,5 @@
 {{#if emptyState}}
-<div class="kripta-empty-state">На сервере нет зарегистрированных категорий или карточек.</div>
+<div class="kripta-empty-state">{{localize 'KRIPTA.Template.EmptyCatalog'}}</div>
 {{else}}
 <div class="kripta-browser kripta-browser--resizable" data-browser-root{{#if sidebarWidthStyle}} style="{{sidebarWidthStyle}}"{{/if}}>
   <aside class="kripta-browser__sidebar">
@@ -22,9 +22,9 @@
           <div class="notes">{{activeLevel.description}}</div>
         </div>
         <div class="kripta-browser__toolbar">
-          <input type="text" name="search" value="{{search}}" placeholder="Поиск">
-          <button type="button" data-action="set-view" data-view="table" class="{{#if isTable}}active{{/if}}">Таблица</button>
-          <button type="button" data-action="set-view" data-view="tiles" class="{{#if isTiles}}active{{/if}}">Плитки</button>
+          <input type="text" name="search" value="{{search}}" placeholder="{{localize 'KRIPTA.Placeholder.Search'}}">
+          <button type="button" data-action="set-view" data-view="table" class="{{#if isTable}}active{{/if}}">{{localize 'KRIPTA.View.Table'}}</button>
+          <button type="button" data-action="set-view" data-view="tiles" class="{{#if isTiles}}active{{/if}}">{{localize 'KRIPTA.View.Tiles'}}</button>
         </div>
       </header>
 
@@ -40,9 +40,9 @@
             {{#if descriptionTablePreviewHtml}}<div class="kripta-html">{{{descriptionTablePreviewHtml}}}</div>{{/if}}
           </div>
           <div class="kripta-row-card__actions">
-            <button type="button" data-action="output">Вывести</button>
-            <button type="button" data-action="info">Информация</button>
-            {{#if ../isGM}}<button type="button" data-action="give">Выдать</button>{{/if}}
+            <button type="button" data-action="output">{{localize 'KRIPTA.Button.Output'}}</button>
+            <button type="button" data-action="info">{{localize 'KRIPTA.Button.Info'}}</button>
+            {{#if ../isGM}}<button type="button" data-action="give">{{localize 'KRIPTA.Button.Give'}}</button>{{/if}}
           </div>
         </article>
         {{/each}}
@@ -55,9 +55,9 @@
           <div class="kripta-card-tile__name">{{{nameHtml}}}</div>
           {{#if descriptionPreviewHtml}}<div class="notes kripta-card-tile__description">{{{descriptionPreviewHtml}}}</div>{{/if}}
           <div class="kripta-inline-actions">
-            <button type="button" data-action="output">Вывести</button>
-            <button type="button" data-action="info">Информация</button>
-            {{#if ../isGM}}<button type="button" data-action="give">Выдать</button>{{/if}}
+            <button type="button" data-action="output">{{localize 'KRIPTA.Button.Output'}}</button>
+            <button type="button" data-action="info">{{localize 'KRIPTA.Button.Info'}}</button>
+            {{#if ../isGM}}<button type="button" data-action="give">{{localize 'KRIPTA.Button.Give'}}</button>{{/if}}
           </div>
         </article>
         {{/each}}
@@ -66,7 +66,7 @@
     </div>
 
     <footer class="sheet-footer flexrow kripta-browser__footer">
-      <button type="button" data-action="refresh">Обновить</button>
+      <button type="button" data-action="refresh">{{localize 'KRIPTA.Button.Refresh'}}</button>
     </footer>
   </section>
 </div>

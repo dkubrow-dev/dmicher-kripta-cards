@@ -34,7 +34,7 @@ function removeKriptaSettingsMenuEntry(_app, html) {
 
 export function registerSettings() {
   game.settings.register(MODULE_ID, SETTINGS.SERVER_URL, {
-    name: "Адрес сервера",
+    name: "KRIPTA.Settings.ServerUrl.Name",
     scope: "world",
     config: false,
     type: String,
@@ -42,7 +42,7 @@ export function registerSettings() {
   });
 
   game.settings.register(MODULE_ID, SETTINGS.TECH_AUTH_USERS, {
-    name: "Тех.пользователи",
+    name: "KRIPTA.Settings.TechAuthUsers.Name",
     scope: "world",
     config: false,
     type: Object,
@@ -53,7 +53,7 @@ export function registerSettings() {
   });
 
   game.settings.register(MODULE_ID, SETTINGS.PLAYER_BINDINGS, {
-    name: "Привязки участников к игрокам сервера",
+    name: "KRIPTA.Settings.PlayerBindings.Name",
     scope: "world",
     config: false,
     type: Object,
@@ -61,7 +61,7 @@ export function registerSettings() {
   });
 
   game.settings.register(MODULE_ID, SETTINGS.UI_PREFS, {
-    name: "Локальные настройки интерфейса",
+    name: "KRIPTA.Settings.UiPrefs.Name",
     scope: "client",
     config: false,
     type: Object,
@@ -72,9 +72,9 @@ export function registerSettings() {
   });
 
   game.settings.registerMenu(MODULE_ID, "connection-settings", {
-    name: "Карточки Крипты",
-    label: "Настройка модуля",
-    hint: "Подключение к API и технические пользователи.",
+    name: "KRIPTA.Settings.Menu.Name",
+    label: "KRIPTA.Settings.Menu.Label",
+    hint: "KRIPTA.Settings.Menu.Hint",
     icon: "fas fa-id-card",
     type: KriptaSettingsApp,
     restricted: false

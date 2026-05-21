@@ -1,4 +1,5 @@
 import { escapeHtml } from "../helpers/utils.js";
+import { format, localize } from "../helpers/lang.js";
 
 const { DialogV2 } = foundry.applications.api;
 
@@ -17,7 +18,7 @@ async function waitDialog(config, fallback = null) {
 export async function chooseServerPlayerDialog(players, currentGuid = "", foundryUserName = "") {
   const normalizedCurrentGuid = String(currentGuid ?? "").trim();
   const hasCurrentSelection = !!normalizedCurrentGuid && players.some((player) => String(player.guid ?? "").trim() === normalizedCurrentGuid);
-  const escapedFoundryUserName = escapeHtml(foundryUserName || "пользователя Foundry");
+  const escapedFoundryUserName = escapeHtml(foundryUserName || localize("Dialog.BindPlayer.DefaultFoundryUser"));
 
   const options = players.map((player) => {
     const playerGuid = String(player.guid ?? "").trim();
@@ -83,7 +84,7 @@ export async function chooseServerPlayerDialog(players, currentGuid = "", foundr
 
   return waitDialog({
     window: {
-      title: "Привязать игрока сервера"
+      title: localize("Dialog.BindPlayer.Title")
     },
     content: `
       <form
@@ -95,7 +96,7 @@ export async function chooseServerPlayerDialog(players, currentGuid = "", foundr
           box-sizing: border-box;
         "
       >
-        <h4>Выбрать игрока для ${escapedFoundryUserName}</h4>
+        <h4>${format("Dialog.BindPlayer.Header", { foundryUserName: escapedFoundryUserName })}</h4>
         <div class="form-group">
           <div
             style="
@@ -126,14 +127,14 @@ export async function chooseServerPlayerDialog(players, currentGuid = "", foundr
     buttons: [
       {
         action: "confirm",
-        label: "Привязать",
+        label: localize("Button.Bind"),
         default: true,
         callback: (_event, button) =>
           button.form?.querySelector('input[name="guid"]:checked')?.value || null
       },
       {
         action: "cancel",
-        label: "Отмена",
+        label: localize("Button.Cancel"),
         callback: () => null
       }
     ]
@@ -143,7 +144,7 @@ export async function chooseServerPlayerDialog(players, currentGuid = "", foundr
 export async function addEditPlayerDialog(player = null) {
   return waitDialog({
     window: {
-      title: player ? "Изменить игрока" : "Добавить игрока"
+      title: player ? localize("Dialog.Player.EditTitle") : localize("Dialog.Player.AddTitle")
     },
     content: `
       <div style="width: 760px; min-width: 760px; max-width: 760px; box-sizing: border-box;">
@@ -171,7 +172,7 @@ export async function addEditPlayerDialog(player = null) {
                 width: 100%;
                 margin: 0 0 8px 0;
               "
-            >Имя</label>
+            >${localize("Label.Name")}</label>
 
             <input
               type="text"
@@ -202,7 +203,7 @@ export async function addEditPlayerDialog(player = null) {
                 width: 100%;
                 margin: 0 0 8px 0;
               "
-            >Комментарий</label>
+            >${localize("Label.Comment")}</label>
 
             <textarea
               name="comment"
@@ -225,7 +226,7 @@ export async function addEditPlayerDialog(player = null) {
     buttons: [
       {
         action: "confirm",
-        label: player ? "Изменить" : "Добавить",
+        label: player ? localize("Button.Edit") : localize("Button.Add"),
         default: true,
         callback: (_event, button) => ({
           action: "confirm",
@@ -235,7 +236,7 @@ export async function addEditPlayerDialog(player = null) {
       },
       {
         action: "cancel",
-        label: "Отмена",
+        label: localize("Button.Cancel"),
         callback: () => ({ action: "cancel" })
       }
     ]
@@ -247,12 +248,15 @@ export async function deletePlayerDialog(player) {
 
   return waitDialog({
     window: {
-      title: "Удалить игрока"
+      title: localize("Dialog.Player.DeleteTitle")
     },
     content: `
       <div style="width: 760px; min-width: 760px; max-width: 760px; box-sizing: border-box;">
         <div class="kripta-danger-note" style="margin-bottom: 12px;">
-          Удаление игрока "${escapeHtml(player?.name ?? "")}" необратимо. Введите ${escapeHtml(code)} и подтвердите удаление.
+          ${format("Dialog.Player.DeleteWarning", {
+            playerName: escapeHtml(player?.name ?? ""),
+            code: escapeHtml(code)
+          })}
         </div>
 
         <form
@@ -278,7 +282,7 @@ export async function deletePlayerDialog(player) {
                 width: 100%;
                 margin: 0 0 8px 0;
               "
-            >Код подтверждения</label>
+            >${localize("Label.ConfirmationCode")}</label>
 
             <input
               type="text"
@@ -299,7 +303,7 @@ export async function deletePlayerDialog(player) {
     buttons: [
       {
         action: "confirm",
-        label: "Удалить",
+        label: localize("Button.Delete"),
         default: true,
         callback: (_event, button) => {
           const entered = String(button.form?.elements?.code?.value ?? "").trim();
@@ -310,7 +314,7 @@ export async function deletePlayerDialog(player) {
       },
       {
         action: "cancel",
-        label: "Отмена",
+        label: localize("Button.Cancel"),
         callback: () => ({ action: "cancel", valid: false })
       }
     ]
@@ -329,16 +333,16 @@ export async function countPromptDialog({ title, message, max = 1, defaultValue 
       <div class="kripta-danger-note">${message}</div>
       <form class="kripta-inline-form">
         <div class="form-group">
-          <label>Количество</label>
+          <label>${localize("Label.Count")}</label>
           <input type="number" name="count" min="1" max="${safeMax}" value="${safeDefault}">
         </div>
-        <div class="notes">всего карточек этого типа - ${safeMax}</div>
+        <div class="notes">${format("Dialog.Count.TotalCards", { max: safeMax })}</div>
       </form>
     `,
     buttons: [
       {
         action: "confirm",
-        label: "Подтвердить",
+        label: localize("Button.Confirm"),
         default: true,
         callback: (_event, button) => {
           const rawValue = Number(button.form?.elements?.count?.value || safeDefault);
@@ -350,7 +354,7 @@ export async function countPromptDialog({ title, message, max = 1, defaultValue 
       },
       {
         action: "cancel",
-        label: "Отмена",
+        label: localize("Button.Cancel"),
         callback: () => ({
           action: "cancel",
           count: null
@@ -364,7 +368,7 @@ export async function countPromptDialog({ title, message, max = 1, defaultValue 
 }
 
 export async function chooseBoundUserDialog(users) {
-  const options = ['<option value="">-- не выбран --</option>'].concat(
+  const options = [`<option value="">${localize("Select.NotSelected")}</option>`].concat(
     users.map((item) => `
       <option value="${escapeHtml(item.foundryUserId)}">${escapeHtml(item.foundryUserName)}</option>
     `)
@@ -372,12 +376,12 @@ export async function chooseBoundUserDialog(users) {
 
   return waitDialog({
     window: {
-      title: "Выдать карточку"
+      title: localize("Dialog.ChooseBoundUser.Title")
     },
     content: `
       <form class="kripta-inline-form">
         <div class="form-group">
-          <label>Игрок</label>
+          <label>${localize("Label.Player")}</label>
           <select name="foundryUserId">${options}</select>
         </div>
       </form>
@@ -385,7 +389,7 @@ export async function chooseBoundUserDialog(users) {
     buttons: [
       {
         action: "confirm",
-        label: "Выдать",
+        label: localize("Button.Give"),
         default: true,
         callback: (_event, button) => ({
           action: "confirm",
@@ -394,7 +398,7 @@ export async function chooseBoundUserDialog(users) {
       },
       {
         action: "cancel",
-        label: "Отмена",
+        label: localize("Button.Cancel"),
         callback: () => ({
           action: "cancel",
           foundryUserId: null

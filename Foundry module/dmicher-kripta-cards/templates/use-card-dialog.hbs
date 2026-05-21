@@ -1,24 +1,24 @@
 <form class="kripta-sheet-form">
   {{#if isMissing}}
-  <p>эта карточка больше не зарегистрирована на сервере.</p>
+  <p>{{localize 'KRIPTA.Template.UseCardMissing'}}</p>
 
   <footer class="sheet-footer flexrow">
-    <button type="button" onclick="this.closest('.app').querySelector('.header-button.close')?.click()">Закрыть</button>
+    <button type="button" onclick="this.closest('.app').querySelector('.header-button.close')?.click()">{{localize 'KRIPTA.Button.Close'}}</button>
   </footer>
   {{else}}
-  <p>Будет исползована карта: <strong>{{{meta.nameHtml}}}</strong>.</p>
+  <p>{{localize 'KRIPTA.Template.UseCardPrompt'}} <strong>{{{meta.nameHtml}}}</strong>.</p>
 
   <div class="form-group">
-    <label>Режим</label>
+    <label>{{localize 'KRIPTA.Label.Mode'}}</label>
     <div class="kripta-radio-row">
-      <label><input type="radio" name="mode" value="spend" checked> Потратить</label>
-      <label><input type="radio" name="mode" value="show"> Показать</label>
+      <label><input type="radio" name="mode" value="spend" checked> {{localize 'KRIPTA.Mode.Spend'}}</label>
+      <label><input type="radio" name="mode" value="show"> {{localize 'KRIPTA.Mode.Show'}}</label>
     </div>
   </div>
 
   <footer class="sheet-footer flexrow">
-    <button type="submit" class="default">Да</button>
-    <button type="button" onclick="this.closest('.app').querySelector('.header-button.close')?.click()">Нет</button>
+    <button type="submit" class="default">{{localize 'KRIPTA.Button.Yes'}}</button>
+    <button type="button" onclick="this.closest('.app').querySelector('.header-button.close')?.click()">{{localize 'KRIPTA.Button.No'}}</button>
   </footer>
   {{/if}}
 </form>

@@ -1,4 +1,5 @@
 import { ROLES } from "../constants.js";
+import { format } from "../helpers/lang.js";
 import { getServerUrl, getTechUsers, objectWithoutUndefined } from "../helpers/utils.js";
 import {
   normalizeCardMeta,
@@ -14,11 +15,11 @@ function assertValidCardAddress(level, number, context = "card request") {
   const normalizedNumber = Number(number);
 
   if (!Number.isInteger(normalizedLevel) || normalizedLevel < 0) {
-    throw new Error(`Некорректный level для ${context}: ${level}`);
+    throw new Error(format("Error.InvalidCardLevel", { context, level }));
   }
 
   if (!Number.isInteger(normalizedNumber) || normalizedNumber < 0) {
-    throw new Error(`Некорректный number для ${context}: ${number}`);
+    throw new Error(format("Error.InvalidCardNumber", { context, number }));
   }
 
   return {

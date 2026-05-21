@@ -4,9 +4,9 @@
   <div class="kripta-html">{{{meta.descriptionHtml}}}</div>
 
   <div class="kripta-inline-actions">
-    <button type="button" data-action="output">Вывести</button>
-    <button type="button" data-action="request">Запросить</button>
-    {{#if isGM}}<button type="button" data-action="give">Выдать</button>{{/if}}
+    <button type="button" data-action="output">{{localize 'KRIPTA.Button.Output'}}</button>
+    <button type="button" data-action="request">{{localize 'KRIPTA.Button.Request'}}</button>
+    {{#if isGM}}<button type="button" data-action="give">{{localize 'KRIPTA.Button.Give'}}</button>{{/if}}
   </div>
 
   {{#if imageUrl}}

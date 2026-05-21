@@ -4,6 +4,7 @@ import { KriptaCardDetailsApp } from "./card-details-app.js";
 import { KriptaGiveCardDialog } from "./give-card-dialog.js";
 import { buildCardSubtitle, createKriptaChatMessage } from "../helpers/chat.js";
 import { chooseBoundUserDialog } from "./dialogs.js";
+import { formatCardNameFallback, localize } from "../helpers/lang.js";
 import { getBindings, getUiPrefs, notifyError, notifyWarn, setUiPref } from "../helpers/utils.js";
 import { sanitizeCardHtml, stripHtml, truncateHtmlDescription } from "../helpers/html-sanitizer.js";
 
@@ -33,7 +34,7 @@ function buildCatalogFallbackMeta(card) {
   return {
     level: Number(card?.level),
     number: Number(card?.number),
-    name: String(card?.name ?? `Карточка ${card?.number ?? ""}`),
+    name: String(card?.name ?? formatCardNameFallback(card?.number ?? "")),
     description: String(card?.description ?? "")
   };
 }
@@ -95,7 +96,7 @@ export class KriptaCatalogApp extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: `${MODULE_ID}-catalog`,
-      title: "Каталог карточек",
+      title: localize("Window.Catalog"),
       template: `${TEMPLATE_ROOT}/catalog-app.hbs`,
       classes: [MODULE_ID, "sheet"],
       width: 1040,
@@ -253,7 +254,7 @@ export class KriptaCatalogApp extends Application {
       try {
         const levelName = this.levels.find((level) => Number(level.id) === Number(item.level))?.name ?? String(item.level);
         await createKriptaChatMessage({
-          title: "Справка",
+          title: localize("Chat.ReferenceTitle"),
           subtitle: buildCardSubtitle(item.name, levelName),
           imageUrl: item.imageUrl,
           imageResolver: item.imageUrl
@@ -263,7 +264,7 @@ export class KriptaCatalogApp extends Application {
           speakerUser: game.user
         });
       } catch (error) {
-        notifyError(error, "Не удалось вывести карточку в чат");
+        notifyError(error, localize("Notification.CardOutputFailed"));
       }
     });
 
@@ -272,7 +273,7 @@ export class KriptaCatalogApp extends Application {
       if (!item) return;
 
       if (!isValidCardRef(item)) {
-        return notifyWarn("У выбранной карточки некорректный номер. Проверь ответ getCardsList и normalizeCardsList.");
+        return notifyWarn(localize("Notification.BadCatalogCardNumber"));
       }
 
       new KriptaCardDetailsApp({ level: item.level, number: item.number }).render(true);
@@ -283,7 +284,7 @@ export class KriptaCatalogApp extends Application {
       if (!item) return;
 
       if (!isValidCardRef(item)) {
-        return notifyWarn("Эту карточку нельзя выдать вручную: у нее некорректный номер. Проверь ответ getCardsList и normalizeCardsList.");
+        return notifyWarn(localize("Notification.BadCatalogCardNumberForGive"));
       }
 
       const bindings = getBindings();
@@ -298,10 +299,10 @@ export class KriptaCatalogApp extends Application {
       if (dialogResult?.action !== "confirm") return;
 
       const foundryUserId = String(dialogResult?.foundryUserId ?? "");
-      if (!foundryUserId) return notifyWarn("Игрок для выдачи не выбран");
+      if (!foundryUserId) return notifyWarn(localize("Notification.PlayerNotSelected"));
 
       const binding = bindings[foundryUserId];
-      if (!binding?.guid) return notifyWarn("Не удалось определить привязку игрока для выдачи");
+      if (!binding?.guid) return notifyWarn(localize("Notification.PlayerBindingMissing"));
 
       new KriptaGiveCardDialog({
         playerGuid: binding.guid,
@@ -322,7 +323,7 @@ export class KriptaCatalogApp extends Application {
       const ref = { level, number };
 
       if (!isValidCardRef(ref)) {
-        return notifyWarn("У выбранной карточки некорректный номер. Проверь ответ getCardsList и normalizeCardsList.");
+        return notifyWarn(localize("Notification.BadCatalogCardNumber"));
       }
 
       new KriptaCardDetailsApp(ref).render(true);
