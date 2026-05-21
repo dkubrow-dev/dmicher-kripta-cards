@@ -1,6 +1,6 @@
 import { KriptaApiClient } from "./api/client.js";
 import { MODULE_ID, CHAT_ACTIONS } from "./constants.js";
-import { createKriptaChatMessage, getActionPayloadFromElement } from "./helpers/chat.js";
+import { buildCardReceiveSubtitle, createKriptaChatMessage, getActionPayloadFromElement } from "./helpers/chat.js";
 import {
   getBinding,
   getServerUrl,
@@ -9,7 +9,6 @@ import {
   notifyInfo,
   notifyWarn
 } from "./helpers/utils.js";
-import { stripHtml } from "./helpers/html-sanitizer.js";
 import { KriptaCatalogApp } from "./apps/catalog-app.js";
 import { KriptaMyCardsApp } from "./apps/my-cards-app.js";
 import { KriptaPlayersApp } from "./apps/players-app.js";
@@ -270,10 +269,15 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         const blob = await KriptaApiClient.getCardImageBlob(meta.imagePath).catch(() => null);
         const imageUrl = blob ? URL.createObjectURL(blob) : "";
         const ownerUser = game.users.get(payload.ownerFoundryUserId);
-        const levelName = levels.find((item) => item.id === payload.level)?.name ?? String(payload.level);
+        const levelName = levels.find((item) => Number(item.id) === Number(payload.level))?.name ?? String(payload.level);
 
         await createKriptaChatMessage({
-          title: `Игрок ${ownerUser?.name ?? payload.playerName ?? "игрок"} получает карточку ${stripHtml(meta.name)} (${levelName})`,
+          title: "Запрос карты подтверждён",
+          subtitle: buildCardReceiveSubtitle({
+            playerName: ownerUser?.name ?? payload.playerName ?? "игрок",
+            cardName: meta.name,
+            levelName
+          }),
           imageUrl,
           description: meta.description,
           speakerUser: game.user

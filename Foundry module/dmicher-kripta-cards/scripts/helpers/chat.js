@@ -1,5 +1,5 @@
 import { CHAT_ACTIONS, MODULE_ID } from "../constants.js";
-import { sanitizeCardHtml } from "./html-sanitizer.js";
+import { sanitizeCardHtml, stripHtml } from "./html-sanitizer.js";
 import { escapeHtml } from "./utils.js";
 
 export function getActionPayloadFromElement(element) {
@@ -74,17 +74,31 @@ function buildKriptaChatContent({
   buttonsHtml = ""
 }) {
   const safeDescription = sanitizeCardHtml(description);
+  const safeSubtitle = sanitizeCardHtml(subtitle);
+  const safeFooter = sanitizeCardHtml(footerHtml);
+  const imageAlt = escapeHtml(stripHtml(subtitle) || String(title ?? ""));
 
   return `
     <div class="kripta-chat-card">
       <div class="kripta-chat-card__title">${escapeHtml(title)}</div>
-      ${subtitle ? `<div class="kripta-chat-card__subtitle">${escapeHtml(subtitle)}</div>` : ""}
-      ${imageUrl ? `<div class="kripta-chat-card__image-wrap"><img class="kripta-chat-card__image" src="${imageUrl}" alt="${escapeHtml(title)}"></div>` : ""}
+      ${safeSubtitle ? `<div class="kripta-chat-card__subtitle">${safeSubtitle}</div>` : ""}
+      ${imageUrl ? `<div class="kripta-chat-card__image-wrap"><img class="kripta-chat-card__image" src="${imageUrl}" alt="${imageAlt}"></div>` : ""}
       ${safeDescription ? `<div class="kripta-chat-card__description">${safeDescription}</div>` : ""}
       ${buttonsHtml ? `<div class="kripta-chat-card__actions">${buttonsHtml}</div>` : ""}
-      ${footerHtml ? `<div class="kripta-chat-card__footer">${footerHtml}</div>` : ""}
+      ${safeFooter ? `<div class="kripta-chat-card__footer">${safeFooter}</div>` : ""}
     </div>
   `;
+}
+
+export function buildCardSubtitle(cardName, levelName = "") {
+  const normalizedLevelName = String(levelName ?? "").trim();
+  const suffix = normalizedLevelName ? ` (${escapeHtml(normalizedLevelName)})` : "";
+  return `${String(cardName ?? "")}${suffix}`;
+}
+
+export function buildCardReceiveSubtitle({ playerName = "", cardName = "", levelName = "" } = {}) {
+  const normalizedPlayerName = String(playerName ?? "").trim() || "игрок";
+  return `Игрок ${escapeHtml(normalizedPlayerName)} получает карточку ${buildCardSubtitle(cardName, levelName)}`;
 }
 
 async function resolveChatImageUrl({ imageUrl = "", imageResolver = null }) {
@@ -199,10 +213,12 @@ export async function createCardRequestMessage({
   number,
   playerName,
   title,
+  cardName = "",
   levelName,
   imageUrl,
   imageResolver = null,
   description,
+  footerHtml = "",
   speakerUser = game.user
 }) {
   const payload = {
@@ -218,15 +234,15 @@ export async function createCardRequestMessage({
     createActionButtonHtml(CHAT_ACTIONS.REQUEST_CARD, "cancel", "Отменить", payload, "is-cancel")
   ].join("");
 
-  const normalizedLevelName = String(levelName ?? "").trim();
-  const fullTitle = normalizedLevelName ? `${title} (${normalizedLevelName})` : title;
+  const subtitleLevelName = String(levelName ?? "").trim() || String(level ?? "");
 
   return createKriptaChatMessage({
-    title: fullTitle,
-    subtitle: "",
+    title,
+    subtitle: buildCardSubtitle(cardName, subtitleLevelName),
     imageUrl,
     imageResolver,
     description,
+    footerHtml,
     speakerUser,
     buttonsHtml,
     flags: {

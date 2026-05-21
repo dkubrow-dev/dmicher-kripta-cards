@@ -226,12 +226,49 @@
   gap: 0.5rem;
 }
 
+.kripta-chat-card__subtitle {
+    font-weight: 700;
+    font-size: 1.3em;
+    text-align: center;
+    margin: 5px 0;
+}
+
 .kripta-chat-card__title {
-  font-weight: 700;
+    font-weight: 700;
+    font-size: 1.7em;
+    text-align: center;
+    margin: 3px 0;
+}
+
+.kripta-chat-card__description {
+    text-align: justify;
+}
+
+.kripta-chat-card__footer {
+    text-align: center;
+}
+
+.kripta-chat-card__footer .kripta-spent-note,
+.kripta-chat-card__footer .kripta-chat-footer-note {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 700;
+    text-align: center;
+}
+
+.kripta-chat-card__footer .kripta-spent-note {
+    color: #d44;
+}
+
+.kripta-chat-card__footer .kripta-chat-footer-note {
+    color: #d44;
 }
 
 .kripta-chat-card__subtitle {
-  opacity: 0.8;
+    opacity: 0.8;
 }
 
 .kripta-chat-card__image-wrap {
@@ -248,10 +285,40 @@
   display: flex;
   gap: 0.35rem;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.kripta-chat-button.is-confirm,
+.kripta-chat-button.is-cancel {
+  font-weight: 600;
+  border: 1px solid transparent;
+  box-shadow: none;
 }
 
 .kripta-chat-button.is-confirm {
-  font-weight: 600;
+  color: #28563a;
+  background: #dcefe2;
+  border-color: #b9d8c3;
+}
+
+.kripta-chat-button.is-confirm:hover,
+.kripta-chat-button.is-confirm:focus {
+  background: #cfe7d7;
+  border-color: #9fc8ad;
+}
+
+.kripta-chat-button.is-cancel {
+  color: #6b3333;
+  background: #f2dddd;
+  border-color: #ddb9b9;
+}
+
+.kripta-chat-button.is-cancel:hover,
+.kripta-chat-button.is-cancel:focus {
+  background: #ebd0d0;
+  border-color: #cfa2a2;
 }
 
 .kripta-window-layout {

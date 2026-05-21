@@ -2,7 +2,7 @@ import { KriptaApiClient } from "../api/client.js";
 import { MODULE_ID, TEMPLATE_ROOT, VIEW_MODES } from "../constants.js";
 import { KriptaCardDetailsApp } from "./card-details-app.js";
 import { KriptaGiveCardDialog } from "./give-card-dialog.js";
-import { createKriptaChatMessage } from "../helpers/chat.js";
+import { buildCardSubtitle, createKriptaChatMessage } from "../helpers/chat.js";
 import { chooseBoundUserDialog } from "./dialogs.js";
 import { getBindings, getUiPrefs, notifyError, notifyWarn, setUiPref } from "../helpers/utils.js";
 import { sanitizeCardHtml, stripHtml, truncateHtmlDescription } from "../helpers/html-sanitizer.js";
@@ -254,7 +254,7 @@ export class KriptaCatalogApp extends Application {
         const levelName = this.levels.find((level) => Number(level.id) === Number(item.level))?.name ?? String(item.level);
         await createKriptaChatMessage({
           title: "Справка",
-          subtitle: `${item.nameText ?? stripHtml(item.name)} (${levelName})`,
+          subtitle: buildCardSubtitle(item.name, levelName),
           imageUrl: item.imageUrl,
           imageResolver: item.imageUrl
             ? null
