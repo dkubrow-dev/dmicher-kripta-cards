@@ -5,6 +5,7 @@ import { KriptaRequestCardDialog } from "./request-card-dialog.js";
 import { createKriptaChatMessage } from "../helpers/chat.js";
 import { chooseBoundUserDialog } from "./dialogs.js";
 import { getBinding, getBindings, notifyError, notifyWarn } from "../helpers/utils.js";
+import { sanitizeCardHtml, stripHtml } from "../helpers/html-sanitizer.js";
 
 function assertLocalCardRef(level, number) {
   const normalizedLevel = Number(level);
@@ -54,12 +55,20 @@ export class KriptaCardDetailsApp extends Application {
 
     const imageBlob = await KriptaApiClient.getCardImageBlob(meta.imagePath).catch(() => null);
 
-    this.meta = meta;
+    const name = String(meta?.name ?? "");
+    const description = String(meta?.description ?? "");
+
+    this.meta = {
+      ...meta,
+      nameText: stripHtml(name),
+      nameHtml: sanitizeCardHtml(name),
+      descriptionHtml: sanitizeCardHtml(description)
+    };
     this.levels = levels;
     this.imageUrl = imageBlob ? URL.createObjectURL(imageBlob) : "";
 
     return {
-      meta,
+      meta: this.meta,
       levelName: levels.find((item) => item.id === ref.level)?.name ?? String(ref.level),
       imageUrl: this.imageUrl,
       isGM: game.user.isGM
@@ -73,7 +82,7 @@ export class KriptaCardDetailsApp extends Application {
       try {
         await createKriptaChatMessage({
           title: "Справка",
-          subtitle: `${this.meta?.name ?? ""} (${this.levels.find((item) => item.id === this.level)?.name ?? this.level})`,
+          subtitle: `${this.meta?.nameText ?? stripHtml(this.meta?.name)} (${this.levels.find((item) => item.id === this.level)?.name ?? this.level})`,
           imageUrl: this.imageUrl,
           description: this.meta?.description ?? "",
           speakerUser: game.user

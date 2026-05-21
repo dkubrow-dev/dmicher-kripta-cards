@@ -1,6 +1,7 @@
 import { KriptaApiClient } from "../api/client.js";
 import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
 import { createCardRequestMessage } from "../helpers/chat.js";
+import { stripHtml } from "../helpers/html-sanitizer.js";
 import { getBinding, notifyError, notifyInfo } from "../helpers/utils.js";
 
 function isValidCard(card) {
@@ -68,7 +69,7 @@ export class KriptaRequestCardDialog extends FormApplication {
 
     return {
       levels: this.levels,
-      cards: this.cards,
+      cards: this.cards.map((card) => ({ ...card, nameText: stripHtml(card?.name) })),
       selectedLevel: this.selectedLevel,
       selectedNumber: this.selectedNumber ?? "",
       isManual: this.mode === "manual"
@@ -189,6 +190,7 @@ export class KriptaRequestCardDialog extends FormApplication {
         snapshot.levels.find((item) => Number(item.id) === Number(chosenCard.level))?.name ??
         chosenCard.levelName ??
         "";
+      const chosenCardName = stripHtml(chosenCard.name);
 
       await createCardRequestMessage({
         playerGuid,
@@ -197,8 +199,8 @@ export class KriptaRequestCardDialog extends FormApplication {
         level: chosenCard.level,
         number: chosenCard.number,
         title: mode === "manual"
-          ? `Выбрана карта: ${chosenCard.name}`
-          : `Случайная карта: ${chosenCard.name}`,
+          ? `Выбрана карта: ${chosenCardName}`
+          : `Случайная карта: ${chosenCardName}`,
         levelName: resolvedLevelName,
         imageUrl: "",
         imageResolver: async () => {

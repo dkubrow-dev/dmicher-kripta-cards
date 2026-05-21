@@ -6,7 +6,7 @@
     <button type="button" onclick="this.closest('.app').querySelector('.header-button.close')?.click()">Закрыть</button>
   </footer>
   {{else}}
-  <p>Выбрана карточка для использования: <strong>{{meta.name}}</strong>.</p>
+  <p>Выбрана карточка для использования: <strong>{{{meta.nameHtml}}}</strong>.</p>
 
   <div class="form-group">
     <label>Режим</label>

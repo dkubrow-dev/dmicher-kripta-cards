@@ -4,7 +4,8 @@ import { countPromptDialog } from "./dialogs.js";
 import { KriptaCardDetailsApp } from "./card-details-app.js";
 import { KriptaRequestCardDialog } from "./request-card-dialog.js";
 import { KriptaUseCardDialog } from "./use-card-dialog.js";
-import { getUiPrefs, notifyError, notifyInfo, notifyWarn, setUiPref, stripHtml, truncateHtmlDescription } from "../helpers/utils.js";
+import { getUiPrefs, notifyError, notifyInfo, notifyWarn, setUiPref } from "../helpers/utils.js";
+import { sanitizeCardHtml, stripHtml, truncateHtmlDescription } from "../helpers/html-sanitizer.js";
 
 const MISSING_CARD_CACHE = new Set();
 
@@ -194,6 +195,8 @@ export class KriptaMyCardsApp extends Application {
       const descriptionPreviewHtml = truncateHtmlDescription(description, 250);
       const descriptionTablePreviewHtml = truncateHtmlDescription(description, 500);
       const name = String(metaResults[index]?.meta?.name ?? item?.name ?? "");
+      const nameText = stripHtml(name);
+      const nameHtml = sanitizeCardHtml(name);
       const cachedImageUrl = metaResults[index]?.isMissing
         ? ""
         : (MY_CARDS_IMAGE_URL_CACHE.get(getMyCardsImageCacheKey(metaResults[index]?.meta?.imagePath)) || "");
@@ -202,10 +205,12 @@ export class KriptaMyCardsApp extends Application {
         ...item,
         ...metaResults[index].meta,
         imageUrl: cachedImageUrl,
+        nameText,
+        nameHtml,
         descriptionText,
         descriptionPreviewHtml,
         descriptionTablePreviewHtml,
-        searchText: `${name} ${descriptionText}`.toLowerCase(),
+        searchText: `${nameText} ${descriptionText}`.toLowerCase(),
         isMissing: metaResults[index]?.isMissing ?? false
       };
     });
@@ -296,7 +301,7 @@ export class KriptaMyCardsApp extends Application {
 
       const count = await countPromptDialog({
         title: "Забрать карточку",
-        message: `Игрок ${this.playerName} будет лишён карточки ${item.name}.`,
+        message: `Игрок ${this.playerName} будет лишён карточки ${item.nameText ?? stripHtml(item.name)}.`,
         max: item.count,
         defaultValue: 1
       });
@@ -510,7 +515,7 @@ export class KriptaMyCardsApp extends Application {
 
     const img = document.createElement("img");
     img.src = imageUrl;
-    img.alt = item.name ?? "";
+    img.alt = item.nameText ?? stripHtml(item.name);
 
     currentContainer.innerHTML = "";
     currentContainer.appendChild(img);

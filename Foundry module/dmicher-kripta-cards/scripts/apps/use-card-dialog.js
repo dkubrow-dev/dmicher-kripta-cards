@@ -2,6 +2,19 @@ import { KriptaApiClient } from "../api/client.js";
 import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
 import { createKriptaChatMessage } from "../helpers/chat.js";
 import { notifyError, notifyInfo, notifyWarn } from "../helpers/utils.js";
+import { sanitizeCardHtml, stripHtml } from "../helpers/html-sanitizer.js";
+
+function decorateCardMeta(meta) {
+  const name = String(meta?.name ?? "");
+  const description = String(meta?.description ?? "");
+
+  return {
+    ...meta,
+    nameText: stripHtml(name),
+    nameHtml: sanitizeCardHtml(name),
+    descriptionHtml: sanitizeCardHtml(description)
+  };
+}
 
 export class KriptaUseCardDialog extends FormApplication {
   constructor(options = {}) {
@@ -31,7 +44,7 @@ export class KriptaUseCardDialog extends FormApplication {
 
   async getData() {
     try {
-      this.meta = await KriptaApiClient.getCardMeta(this.level, this.number);
+      this.meta = decorateCardMeta(await KriptaApiClient.getCardMeta(this.level, this.number));
       const blob = await KriptaApiClient.getCardImageBlob(this.meta.imagePath).catch(() => null);
       this.imageUrl = blob ? URL.createObjectURL(blob) : "";
       this.isMissing = false;
@@ -46,12 +59,12 @@ export class KriptaUseCardDialog extends FormApplication {
 
       if (message.includes("404") || message.toLowerCase().includes("not registered")) {
         this.isMissing = true;
-        this.meta = {
+        this.meta = decorateCardMeta({
           level: this.level,
           number: this.number,
           name: `Карточка ${this.number}`,
           description: `Карточка ${this.level}/${this.number} больше не зарегистрирована на сервере.`
-        };
+        });
 
         return {
           meta: this.meta,
@@ -79,7 +92,7 @@ export class KriptaUseCardDialog extends FormApplication {
       }
 
       await createKriptaChatMessage({
-        title: this.meta?.name ?? `Карточка ${this.level}/${this.number}`,
+        title: this.meta?.nameText ?? stripHtml(this.meta?.name) ?? `Карточка ${this.level}/${this.number}`,
         imageUrl: this.imageUrl,
         description: this.meta?.description ?? "",
         footerHtml: spend
