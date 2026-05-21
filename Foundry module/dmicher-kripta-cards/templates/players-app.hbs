@@ -3,25 +3,33 @@
     <section class="kripta-players-list">
       {{#each rows}}
       <article class="kripta-player-row">
-        <div class="kripta-player-row__head">
-          <div>
-            <h3>{{foundryUserName}}</h3>
-            <div class="notes">{{#if isGM}}мастер{{else}}игрок{{/if}}{{#if active}} · online{{/if}}</div>
+          <div class="kripta-player-row__head">
+              <div>
+                  <h3>{{foundryUserName}}</h3>
+                  <div class="notes">
+                      <b>Роль</b>: {{#if isGM}}Мастер{{else}}Игрок{{/if}} · {{#if active}}<span style="color:darkgreen">в игре</span>{{else}}<span style="color:brown">вне игры</span>{{/if}}
+                  </div>
+                  <div class="kripta-player-row__binding">
+                      <div class="kripta-player-row__server-name">
+                          <b>Привязка</b>:
+                          {{#if boundPlayer}}
+                          {{boundPlayer.name}} · {{#if cardsCount}} выдано карт:
+                          <span class="kripta-badge kripta-badge--hint"
+                                data-tooltip="Количество выданных типов карт (не учитывает повторяющиеся)"
+                                data-tooltip-direction="UP"
+                                title="Количество выданных типов карт (не учитывает повторяющиеся)"
+                                aria-label="Количество выданных типов карт (не учитывает повторяющиеся)">
+                              {{cardsCount}}
+                          </span>
+                          {{else}}нет карт{{/if}}
+                          {{else}}игрок не привязан, выберите игрока.{{/if}}
+                      </div>
+                      {{#if boundPlayer}}<div class="notes" style="margin-top: 5px"><i>{{boundPlayer.comment}}</i></div>{{/if}}
+                  </div>
+              </div>
           </div>
-          <span class="kripta-badge kripta-badge--hint"
-            data-tooltip="Количество выданных типов карт (не учитывает повторяющиеся)" data-tooltip-direction="UP"
-            title="Количество выданных типов карт (не учитывает повторяющиеся)"
-            aria-label="Количество выданных типов карт (не учитывает повторяющиеся)">
-            {{cardsCount}}
-          </span>
-        </div>
         <div class="kripta-player-row__body">
-          <div class="kripta-player-row__binding">
-            <div class="kripta-player-row__server-name">{{#if boundPlayer}}{{boundPlayer.name}}{{else}}не
-              привязан{{/if}}</div>
-            <div class="notes">{{#if boundPlayer}}{{boundPlayer.comment}}{{else}}выберите игрока сервера{{/if}}</div>
-          </div>
-          <div class="kripta-inline-actions">
+          <div class="kripta-inline-actions kripta-player-row__actions">
             <button type="button" data-action="bind" data-user-id="{{foundryUserId}}">Привязать</button>
             <button type="button" data-action="unbind" data-user-id="{{foundryUserId}}">Отвязать</button>
             <button type="button" data-action="open-cards" data-user-id="{{foundryUserId}}">Карточки игрока</button>

@@ -166,6 +166,18 @@ export class KriptaPlayerRegistryApp extends Application {
       this._applySelectionStyles(html);
     });
 
+    html.find("[data-player-guid]").on("dblclick", (event) => {
+      const button = event.button ?? event.originalEvent?.button ?? 0;
+      if (button !== 0) return;
+
+      const nextGuid = String(event.currentTarget.dataset.playerGuid ?? "").trim();
+      if (!nextGuid) return;
+
+      this.selectedGuid = nextGuid;
+      this._applySelectionStyles(html);
+      html.find('[data-action="edit"]').trigger("click");
+    });
+
     html.find('[data-action="refresh"]').on("click", () => this.render());
 
     html.find('[data-action="add"]').on("click", async () => {
