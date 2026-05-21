@@ -4,7 +4,7 @@ import { KriptaCardDetailsApp } from "./card-details-app.js";
 import { KriptaGiveCardDialog } from "./give-card-dialog.js";
 import { createKriptaChatMessage } from "../helpers/chat.js";
 import { chooseBoundUserDialog } from "./dialogs.js";
-import { getBindings, getUiPrefs, notifyError, notifyWarn, setUiPref, stripHtml } from "../helpers/utils.js";
+import { getBindings, getUiPrefs, notifyError, notifyWarn, setUiPref, stripHtml, truncateHtmlDescription } from "../helpers/utils.js";
 
 const WINDOW_MIN_WIDTH = 450;
 const SIDEBAR_MIN_WIDTH = 200;
@@ -182,6 +182,8 @@ export class KriptaCatalogApp extends Application {
       const name = String(meta?.name ?? card?.name ?? "");
       const description = String(meta?.description ?? card?.description ?? "");
       const descriptionText = stripHtml(description);
+      const descriptionPreviewHtml = truncateHtmlDescription(description, 250);
+      const descriptionTablePreviewHtml = truncateHtmlDescription(description, 500);
       const cachedImageUrl = isValidCardRef(card)
         ? CATALOG_IMAGE_URL_CACHE.get(getCatalogImageCacheKey(meta.imagePath))
         : "";
@@ -191,6 +193,8 @@ export class KriptaCatalogApp extends Application {
         ...meta,
         imageUrl: cachedImageUrl,
         descriptionText,
+        descriptionPreviewHtml,
+        descriptionTablePreviewHtml,
         searchText: `${name} ${descriptionText}`.toLowerCase(),
         isBroken: !isValidCardRef(card) || (metaResults[index]?.isBroken ?? false)
       };

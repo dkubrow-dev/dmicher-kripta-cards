@@ -39,7 +39,7 @@
           </div>
           <div class="kripta-row-card__content">
             <h3>{{name}} <span class="kripta-badge">{{count}}</span></h3>
-            <div class="kripta-html">{{{description}}}</div>
+            {{#if descriptionTablePreviewHtml}}<div class="kripta-html">{{{descriptionTablePreviewHtml}}}</div>{{/if}}
           </div>
           <div class="kripta-row-card__actions">
             <button type="button" data-action="use">Использовать</button>
@@ -56,6 +56,7 @@
           <div class="kripta-card-tile__image-wrap">{{#if imageUrl}}<img src="{{imageUrl}}" alt="{{name}}">{{/if}}</div>
           <div class="kripta-card-tile__name">{{name}}</div>
           <div class="notes">Количество: {{count}}</div>
+          {{#if descriptionPreviewHtml}}<div class="notes kripta-card-tile__description">{{{descriptionPreviewHtml}}}</div>{{/if}}
           <div class="kripta-inline-actions">
             <button type="button" data-action="use">Использовать</button>
           </div>

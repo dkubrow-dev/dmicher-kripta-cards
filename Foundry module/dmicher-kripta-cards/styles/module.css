@@ -39,6 +39,7 @@
   justify-content: space-between;
   gap: 0.75rem;
   align-items: flex-start;
+  margin-bottom: 5px;
 }
 
 .dmicher-kripta-cards .kripta-browser__toolbar {
@@ -130,7 +131,21 @@
 }
 
 .dmicher-kripta-cards .kripta-card-tile__name {
+  font-size: 1.1em;
   font-weight: 600;
+  text-align: center;
+}
+
+.dmicher-kripta-cards .kripta-card-tile__description {
+  overflow-wrap: anywhere;
+}
+
+.dmicher-kripta-cards .kripta-card-tile__description p {
+  margin: 0 0 0.35rem;
+}
+
+.dmicher-kripta-cards .kripta-card-tile__description p:last-child {
+  margin-bottom: 0;
 }
 
 .dmicher-kripta-cards .kripta-player-row {
