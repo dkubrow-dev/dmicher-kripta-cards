@@ -1,6 +1,7 @@
 import { KriptaApiClient } from "../api/client.js";
 import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
-import { createKriptaChatMessage } from "../helpers/chat.js";
+import { buildCardReceiveSubtitle, createKriptaChatMessage } from "../helpers/chat.js";
+import { sortCardsByName } from "../helpers/card-sort.js";
 import { stripHtml } from "../helpers/html-sanitizer.js";
 import { getBinding, notifyError, notifyInfo } from "../helpers/utils.js";
 
@@ -15,6 +16,10 @@ function pickRandomCard(cards) {
 
 function needsMetaHydration(card) {
   return !card || !String(card.name ?? "").trim() || !String(card.description ?? "").trim() || !String(card.imagePath ?? "").trim();
+}
+
+async function getSortedCardsList(level) {
+  return sortCardsByName(await KriptaApiClient.getCardsList(level, ""));
 }
 
 export class KriptaGiveCardDialog extends FormApplication {
@@ -55,7 +60,7 @@ export class KriptaGiveCardDialog extends FormApplication {
     }
 
     if (this.mode === "manual") {
-      this.cards = await KriptaApiClient.getCardsList(this.selectedLevel, "");
+      this.cards = await getSortedCardsList(this.selectedLevel);
 
       if (
         (this.selectedNumber === null || this.selectedNumber === undefined || this.selectedNumber === "") &&
@@ -88,7 +93,7 @@ export class KriptaGiveCardDialog extends FormApplication {
       }
 
       if (this.mode === "manual") {
-        this.cards = await KriptaApiClient.getCardsList(this.selectedLevel, "");
+        this.cards = await getSortedCardsList(this.selectedLevel);
         this.selectedNumber = this.cards[0]?.number ?? null;
       } else {
         this.cards = [];
@@ -102,7 +107,7 @@ export class KriptaGiveCardDialog extends FormApplication {
       this.selectedLevel = Number(event.currentTarget.value);
 
       if (this.mode === "manual") {
-        this.cards = await KriptaApiClient.getCardsList(this.selectedLevel, "");
+        this.cards = await getSortedCardsList(this.selectedLevel);
         this.selectedNumber = this.cards[0]?.number ?? null;
       }
 
@@ -197,10 +202,13 @@ export class KriptaGiveCardDialog extends FormApplication {
       const levels = snapshot.levels.length ? snapshot.levels : await KriptaApiClient.getLevelsList();
       const levelName = levels.find((item) => Number(item.id) === Number(card.level))?.name ?? String(card.level);
 
-      const cardName = stripHtml(card.name);
-
       await createKriptaChatMessage({
-        title: `Игрок ${snapshot.playerName} получает карточку ${cardName} (${levelName})`,
+        title: "Выдана карточка",
+        subtitle: buildCardReceiveSubtitle({
+          playerName: snapshot.playerName,
+          cardName: card.name,
+          levelName
+        }),
         imageUrl: "",
         imageResolver: async () => {
           const blob = await KriptaApiClient.getCardImageBlob(card.imagePath).catch(() => null);

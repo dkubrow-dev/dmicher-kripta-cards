@@ -2,7 +2,7 @@ import { KriptaApiClient } from "../api/client.js";
 import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
 import { KriptaGiveCardDialog } from "./give-card-dialog.js";
 import { KriptaRequestCardDialog } from "./request-card-dialog.js";
-import { createKriptaChatMessage } from "../helpers/chat.js";
+import { buildCardSubtitle, createKriptaChatMessage } from "../helpers/chat.js";
 import { chooseBoundUserDialog } from "./dialogs.js";
 import { getBinding, getBindings, notifyError, notifyWarn } from "../helpers/utils.js";
 import { sanitizeCardHtml, stripHtml } from "../helpers/html-sanitizer.js";
@@ -82,7 +82,10 @@ export class KriptaCardDetailsApp extends Application {
       try {
         await createKriptaChatMessage({
           title: "Справка",
-          subtitle: `${this.meta?.nameText ?? stripHtml(this.meta?.name)} (${this.levels.find((item) => item.id === this.level)?.name ?? this.level})`,
+          subtitle: buildCardSubtitle(
+            this.meta?.name ?? `Карта ${this.level}/${this.number}`,
+            this.levels.find((item) => Number(item.id) === Number(this.level))?.name ?? this.level
+          ),
           imageUrl: this.imageUrl,
           description: this.meta?.description ?? "",
           speakerUser: game.user

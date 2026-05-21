@@ -1,6 +1,6 @@
 import { KriptaApiClient } from "../api/client.js";
 import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
-import { createKriptaChatMessage } from "../helpers/chat.js";
+import { buildCardSubtitle, createKriptaChatMessage } from "../helpers/chat.js";
 import { notifyError, notifyInfo, notifyWarn } from "../helpers/utils.js";
 import { sanitizeCardHtml, stripHtml } from "../helpers/html-sanitizer.js";
 
@@ -26,6 +26,8 @@ export class KriptaUseCardDialog extends FormApplication {
     this.number = Number(options.number);
     this.onComplete = options.onComplete ?? (() => {});
     this.meta = null;
+    this.levels = [];
+    this.levelName = "";
     this.imageUrl = "";
     this.isMissing = false;
   }
@@ -44,7 +46,15 @@ export class KriptaUseCardDialog extends FormApplication {
 
   async getData() {
     try {
-      this.meta = decorateCardMeta(await KriptaApiClient.getCardMeta(this.level, this.number));
+      const [meta, levels] = await Promise.all([
+        KriptaApiClient.getCardMeta(this.level, this.number),
+        KriptaApiClient.getLevelsList()
+      ]);
+
+      this.meta = decorateCardMeta(meta);
+      this.levels = levels;
+      this.levelName = levels.find((item) => Number(item.id) === Number(this.level))?.name ?? String(this.level);
+
       const blob = await KriptaApiClient.getCardImageBlob(this.meta.imagePath).catch(() => null);
       this.imageUrl = blob ? URL.createObjectURL(blob) : "";
       this.isMissing = false;
@@ -59,6 +69,7 @@ export class KriptaUseCardDialog extends FormApplication {
 
       if (message.includes("404") || message.toLowerCase().includes("not registered")) {
         this.isMissing = true;
+        this.levelName = String(this.level);
         this.meta = decorateCardMeta({
           level: this.level,
           number: this.number,
@@ -92,12 +103,11 @@ export class KriptaUseCardDialog extends FormApplication {
       }
 
       await createKriptaChatMessage({
-        title: this.meta?.nameText ?? stripHtml(this.meta?.name) ?? `Карточка ${this.level}/${this.number}`,
+        title: spend ? "Карта потрачена" : "Справка по карте",
+        subtitle: buildCardSubtitle(this.meta?.name ?? `Карта ${this.level}/${this.number}`, this.levelName || this.level),
         imageUrl: this.imageUrl,
         description: this.meta?.description ?? "",
-        footerHtml: spend
-          ? '<div class="kripta-spent-note" style="display:block;width:100%;margin-top:8px;font-size:12px;line-height:1.35;font-weight:700;text-align:center;color:#d44;">карточка потрачена</div>'
-          : "",
+        footerHtml: spend ? '<div class="kripta-spent-note">КАРТА ПОТРАЧЕНА</div>' : "",
         speakerUser: game.users.get(this.ownerFoundryUserId) ?? game.user,
         rollModeUser: game.user
       });
