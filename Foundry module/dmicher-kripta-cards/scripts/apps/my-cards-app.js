@@ -4,7 +4,7 @@ import { countPromptDialog } from "./dialogs.js";
 import { KriptaCardDetailsApp } from "./card-details-app.js";
 import { KriptaRequestCardDialog } from "./request-card-dialog.js";
 import { KriptaUseCardDialog } from "./use-card-dialog.js";
-import { getUiPrefs, notifyError, notifyInfo, notifyWarn, setUiPref, stripHtml } from "../helpers/utils.js";
+import { getUiPrefs, notifyError, notifyInfo, notifyWarn, setUiPref, stripHtml, truncateHtmlDescription } from "../helpers/utils.js";
 
 const MISSING_CARD_CACHE = new Set();
 
@@ -189,7 +189,10 @@ export class KriptaMyCardsApp extends Application {
     );
 
     this.items = list.map((item, index) => {
-      const descriptionText = stripHtml(metaResults[index]?.meta?.description ?? "");
+      const description = String(metaResults[index]?.meta?.description ?? "");
+      const descriptionText = stripHtml(description);
+      const descriptionPreviewHtml = truncateHtmlDescription(description, 250);
+      const descriptionTablePreviewHtml = truncateHtmlDescription(description, 500);
       const name = String(metaResults[index]?.meta?.name ?? item?.name ?? "");
       const cachedImageUrl = metaResults[index]?.isMissing
         ? ""
@@ -200,6 +203,8 @@ export class KriptaMyCardsApp extends Application {
         ...metaResults[index].meta,
         imageUrl: cachedImageUrl,
         descriptionText,
+        descriptionPreviewHtml,
+        descriptionTablePreviewHtml,
         searchText: `${name} ${descriptionText}`.toLowerCase(),
         isMissing: metaResults[index]?.isMissing ?? false
       };
