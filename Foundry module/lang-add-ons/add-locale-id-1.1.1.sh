@@ -1,0 +1,251 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ ! -f "dmicher-kripta-cards/module.json" ]; then
+  echo "Run this script from the Foundry module workspace root, next to dmicher-kripta-cards/module.json." >&2
+  exit 1
+fi
+
+SCRIPT_FILE="$0"
+LOCALE_PATH="dmicher-kripta-cards/lang/id.json"
+mkdir -p "dmicher-kripta-cards/lang"
+awk '/^__LOCALE_JSON__$/ {p=1; next} /^__END_LOCALE_JSON__$/ {p=0} p' "$SCRIPT_FILE" > "$LOCALE_PATH"
+
+if command -v node >/dev/null 2>&1; then
+  SCRIPT_FILE="$SCRIPT_FILE" node <<'NODE'
+const fs = require("fs");
+const script = fs.readFileSync(process.env.SCRIPT_FILE, "utf8");
+function block(name) {
+  const match = script.match(new RegExp("__" + name + "__\\r?\\n([\\s\\S]*?)\\r?\\n__END_" + name + "__"));
+  if (!match) throw new Error("Missing block " + name);
+  return match[1].trim();
+}
+const entry = JSON.parse(block("MANIFEST_JSON"));
+const manifestPath = "dmicher-kripta-cards/module.json";
+const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+manifest.languages = Array.isArray(manifest.languages) ? manifest.languages : [];
+if (!manifest.languages.some((item) => item.lang === entry.lang)) {
+  manifest.languages.push(entry);
+}
+fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n", "utf8");
+console.log("Locale " + entry.lang + " installed.");
+NODE
+elif command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
+  PYTHON_BIN="$(command -v python3 || command -v python)"
+  SCRIPT_FILE="$SCRIPT_FILE" "$PYTHON_BIN" <<'PY'
+import json
+import os
+import re
+
+with open(os.environ["SCRIPT_FILE"], "r", encoding="utf-8") as script_file:
+    script = script_file.read()
+
+def block(name):
+    match = re.search(r"__" + re.escape(name) + r"__\r?\n([\s\S]*?)\r?\n__END_" + re.escape(name) + r"__", script)
+    if not match:
+        raise RuntimeError("Missing block " + name)
+    return match.group(1).strip()
+
+entry = json.loads(block("MANIFEST_JSON"))
+manifest_path = "dmicher-kripta-cards/module.json"
+with open(manifest_path, "r", encoding="utf-8") as manifest_file:
+    manifest = json.load(manifest_file)
+manifest["languages"] = manifest.get("languages") or []
+if not any(item.get("lang") == entry["lang"] for item in manifest["languages"]):
+    manifest["languages"].append(entry)
+with open(manifest_path, "w", encoding="utf-8") as manifest_file:
+    json.dump(manifest, manifest_file, ensure_ascii=False, indent=2)
+    manifest_file.write("\n")
+print("Locale " + entry["lang"] + " installed.")
+PY
+else
+  echo "Locale file was written, but module.json was not updated: install node or python and rerun the script." >&2
+  exit 1
+fi
+
+exit 0
+__MANIFEST_JSON__
+{
+  "lang": "id",
+  "name": "Bahasa Indonesia",
+  "path": "lang/id.json"
+}
+__END_MANIFEST_JSON__
+__LOCALE_JSON__
+{
+  "KRIPTA.NoBinding": "Pengguna Foundry Anda belum ditautkan ke Pemain Server di modul Kripta Cards. Harap hubungi Game Master.",
+  "KRIPTA.GMOnly": "Tindakan ini hanya tersedia untuk Game Master.",
+  "KRIPTA.Settings.ServerUrl.Name": "Alamat server",
+  "KRIPTA.Settings.TechAuthUsers.Name": "Pengguna teknis",
+  "KRIPTA.Settings.PlayerBindings.Name": "Tautan pengguna Foundry ke pemain server",
+  "KRIPTA.Settings.UiPrefs.Name": "Pengaturan antarmuka lokal",
+  "KRIPTA.Settings.Menu.Name": "Kripta Cards",
+  "KRIPTA.Settings.Menu.Label": "Pengaturan modul",
+  "KRIPTA.Settings.Menu.Hint": "Koneksi API dan pengguna teknis.",
+  "KRIPTA.Settings.Help.BeforeServerLink": "Jika Anda belum memasang dan mengonfigurasi server konten untuk modul ini, buka ",
+  "KRIPTA.Settings.Help.ServerLink": "tautan ini",
+  "KRIPTA.Settings.Help.AfterServerLink": " untuk melakukannya. Untuk konfigurasi cepat, gunakan ",
+  "KRIPTA.Settings.Help.DocumentationLink": "dokumentasi",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
+  "KRIPTA.Window.Catalog": "Katalog Kartu",
+  "KRIPTA.Window.CardDetails": "Kartu Katalog",
+  "KRIPTA.Window.GiveCard": "Berikan Kartu",
+  "KRIPTA.Window.MyCards": "Kartu Pemain",
+  "KRIPTA.Window.Players": "Kelola Pemain",
+  "KRIPTA.Window.Registry": "Registri Pemain",
+  "KRIPTA.Window.RequestCard": "Minta Kartu",
+  "KRIPTA.Window.Settings": "Kripta Cards - Pengaturan",
+  "KRIPTA.Window.UseCard": "Gunakan Kartu",
+  "KRIPTA.Menu.Title": "Kripta Cards",
+  "KRIPTA.Menu.Catalog": "Katalog Kartu",
+  "KRIPTA.Menu.GetCard": "Minta Kartu",
+  "KRIPTA.Menu.MyCards": "Kartu Saya",
+  "KRIPTA.Menu.Players": "Kelola Pemain",
+  "KRIPTA.Label.Category": "Kategori",
+  "KRIPTA.Label.Mode": "Mode",
+  "KRIPTA.Label.Card": "Kartu",
+  "KRIPTA.Label.Player": "Pemain",
+  "KRIPTA.Label.Name": "Nama",
+  "KRIPTA.Label.Comment": "Komentar",
+  "KRIPTA.Label.CardTypes": "Jenis kartu",
+  "KRIPTA.Label.Count": "Jumlah",
+  "KRIPTA.Label.ConfirmationCode": "Kode konfirmasi",
+  "KRIPTA.Label.Id": "Id",
+  "KRIPTA.Label.Key": "Key",
+  "KRIPTA.Label.ServerUrl": "URL server",
+  "KRIPTA.Label.Writer": "Writer",
+  "KRIPTA.Label.Reader": "Reader",
+  "KRIPTA.Label.Role": "Peran",
+  "KRIPTA.Label.Binding": "Tautan",
+  "KRIPTA.Role.GM": "Game Master",
+  "KRIPTA.Role.Player": "Pemain",
+  "KRIPTA.Status.InGame": "online",
+  "KRIPTA.Status.Offline": "offline",
+  "KRIPTA.Binding.CardsIssued": "kartu diberikan:",
+  "KRIPTA.Binding.NoCards": "tidak ada kartu",
+  "KRIPTA.Binding.NotBound": "pemain belum ditautkan, tautkan pemain.",
+  "KRIPTA.Binding.CardsCountHint": "Jumlah jenis kartu yang diberikan, tidak termasuk duplikat",
+  "KRIPTA.Button.Add": "Tambah",
+  "KRIPTA.Button.Bind": "Tautkan",
+  "KRIPTA.Button.Cancel": "Batal",
+  "KRIPTA.Button.Close": "Tutup",
+  "KRIPTA.Button.Confirm": "Konfirmasi",
+  "KRIPTA.Button.Delete": "Hapus",
+  "KRIPTA.Button.Edit": "Ubah",
+  "KRIPTA.Button.Give": "Berikan",
+  "KRIPTA.Button.GiveCard": "Berikan Kartu",
+  "KRIPTA.Button.Info": "Info",
+  "KRIPTA.Button.No": "Tidak",
+  "KRIPTA.Button.Output": "Posting",
+  "KRIPTA.Button.Refresh": "Segarkan",
+  "KRIPTA.Button.Registry": "Registri Pemain",
+  "KRIPTA.Button.Request": "Minta",
+  "KRIPTA.Button.RequestCard": "Minta",
+  "KRIPTA.Button.SaveChanges": "Simpan Perubahan",
+  "KRIPTA.Button.Take": "Ambil",
+  "KRIPTA.Button.TestAuth": "Periksa pengguna teknis",
+  "KRIPTA.Button.TestServer": "Periksa server",
+  "KRIPTA.Button.Unbind": "Lepas tautan",
+  "KRIPTA.Button.Use": "Gunakan",
+  "KRIPTA.Button.Yes": "Ya",
+  "KRIPTA.Mode.Manual": "Pilih manual",
+  "KRIPTA.Mode.Random": "Acak",
+  "KRIPTA.Mode.Show": "Tampilkan",
+  "KRIPTA.Mode.Spend": "Habiskan",
+  "KRIPTA.View.Table": "Tabel",
+  "KRIPTA.View.Tiles": "Ubin",
+  "KRIPTA.Placeholder.Search": "Cari",
+  "KRIPTA.Select.NotSelected": "-- belum dipilih --",
+  "KRIPTA.Template.EmptyCatalog": "Tidak ada kategori atau kartu yang terdaftar di server.",
+  "KRIPTA.Template.MyCardsTitle": "Kartu pemain: {playerName}",
+  "KRIPTA.Template.UseCardMissing": "Kartu ini tidak lagi terdaftar di server.",
+  "KRIPTA.Template.UseCardPrompt": "Kartu ini akan digunakan:",
+  "KRIPTA.Card.FallbackName": "Kartu {number}",
+  "KRIPTA.Card.FallbackAddress": "Kartu {level}/{number}",
+  "KRIPTA.Card.MissingDescription": "Kartu {level}/{number} tidak ada di katalog server saat ini.",
+  "KRIPTA.Card.NotRegisteredDescription": "Kartu {level}/{number} tidak lagi terdaftar di server.",
+  "KRIPTA.Level.FallbackName": "Level {level}",
+  "KRIPTA.Level.MissingDescription": "Level ini ada di inventaris pemain, tetapi tidak ada di katalog server saat ini.",
+  "KRIPTA.Chat.BlobReadFailed": "Gagal membaca blob",
+  "KRIPTA.Chat.CardGivenTitle": "Kartu Diberikan",
+  "KRIPTA.Chat.CardReceiveSubtitle": "Pemain {playerName} menerima kartu {cardSubtitle}",
+  "KRIPTA.Chat.CardRequestCanceled": "Permintaan kartu dibatalkan.",
+  "KRIPTA.Chat.CardRequestConfirmedTitle": "Permintaan Kartu Dikonfirmasi",
+  "KRIPTA.Chat.CardRequestPayloadUnreadable": "Gagal membaca data permintaan.",
+  "KRIPTA.Chat.CardSpentFooter": "KARTU DIHABISKAN",
+  "KRIPTA.Chat.CardSpentTitle": "Kartu Dihabiskan",
+  "KRIPTA.Chat.FallbackPlayer": "pemain",
+  "KRIPTA.Chat.ManualChoiceFooter": "PILIHAN MANUAL",
+  "KRIPTA.Chat.ReferenceTitle": "Referensi",
+  "KRIPTA.Chat.RequestManualTitle": "Permintaan Kartu Pilihan",
+  "KRIPTA.Chat.RequestRandomTitle": "Permintaan Kartu Acak",
+  "KRIPTA.Chat.ShowCardTitle": "Referensi Kartu",
+  "KRIPTA.Dialog.BindPlayer.Title": "Tautkan Pemain Server",
+  "KRIPTA.Dialog.BindPlayer.Header": "Pilih pemain untuk {foundryUserName}",
+  "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "pengguna Foundry",
+  "KRIPTA.Dialog.Player.AddTitle": "Tambah Pemain",
+  "KRIPTA.Dialog.Player.EditTitle": "Ubah Pemain",
+  "KRIPTA.Dialog.Player.DeleteTitle": "Hapus Pemain",
+  "KRIPTA.Dialog.Player.DeleteWarning": "Menghapus pemain \"{playerName}\" tidak dapat dibatalkan. Masukkan \"{code}\" dan konfirmasi penghapusan.",
+  "KRIPTA.Dialog.Count.TotalCards": "total kartu jenis ini - {max}",
+  "KRIPTA.Error.InvalidCardLevel": "Level tidak valid untuk {context}: {level}",
+  "KRIPTA.Error.InvalidCardNumber": "Nomor tidak valid untuk {context}: {number}",
+  "KRIPTA.Error.InvalidLocalCardLevel": "level kartu tidak valid: {level}",
+  "KRIPTA.Error.InvalidLocalCardNumber": "nomor kartu tidak valid: {number}",
+  "KRIPTA.Error.InvalidRequestCard": "Kartu tidak valid untuk permintaan",
+  "KRIPTA.Error.InvalidGiveCard": "Kartu tidak valid untuk diberikan",
+  "KRIPTA.Error.MissingRequestPlayerGuid": "Gagal menentukan playerGuid untuk memberikan kartu.",
+  "KRIPTA.Error.MissingSelectedCard": "Gagal menentukan kartu yang dipilih.",
+  "KRIPTA.Error.MissingSelectedCardForGive": "Gagal menentukan kartu yang dipilih untuk diberikan.",
+  "KRIPTA.Error.MissingGivePlayer": "Gagal menentukan pemain penerima kartu.",
+  "KRIPTA.Error.MissingGiveCard": "Gagal menentukan kartu yang akan diberikan.",
+  "KRIPTA.Error.MissingServerUrl": "Pengaturan jalur server tidak ada.",
+  "KRIPTA.Error.InvalidReader": "Pengguna teknis Reader dikonfigurasi dengan tidak benar.",
+  "KRIPTA.Error.InvalidWriter": "Pengguna teknis Writer dikonfigurasi dengan tidak benar.",
+  "KRIPTA.Error.MenuUnavailable": "Fitur ini tidak tersedia. Periksa pengaturan modul. Detail ada di konsol browser.",
+  "KRIPTA.Error.Generic": "Terjadi kesalahan",
+  "KRIPTA.Error.Unknown": "kesalahan tidak diketahui",
+  "KRIPTA.Error.NameRequired": "Kolom Name wajib diisi.",
+  "KRIPTA.Error.RegistryDeleteReturned": "server mengembalikan pemain di registri setelah penghapusan.",
+  "KRIPTA.Notification.CardGiven": "Kartu diberikan.",
+  "KRIPTA.Notification.CardUsed": "Kartu digunakan dan dihabiskan.",
+  "KRIPTA.Notification.CardWrittenOff": "Kartu dihapus.",
+  "KRIPTA.Notification.CannotUseMissingCard": "Kartu ini tidak lagi terdaftar di server. Kartu tidak dapat digunakan.",
+  "KRIPTA.Notification.MissingCard": "Kartu ini tidak lagi terdaftar di server.",
+  "KRIPTA.Notification.PlayerNotSelected": "Tidak ada pemain yang dipilih untuk diberi kartu",
+  "KRIPTA.Notification.PlayerBindingMissing": "Gagal menentukan tautan pemain untuk memberikan kartu",
+  "KRIPTA.Notification.RequestSent": "Permintaan kartu dikirim ke chat.",
+  "KRIPTA.Notification.ServerSuccess": "Koneksi berhasil.",
+  "KRIPTA.Notification.ServerSuccessWithDetails": "Koneksi berhasil. {details}",
+  "KRIPTA.Notification.ServerConnectionFailed": "Gagal terhubung ke server. Periksa alamat, ketersediaan server, dan pengaturan CORS/HTTPS.",
+  "KRIPTA.Notification.ServerCheckFailedFallback": "Gagal memeriksa server.",
+  "KRIPTA.Notification.InvalidServerUrl": "Alamat server tidak valid: {url}",
+  "KRIPTA.Notification.SettingsAccessDenied": "Bagian pengaturan Kripta Cards hanya tersedia untuk peran Game Master dan Assistant Game Master.",
+  "KRIPTA.Notification.ServerCheckFailed": "Pemeriksaan server gagal",
+  "KRIPTA.Notification.TechUserReader": "Reader",
+  "KRIPTA.Notification.TechUserWriter": "Writer",
+  "KRIPTA.Notification.TechUsersCheckSuccess": "Pengguna teknis \"Reader\" dan \"Writer\" lulus pemeriksaan.",
+  "KRIPTA.Notification.SettingsSaved": "Pengaturan koneksi disimpan.",
+  "KRIPTA.Notification.PlayerAdded": "Pemain ditambahkan.",
+  "KRIPTA.Notification.PlayerUpdated": "Pemain diperbarui.",
+  "KRIPTA.Notification.PlayerDeleted": "Pemain dihapus.",
+  "KRIPTA.Notification.DeleteCanceledBadCode": "Penghapusan dibatalkan. Kolom konfirmasi diisi dengan tidak benar.",
+  "KRIPTA.Notification.BindingSaved": "Tautan disimpan.",
+  "KRIPTA.Notification.BindingDeleted": "Tautan dihapus.",
+  "KRIPTA.Notification.BadCatalogCardNumber": "Kartu yang dipilih memiliki nomor tidak valid. Periksa respons getCardsList dan normalizeCardsList.",
+  "KRIPTA.Notification.BadCatalogCardNumberForGive": "Kartu ini tidak dapat diberikan secara manual karena nomornya tidak valid. Periksa respons getCardsList dan normalizeCardsList.",
+  "KRIPTA.Notification.CardOutputFailed": "Gagal memposting kartu ke chat",
+  "KRIPTA.Notification.CardGiveFailed": "Gagal memberikan kartu",
+  "KRIPTA.Notification.CardUseFailed": "Gagal menggunakan kartu",
+  "KRIPTA.Notification.CardTakeFailed": "Gagal menghapus kartu",
+  "KRIPTA.Notification.CardRequestFailed": "Gagal mengirim permintaan kartu",
+  "KRIPTA.Notification.CardRequestConfirmFailed": "Gagal mengonfirmasi pemberian kartu",
+  "KRIPTA.Notification.PlayerAddFailed": "Gagal menambahkan pemain",
+  "KRIPTA.Notification.PlayerUpdateFailed": "Gagal memperbarui pemain",
+  "KRIPTA.Notification.PlayerDeleteFailed": "Gagal menghapus pemain",
+  "KRIPTA.Notification.CardRollFailed": "Gagal menerima kartu.",
+  "KRIPTA.Dialog.TakeCard.Title": "Ambil Kartu",
+  "KRIPTA.Dialog.TakeCard.Message": "Pemain {playerName} akan kehilangan kartu {cardName}.",
+  "KRIPTA.Dialog.ChooseBoundUser.Title": "Berikan Kartu"
+}
+__END_LOCALE_JSON__

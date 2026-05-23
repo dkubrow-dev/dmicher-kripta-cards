@@ -1,0 +1,226 @@
+@echo off
+setlocal
+set "SCRIPT_FILE=%~f0"
+if not exist "dmicher-kripta-cards\module.json" (
+  echo Run this script from the Foundry module workspace root, next to dmicher-kripta-cards\module.json.
+  exit /b 1
+)
+powershell -NoProfile -ExecutionPolicy Bypass -EncodedCommand JABFAHIAcgBvAHIAQQBjAHQAaQBvAG4AUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAUwB0AG8AcAAnADsAIAAkAHMAPQBbAEkATwAuAEYAaQBsAGUAXQA6ADoAUgBlAGEAZABBAGwAbABUAGUAeAB0ACgAJABlAG4AdgA6AFMAQwBSAEkAUABUAF8ARgBJAEwARQAsAFsAVABlAHgAdAAuAEUAbgBjAG8AZABpAG4AZwBdADoAOgBVAFQARgA4ACkAOwAgACQAbQA9AFsAcgBlAGcAZQB4AF0AOgA6AE0AYQB0AGMAaAAoACQAcwAsACcAKAA/AHMAKQBfAF8AUABPAFcARQBSAFMASABFAEwATABfAF8AXAByAD8AXABuACgALgAqAD8AKQBcAHIAPwBcAG4AXwBfAEUATgBEAF8AUABPAFcARQBSAFMASABFAEwATABfAF8AJwApADsAIABpAGYAKAAtAG4AbwB0ACAAJABtAC4AUwB1AGMAYwBlAHMAcwApAHsAdABoAHIAbwB3ACAAJwBNAGkAcwBzAGkAbgBnACAAUABvAHcAZQByAFMAaABlAGwAbAAgAGIAbABvAGMAawAnAH0AOwAgAEkAbgB2AG8AawBlAC0ARQB4AHAAcgBlAHMAcwBpAG8AbgAgACQAbQAuAEcAcgBvAHUAcABzAFsAMQBdAC4AVgBhAGwAdQBlAA==
+if errorlevel 1 exit /b %ERRORLEVEL%
+exit /b 0
+__POWERSHELL__
+$ErrorActionPreference = 'Stop'
+$script = [IO.File]::ReadAllText($env:SCRIPT_FILE, [Text.Encoding]::UTF8)
+
+function Get-EmbeddedBlock([string]$Name) {
+  $pattern = '(?s)__' + [regex]::Escape($Name) + '__\r?\n(.*?)\r?\n__END_' + [regex]::Escape($Name) + '__'
+  $match = [regex]::Match($script, $pattern)
+  if (-not $match.Success) {
+    throw 'Missing block ' + $Name
+  }
+  return $match.Groups[1].Value.Trim([char]13, [char]10)
+}
+
+$encoding = New-Object System.Text.UTF8Encoding -ArgumentList $false
+$localeJson = Get-EmbeddedBlock 'LOCALE_JSON'
+$manifestEntryJson = Get-EmbeddedBlock 'MANIFEST_JSON'
+$localePath = 'dmicher-kripta-cards/lang/ka.json'
+$manifestPath = 'dmicher-kripta-cards/module.json'
+
+New-Item -ItemType Directory -Force -Path 'dmicher-kripta-cards/lang' | Out-Null
+[IO.File]::WriteAllText($localePath, $localeJson + [Environment]::NewLine, $encoding)
+
+$manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+$entry = $manifestEntryJson | ConvertFrom-Json
+if (-not @($manifest.languages | Where-Object { $_.lang -eq $entry.lang }).Count) {
+  $manifest.languages = @($manifest.languages) + $entry
+}
+
+[IO.File]::WriteAllText($manifestPath, ($manifest | ConvertTo-Json -Depth 20) + [Environment]::NewLine, $encoding)
+Write-Host ('Locale ' + $entry.lang + ' installed.')
+__END_POWERSHELL__
+__MANIFEST_JSON__
+{
+  "lang": "ka",
+  "name": "ქართული",
+  "path": "lang/ka.json"
+}
+__END_MANIFEST_JSON__
+__LOCALE_JSON__
+{
+  "KRIPTA.NoBinding": "თქვენი Foundry-ის მონაწილე კრიპტას ბარათების მოდულში სერვერის მოთამაშესთან არ არის მიბმული. მიმართეთ თამაშის ოსტატს.",
+  "KRIPTA.GMOnly": "ეს მოქმედება ხელმისაწვდომია მხოლოდ თამაშის ოსტატისთვის.",
+  "KRIPTA.Settings.ServerUrl.Name": "სერვერის მისამართი",
+  "KRIPTA.Settings.TechAuthUsers.Name": "ტექნიკური მომხმარებლები",
+  "KRIPTA.Settings.PlayerBindings.Name": "Foundry-ის მონაწილეების მიბმა სერვერის მოთამაშეებზე",
+  "KRIPTA.Settings.UiPrefs.Name": "ლოკალური ინტერფეისის პარამეტრები",
+  "KRIPTA.Settings.Menu.Name": "კრიპტას ბარათები",
+  "KRIPTA.Settings.Menu.Label": "მოდულის დაყენება",
+  "KRIPTA.Settings.Menu.Hint": "API-სთან დაკავშირება და ტექნიკური მომხმარებლები.",
+  "KRIPTA.Settings.Help.BeforeServerLink": "თუ მოდულის კონტენტის სერვერი ჯერ არ დაგიყენებიათ და არ დაგიკონფიგურირებიათ, ამისათვის გადადით ",
+  "KRIPTA.Settings.Help.ServerLink": "ამ ბმულზე",
+  "KRIPTA.Settings.Help.AfterServerLink": ". სწრაფი კონფიგურაციისთვის გამოიყენეთ ",
+  "KRIPTA.Settings.Help.DocumentationLink": "დოკუმენტაცია",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
+  "KRIPTA.Window.Catalog": "ბარათების კატალოგი",
+  "KRIPTA.Window.CardDetails": "კატალოგის ბარათი",
+  "KRIPTA.Window.GiveCard": "ბარათის გაცემა",
+  "KRIPTA.Window.MyCards": "მოთამაშის ბარათები",
+  "KRIPTA.Window.Players": "მოთამაშეების მართვა",
+  "KRIPTA.Window.Registry": "მოთამაშეების რეესტრი",
+  "KRIPTA.Window.RequestCard": "ბარათის მიღება",
+  "KRIPTA.Window.Settings": "კრიპტას ბარათები - პარამეტრები",
+  "KRIPTA.Window.UseCard": "ბარათის გამოყენება",
+  "KRIPTA.Menu.Title": "კრიპტას ბარათები",
+  "KRIPTA.Menu.Catalog": "ბარათების კატალოგი",
+  "KRIPTA.Menu.GetCard": "ბარათის მიღება",
+  "KRIPTA.Menu.MyCards": "ჩემი ბარათები",
+  "KRIPTA.Menu.Players": "მოთამაშეების მართვა",
+  "KRIPTA.Label.Category": "კატეგორია",
+  "KRIPTA.Label.Mode": "რეჟიმი",
+  "KRIPTA.Label.Card": "ბარათი",
+  "KRIPTA.Label.Player": "მოთამაშე",
+  "KRIPTA.Label.Name": "სახელი",
+  "KRIPTA.Label.Comment": "კომენტარი",
+  "KRIPTA.Label.CardTypes": "ბარათების ტიპები",
+  "KRIPTA.Label.Count": "რაოდენობა",
+  "KRIPTA.Label.ConfirmationCode": "დადასტურების კოდი",
+  "KRIPTA.Label.Id": "იდენტიფიკატორი",
+  "KRIPTA.Label.Key": "გასაღები",
+  "KRIPTA.Label.ServerUrl": "სერვერის გზა",
+  "KRIPTA.Label.Writer": "მწერალი (Writer)",
+  "KRIPTA.Label.Reader": "მკითხველი (Reader)",
+  "KRIPTA.Label.Role": "როლი",
+  "KRIPTA.Label.Binding": "მიბმა",
+  "KRIPTA.Role.GM": "ოსტატი",
+  "KRIPTA.Role.Player": "მოთამაშე",
+  "KRIPTA.Status.InGame": "თამაშში",
+  "KRIPTA.Status.Offline": "თამაშს გარეთ",
+  "KRIPTA.Binding.CardsIssued": "გაცემული ბარათები:",
+  "KRIPTA.Binding.NoCards": "ბარათები არ არის",
+  "KRIPTA.Binding.NotBound": "მოთამაშე მიბმული არ არის, აირჩიეთ მოთამაშე.",
+  "KRIPTA.Binding.CardsCountHint": "გაცემული ბარათების ტიპების რაოდენობა (გამეორებები არ ითვლება)",
+  "KRIPTA.Button.Add": "დამატება",
+  "KRIPTA.Button.Bind": "მიბმა",
+  "KRIPTA.Button.Cancel": "გაუქმება",
+  "KRIPTA.Button.Close": "დახურვა",
+  "KRIPTA.Button.Confirm": "დადასტურება",
+  "KRIPTA.Button.Delete": "წაშლა",
+  "KRIPTA.Button.Edit": "შეცვლა",
+  "KRIPTA.Button.Give": "გაცემა",
+  "KRIPTA.Button.GiveCard": "ბარათის გაცემა",
+  "KRIPTA.Button.Info": "ინფორმაცია",
+  "KRIPTA.Button.No": "არა",
+  "KRIPTA.Button.Output": "გამოტანა",
+  "KRIPTA.Button.Refresh": "განახლება",
+  "KRIPTA.Button.Registry": "მოთამაშეების რეესტრი",
+  "KRIPTA.Button.Request": "მოთხოვნა",
+  "KRIPTA.Button.RequestCard": "მიღება",
+  "KRIPTA.Button.SaveChanges": "ცვლილებების შენახვა",
+  "KRIPTA.Button.Take": "ჩამორთმევა",
+  "KRIPTA.Button.TestAuth": "ტექნიკური მომხმარებლების შემოწმება",
+  "KRIPTA.Button.TestServer": "სერვერის შემოწმება",
+  "KRIPTA.Button.Unbind": "მიბმის მოხსნა",
+  "KRIPTA.Button.Use": "გამოყენება",
+  "KRIPTA.Button.Yes": "დიახ",
+  "KRIPTA.Mode.Manual": "არჩევით",
+  "KRIPTA.Mode.Random": "შემთხვევითი",
+  "KRIPTA.Mode.Show": "ჩვენება",
+  "KRIPTA.Mode.Spend": "დახარჯვა",
+  "KRIPTA.View.Table": "ცხრილი",
+  "KRIPTA.View.Tiles": "ფილები",
+  "KRIPTA.Placeholder.Search": "ძებნა",
+  "KRIPTA.Select.NotSelected": "-- არჩეული არ არის --",
+  "KRIPTA.Template.EmptyCatalog": "სერვერზე რეგისტრირებული კატეგორიები ან ბარათები არ არის.",
+  "KRIPTA.Template.MyCardsTitle": "მოთამაშის ბარათები: {playerName}",
+  "KRIPTA.Template.UseCardMissing": "ეს ბარათი სერვერზე აღარ არის რეგისტრირებული.",
+  "KRIPTA.Template.UseCardPrompt": "გამოყენებული იქნება ბარათი:",
+  "KRIPTA.Card.FallbackName": "ბარათი {number}",
+  "KRIPTA.Card.FallbackAddress": "ბარათი {level}/{number}",
+  "KRIPTA.Card.MissingDescription": "ბარათი {level}/{number} სერვერის მიმდინარე კატალოგში არ არის.",
+  "KRIPTA.Card.NotRegisteredDescription": "ბარათი {level}/{number} სერვერზე აღარ არის რეგისტრირებული.",
+  "KRIPTA.Level.FallbackName": "დონე {level}",
+  "KRIPTA.Level.MissingDescription": "დონე მოთამაშის ინვენტარში არის, მაგრამ სერვერის მიმდინარე კატალოგში არ არის.",
+  "KRIPTA.Chat.BlobReadFailed": "BLOB-ის წაკითხვა ვერ მოხერხდა",
+  "KRIPTA.Chat.CardGivenTitle": "ბარათი გაცემულია",
+  "KRIPTA.Chat.CardReceiveSubtitle": "მოთამაშე {playerName} იღებს ბარათს {cardSubtitle}",
+  "KRIPTA.Chat.CardRequestCanceled": "ბარათის მოთხოვნა გაუქმდა.",
+  "KRIPTA.Chat.CardRequestConfirmedTitle": "ბარათის მოთხოვნა დადასტურდა",
+  "KRIPTA.Chat.CardRequestPayloadUnreadable": "მოთხოვნის მონაცემების წაკითხვა ვერ მოხერხდა.",
+  "KRIPTA.Chat.CardSpentFooter": "ბარათი დახარჯულია",
+  "KRIPTA.Chat.CardSpentTitle": "ბარათი დახარჯულია",
+  "KRIPTA.Chat.FallbackPlayer": "მოთამაშე",
+  "KRIPTA.Chat.ManualChoiceFooter": "ხელით არჩევა",
+  "KRIPTA.Chat.ReferenceTitle": "ცნობა",
+  "KRIPTA.Chat.RequestManualTitle": "არჩეული ბარათის მოთხოვნა",
+  "KRIPTA.Chat.RequestRandomTitle": "შემთხვევითი ბარათის მოთხოვნა",
+  "KRIPTA.Chat.ShowCardTitle": "ბარათის ცნობა",
+  "KRIPTA.Dialog.BindPlayer.Title": "სერვერის მოთამაშის მიბმა",
+  "KRIPTA.Dialog.BindPlayer.Header": "მოთამაშის არჩევა მომხმარებლისთვის {foundryUserName}",
+  "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry-ის მომხმარებელი",
+  "KRIPTA.Dialog.Player.AddTitle": "მოთამაშის დამატება",
+  "KRIPTA.Dialog.Player.EditTitle": "მოთამაშის შეცვლა",
+  "KRIPTA.Dialog.Player.DeleteTitle": "მოთამაშის წაშლა",
+  "KRIPTA.Dialog.Player.DeleteWarning": "მოთამაშის \"{playerName}\" წაშლა შეუქცევადია. შეიყვანეთ \"{code}\" და დაადასტურეთ წაშლა.",
+  "KRIPTA.Dialog.Count.TotalCards": "ამ ტიპის სულ ბარათები - {max}",
+  "KRIPTA.Error.InvalidCardLevel": "არასწორი level {context}-ისთვის: {level}",
+  "KRIPTA.Error.InvalidCardNumber": "არასწორი number {context}-ისთვის: {number}",
+  "KRIPTA.Error.InvalidLocalCardLevel": "ბარათის არასწორი level: {level}",
+  "KRIPTA.Error.InvalidLocalCardNumber": "ბარათის არასწორი number: {number}",
+  "KRIPTA.Error.InvalidRequestCard": "არასწორი ბარათი მოთხოვნისთვის",
+  "KRIPTA.Error.InvalidGiveCard": "არასწორი ბარათი გასაცემად",
+  "KRIPTA.Error.MissingRequestPlayerGuid": "ბარათის გასაცემად playerGuid-ის დადგენა ვერ მოხერხდა.",
+  "KRIPTA.Error.MissingSelectedCard": "არჩეული ბარათის დადგენა ვერ მოხერხდა.",
+  "KRIPTA.Error.MissingSelectedCardForGive": "გასაცემად არჩეული ბარათის დადგენა ვერ მოხერხდა.",
+  "KRIPTA.Error.MissingGivePlayer": "ბარათის გასაცემად მოთამაშის დადგენა ვერ მოხერხდა.",
+  "KRIPTA.Error.MissingGiveCard": "გასაცემად ბარათის დადგენა ვერ მოხერხდა.",
+  "KRIPTA.Error.MissingServerUrl": "სერვერის გზის პარამეტრი არ არის.",
+  "KRIPTA.Error.InvalidReader": "ტექნიკური მომხმარებელი Reader არასწორად არის დაყენებული.",
+  "KRIPTA.Error.InvalidWriter": "ტექნიკური მომხმარებელი Writer არასწორად არის დაყენებული.",
+  "KRIPTA.Error.MenuUnavailable": "ფუნქცია არ მუშაობს. შეამოწმეთ მოდულის პარამეტრები. დეტალები ბრაუზერის კონსოლშია.",
+  "KRIPTA.Error.Generic": "მოხდა შეცდომა",
+  "KRIPTA.Error.Unknown": "უცნობი შეცდომა",
+  "KRIPTA.Error.NameRequired": "სახელის ველი სავალდებულოა.",
+  "KRIPTA.Error.RegistryDeleteReturned": "სერვერმა წაშლის შემდეგ მოთამაშე რეესტრში დააბრუნა.",
+  "KRIPTA.Notification.CardGiven": "ბარათი გაცემულია.",
+  "KRIPTA.Notification.CardUsed": "ბარათი გამოყენებულია და ჩამოწერილია.",
+  "KRIPTA.Notification.CardWrittenOff": "ბარათი ჩამოწერილია.",
+  "KRIPTA.Notification.CannotUseMissingCard": "ეს ბარათი სერვერზე აღარ არის რეგისტრირებული. გამოყენება მიუწვდომელია.",
+  "KRIPTA.Notification.MissingCard": "ეს ბარათი სერვერზე აღარ არის რეგისტრირებული.",
+  "KRIPTA.Notification.PlayerNotSelected": "ბარათის გასაცემად მოთამაშე არჩეული არ არის",
+  "KRIPTA.Notification.PlayerBindingMissing": "ბარათის გასაცემად მოთამაშის მიბმის დადგენა ვერ მოხერხდა",
+  "KRIPTA.Notification.RequestSent": "ბარათის მოთხოვნა ჩატში გაიგზავნა.",
+  "KRIPTA.Notification.ServerSuccess": "დაკავშირება წარმატებულია.",
+  "KRIPTA.Notification.ServerSuccessWithDetails": "დაკავშირება წარმატებულია. {details}",
+  "KRIPTA.Notification.ServerConnectionFailed": "სერვერთან დაკავშირება ვერ მოხერხდა. შეამოწმეთ მისამართი, სერვერის ხელმისაწვდომობა და CORS/HTTPS პარამეტრები.",
+  "KRIPTA.Notification.ServerCheckFailedFallback": "სერვერის შემოწმება ვერ მოხერხდა.",
+  "KRIPTA.Notification.InvalidServerUrl": "სერვერის არასწორი მისამართი: {url}",
+  "KRIPTA.Notification.SettingsAccessDenied": "«კრიპტას ბარათების» პარამეტრების განყოფილება ხელმისაწვდომია მხოლოდ «ოსტატი» და «ოსტატის ასისტენტი» როლებისთვის.",
+  "KRIPTA.Notification.ServerCheckFailed": "სერვერის შემოწმება ვერ შესრულდა",
+  "KRIPTA.Notification.TechUserReader": "მკითხველი",
+  "KRIPTA.Notification.TechUserWriter": "მწერალი",
+  "KRIPTA.Notification.TechUsersCheckSuccess": "ტექნიკური მომხმარებლები \"Reader\" და \"Writer\" შემოწმებას წარმატებით გადიან.",
+  "KRIPTA.Notification.SettingsSaved": "დაკავშირების პარამეტრები შენახულია.",
+  "KRIPTA.Notification.PlayerAdded": "მოთამაშე დამატებულია.",
+  "KRIPTA.Notification.PlayerUpdated": "მოთამაშე განახლებულია.",
+  "KRIPTA.Notification.PlayerDeleted": "მოთამაშე წაშლილია.",
+  "KRIPTA.Notification.DeleteCanceledBadCode": "წაშლა გაუქმდა. საკონტროლო ველი არასწორად არის შევსებული.",
+  "KRIPTA.Notification.BindingSaved": "მიბმა შენახულია.",
+  "KRIPTA.Notification.BindingDeleted": "მიბმა წაშლილია.",
+  "KRIPTA.Notification.BadCatalogCardNumber": "არჩეული ბარათის ნომერი არასწორია. შეამოწმეთ getCardsList-ის პასუხი და normalizeCardsList.",
+  "KRIPTA.Notification.BadCatalogCardNumberForGive": "ამ ბარათის ხელით გაცემა შეუძლებელია: მას არასწორი ნომერი აქვს. შეამოწმეთ getCardsList-ის პასუხი და normalizeCardsList.",
+  "KRIPTA.Notification.CardOutputFailed": "ბარათის ჩატში გამოტანა ვერ მოხერხდა",
+  "KRIPTA.Notification.CardGiveFailed": "ბარათის გაცემა ვერ მოხერხდა",
+  "KRIPTA.Notification.CardUseFailed": "ბარათის გამოყენება ვერ მოხერხდა",
+  "KRIPTA.Notification.CardTakeFailed": "ბარათის ჩამოწერა ვერ მოხერხდა",
+  "KRIPTA.Notification.CardRequestFailed": "ბარათის მოთხოვნის გაგზავნა ვერ მოხერხდა",
+  "KRIPTA.Notification.CardRequestConfirmFailed": "ბარათის გაცემის დადასტურება ვერ მოხერხდა",
+  "KRIPTA.Notification.PlayerAddFailed": "მოთამაშის დამატება ვერ მოხერხდა",
+  "KRIPTA.Notification.PlayerUpdateFailed": "მოთამაშის განახლება ვერ მოხერხდა",
+  "KRIPTA.Notification.PlayerDeleteFailed": "მოთამაშის წაშლა ვერ მოხერხდა",
+  "KRIPTA.Notification.CardRollFailed": "ბარათის მიღება ვერ მოხერხდა.",
+  "KRIPTA.Dialog.TakeCard.Title": "ბარათის ჩამორთმევა",
+  "KRIPTA.Dialog.TakeCard.Message": "მოთამაშე {playerName} დაკარგავს ბარათს {cardName}.",
+  "KRIPTA.Dialog.ChooseBoundUser.Title": "ბარათის გაცემა"
+}
+__END_LOCALE_JSON__

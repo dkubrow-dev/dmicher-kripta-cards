@@ -1,0 +1,251 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ ! -f "dmicher-kripta-cards/module.json" ]; then
+  echo "Run this script from the Foundry module workspace root, next to dmicher-kripta-cards/module.json." >&2
+  exit 1
+fi
+
+SCRIPT_FILE="$0"
+LOCALE_PATH="dmicher-kripta-cards/lang/bn.json"
+mkdir -p "dmicher-kripta-cards/lang"
+awk '/^__LOCALE_JSON__$/ {p=1; next} /^__END_LOCALE_JSON__$/ {p=0} p' "$SCRIPT_FILE" > "$LOCALE_PATH"
+
+if command -v node >/dev/null 2>&1; then
+  SCRIPT_FILE="$SCRIPT_FILE" node <<'NODE'
+const fs = require("fs");
+const script = fs.readFileSync(process.env.SCRIPT_FILE, "utf8");
+function block(name) {
+  const match = script.match(new RegExp("__" + name + "__\\r?\\n([\\s\\S]*?)\\r?\\n__END_" + name + "__"));
+  if (!match) throw new Error("Missing block " + name);
+  return match[1].trim();
+}
+const entry = JSON.parse(block("MANIFEST_JSON"));
+const manifestPath = "dmicher-kripta-cards/module.json";
+const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+manifest.languages = Array.isArray(manifest.languages) ? manifest.languages : [];
+if (!manifest.languages.some((item) => item.lang === entry.lang)) {
+  manifest.languages.push(entry);
+}
+fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n", "utf8");
+console.log("Locale " + entry.lang + " installed.");
+NODE
+elif command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
+  PYTHON_BIN="$(command -v python3 || command -v python)"
+  SCRIPT_FILE="$SCRIPT_FILE" "$PYTHON_BIN" <<'PY'
+import json
+import os
+import re
+
+with open(os.environ["SCRIPT_FILE"], "r", encoding="utf-8") as script_file:
+    script = script_file.read()
+
+def block(name):
+    match = re.search(r"__" + re.escape(name) + r"__\r?\n([\s\S]*?)\r?\n__END_" + re.escape(name) + r"__", script)
+    if not match:
+        raise RuntimeError("Missing block " + name)
+    return match.group(1).strip()
+
+entry = json.loads(block("MANIFEST_JSON"))
+manifest_path = "dmicher-kripta-cards/module.json"
+with open(manifest_path, "r", encoding="utf-8") as manifest_file:
+    manifest = json.load(manifest_file)
+manifest["languages"] = manifest.get("languages") or []
+if not any(item.get("lang") == entry["lang"] for item in manifest["languages"]):
+    manifest["languages"].append(entry)
+with open(manifest_path, "w", encoding="utf-8") as manifest_file:
+    json.dump(manifest, manifest_file, ensure_ascii=False, indent=2)
+    manifest_file.write("\n")
+print("Locale " + entry["lang"] + " installed.")
+PY
+else
+  echo "Locale file was written, but module.json was not updated: install node or python and rerun the script." >&2
+  exit 1
+fi
+
+exit 0
+__MANIFEST_JSON__
+{
+  "lang": "bn",
+  "name": "বাংলা",
+  "path": "lang/bn.json"
+}
+__END_MANIFEST_JSON__
+__LOCALE_JSON__
+{
+  "KRIPTA.NoBinding": "আপনার Foundry ব্যবহারকারী Kripta Cards মডিউলে কোনো সার্ভার খেলোয়াড়ের সঙ্গে যুক্ত নয়। অনুগ্রহ করে গেম মাস্টারের সঙ্গে যোগাযোগ করুন।",
+  "KRIPTA.GMOnly": "এই কাজটি শুধুমাত্র গেম মাস্টারের জন্য উপলভ্য।",
+  "KRIPTA.Settings.ServerUrl.Name": "সার্ভার ঠিকানা",
+  "KRIPTA.Settings.TechAuthUsers.Name": "প্রযুক্তিগত ব্যবহারকারী",
+  "KRIPTA.Settings.PlayerBindings.Name": "Foundry ব্যবহারকারী ও সার্ভার খেলোয়াড়ের সংযোগ",
+  "KRIPTA.Settings.UiPrefs.Name": "স্থানীয় ইন্টারফেস সেটিংস",
+  "KRIPTA.Settings.Menu.Name": "Kripta Cards",
+  "KRIPTA.Settings.Menu.Label": "মডিউল সেটিংস",
+  "KRIPTA.Settings.Menu.Hint": "API সংযোগ এবং প্রযুক্তিগত ব্যবহারকারী।",
+  "KRIPTA.Settings.Help.BeforeServerLink": "আপনি যদি এখনও মডিউলের জন্য কনটেন্ট সার্ভার ইনস্টল ও কনফিগার না করে থাকেন, তাহলে তা করতে ",
+  "KRIPTA.Settings.Help.ServerLink": "এই লিঙ্কে",
+  "KRIPTA.Settings.Help.AfterServerLink": " যান। দ্রুত কনফিগারেশনের জন্য ",
+  "KRIPTA.Settings.Help.DocumentationLink": "ডকুমেন্টেশন",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " ব্যবহার করুন।",
+  "KRIPTA.Window.Catalog": "কার্ড ক্যাটালগ",
+  "KRIPTA.Window.CardDetails": "ক্যাটালগ কার্ড",
+  "KRIPTA.Window.GiveCard": "কার্ড দিন",
+  "KRIPTA.Window.MyCards": "খেলোয়াড়ের কার্ড",
+  "KRIPTA.Window.Players": "খেলোয়াড় পরিচালনা",
+  "KRIPTA.Window.Registry": "খেলোয়াড় নিবন্ধন",
+  "KRIPTA.Window.RequestCard": "কার্ড অনুরোধ",
+  "KRIPTA.Window.Settings": "Kripta Cards - সেটিংস",
+  "KRIPTA.Window.UseCard": "কার্ড ব্যবহার",
+  "KRIPTA.Menu.Title": "Kripta Cards",
+  "KRIPTA.Menu.Catalog": "কার্ড ক্যাটালগ",
+  "KRIPTA.Menu.GetCard": "কার্ড অনুরোধ",
+  "KRIPTA.Menu.MyCards": "আমার কার্ড",
+  "KRIPTA.Menu.Players": "খেলোয়াড় পরিচালনা",
+  "KRIPTA.Label.Category": "বিভাগ",
+  "KRIPTA.Label.Mode": "মোড",
+  "KRIPTA.Label.Card": "কার্ড",
+  "KRIPTA.Label.Player": "খেলোয়াড়",
+  "KRIPTA.Label.Name": "নাম",
+  "KRIPTA.Label.Comment": "মন্তব্য",
+  "KRIPTA.Label.CardTypes": "কার্ডের ধরন",
+  "KRIPTA.Label.Count": "পরিমাণ",
+  "KRIPTA.Label.ConfirmationCode": "নিশ্চিতকরণ কোড",
+  "KRIPTA.Label.Id": "Id",
+  "KRIPTA.Label.Key": "Key",
+  "KRIPTA.Label.ServerUrl": "সার্ভার URL",
+  "KRIPTA.Label.Writer": "Writer",
+  "KRIPTA.Label.Reader": "Reader",
+  "KRIPTA.Label.Role": "ভূমিকা",
+  "KRIPTA.Label.Binding": "সংযোগ",
+  "KRIPTA.Role.GM": "গেম মাস্টার",
+  "KRIPTA.Role.Player": "খেলোয়াড়",
+  "KRIPTA.Status.InGame": "অনলাইনে",
+  "KRIPTA.Status.Offline": "অফলাইনে",
+  "KRIPTA.Binding.CardsIssued": "দেওয়া কার্ড:",
+  "KRIPTA.Binding.NoCards": "কোনো কার্ড নেই",
+  "KRIPTA.Binding.NotBound": "খেলোয়াড় যুক্ত নয়, একজন খেলোয়াড় যুক্ত করুন।",
+  "KRIPTA.Binding.CardsCountHint": "পুনরাবৃত্তি বাদ দিয়ে দেওয়া কার্ডের ধরন সংখ্যা",
+  "KRIPTA.Button.Add": "যোগ করুন",
+  "KRIPTA.Button.Bind": "যুক্ত করুন",
+  "KRIPTA.Button.Cancel": "বাতিল",
+  "KRIPTA.Button.Close": "বন্ধ",
+  "KRIPTA.Button.Confirm": "নিশ্চিত",
+  "KRIPTA.Button.Delete": "মুছুন",
+  "KRIPTA.Button.Edit": "সম্পাদনা",
+  "KRIPTA.Button.Give": "দিন",
+  "KRIPTA.Button.GiveCard": "কার্ড দিন",
+  "KRIPTA.Button.Info": "তথ্য",
+  "KRIPTA.Button.No": "না",
+  "KRIPTA.Button.Output": "পোস্ট",
+  "KRIPTA.Button.Refresh": "রিফ্রেশ",
+  "KRIPTA.Button.Registry": "খেলোয়াড় নিবন্ধন",
+  "KRIPTA.Button.Request": "অনুরোধ",
+  "KRIPTA.Button.RequestCard": "অনুরোধ",
+  "KRIPTA.Button.SaveChanges": "পরিবর্তন সংরক্ষণ",
+  "KRIPTA.Button.Take": "ফেরত নিন",
+  "KRIPTA.Button.TestAuth": "প্রযুক্তিগত ব্যবহারকারী পরীক্ষা",
+  "KRIPTA.Button.TestServer": "সার্ভার পরীক্ষা",
+  "KRIPTA.Button.Unbind": "সংযোগ সরান",
+  "KRIPTA.Button.Use": "ব্যবহার",
+  "KRIPTA.Button.Yes": "হ্যাঁ",
+  "KRIPTA.Mode.Manual": "নিজে নির্বাচন",
+  "KRIPTA.Mode.Random": "র্যান্ডম",
+  "KRIPTA.Mode.Show": "দেখান",
+  "KRIPTA.Mode.Spend": "খরচ করুন",
+  "KRIPTA.View.Table": "টেবিল",
+  "KRIPTA.View.Tiles": "টাইল",
+  "KRIPTA.Placeholder.Search": "অনুসন্ধান",
+  "KRIPTA.Select.NotSelected": "-- নির্বাচিত নয় --",
+  "KRIPTA.Template.EmptyCatalog": "সার্ভারে কোনো নিবন্ধিত বিভাগ বা কার্ড নেই।",
+  "KRIPTA.Template.MyCardsTitle": "খেলোয়াড়ের কার্ড: {playerName}",
+  "KRIPTA.Template.UseCardMissing": "এই কার্ডটি আর সার্ভারে নিবন্ধিত নয়।",
+  "KRIPTA.Template.UseCardPrompt": "এই কার্ডটি ব্যবহার করা হবে:",
+  "KRIPTA.Card.FallbackName": "কার্ড {number}",
+  "KRIPTA.Card.FallbackAddress": "কার্ড {level}/{number}",
+  "KRIPTA.Card.MissingDescription": "কার্ড {level}/{number} বর্তমান সার্ভার ক্যাটালগে নেই।",
+  "KRIPTA.Card.NotRegisteredDescription": "কার্ড {level}/{number} আর সার্ভারে নিবন্ধিত নয়।",
+  "KRIPTA.Level.FallbackName": "স্তর {level}",
+  "KRIPTA.Level.MissingDescription": "এই স্তরটি খেলোয়াড়ের ইনভেন্টরিতে আছে, কিন্তু বর্তমান সার্ভার ক্যাটালগে নেই।",
+  "KRIPTA.Chat.BlobReadFailed": "blob পড়তে ব্যর্থ",
+  "KRIPTA.Chat.CardGivenTitle": "কার্ড দেওয়া হয়েছে",
+  "KRIPTA.Chat.CardReceiveSubtitle": "খেলোয়াড় {playerName} কার্ড {cardSubtitle} পায়",
+  "KRIPTA.Chat.CardRequestCanceled": "কার্ড অনুরোধ বাতিল হয়েছে।",
+  "KRIPTA.Chat.CardRequestConfirmedTitle": "কার্ড অনুরোধ নিশ্চিত হয়েছে",
+  "KRIPTA.Chat.CardRequestPayloadUnreadable": "অনুরোধের তথ্য পড়তে ব্যর্থ।",
+  "KRIPTA.Chat.CardSpentFooter": "কার্ড খরচ হয়েছে",
+  "KRIPTA.Chat.CardSpentTitle": "কার্ড খরচ হয়েছে",
+  "KRIPTA.Chat.FallbackPlayer": "খেলোয়াড়",
+  "KRIPTA.Chat.ManualChoiceFooter": "ম্যানুয়াল নির্বাচন",
+  "KRIPTA.Chat.ReferenceTitle": "তথ্যসূত্র",
+  "KRIPTA.Chat.RequestManualTitle": "নির্বাচিত কার্ড অনুরোধ",
+  "KRIPTA.Chat.RequestRandomTitle": "র্যান্ডম কার্ড অনুরোধ",
+  "KRIPTA.Chat.ShowCardTitle": "কার্ড তথ্যসূত্র",
+  "KRIPTA.Dialog.BindPlayer.Title": "সার্ভার খেলোয়াড় যুক্ত করুন",
+  "KRIPTA.Dialog.BindPlayer.Header": "{foundryUserName}-এর জন্য খেলোয়াড় নির্বাচন করুন",
+  "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry ব্যবহারকারী",
+  "KRIPTA.Dialog.Player.AddTitle": "খেলোয়াড় যোগ করুন",
+  "KRIPTA.Dialog.Player.EditTitle": "খেলোয়াড় সম্পাদনা",
+  "KRIPTA.Dialog.Player.DeleteTitle": "খেলোয়াড় মুছুন",
+  "KRIPTA.Dialog.Player.DeleteWarning": "খেলোয়াড় \"{playerName}\" মুছে ফেলা ফিরিয়ে নেওয়া যাবে না। \"{code}\" লিখুন এবং মুছে ফেলা নিশ্চিত করুন।",
+  "KRIPTA.Dialog.Count.TotalCards": "এই ধরনের মোট কার্ড - {max}",
+  "KRIPTA.Error.InvalidCardLevel": "{context}-এর জন্য অবৈধ স্তর: {level}",
+  "KRIPTA.Error.InvalidCardNumber": "{context}-এর জন্য অবৈধ নম্বর: {number}",
+  "KRIPTA.Error.InvalidLocalCardLevel": "অবৈধ কার্ড স্তর: {level}",
+  "KRIPTA.Error.InvalidLocalCardNumber": "অবৈধ কার্ড নম্বর: {number}",
+  "KRIPTA.Error.InvalidRequestCard": "অনুরোধের জন্য অবৈধ কার্ড",
+  "KRIPTA.Error.InvalidGiveCard": "দেওয়ার জন্য অবৈধ কার্ড",
+  "KRIPTA.Error.MissingRequestPlayerGuid": "কার্ড দেওয়ার জন্য playerGuid নির্ধারণ করা যায়নি।",
+  "KRIPTA.Error.MissingSelectedCard": "নির্বাচিত কার্ড নির্ধারণ করা যায়নি।",
+  "KRIPTA.Error.MissingSelectedCardForGive": "দেওয়ার জন্য নির্বাচিত কার্ড নির্ধারণ করা যায়নি।",
+  "KRIPTA.Error.MissingGivePlayer": "কার্ড পাওয়ার খেলোয়াড় নির্ধারণ করা যায়নি।",
+  "KRIPTA.Error.MissingGiveCard": "দেওয়ার কার্ড নির্ধারণ করা যায়নি।",
+  "KRIPTA.Error.MissingServerUrl": "সার্ভার পাথ সেটিং অনুপস্থিত।",
+  "KRIPTA.Error.InvalidReader": "Reader প্রযুক্তিগত ব্যবহারকারী ভুলভাবে কনফিগার করা হয়েছে।",
+  "KRIPTA.Error.InvalidWriter": "Writer প্রযুক্তিগত ব্যবহারকারী ভুলভাবে কনফিগার করা হয়েছে।",
+  "KRIPTA.Error.MenuUnavailable": "এই ফিচারটি উপলভ্য নয়। মডিউল সেটিংস পরীক্ষা করুন। বিস্তারিত ব্রাউজার কনসোলে আছে।",
+  "KRIPTA.Error.Generic": "একটি ত্রুটি ঘটেছে",
+  "KRIPTA.Error.Unknown": "অজানা ত্রুটি",
+  "KRIPTA.Error.NameRequired": "Name ক্ষেত্রটি আবশ্যক।",
+  "KRIPTA.Error.RegistryDeleteReturned": "মুছে ফেলার পর সার্ভার খেলোয়াড়টিকে নিবন্ধনে ফেরত দিয়েছে।",
+  "KRIPTA.Notification.CardGiven": "কার্ড দেওয়া হয়েছে।",
+  "KRIPTA.Notification.CardUsed": "কার্ড ব্যবহার ও খরচ হয়েছে।",
+  "KRIPTA.Notification.CardWrittenOff": "কার্ড সরানো হয়েছে।",
+  "KRIPTA.Notification.CannotUseMissingCard": "এই কার্ডটি আর সার্ভারে নিবন্ধিত নয়। এটি ব্যবহার করা যাবে না।",
+  "KRIPTA.Notification.MissingCard": "এই কার্ডটি আর সার্ভারে নিবন্ধিত নয়।",
+  "KRIPTA.Notification.PlayerNotSelected": "কার্ড দেওয়ার জন্য কোনো খেলোয়াড় নির্বাচিত নয়",
+  "KRIPTA.Notification.PlayerBindingMissing": "কার্ড দেওয়ার জন্য খেলোয়াড়ের সংযোগ নির্ধারণ করা যায়নি",
+  "KRIPTA.Notification.RequestSent": "কার্ড অনুরোধ চ্যাটে পাঠানো হয়েছে।",
+  "KRIPTA.Notification.ServerSuccess": "সংযোগ সফল।",
+  "KRIPTA.Notification.ServerSuccessWithDetails": "সংযোগ সফল। {details}",
+  "KRIPTA.Notification.ServerConnectionFailed": "সার্ভারে সংযোগ করা যায়নি। ঠিকানা, সার্ভারের উপলভ্যতা এবং CORS/HTTPS সেটিংস পরীক্ষা করুন।",
+  "KRIPTA.Notification.ServerCheckFailedFallback": "সার্ভার পরীক্ষা করা যায়নি।",
+  "KRIPTA.Notification.InvalidServerUrl": "অবৈধ সার্ভার ঠিকানা: {url}",
+  "KRIPTA.Notification.SettingsAccessDenied": "Kripta Cards সেটিংস বিভাগ শুধুমাত্র গেম মাস্টার এবং সহকারী গেম মাস্টার ভূমিকায় উপলভ্য।",
+  "KRIPTA.Notification.ServerCheckFailed": "সার্ভার পরীক্ষা ব্যর্থ",
+  "KRIPTA.Notification.TechUserReader": "Reader",
+  "KRIPTA.Notification.TechUserWriter": "Writer",
+  "KRIPTA.Notification.TechUsersCheckSuccess": "\"Reader\" এবং \"Writer\" প্রযুক্তিগত ব্যবহারকারীরা পরীক্ষায় উত্তীর্ণ।",
+  "KRIPTA.Notification.SettingsSaved": "সংযোগ সেটিংস সংরক্ষিত হয়েছে।",
+  "KRIPTA.Notification.PlayerAdded": "খেলোয়াড় যোগ হয়েছে।",
+  "KRIPTA.Notification.PlayerUpdated": "খেলোয়াড় আপডেট হয়েছে।",
+  "KRIPTA.Notification.PlayerDeleted": "খেলোয়াড় মুছে ফেলা হয়েছে।",
+  "KRIPTA.Notification.DeleteCanceledBadCode": "মুছে ফেলা বাতিল হয়েছে। নিশ্চিতকরণ ক্ষেত্রটি ভুলভাবে পূরণ করা হয়েছে।",
+  "KRIPTA.Notification.BindingSaved": "সংযোগ সংরক্ষিত হয়েছে।",
+  "KRIPTA.Notification.BindingDeleted": "সংযোগ সরানো হয়েছে।",
+  "KRIPTA.Notification.BadCatalogCardNumber": "নির্বাচিত কার্ডের নম্বর অবৈধ। getCardsList প্রতিক্রিয়া এবং normalizeCardsList পরীক্ষা করুন।",
+  "KRIPTA.Notification.BadCatalogCardNumberForGive": "এই কার্ডটি ম্যানুয়ালি দেওয়া যাবে না, কারণ এর নম্বর অবৈধ। getCardsList প্রতিক্রিয়া এবং normalizeCardsList পরীক্ষা করুন।",
+  "KRIPTA.Notification.CardOutputFailed": "কার্ডটি চ্যাটে পোস্ট করতে ব্যর্থ",
+  "KRIPTA.Notification.CardGiveFailed": "কার্ড দিতে ব্যর্থ",
+  "KRIPTA.Notification.CardUseFailed": "কার্ড ব্যবহার করতে ব্যর্থ",
+  "KRIPTA.Notification.CardTakeFailed": "কার্ড সরাতে ব্যর্থ",
+  "KRIPTA.Notification.CardRequestFailed": "কার্ড অনুরোধ পাঠাতে ব্যর্থ",
+  "KRIPTA.Notification.CardRequestConfirmFailed": "কার্ড দেওয়া নিশ্চিত করতে ব্যর্থ",
+  "KRIPTA.Notification.PlayerAddFailed": "খেলোয়াড় যোগ করতে ব্যর্থ",
+  "KRIPTA.Notification.PlayerUpdateFailed": "খেলোয়াড় আপডেট করতে ব্যর্থ",
+  "KRIPTA.Notification.PlayerDeleteFailed": "খেলোয়াড় মুছতে ব্যর্থ",
+  "KRIPTA.Notification.CardRollFailed": "কার্ড পাওয়া যায়নি।",
+  "KRIPTA.Dialog.TakeCard.Title": "কার্ড ফেরত নিন",
+  "KRIPTA.Dialog.TakeCard.Message": "খেলোয়াড় {playerName} কার্ড {cardName} হারাবে।",
+  "KRIPTA.Dialog.ChooseBoundUser.Title": "কার্ড দিন"
+}
+__END_LOCALE_JSON__

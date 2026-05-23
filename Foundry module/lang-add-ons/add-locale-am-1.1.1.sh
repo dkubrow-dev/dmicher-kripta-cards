@@ -1,0 +1,251 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ ! -f "dmicher-kripta-cards/module.json" ]; then
+  echo "Run this script from the Foundry module workspace root, next to dmicher-kripta-cards/module.json." >&2
+  exit 1
+fi
+
+SCRIPT_FILE="$0"
+LOCALE_PATH="dmicher-kripta-cards/lang/am.json"
+mkdir -p "dmicher-kripta-cards/lang"
+awk '/^__LOCALE_JSON__$/ {p=1; next} /^__END_LOCALE_JSON__$/ {p=0} p' "$SCRIPT_FILE" > "$LOCALE_PATH"
+
+if command -v node >/dev/null 2>&1; then
+  SCRIPT_FILE="$SCRIPT_FILE" node <<'NODE'
+const fs = require("fs");
+const script = fs.readFileSync(process.env.SCRIPT_FILE, "utf8");
+function block(name) {
+  const match = script.match(new RegExp("__" + name + "__\\r?\\n([\\s\\S]*?)\\r?\\n__END_" + name + "__"));
+  if (!match) throw new Error("Missing block " + name);
+  return match[1].trim();
+}
+const entry = JSON.parse(block("MANIFEST_JSON"));
+const manifestPath = "dmicher-kripta-cards/module.json";
+const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+manifest.languages = Array.isArray(manifest.languages) ? manifest.languages : [];
+if (!manifest.languages.some((item) => item.lang === entry.lang)) {
+  manifest.languages.push(entry);
+}
+fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n", "utf8");
+console.log("Locale " + entry.lang + " installed.");
+NODE
+elif command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
+  PYTHON_BIN="$(command -v python3 || command -v python)"
+  SCRIPT_FILE="$SCRIPT_FILE" "$PYTHON_BIN" <<'PY'
+import json
+import os
+import re
+
+with open(os.environ["SCRIPT_FILE"], "r", encoding="utf-8") as script_file:
+    script = script_file.read()
+
+def block(name):
+    match = re.search(r"__" + re.escape(name) + r"__\r?\n([\s\S]*?)\r?\n__END_" + re.escape(name) + r"__", script)
+    if not match:
+        raise RuntimeError("Missing block " + name)
+    return match.group(1).strip()
+
+entry = json.loads(block("MANIFEST_JSON"))
+manifest_path = "dmicher-kripta-cards/module.json"
+with open(manifest_path, "r", encoding="utf-8") as manifest_file:
+    manifest = json.load(manifest_file)
+manifest["languages"] = manifest.get("languages") or []
+if not any(item.get("lang") == entry["lang"] for item in manifest["languages"]):
+    manifest["languages"].append(entry)
+with open(manifest_path, "w", encoding="utf-8") as manifest_file:
+    json.dump(manifest, manifest_file, ensure_ascii=False, indent=2)
+    manifest_file.write("\n")
+print("Locale " + entry["lang"] + " installed.")
+PY
+else
+  echo "Locale file was written, but module.json was not updated: install node or python and rerun the script." >&2
+  exit 1
+fi
+
+exit 0
+__MANIFEST_JSON__
+{
+  "lang": "am",
+  "name": "አማርኛ",
+  "path": "lang/am.json"
+}
+__END_MANIFEST_JSON__
+__LOCALE_JSON__
+{
+  "KRIPTA.NoBinding": "የFoundry ተጠቃሚዎ በKripta Cards ሞጁል ውስጥ ከሰርቨር ተጫዋች ጋር አልተገናኘም። እባክዎ የጨዋታ መሪውን ያነጋግሩ።",
+  "KRIPTA.GMOnly": "ይህ እርምጃ ለጨዋታ መሪው ብቻ ይገኛል።",
+  "KRIPTA.Settings.ServerUrl.Name": "የሰርቨር አድራሻ",
+  "KRIPTA.Settings.TechAuthUsers.Name": "ቴክኒካዊ ተጠቃሚዎች",
+  "KRIPTA.Settings.PlayerBindings.Name": "የFoundry ተጠቃሚዎችን ከሰርቨር ተጫዋቾች ጋር ማገናኘት",
+  "KRIPTA.Settings.UiPrefs.Name": "የአካባቢ በይነገጽ ቅንብሮች",
+  "KRIPTA.Settings.Menu.Name": "የKripta ካርዶች",
+  "KRIPTA.Settings.Menu.Label": "የሞጁል ቅንብሮች",
+  "KRIPTA.Settings.Menu.Hint": "የAPI ግንኙነት እና ቴክኒካዊ ተጠቃሚዎች።",
+  "KRIPTA.Settings.Help.BeforeServerLink": "ለሞጁሉ የይዘት አገልጋይ ገና ካልጫኑ እና ካላዋቀሩ፣ ",
+  "KRIPTA.Settings.Help.ServerLink": "ይህን አገናኝ",
+  "KRIPTA.Settings.Help.AfterServerLink": " ይከተሉ። ለፈጣን ማዋቀር ",
+  "KRIPTA.Settings.Help.DocumentationLink": "ሰነዱን",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " ይጠቀሙ።",
+  "KRIPTA.Window.Catalog": "የካርድ ካታሎግ",
+  "KRIPTA.Window.CardDetails": "የካታሎግ ካርድ",
+  "KRIPTA.Window.GiveCard": "ካርድ ስጥ",
+  "KRIPTA.Window.MyCards": "የተጫዋች ካርዶች",
+  "KRIPTA.Window.Players": "ተጫዋቾችን አስተዳድር",
+  "KRIPTA.Window.Registry": "የተጫዋቾች መዝገብ",
+  "KRIPTA.Window.RequestCard": "ካርድ ጠይቅ",
+  "KRIPTA.Window.Settings": "የKripta ካርዶች - ቅንብሮች",
+  "KRIPTA.Window.UseCard": "ካርድ ተጠቀም",
+  "KRIPTA.Menu.Title": "የKripta ካርዶች",
+  "KRIPTA.Menu.Catalog": "የካርድ ካታሎግ",
+  "KRIPTA.Menu.GetCard": "ካርድ ጠይቅ",
+  "KRIPTA.Menu.MyCards": "የእኔ ካርዶች",
+  "KRIPTA.Menu.Players": "ተጫዋቾችን አስተዳድር",
+  "KRIPTA.Label.Category": "ምድብ",
+  "KRIPTA.Label.Mode": "ሁነታ",
+  "KRIPTA.Label.Card": "ካርድ",
+  "KRIPTA.Label.Player": "ተጫዋች",
+  "KRIPTA.Label.Name": "ስም",
+  "KRIPTA.Label.Comment": "አስተያየት",
+  "KRIPTA.Label.CardTypes": "የካርድ አይነቶች",
+  "KRIPTA.Label.Count": "ብዛት",
+  "KRIPTA.Label.ConfirmationCode": "የማረጋገጫ ኮድ",
+  "KRIPTA.Label.Id": "መለያ",
+  "KRIPTA.Label.Key": "ቁልፍ",
+  "KRIPTA.Label.ServerUrl": "የሰርቨር URL",
+  "KRIPTA.Label.Writer": "ጸሐፊ",
+  "KRIPTA.Label.Reader": "አንባቢ",
+  "KRIPTA.Label.Role": "ሚና",
+  "KRIPTA.Label.Binding": "ግንኙነት",
+  "KRIPTA.Role.GM": "የጨዋታ መሪ",
+  "KRIPTA.Role.Player": "ተጫዋች",
+  "KRIPTA.Status.InGame": "በመስመር ላይ",
+  "KRIPTA.Status.Offline": "ከመስመር ውጭ",
+  "KRIPTA.Binding.CardsIssued": "የተሰጡ ካርዶች:",
+  "KRIPTA.Binding.NoCards": "ካርዶች የሉም",
+  "KRIPTA.Binding.NotBound": "ተጫዋች አልተገናኘም፣ ተጫዋች ያገናኙ።",
+  "KRIPTA.Binding.CardsCountHint": "የተሰጡ የካርድ አይነቶች ብዛት፣ የተደጋገሙትን ሳይጨምር",
+  "KRIPTA.Button.Add": "ጨምር",
+  "KRIPTA.Button.Bind": "አገናኝ",
+  "KRIPTA.Button.Cancel": "ሰርዝ",
+  "KRIPTA.Button.Close": "ዝጋ",
+  "KRIPTA.Button.Confirm": "አረጋግጥ",
+  "KRIPTA.Button.Delete": "ሰርዝ",
+  "KRIPTA.Button.Edit": "አርትዕ",
+  "KRIPTA.Button.Give": "ስጥ",
+  "KRIPTA.Button.GiveCard": "ካርድ ስጥ",
+  "KRIPTA.Button.Info": "መረጃ",
+  "KRIPTA.Button.No": "አይ",
+  "KRIPTA.Button.Output": "አትም",
+  "KRIPTA.Button.Refresh": "አድስ",
+  "KRIPTA.Button.Registry": "የተጫዋቾች መዝገብ",
+  "KRIPTA.Button.Request": "ጠይቅ",
+  "KRIPTA.Button.RequestCard": "ጠይቅ",
+  "KRIPTA.Button.SaveChanges": "ለውጦችን አስቀምጥ",
+  "KRIPTA.Button.Take": "አስወግድ",
+  "KRIPTA.Button.TestAuth": "ቴክኒካዊ ተጠቃሚዎችን ፈትሽ",
+  "KRIPTA.Button.TestServer": "ሰርቨርን ፈትሽ",
+  "KRIPTA.Button.Unbind": "ግንኙነት አቋርጥ",
+  "KRIPTA.Button.Use": "ተጠቀም",
+  "KRIPTA.Button.Yes": "አዎ",
+  "KRIPTA.Mode.Manual": "በእጅ ምረጥ",
+  "KRIPTA.Mode.Random": "በዘፈቀደ",
+  "KRIPTA.Mode.Show": "አሳይ",
+  "KRIPTA.Mode.Spend": "አውጣ",
+  "KRIPTA.View.Table": "ሰንጠረዥ",
+  "KRIPTA.View.Tiles": "ሰቆች",
+  "KRIPTA.Placeholder.Search": "ፈልግ",
+  "KRIPTA.Select.NotSelected": "-- አልተመረጠም --",
+  "KRIPTA.Template.EmptyCatalog": "በሰርቨሩ ላይ የተመዘገቡ ምድቦች ወይም ካርዶች የሉም።",
+  "KRIPTA.Template.MyCardsTitle": "የተጫዋች ካርዶች: {playerName}",
+  "KRIPTA.Template.UseCardMissing": "ይህ ካርድ ከእንግዲህ በሰርቨሩ ላይ አልተመዘገበም።",
+  "KRIPTA.Template.UseCardPrompt": "ይህ ካርድ ይጠቀማል:",
+  "KRIPTA.Card.FallbackName": "ካርድ {number}",
+  "KRIPTA.Card.FallbackAddress": "ካርድ {level}/{number}",
+  "KRIPTA.Card.MissingDescription": "ካርድ {level}/{number} በአሁኑ የሰርቨር ካታሎግ ውስጥ የለም።",
+  "KRIPTA.Card.NotRegisteredDescription": "ካርድ {level}/{number} ከእንግዲህ በሰርቨሩ ላይ አልተመዘገበም።",
+  "KRIPTA.Level.FallbackName": "ደረጃ {level}",
+  "KRIPTA.Level.MissingDescription": "ይህ ደረጃ በተጫዋቹ ንብረት ውስጥ አለ፣ ግን በአሁኑ የሰርቨር ካታሎግ ውስጥ የለም።",
+  "KRIPTA.Chat.BlobReadFailed": "blob ማንበብ አልተሳካም",
+  "KRIPTA.Chat.CardGivenTitle": "ካርድ ተሰጥቷል",
+  "KRIPTA.Chat.CardReceiveSubtitle": "ተጫዋች {playerName} ካርድ {cardSubtitle} ይቀበላል",
+  "KRIPTA.Chat.CardRequestCanceled": "የካርድ ጥያቄ ተሰርዟል።",
+  "KRIPTA.Chat.CardRequestConfirmedTitle": "የካርድ ጥያቄ ተረጋግጧል",
+  "KRIPTA.Chat.CardRequestPayloadUnreadable": "የጥያቄ ውሂብ ማንበብ አልተሳካም።",
+  "KRIPTA.Chat.CardSpentFooter": "ካርዱ ተጠቅሟል",
+  "KRIPTA.Chat.CardSpentTitle": "ካርዱ ተጠቅሟል",
+  "KRIPTA.Chat.FallbackPlayer": "ተጫዋች",
+  "KRIPTA.Chat.ManualChoiceFooter": "በእጅ ምርጫ",
+  "KRIPTA.Chat.ReferenceTitle": "ማጣቀሻ",
+  "KRIPTA.Chat.RequestManualTitle": "የተመረጠ ካርድ ጥያቄ",
+  "KRIPTA.Chat.RequestRandomTitle": "የዘፈቀደ ካርድ ጥያቄ",
+  "KRIPTA.Chat.ShowCardTitle": "የካርድ ማጣቀሻ",
+  "KRIPTA.Dialog.BindPlayer.Title": "የሰርቨር ተጫዋች አገናኝ",
+  "KRIPTA.Dialog.BindPlayer.Header": "ለ{foundryUserName} ተጫዋች ምረጥ",
+  "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "የFoundry ተጠቃሚ",
+  "KRIPTA.Dialog.Player.AddTitle": "ተጫዋች ጨምር",
+  "KRIPTA.Dialog.Player.EditTitle": "ተጫዋች አርትዕ",
+  "KRIPTA.Dialog.Player.DeleteTitle": "ተጫዋች ሰርዝ",
+  "KRIPTA.Dialog.Player.DeleteWarning": "ተጫዋች \"{playerName}\" መሰረዝ መመለስ አይቻልም። \"{code}\" ያስገቡ እና ስረዛውን ያረጋግጡ።",
+  "KRIPTA.Dialog.Count.TotalCards": "የዚህ አይነት ጠቅላላ ካርዶች - {max}",
+  "KRIPTA.Error.InvalidCardLevel": "ለ{context} የማይሰራ ደረጃ: {level}",
+  "KRIPTA.Error.InvalidCardNumber": "ለ{context} የማይሰራ ቁጥር: {number}",
+  "KRIPTA.Error.InvalidLocalCardLevel": "የማይሰራ የካርድ ደረጃ: {level}",
+  "KRIPTA.Error.InvalidLocalCardNumber": "የማይሰራ የካርድ ቁጥር: {number}",
+  "KRIPTA.Error.InvalidRequestCard": "ለጥያቄ የማይሰራ ካርድ",
+  "KRIPTA.Error.InvalidGiveCard": "ለመስጠት የማይሰራ ካርድ",
+  "KRIPTA.Error.MissingRequestPlayerGuid": "ካርድ ለመስጠት playerGuid መወሰን አልተሳካም።",
+  "KRIPTA.Error.MissingSelectedCard": "የተመረጠውን ካርድ መወሰን አልተሳካም።",
+  "KRIPTA.Error.MissingSelectedCardForGive": "ለመስጠት የተመረጠውን ካርድ መወሰን አልተሳካም።",
+  "KRIPTA.Error.MissingGivePlayer": "ካርዱን ለመስጠት ተጫዋቹን መወሰን አልተሳካም።",
+  "KRIPTA.Error.MissingGiveCard": "ለመስጠት ካርዱን መወሰን አልተሳካም።",
+  "KRIPTA.Error.MissingServerUrl": "የሰርቨር መንገድ ቅንብር የለም።",
+  "KRIPTA.Error.InvalidReader": "የReader ቴክኒካዊ ተጠቃሚ በስህተት ተዋቅሯል።",
+  "KRIPTA.Error.InvalidWriter": "የWriter ቴክኒካዊ ተጠቃሚ በስህተት ተዋቅሯል።",
+  "KRIPTA.Error.MenuUnavailable": "ይህ ባህሪ አይገኝም። የሞጁሉን ቅንብሮች ይፈትሹ። ዝርዝሮች በአሳሽ console ውስጥ ናቸው።",
+  "KRIPTA.Error.Generic": "ስህተት ተፈጥሯል",
+  "KRIPTA.Error.Unknown": "ያልታወቀ ስህተት",
+  "KRIPTA.Error.NameRequired": "የስም መስክ ያስፈልጋል።",
+  "KRIPTA.Error.RegistryDeleteReturned": "ሰርቨሩ ከስረዛ በኋላ ተጫዋቹን በመዝገቡ ውስጥ መልሶታል።",
+  "KRIPTA.Notification.CardGiven": "ካርድ ተሰጥቷል።",
+  "KRIPTA.Notification.CardUsed": "ካርድ ተጠቅሟል እና ተወግዷል።",
+  "KRIPTA.Notification.CardWrittenOff": "ካርድ ተወግዷል።",
+  "KRIPTA.Notification.CannotUseMissingCard": "ይህ ካርድ ከእንግዲህ በሰርቨሩ ላይ አልተመዘገበም። መጠቀም አይቻልም።",
+  "KRIPTA.Notification.MissingCard": "ይህ ካርድ ከእንግዲህ በሰርቨሩ ላይ አልተመዘገበም።",
+  "KRIPTA.Notification.PlayerNotSelected": "ካርድ ለመስጠት ተጫዋች አልተመረጠም",
+  "KRIPTA.Notification.PlayerBindingMissing": "ካርድ ለመስጠት የተጫዋች ግንኙነት መወሰን አልተሳካም",
+  "KRIPTA.Notification.RequestSent": "የካርድ ጥያቄ ወደ ቻት ተልኳል።",
+  "KRIPTA.Notification.ServerSuccess": "ግንኙነት ተሳክቷል።",
+  "KRIPTA.Notification.ServerSuccessWithDetails": "ግንኙነት ተሳክቷል። {details}",
+  "KRIPTA.Notification.ServerConnectionFailed": "ከሰርቨሩ ጋር መገናኘት አልተሳካም። አድራሻውን፣ የሰርቨር ተገኝነትን እና የCORS/HTTPS ቅንብሮችን ይፈትሹ።",
+  "KRIPTA.Notification.ServerCheckFailedFallback": "ሰርቨሩን መፈተሽ አልተሳካም።",
+  "KRIPTA.Notification.InvalidServerUrl": "የማይሰራ የሰርቨር አድራሻ: {url}",
+  "KRIPTA.Notification.SettingsAccessDenied": "የKripta Cards ቅንብሮች ክፍል ለጨዋታ መሪ እና ለረዳት የጨዋታ መሪ ሚናዎች ብቻ ይገኛል።",
+  "KRIPTA.Notification.ServerCheckFailed": "የሰርቨር ፍተሻ አልተሳካም",
+  "KRIPTA.Notification.TechUserReader": "አንባቢ",
+  "KRIPTA.Notification.TechUserWriter": "ጸሐፊ",
+  "KRIPTA.Notification.TechUsersCheckSuccess": "\"Reader\" እና \"Writer\" ቴክኒካዊ ተጠቃሚዎች ፍተሻውን አልፈዋል።",
+  "KRIPTA.Notification.SettingsSaved": "የግንኙነት ቅንብሮች ተቀምጠዋል።",
+  "KRIPTA.Notification.PlayerAdded": "ተጫዋች ታክሏል።",
+  "KRIPTA.Notification.PlayerUpdated": "ተጫዋች ተዘምኗል።",
+  "KRIPTA.Notification.PlayerDeleted": "ተጫዋች ተሰርዟል።",
+  "KRIPTA.Notification.DeleteCanceledBadCode": "ስረዛ ተሰርዟል። የማረጋገጫ መስክ በስህተት ተሞልቷል።",
+  "KRIPTA.Notification.BindingSaved": "ግንኙነት ተቀምጧል።",
+  "KRIPTA.Notification.BindingDeleted": "ግንኙነት ተወግዷል።",
+  "KRIPTA.Notification.BadCatalogCardNumber": "የተመረጠው ካርድ የማይሰራ ቁጥር አለው። የgetCardsList መልስን እና normalizeCardsListን ይፈትሹ።",
+  "KRIPTA.Notification.BadCatalogCardNumberForGive": "ይህ ካርድ በእጅ ሊሰጥ አይችልም፣ ምክንያቱም የማይሰራ ቁጥር አለው። የgetCardsList መልስን እና normalizeCardsListን ይፈትሹ።",
+  "KRIPTA.Notification.CardOutputFailed": "ካርዱን ወደ ቻት መለጠፍ አልተሳካም",
+  "KRIPTA.Notification.CardGiveFailed": "ካርድ መስጠት አልተሳካም",
+  "KRIPTA.Notification.CardUseFailed": "ካርድ መጠቀም አልተሳካም",
+  "KRIPTA.Notification.CardTakeFailed": "ካርድ ማስወገድ አልተሳካም",
+  "KRIPTA.Notification.CardRequestFailed": "የካርድ ጥያቄ መላክ አልተሳካም",
+  "KRIPTA.Notification.CardRequestConfirmFailed": "የካርድ መስጠትን ማረጋገጥ አልተሳካም",
+  "KRIPTA.Notification.PlayerAddFailed": "ተጫዋች መጨመር አልተሳካም",
+  "KRIPTA.Notification.PlayerUpdateFailed": "ተጫዋች ማዘመን አልተሳካም",
+  "KRIPTA.Notification.PlayerDeleteFailed": "ተጫዋች መሰረዝ አልተሳካም",
+  "KRIPTA.Notification.CardRollFailed": "ካርድ መቀበል አልተሳካም።",
+  "KRIPTA.Dialog.TakeCard.Title": "ካርድ አስወግድ",
+  "KRIPTA.Dialog.TakeCard.Message": "ተጫዋች {playerName} ካርድ {cardName} ያጣል።",
+  "KRIPTA.Dialog.ChooseBoundUser.Title": "ካርድ ስጥ"
+}
+__END_LOCALE_JSON__

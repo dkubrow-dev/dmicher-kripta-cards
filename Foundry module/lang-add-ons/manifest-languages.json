@@ -1,0 +1,197 @@
+[
+  {
+    "lang": "am",
+    "name": "አማርኛ",
+    "path": "lang/am.json"
+  },
+  {
+    "lang": "ar",
+    "name": "العربية",
+    "path": "lang/ar.json"
+  },
+  {
+    "lang": "av",
+    "name": "МагӀарул мацӀ",
+    "path": "lang/av.json"
+  },
+  {
+    "lang": "az",
+    "name": "Azərbaycanca",
+    "path": "lang/az.json"
+  },
+  {
+    "lang": "ba",
+    "name": "Башҡортса",
+    "path": "lang/ba.json"
+  },
+  {
+    "lang": "be",
+    "name": "Беларуская",
+    "path": "lang/be.json"
+  },
+  {
+    "lang": "bn",
+    "name": "বাংলা",
+    "path": "lang/bn.json"
+  },
+  {
+    "lang": "ca",
+    "name": "Català",
+    "path": "lang/ca.json"
+  },
+  {
+    "lang": "ce",
+    "name": "Нохчийн",
+    "path": "lang/ce.json"
+  },
+  {
+    "lang": "cs",
+    "name": "Čeština",
+    "path": "lang/cs.json"
+  },
+  {
+    "lang": "de",
+    "name": "Deutsch",
+    "path": "lang/de.json"
+  },
+  {
+    "lang": "es",
+    "name": "Español",
+    "path": "lang/es.json"
+  },
+  {
+    "lang": "fr",
+    "name": "Français",
+    "path": "lang/fr.json"
+  },
+  {
+    "lang": "ha",
+    "name": "Hausa",
+    "path": "lang/ha.json"
+  },
+  {
+    "lang": "hi",
+    "name": "हिन्दी",
+    "path": "lang/hi.json"
+  },
+  {
+    "lang": "hu",
+    "name": "Magyar",
+    "path": "lang/hu.json"
+  },
+  {
+    "lang": "hy",
+    "name": "Հայերեն",
+    "path": "lang/hy.json"
+  },
+  {
+    "lang": "id",
+    "name": "Bahasa Indonesia",
+    "path": "lang/id.json"
+  },
+  {
+    "lang": "ig",
+    "name": "Igbo",
+    "path": "lang/ig.json"
+  },
+  {
+    "lang": "ja",
+    "name": "日本語",
+    "path": "lang/ja.json"
+  },
+  {
+    "lang": "ka",
+    "name": "ქართული",
+    "path": "lang/ka.json"
+  },
+  {
+    "lang": "kbd",
+    "name": "Адыгэбзэ",
+    "path": "lang/kbd.json"
+  },
+  {
+    "lang": "kk",
+    "name": "Қазақша",
+    "path": "lang/kk.json"
+  },
+  {
+    "lang": "ko",
+    "name": "한국어",
+    "path": "lang/ko.json"
+  },
+  {
+    "lang": "ky",
+    "name": "Кыргызча",
+    "path": "lang/ky.json"
+  },
+  {
+    "lang": "om",
+    "name": "Afaan Oromoo",
+    "path": "lang/om.json"
+  },
+  {
+    "lang": "pl",
+    "name": "Polski",
+    "path": "lang/pl.json"
+  },
+  {
+    "lang": "pt",
+    "name": "Português",
+    "path": "lang/pt.json"
+  },
+  {
+    "lang": "ro-MD",
+    "name": "Română (Moldova)",
+    "path": "lang/ro-MD.json"
+  },
+  {
+    "lang": "sv",
+    "name": "Svenska",
+    "path": "lang/sv.json"
+  },
+  {
+    "lang": "sw",
+    "name": "Kiswahili",
+    "path": "lang/sw.json"
+  },
+  {
+    "lang": "tg",
+    "name": "Тоҷикӣ",
+    "path": "lang/tg.json"
+  },
+  {
+    "lang": "th",
+    "name": "ไทย",
+    "path": "lang/th.json"
+  },
+  {
+    "lang": "tt",
+    "name": "Татарча",
+    "path": "lang/tt.json"
+  },
+  {
+    "lang": "uk",
+    "name": "Українська",
+    "path": "lang/uk.json"
+  },
+  {
+    "lang": "ur",
+    "name": "اردو",
+    "path": "lang/ur.json"
+  },
+  {
+    "lang": "uz",
+    "name": "Oʻzbekcha",
+    "path": "lang/uz.json"
+  },
+  {
+    "lang": "yo",
+    "name": "Yorùbá",
+    "path": "lang/yo.json"
+  },
+  {
+    "lang": "zh-CN",
+    "name": "简体中文",
+    "path": "lang/zh-CN.json"
+  }
+]

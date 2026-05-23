@@ -1,0 +1,251 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ ! -f "dmicher-kripta-cards/module.json" ]; then
+  echo "Run this script from the Foundry module workspace root, next to dmicher-kripta-cards/module.json." >&2
+  exit 1
+fi
+
+SCRIPT_FILE="$0"
+LOCALE_PATH="dmicher-kripta-cards/lang/zh-CN.json"
+mkdir -p "dmicher-kripta-cards/lang"
+awk '/^__LOCALE_JSON__$/ {p=1; next} /^__END_LOCALE_JSON__$/ {p=0} p' "$SCRIPT_FILE" > "$LOCALE_PATH"
+
+if command -v node >/dev/null 2>&1; then
+  SCRIPT_FILE="$SCRIPT_FILE" node <<'NODE'
+const fs = require("fs");
+const script = fs.readFileSync(process.env.SCRIPT_FILE, "utf8");
+function block(name) {
+  const match = script.match(new RegExp("__" + name + "__\\r?\\n([\\s\\S]*?)\\r?\\n__END_" + name + "__"));
+  if (!match) throw new Error("Missing block " + name);
+  return match[1].trim();
+}
+const entry = JSON.parse(block("MANIFEST_JSON"));
+const manifestPath = "dmicher-kripta-cards/module.json";
+const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+manifest.languages = Array.isArray(manifest.languages) ? manifest.languages : [];
+if (!manifest.languages.some((item) => item.lang === entry.lang)) {
+  manifest.languages.push(entry);
+}
+fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n", "utf8");
+console.log("Locale " + entry.lang + " installed.");
+NODE
+elif command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
+  PYTHON_BIN="$(command -v python3 || command -v python)"
+  SCRIPT_FILE="$SCRIPT_FILE" "$PYTHON_BIN" <<'PY'
+import json
+import os
+import re
+
+with open(os.environ["SCRIPT_FILE"], "r", encoding="utf-8") as script_file:
+    script = script_file.read()
+
+def block(name):
+    match = re.search(r"__" + re.escape(name) + r"__\r?\n([\s\S]*?)\r?\n__END_" + re.escape(name) + r"__", script)
+    if not match:
+        raise RuntimeError("Missing block " + name)
+    return match.group(1).strip()
+
+entry = json.loads(block("MANIFEST_JSON"))
+manifest_path = "dmicher-kripta-cards/module.json"
+with open(manifest_path, "r", encoding="utf-8") as manifest_file:
+    manifest = json.load(manifest_file)
+manifest["languages"] = manifest.get("languages") or []
+if not any(item.get("lang") == entry["lang"] for item in manifest["languages"]):
+    manifest["languages"].append(entry)
+with open(manifest_path, "w", encoding="utf-8") as manifest_file:
+    json.dump(manifest, manifest_file, ensure_ascii=False, indent=2)
+    manifest_file.write("\n")
+print("Locale " + entry["lang"] + " installed.")
+PY
+else
+  echo "Locale file was written, but module.json was not updated: install node or python and rerun the script." >&2
+  exit 1
+fi
+
+exit 0
+__MANIFEST_JSON__
+{
+  "lang": "zh-CN",
+  "name": "简体中文",
+  "path": "lang/zh-CN.json"
+}
+__END_MANIFEST_JSON__
+__LOCALE_JSON__
+{
+  "KRIPTA.NoBinding": "你的 Foundry 用户尚未在 Kripta Cards 模块中绑定服务器玩家。请联系游戏主持人。",
+  "KRIPTA.GMOnly": "此操作仅游戏主持人可用。",
+  "KRIPTA.Settings.ServerUrl.Name": "服务器地址",
+  "KRIPTA.Settings.TechAuthUsers.Name": "技术用户",
+  "KRIPTA.Settings.PlayerBindings.Name": "Foundry 用户与服务器玩家绑定",
+  "KRIPTA.Settings.UiPrefs.Name": "本地界面设置",
+  "KRIPTA.Settings.Menu.Name": "Kripta Cards",
+  "KRIPTA.Settings.Menu.Label": "模块设置",
+  "KRIPTA.Settings.Menu.Hint": "API 连接和技术用户。",
+  "KRIPTA.Settings.Help.BeforeServerLink": "如果你还没有为模块安装并配置内容服务器，请点击",
+  "KRIPTA.Settings.Help.ServerLink": "此链接",
+  "KRIPTA.Settings.Help.AfterServerLink": "完成操作。要快速配置，请使用",
+  "KRIPTA.Settings.Help.DocumentationLink": "文档",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": "。",
+  "KRIPTA.Window.Catalog": "卡牌目录",
+  "KRIPTA.Window.CardDetails": "目录卡牌",
+  "KRIPTA.Window.GiveCard": "发放卡牌",
+  "KRIPTA.Window.MyCards": "玩家卡牌",
+  "KRIPTA.Window.Players": "管理玩家",
+  "KRIPTA.Window.Registry": "玩家登记表",
+  "KRIPTA.Window.RequestCard": "请求卡牌",
+  "KRIPTA.Window.Settings": "Kripta Cards - 设置",
+  "KRIPTA.Window.UseCard": "使用卡牌",
+  "KRIPTA.Menu.Title": "Kripta Cards",
+  "KRIPTA.Menu.Catalog": "卡牌目录",
+  "KRIPTA.Menu.GetCard": "请求卡牌",
+  "KRIPTA.Menu.MyCards": "我的卡牌",
+  "KRIPTA.Menu.Players": "管理玩家",
+  "KRIPTA.Label.Category": "类别",
+  "KRIPTA.Label.Mode": "模式",
+  "KRIPTA.Label.Card": "卡牌",
+  "KRIPTA.Label.Player": "玩家",
+  "KRIPTA.Label.Name": "名称",
+  "KRIPTA.Label.Comment": "备注",
+  "KRIPTA.Label.CardTypes": "卡牌类型",
+  "KRIPTA.Label.Count": "数量",
+  "KRIPTA.Label.ConfirmationCode": "确认码",
+  "KRIPTA.Label.Id": "Id",
+  "KRIPTA.Label.Key": "Key",
+  "KRIPTA.Label.ServerUrl": "服务器 URL",
+  "KRIPTA.Label.Writer": "Writer",
+  "KRIPTA.Label.Reader": "Reader",
+  "KRIPTA.Label.Role": "角色",
+  "KRIPTA.Label.Binding": "绑定",
+  "KRIPTA.Role.GM": "游戏主持人",
+  "KRIPTA.Role.Player": "玩家",
+  "KRIPTA.Status.InGame": "游戏中",
+  "KRIPTA.Status.Offline": "离线",
+  "KRIPTA.Binding.CardsIssued": "已发放卡牌：",
+  "KRIPTA.Binding.NoCards": "没有卡牌",
+  "KRIPTA.Binding.NotBound": "玩家未绑定，请选择玩家。",
+  "KRIPTA.Binding.CardsCountHint": "已发放的卡牌类型数量，不包含重复项",
+  "KRIPTA.Button.Add": "添加",
+  "KRIPTA.Button.Bind": "绑定",
+  "KRIPTA.Button.Cancel": "取消",
+  "KRIPTA.Button.Close": "关闭",
+  "KRIPTA.Button.Confirm": "确认",
+  "KRIPTA.Button.Delete": "删除",
+  "KRIPTA.Button.Edit": "编辑",
+  "KRIPTA.Button.Give": "发放",
+  "KRIPTA.Button.GiveCard": "发放卡牌",
+  "KRIPTA.Button.Info": "信息",
+  "KRIPTA.Button.No": "否",
+  "KRIPTA.Button.Output": "发布",
+  "KRIPTA.Button.Refresh": "刷新",
+  "KRIPTA.Button.Registry": "玩家登记表",
+  "KRIPTA.Button.Request": "请求",
+  "KRIPTA.Button.RequestCard": "请求",
+  "KRIPTA.Button.SaveChanges": "保存更改",
+  "KRIPTA.Button.Take": "收回",
+  "KRIPTA.Button.TestAuth": "检查技术用户",
+  "KRIPTA.Button.TestServer": "检查服务器",
+  "KRIPTA.Button.Unbind": "解除绑定",
+  "KRIPTA.Button.Use": "使用",
+  "KRIPTA.Button.Yes": "是",
+  "KRIPTA.Mode.Manual": "手动选择",
+  "KRIPTA.Mode.Random": "随机",
+  "KRIPTA.Mode.Show": "展示",
+  "KRIPTA.Mode.Spend": "消耗",
+  "KRIPTA.View.Table": "表格",
+  "KRIPTA.View.Tiles": "图块",
+  "KRIPTA.Placeholder.Search": "搜索",
+  "KRIPTA.Select.NotSelected": "-- 未选择 --",
+  "KRIPTA.Template.EmptyCatalog": "服务器上没有已注册的类别或卡牌。",
+  "KRIPTA.Template.MyCardsTitle": "玩家卡牌：{playerName}",
+  "KRIPTA.Template.UseCardMissing": "此卡牌已不再在服务器上注册。",
+  "KRIPTA.Template.UseCardPrompt": "将使用此卡牌：",
+  "KRIPTA.Card.FallbackName": "卡牌 {number}",
+  "KRIPTA.Card.FallbackAddress": "卡牌 {level}/{number}",
+  "KRIPTA.Card.MissingDescription": "卡牌 {level}/{number} 不在当前服务器目录中。",
+  "KRIPTA.Card.NotRegisteredDescription": "卡牌 {level}/{number} 已不再在服务器上注册。",
+  "KRIPTA.Level.FallbackName": "等级 {level}",
+  "KRIPTA.Level.MissingDescription": "此等级存在于玩家库存中，但不在当前服务器目录中。",
+  "KRIPTA.Chat.BlobReadFailed": "无法读取 blob",
+  "KRIPTA.Chat.CardGivenTitle": "卡牌已发放",
+  "KRIPTA.Chat.CardReceiveSubtitle": "玩家 {playerName} 获得卡牌 {cardSubtitle}",
+  "KRIPTA.Chat.CardRequestCanceled": "卡牌请求已取消。",
+  "KRIPTA.Chat.CardRequestConfirmedTitle": "卡牌请求已确认",
+  "KRIPTA.Chat.CardRequestPayloadUnreadable": "无法读取请求数据。",
+  "KRIPTA.Chat.CardSpentFooter": "卡牌已消耗",
+  "KRIPTA.Chat.CardSpentTitle": "卡牌已消耗",
+  "KRIPTA.Chat.FallbackPlayer": "玩家",
+  "KRIPTA.Chat.ManualChoiceFooter": "手动选择",
+  "KRIPTA.Chat.ReferenceTitle": "参考",
+  "KRIPTA.Chat.RequestManualTitle": "指定卡牌请求",
+  "KRIPTA.Chat.RequestRandomTitle": "随机卡牌请求",
+  "KRIPTA.Chat.ShowCardTitle": "卡牌参考",
+  "KRIPTA.Dialog.BindPlayer.Title": "绑定服务器玩家",
+  "KRIPTA.Dialog.BindPlayer.Header": "为 {foundryUserName} 选择玩家",
+  "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry 用户",
+  "KRIPTA.Dialog.Player.AddTitle": "添加玩家",
+  "KRIPTA.Dialog.Player.EditTitle": "编辑玩家",
+  "KRIPTA.Dialog.Player.DeleteTitle": "删除玩家",
+  "KRIPTA.Dialog.Player.DeleteWarning": "删除玩家 \"{playerName}\" 后无法撤销。请输入 {code} 并确认删除。",
+  "KRIPTA.Dialog.Count.TotalCards": "此类型卡牌总数 - {max}",
+  "KRIPTA.Error.InvalidCardLevel": "{context} 的等级无效：{level}",
+  "KRIPTA.Error.InvalidCardNumber": "{context} 的编号无效：{number}",
+  "KRIPTA.Error.InvalidLocalCardLevel": "卡牌等级无效：{level}",
+  "KRIPTA.Error.InvalidLocalCardNumber": "卡牌编号无效：{number}",
+  "KRIPTA.Error.InvalidRequestCard": "用于请求的卡牌无效",
+  "KRIPTA.Error.InvalidGiveCard": "用于发放的卡牌无效",
+  "KRIPTA.Error.MissingRequestPlayerGuid": "无法确定用于发放卡牌的 playerGuid。",
+  "KRIPTA.Error.MissingSelectedCard": "无法确定所选卡牌。",
+  "KRIPTA.Error.MissingSelectedCardForGive": "无法确定要发放的所选卡牌。",
+  "KRIPTA.Error.MissingGivePlayer": "无法确定要接收卡牌的玩家。",
+  "KRIPTA.Error.MissingGiveCard": "无法确定要发放的卡牌。",
+  "KRIPTA.Error.MissingServerUrl": "缺少服务器路径设置。",
+  "KRIPTA.Error.InvalidReader": "Reader 技术用户配置不正确。",
+  "KRIPTA.Error.InvalidWriter": "Writer 技术用户配置不正确。",
+  "KRIPTA.Error.MenuUnavailable": "此功能不可用。请检查模块设置。详细信息位于浏览器控制台。",
+  "KRIPTA.Error.Generic": "发生错误",
+  "KRIPTA.Error.Unknown": "未知错误",
+  "KRIPTA.Error.NameRequired": "api 400：Name 字段为必填项。",
+  "KRIPTA.Error.RegistryDeleteReturned": "删除后服务器仍在登记表中返回了该玩家。",
+  "KRIPTA.Notification.CardGiven": "卡牌已发放。",
+  "KRIPTA.Notification.CardUsed": "卡牌已使用并消耗。",
+  "KRIPTA.Notification.CardWrittenOff": "卡牌已移除。",
+  "KRIPTA.Notification.CannotUseMissingCard": "此卡牌已不再在服务器上注册，无法使用。",
+  "KRIPTA.Notification.MissingCard": "此卡牌已不再在服务器上注册。",
+  "KRIPTA.Notification.PlayerNotSelected": "未选择要发放卡牌的玩家",
+  "KRIPTA.Notification.PlayerBindingMissing": "无法确定用于发放卡牌的玩家绑定",
+  "KRIPTA.Notification.RequestSent": "卡牌请求已发送到聊天。",
+  "KRIPTA.Notification.ServerSuccess": "连接成功。",
+  "KRIPTA.Notification.ServerSuccessWithDetails": "连接成功。{details}",
+  "KRIPTA.Notification.ServerConnectionFailed": "无法连接到服务器。请检查地址、服务器可用性以及 CORS/HTTPS 设置。",
+  "KRIPTA.Notification.ServerCheckFailedFallback": "无法检查服务器。",
+  "KRIPTA.Notification.InvalidServerUrl": "服务器地址无效：{url}",
+  "KRIPTA.Notification.SettingsAccessDenied": "Kripta Cards 设置仅对游戏主持人和助理游戏主持人角色开放。",
+  "KRIPTA.Notification.ServerCheckFailed": "服务器检查失败",
+  "KRIPTA.Notification.TechUserReader": "Reader",
+  "KRIPTA.Notification.TechUserWriter": "Writer",
+  "KRIPTA.Notification.TechUsersCheckSuccess": "Reader 和 Writer 检查通过。",
+  "KRIPTA.Notification.SettingsSaved": "连接设置已保存。",
+  "KRIPTA.Notification.PlayerAdded": "玩家已添加。",
+  "KRIPTA.Notification.PlayerUpdated": "玩家已更新。",
+  "KRIPTA.Notification.PlayerDeleted": "玩家已删除。",
+  "KRIPTA.Notification.DeleteCanceledBadCode": "删除已取消。确认字段填写不正确。",
+  "KRIPTA.Notification.BindingSaved": "绑定已保存。",
+  "KRIPTA.Notification.BindingDeleted": "绑定已移除。",
+  "KRIPTA.Notification.BadCatalogCardNumber": "所选卡牌编号无效。请检查 getCardsList 响应和 normalizeCardsList。",
+  "KRIPTA.Notification.BadCatalogCardNumberForGive": "此卡牌编号无效，无法手动发放。请检查 getCardsList 响应和 normalizeCardsList。",
+  "KRIPTA.Notification.CardOutputFailed": "无法将卡牌发布到聊天",
+  "KRIPTA.Notification.CardGiveFailed": "无法发放卡牌",
+  "KRIPTA.Notification.CardUseFailed": "无法使用卡牌",
+  "KRIPTA.Notification.CardTakeFailed": "无法移除卡牌",
+  "KRIPTA.Notification.CardRequestFailed": "无法发送卡牌请求",
+  "KRIPTA.Notification.CardRequestConfirmFailed": "无法确认卡牌发放",
+  "KRIPTA.Notification.PlayerAddFailed": "无法添加玩家",
+  "KRIPTA.Notification.PlayerUpdateFailed": "无法更新玩家",
+  "KRIPTA.Notification.PlayerDeleteFailed": "无法删除玩家",
+  "KRIPTA.Notification.CardRollFailed": "无法获得卡牌。",
+  "KRIPTA.Dialog.TakeCard.Title": "收回卡牌",
+  "KRIPTA.Dialog.TakeCard.Message": "玩家 {playerName} 将失去卡牌 {cardName}。",
+  "KRIPTA.Dialog.ChooseBoundUser.Title": "发放卡牌"
+}
+__END_LOCALE_JSON__
