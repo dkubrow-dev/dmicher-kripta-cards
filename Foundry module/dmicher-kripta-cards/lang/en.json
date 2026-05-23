@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Your Foundry User is not linked to a Server Player in the Kripta Cards module. Please contact the Game Master.",
   "KRIPTA.GMOnly": "This action is available only to the Game Master.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Server address",
   "KRIPTA.Settings.TechAuthUsers.Name": "Technical users",
   "KRIPTA.Settings.PlayerBindings.Name": "Foundry user to server player bindings",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta Cards",
   "KRIPTA.Settings.Menu.Label": "Module settings",
   "KRIPTA.Settings.Menu.Hint": "API connection and technical users.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "If you have not yet installed and configured the content server for the module, follow ",
+  "KRIPTA.Settings.Help.ServerLink": "this link",
+  "KRIPTA.Settings.Help.AfterServerLink": " to do that. For quick setup, use the ",
+  "KRIPTA.Settings.Help.DocumentationLink": "documentation",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Card Catalog",
   "KRIPTA.Window.CardDetails": "Catalog Card",
   "KRIPTA.Window.GiveCard": "Give Card",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Request Card",
   "KRIPTA.Window.Settings": "Kripta Cards - Settings",
   "KRIPTA.Window.UseCard": "Use Card",
-
   "KRIPTA.Menu.Title": "Kripta Cards",
   "KRIPTA.Menu.Catalog": "Card Catalog",
   "KRIPTA.Menu.GetCard": "Request Card",
   "KRIPTA.Menu.MyCards": "My Cards",
   "KRIPTA.Menu.Players": "Manage Players",
-
   "KRIPTA.Label.Category": "Category",
   "KRIPTA.Label.Mode": "Mode",
   "KRIPTA.Label.Card": "Card",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Reader",
   "KRIPTA.Label.Role": "Role",
   "KRIPTA.Label.Binding": "Binding",
-
   "KRIPTA.Role.GM": "Game Master",
   "KRIPTA.Role.Player": "Player",
   "KRIPTA.Status.InGame": "online",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "no cards",
   "KRIPTA.Binding.NotBound": "player is not linked, bind a player.",
   "KRIPTA.Binding.CardsCountHint": "Number of issued card types, excluding duplicates",
-
   "KRIPTA.Button.Add": "Add",
   "KRIPTA.Button.Bind": "Bind",
   "KRIPTA.Button.Cancel": "Cancel",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Take",
   "KRIPTA.Button.TestAuth": "Check technical users",
   "KRIPTA.Button.TestServer": "Check server",
-  "KRIPTA.Button.ThanksAuthor": "Thank the author",
   "KRIPTA.Button.Unbind": "Unbind",
   "KRIPTA.Button.Use": "Use",
   "KRIPTA.Button.Yes": "Yes",
-
   "KRIPTA.Mode.Manual": "Choose manually",
   "KRIPTA.Mode.Random": "Random",
   "KRIPTA.Mode.Show": "Show",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Tiles",
   "KRIPTA.Placeholder.Search": "Search",
   "KRIPTA.Select.NotSelected": "-- not selected --",
-
   "KRIPTA.Template.EmptyCatalog": "There are no registered categories or cards on the server.",
   "KRIPTA.Template.MyCardsTitle": "Player cards: {playerName}",
   "KRIPTA.Template.UseCardMissing": "This card is no longer registered on the server.",
   "KRIPTA.Template.UseCardPrompt": "This card will be used:",
-
   "KRIPTA.Card.FallbackName": "Card {number}",
   "KRIPTA.Card.FallbackAddress": "Card {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Card {level}/{number} is missing from the current server catalog.",
   "KRIPTA.Card.NotRegisteredDescription": "Card {level}/{number} is no longer registered on the server.",
   "KRIPTA.Level.FallbackName": "Level {level}",
   "KRIPTA.Level.MissingDescription": "This level exists in the player's inventory but is missing from the current server catalog.",
-
   "KRIPTA.Chat.BlobReadFailed": "Failed to read blob",
   "KRIPTA.Chat.CardGivenTitle": "Card Given",
   "KRIPTA.Chat.CardReceiveSubtitle": "Player {playerName} receives card {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Selected Card Request",
   "KRIPTA.Chat.RequestRandomTitle": "Random Card Request",
   "KRIPTA.Chat.ShowCardTitle": "Card Reference",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Bind Server Player",
   "KRIPTA.Dialog.BindPlayer.Header": "Choose a player for {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry user",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Delete Player",
   "KRIPTA.Dialog.Player.DeleteWarning": "Deleting player \"{playerName}\" cannot be undone. Enter \"{code}\" and confirm deletion.",
   "KRIPTA.Dialog.Count.TotalCards": "total cards of this type - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "Invalid level for {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "Invalid number for {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "invalid card level: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "unknown error",
   "KRIPTA.Error.NameRequired": "The Name field is required.",
   "KRIPTA.Error.RegistryDeleteReturned": "the server returned the player in the registry after deletion.",
-
   "KRIPTA.Notification.CardGiven": "Card given.",
   "KRIPTA.Notification.CardUsed": "Card used and spent.",
   "KRIPTA.Notification.CardWrittenOff": "Card removed.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Failed to connect to the server. Check the address, server availability, and CORS/HTTPS settings.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Failed to check the server.",
   "KRIPTA.Notification.InvalidServerUrl": "Invalid server address: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "The link for the \"Thank the author\" button is not configured.",
   "KRIPTA.Notification.SettingsAccessDenied": "The Kripta Cards settings section is available only to the Game Master and Assistant Game Master roles.",
   "KRIPTA.Notification.ServerCheckFailed": "Server check failed",
   "KRIPTA.Notification.TechUserReader": "Reader",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Failed to update player",
   "KRIPTA.Notification.PlayerDeleteFailed": "Failed to delete player",
   "KRIPTA.Notification.CardRollFailed": "Failed to receive card.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Take Card",
   "KRIPTA.Dialog.TakeCard.Message": "Player {playerName} will lose card {cardName}.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Give Card"
