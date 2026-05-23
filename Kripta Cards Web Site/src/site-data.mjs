@@ -34,15 +34,41 @@ export const config = {
         ru: "Страница модуля на Foundry VTT"
       },
       href: "https://foundryvtt.com/packages/dmicher-kripta-cards"
-    },
-    {
-      label: {
-        en: "Subscribe for updates and donations at boosty.to",
-        ru: "Подписка на обновления и донации - на boosty.to"
-      },
-      href: "https://boosty.to/dmicher"
     }
   ],
+  author: {
+    name: "dmicher abathur kubrow",
+    license: {
+      name: "Apache License 2.0",
+      href: "https://github.com/dkubrow-dev/dmicher-kripta-cards/blob/main/LICENSE"
+    },
+    contacts: [
+      {
+        id: "github-issues",
+        label: {
+          en: "GitHub issues",
+          ru: "GitHub Issues"
+        },
+        href: "https://github.com/dkubrow-dev/dmicher-kripta-cards/issues",
+        note: {
+          en: "For bug reports, reproducible problems, and public feature requests.",
+          ru: "Для сообщений об ошибках, воспроизводимых проблем и публичных предложений."
+        }
+      },
+      {
+        id: "boosty",
+        label: {
+          en: "Boosty",
+          ru: "Boosty"
+        },
+        href: "https://boosty.to/dmicher",
+        note: {
+          en: "For optional donations and project updates.",
+          ru: "Для добровольных донатов и обновлений проекта."
+        }
+      }
+    ]
+  },
   foundry: {
     packageId: "dmicher-kripta-cards",
     listingUrl: "https://foundryvtt.com/packages/dmicher-kripta-cards",
@@ -146,7 +172,16 @@ export const catalogs = {
       date: null,
       manifestUrl: "https://github.com/dkubrow-dev/dmicher-kripta-cards/releases/latest/download/module.json",
       foundryUrl: "https://foundryvtt.com/packages/dmicher-kripta-cards",
-      aiStatus: "human-authored",
+      aiStatus: "ai-assisted",
+      files: [
+        {
+          label: "Foundry module ZIP",
+          href: "/files/module/dmicher-kripta-cards-1.1.1.zip",
+          storage: "local",
+          size: "TBD",
+          sha256: "TBD"
+        }
+      ],
       notes: {
         en: "The first module build approved by Foundry support for publication on the platform. Corresponds to server version 1.1.1.",
         ru: "Первая сборка модуля, одобренная поддержкой Foundry для публикации модуля на платформе. Соответствует версии 1.1.1 сервера."
@@ -177,8 +212,8 @@ export const catalogs = {
   ],
   contentPacks: [
     {
-      id: "dmicher-cards",
-      title: "dmicher-cards",
+      id: "dmicher-kards",
+      title: "dmicher-kards",
       status: "planned",
       aiStatus: "ai-assisted",
       serverCompatibility: "1.1.1",

@@ -56,24 +56,75 @@
     }
   }
 
-  function showModuleVersionHint(locale) {
-    const panel = document.querySelector("[data-module-context]");
+  function readModuleVersion() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("moduleVersion") || params.get("module");
+  }
+
+  function compatibleWith(card, version) {
+    const value = card.getAttribute("data-module-compatibility") || "";
+    return value
+      .split(/[\s,;]+/)
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .includes(version);
+  }
+
+  function showServerRecommendations() {
+    const panel = document.querySelector("[data-server-recommendations]");
     if (!panel) {
       return;
     }
 
-    const params = new URLSearchParams(window.location.search);
-    const version = params.get("moduleVersion") || params.get("module");
+    const version = readModuleVersion();
     if (!version) {
       return;
     }
 
-    const text = panel.querySelector("[data-module-version-text]");
+    const cards = Array.from(panel.querySelectorAll("[data-module-compatibility]"));
+    const matches = cards.filter((card) => compatibleWith(card, version));
+    if (!matches.length) {
+      return;
+    }
+
+    cards.forEach((card) => {
+      card.hidden = true;
+    });
+    matches.forEach((card) => {
+      card.hidden = false;
+    });
+
+    const text = panel.querySelector("[data-server-version-text]");
     if (text) {
       const template = text.textContent || "";
       text.textContent = template.replace("{version}", version);
     }
     panel.hidden = false;
+  }
+
+  function bindMultiDownloadButtons() {
+    document.querySelectorAll("[data-download-hrefs]").forEach((button) => {
+      button.addEventListener("click", () => {
+        let hrefs = [];
+        try {
+          hrefs = JSON.parse(button.getAttribute("data-download-hrefs") || "[]");
+        } catch {
+          hrefs = [];
+        }
+
+        hrefs.forEach((href, index) => {
+          window.setTimeout(() => {
+            const link = document.createElement("a");
+            link.href = href;
+            link.download = "";
+            link.rel = "noopener";
+            document.body.append(link);
+            link.click();
+            link.remove();
+          }, index * 120);
+        });
+      });
+    });
   }
 
   const settings = readCookie();
@@ -106,6 +157,7 @@
       });
     }
 
-    showModuleVersionHint(locale);
+    showServerRecommendations();
+    bindMultiDownloadButtons();
   });
 })();

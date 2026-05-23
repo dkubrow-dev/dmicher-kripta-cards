@@ -160,7 +160,12 @@ function renderLayout(locale, page, content, options = {}) {
   <link rel="canonical" href="${canonical}">
   ${alternateLinks}
   <link rel="alternate" hreflang="x-default" href="${absoluteUrl(config.defaultLocale, page.slug)}">
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#101018">
   <link rel="stylesheet" href="/assets/main.css">
   <script>
     (function () {
@@ -196,7 +201,7 @@ function renderHeader(locale, page) {
   return `<header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/${locale}/" aria-label="${escapeHtml(config.siteName[locale])}">
-        <span class="brand-mark" aria-hidden="true">KC</span>
+        <img class="brand-mark" src="/favicon-64x64.png" width="38" height="38" alt="" aria-hidden="true">
         <span class="brand-text">${escapeHtml(config.siteName[locale])}</span>
       </a>
       <nav class="nav" aria-label="${escapeHtml(t.mainNavigation)}">
@@ -223,7 +228,10 @@ function renderFooter(locale) {
   return `<footer class="site-footer">
     <div class="footer-inner">
       <span>${escapeHtml(config.siteName[locale])}</span>
-      <span><a href="/${locale}/ai-policy/">${escapeHtml(navigation[locale].find((item) => item.href.endsWith("/ai-policy/")).label)}</a></span>
+      <span class="footer-links">
+        <a href="/${locale}/ai-policy/">${escapeHtml(navigation[locale].find((item) => item.href.endsWith("/ai-policy/")).label)}</a>
+        <a href="/${locale}/author-license/">${escapeHtml(navigation[locale].find((item) => item.href.endsWith("/author-license/")).label)}</a>
+      </span>
     </div>
   </footer>`;
 }
@@ -234,6 +242,14 @@ function helpers(locale, page) {
     ui: t,
     linkButton(href, label, variant = "") {
       return `<a class="button ${variant}" href="${href}">${escapeHtml(label)}</a>`;
+    },
+    multiDownloadButton(files, label, variant = "") {
+      const urls = files.map((file) => file.href).filter(Boolean);
+      if (!urls.length) {
+        return `<span class="button is-disabled ${variant}" aria-disabled="true">${escapeHtml(t.unavailable)}</span>`;
+      }
+
+      return `<button class="button ${variant}" type="button" data-download-hrefs="${escapeHtml(JSON.stringify(urls))}">${escapeHtml(label)}</button>`;
     },
     pageIntro(title, text) {
       return `<section class="page-intro"><h1>${escapeHtml(title)}</h1><p>${escapeHtml(text)}</p></section>`;
@@ -262,6 +278,35 @@ function helpers(locale, page) {
         checksum(item.files.map((file) => file.sha256).join(", ")),
         escapeHtml(item.notes[locale])
       ]));
+    },
+    serverRecommendationPanel(items) {
+      const cards = items.map((item) => {
+        const file = item.files[0];
+        if (!file) {
+          return "";
+        }
+
+        const action = item.status === "published"
+          ? `<a class="button" href="${file.href}">${escapeHtml(t.download)}</a>`
+          : `<span class="button is-disabled" aria-disabled="true">${escapeHtml(t.unavailable)}</span>`;
+
+        return `<article class="server-recommendation-card" data-module-compatibility="${escapeHtml(item.moduleCompatibility)}" hidden>
+          <h3>${escapeHtml(config.siteName[locale])} ${escapeHtml(item.version)}</h3>
+          <p>${escapeHtml(item.notes[locale])}</p>
+          <dl class="compact-list">
+            <div><dt>${escapeHtml(t.compatibility)}</dt><dd>${escapeHtml(`Module ${item.moduleCompatibility}; Foundry ${item.foundryCompatibility}`)}</dd></div>
+            <div><dt>${escapeHtml(t.file)}</dt><dd>${escapeHtml(file.label)}</dd></div>
+            <div><dt>${escapeHtml(t.sha256)}</dt><dd>${checksum(file.sha256)}</dd></div>
+          </dl>
+          <div class="hero-actions">${action}</div>
+        </article>`;
+      }).join("");
+
+      return `<section class="module-context server-recommendations" data-server-recommendations hidden>
+        <h2>${escapeHtml(t.serverRecommendationTitle)}</h2>
+        <p data-server-version-text>${escapeHtml(t.serverRecommendationText)}</p>
+        <div class="server-recommendation-list">${cards}</div>
+      </section>`;
     },
     moduleReleaseTable(items) {
       return table([
@@ -328,6 +373,9 @@ function helpers(locale, page) {
     },
     checkList(items) {
       return `<ul class="checks">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+    },
+    codeBlock(value, language = "text") {
+      return `<pre><code class="language-${escapeHtml(language)}">${escapeHtml(value)}</code></pre>`;
     }
   };
 }

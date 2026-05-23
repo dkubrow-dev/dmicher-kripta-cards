@@ -116,18 +116,12 @@ a:hover {
 }
 
 .brand-mark {
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--line);
+  width: 38px;
+  height: 38px;
+  display: block;
+  flex: 0 0 auto;
   border-radius: var(--radius);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--accent) 42%, transparent), transparent 56%),
-    var(--surface-2);
-  color: var(--accent);
-  font-size: 0.82rem;
-  letter-spacing: 0;
+  object-fit: contain;
 }
 
 .nav {
@@ -267,6 +261,8 @@ h3 {
   border-radius: var(--radius);
   color: var(--bg);
   background: var(--accent);
+  cursor: pointer;
+  font: inherit;
   font-weight: 800;
   text-decoration: none;
 }
@@ -281,6 +277,24 @@ h3 {
 .button:hover,
 .inline-links a:hover {
   transform: translateY(-1px);
+}
+
+.button.is-disabled {
+  color: var(--muted);
+  background: var(--surface-2);
+  border-color: var(--line);
+  cursor: not-allowed;
+}
+
+.button.is-disabled:hover {
+  transform: none;
+}
+
+.release-download {
+  width: 100%;
+  min-height: 72px;
+  margin: 0.35rem 0 1rem;
+  font-size: clamp(1.35rem, 4vw, 2rem);
 }
 
 .release-panel,
@@ -342,6 +356,17 @@ h3 {
 
 .module-context {
   padding: 1.2rem;
+}
+
+.server-recommendation-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.server-recommendation-card {
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
 }
 
 .section-head,
@@ -478,6 +503,30 @@ tr:last-child td {
   margin-top: 1rem;
 }
 
+.text-flow h3 {
+  margin-top: 1.2rem;
+}
+
+.text-flow ul,
+.text-flow ol {
+  color: var(--muted);
+}
+
+pre {
+  max-width: 100%;
+  margin: 1rem 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+code {
+  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9rem;
+}
+
 .status-list {
   display: grid;
   gap: 0.8rem;
@@ -528,6 +577,12 @@ tr:last-child td {
 
 .footer-inner a {
   color: var(--muted);
+}
+
+.footer-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
 }
 
 @media (max-width: 920px) {
