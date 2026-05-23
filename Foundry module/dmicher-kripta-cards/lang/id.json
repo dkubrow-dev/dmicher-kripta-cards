@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Pengguna Foundry Anda belum ditautkan ke Pemain Server di modul Kripta Cards. Harap hubungi Game Master.",
   "KRIPTA.GMOnly": "Tindakan ini hanya tersedia untuk Game Master.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Alamat server",
   "KRIPTA.Settings.TechAuthUsers.Name": "Pengguna teknis",
   "KRIPTA.Settings.PlayerBindings.Name": "Tautan pengguna Foundry ke pemain server",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta Cards",
   "KRIPTA.Settings.Menu.Label": "Pengaturan modul",
   "KRIPTA.Settings.Menu.Hint": "Koneksi API dan pengguna teknis.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Jika Anda belum memasang dan mengonfigurasi server konten untuk modul ini, buka ",
+  "KRIPTA.Settings.Help.ServerLink": "tautan ini",
+  "KRIPTA.Settings.Help.AfterServerLink": " untuk melakukannya. Untuk konfigurasi cepat, gunakan ",
+  "KRIPTA.Settings.Help.DocumentationLink": "dokumentasi",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Katalog Kartu",
   "KRIPTA.Window.CardDetails": "Kartu Katalog",
   "KRIPTA.Window.GiveCard": "Berikan Kartu",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Minta Kartu",
   "KRIPTA.Window.Settings": "Kripta Cards - Pengaturan",
   "KRIPTA.Window.UseCard": "Gunakan Kartu",
-
   "KRIPTA.Menu.Title": "Kripta Cards",
   "KRIPTA.Menu.Catalog": "Katalog Kartu",
   "KRIPTA.Menu.GetCard": "Minta Kartu",
   "KRIPTA.Menu.MyCards": "Kartu Saya",
   "KRIPTA.Menu.Players": "Kelola Pemain",
-
   "KRIPTA.Label.Category": "Kategori",
   "KRIPTA.Label.Mode": "Mode",
   "KRIPTA.Label.Card": "Kartu",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Reader",
   "KRIPTA.Label.Role": "Peran",
   "KRIPTA.Label.Binding": "Tautan",
-
   "KRIPTA.Role.GM": "Game Master",
   "KRIPTA.Role.Player": "Pemain",
   "KRIPTA.Status.InGame": "online",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "tidak ada kartu",
   "KRIPTA.Binding.NotBound": "pemain belum ditautkan, tautkan pemain.",
   "KRIPTA.Binding.CardsCountHint": "Jumlah jenis kartu yang diberikan, tidak termasuk duplikat",
-
   "KRIPTA.Button.Add": "Tambah",
   "KRIPTA.Button.Bind": "Tautkan",
   "KRIPTA.Button.Cancel": "Batal",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Ambil",
   "KRIPTA.Button.TestAuth": "Periksa pengguna teknis",
   "KRIPTA.Button.TestServer": "Periksa server",
-  "KRIPTA.Button.ThanksAuthor": "Ucapkan terima kasih kepada pembuat",
   "KRIPTA.Button.Unbind": "Lepas tautan",
   "KRIPTA.Button.Use": "Gunakan",
   "KRIPTA.Button.Yes": "Ya",
-
   "KRIPTA.Mode.Manual": "Pilih manual",
   "KRIPTA.Mode.Random": "Acak",
   "KRIPTA.Mode.Show": "Tampilkan",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Ubin",
   "KRIPTA.Placeholder.Search": "Cari",
   "KRIPTA.Select.NotSelected": "-- belum dipilih --",
-
   "KRIPTA.Template.EmptyCatalog": "Tidak ada kategori atau kartu yang terdaftar di server.",
   "KRIPTA.Template.MyCardsTitle": "Kartu pemain: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Kartu ini tidak lagi terdaftar di server.",
   "KRIPTA.Template.UseCardPrompt": "Kartu ini akan digunakan:",
-
   "KRIPTA.Card.FallbackName": "Kartu {number}",
   "KRIPTA.Card.FallbackAddress": "Kartu {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Kartu {level}/{number} tidak ada di katalog server saat ini.",
   "KRIPTA.Card.NotRegisteredDescription": "Kartu {level}/{number} tidak lagi terdaftar di server.",
   "KRIPTA.Level.FallbackName": "Level {level}",
   "KRIPTA.Level.MissingDescription": "Level ini ada di inventaris pemain, tetapi tidak ada di katalog server saat ini.",
-
   "KRIPTA.Chat.BlobReadFailed": "Gagal membaca blob",
   "KRIPTA.Chat.CardGivenTitle": "Kartu Diberikan",
   "KRIPTA.Chat.CardReceiveSubtitle": "Pemain {playerName} menerima kartu {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Permintaan Kartu Pilihan",
   "KRIPTA.Chat.RequestRandomTitle": "Permintaan Kartu Acak",
   "KRIPTA.Chat.ShowCardTitle": "Referensi Kartu",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Tautkan Pemain Server",
   "KRIPTA.Dialog.BindPlayer.Header": "Pilih pemain untuk {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "pengguna Foundry",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Hapus Pemain",
   "KRIPTA.Dialog.Player.DeleteWarning": "Menghapus pemain \"{playerName}\" tidak dapat dibatalkan. Masukkan \"{code}\" dan konfirmasi penghapusan.",
   "KRIPTA.Dialog.Count.TotalCards": "total kartu jenis ini - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "Level tidak valid untuk {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "Nomor tidak valid untuk {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "level kartu tidak valid: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "kesalahan tidak diketahui",
   "KRIPTA.Error.NameRequired": "Kolom Name wajib diisi.",
   "KRIPTA.Error.RegistryDeleteReturned": "server mengembalikan pemain di registri setelah penghapusan.",
-
   "KRIPTA.Notification.CardGiven": "Kartu diberikan.",
   "KRIPTA.Notification.CardUsed": "Kartu digunakan dan dihabiskan.",
   "KRIPTA.Notification.CardWrittenOff": "Kartu dihapus.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Gagal terhubung ke server. Periksa alamat, ketersediaan server, dan pengaturan CORS/HTTPS.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Gagal memeriksa server.",
   "KRIPTA.Notification.InvalidServerUrl": "Alamat server tidak valid: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "Tautan untuk tombol \"Ucapkan terima kasih kepada pembuat\" belum dikonfigurasi.",
   "KRIPTA.Notification.SettingsAccessDenied": "Bagian pengaturan Kripta Cards hanya tersedia untuk peran Game Master dan Assistant Game Master.",
   "KRIPTA.Notification.ServerCheckFailed": "Pemeriksaan server gagal",
   "KRIPTA.Notification.TechUserReader": "Reader",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Gagal memperbarui pemain",
   "KRIPTA.Notification.PlayerDeleteFailed": "Gagal menghapus pemain",
   "KRIPTA.Notification.CardRollFailed": "Gagal menerima kartu.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Ambil Kartu",
   "KRIPTA.Dialog.TakeCard.Message": "Pemain {playerName} akan kehilangan kartu {cardName}.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Berikan Kartu"

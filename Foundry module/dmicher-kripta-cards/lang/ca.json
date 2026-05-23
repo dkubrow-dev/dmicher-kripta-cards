@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "El teu participant de Foundry no està vinculat a cap jugador del servidor al mòdul Cartes de Kripta. Contacta amb el director de joc.",
   "KRIPTA.GMOnly": "Aquesta acció només està disponible per al director de joc.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Adreça del servidor",
   "KRIPTA.Settings.TechAuthUsers.Name": "Usuaris tècnics",
   "KRIPTA.Settings.PlayerBindings.Name": "Vincles dels participants amb els jugadors del servidor",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Cartes de Kripta",
   "KRIPTA.Settings.Menu.Label": "Configuració del mòdul",
   "KRIPTA.Settings.Menu.Hint": "Connexió a l'API i usuaris tècnics.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Si encara no heu instal·lat i configurat el servidor de contingut del mòdul, seguiu ",
+  "KRIPTA.Settings.Help.ServerLink": "aquest enllaç",
+  "KRIPTA.Settings.Help.AfterServerLink": " per fer-ho. Per a una configuració ràpida, feu servir la ",
+  "KRIPTA.Settings.Help.DocumentationLink": "documentació",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Catàleg de cartes",
   "KRIPTA.Window.CardDetails": "Carta del catàleg",
   "KRIPTA.Window.GiveCard": "Donar carta",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Obtenir carta",
   "KRIPTA.Window.Settings": "Cartes de Kripta - Configuració",
   "KRIPTA.Window.UseCard": "Utilitzar carta",
-
   "KRIPTA.Menu.Title": "Cartes de Kripta",
   "KRIPTA.Menu.Catalog": "Catàleg de cartes",
   "KRIPTA.Menu.GetCard": "Obtenir carta",
   "KRIPTA.Menu.MyCards": "Les meves cartes",
   "KRIPTA.Menu.Players": "Gestió de jugadors",
-
   "KRIPTA.Label.Category": "Categoria",
   "KRIPTA.Label.Mode": "Mode",
   "KRIPTA.Label.Card": "Carta",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Lector (Reader)",
   "KRIPTA.Label.Role": "Rol",
   "KRIPTA.Label.Binding": "Vincle",
-
   "KRIPTA.Role.GM": "Director de joc",
   "KRIPTA.Role.Player": "Jugador",
   "KRIPTA.Status.InGame": "en joc",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "cap carta",
   "KRIPTA.Binding.NotBound": "el jugador no està vinculat, selecciona un jugador.",
   "KRIPTA.Binding.CardsCountHint": "Nombre de tipus de cartes lliurades (no compta repetides)",
-
   "KRIPTA.Button.Add": "Afegir",
   "KRIPTA.Button.Bind": "Vincular",
   "KRIPTA.Button.Cancel": "Cancel·lar",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Retirar",
   "KRIPTA.Button.TestAuth": "Comprovar usuaris tècnics",
   "KRIPTA.Button.TestServer": "Comprovar servidor",
-  "KRIPTA.Button.ThanksAuthor": "Agrair a l'autor",
   "KRIPTA.Button.Unbind": "Desvincular",
   "KRIPTA.Button.Use": "Utilitzar",
   "KRIPTA.Button.Yes": "Sí",
-
   "KRIPTA.Mode.Manual": "A elecció",
   "KRIPTA.Mode.Random": "Aleatòria",
   "KRIPTA.Mode.Show": "Mostrar",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Rajoles",
   "KRIPTA.Placeholder.Search": "Cerca",
   "KRIPTA.Select.NotSelected": "-- no seleccionat --",
-
   "KRIPTA.Template.EmptyCatalog": "Al servidor no hi ha categories ni cartes registrades.",
   "KRIPTA.Template.MyCardsTitle": "Cartes del jugador: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Aquesta carta ja no està registrada al servidor.",
   "KRIPTA.Template.UseCardPrompt": "S'utilitzarà la carta:",
-
   "KRIPTA.Card.FallbackName": "Carta {number}",
   "KRIPTA.Card.FallbackAddress": "Carta {level}/{number}",
   "KRIPTA.Card.MissingDescription": "La carta {level}/{number} no és al catàleg actual del servidor.",
   "KRIPTA.Card.NotRegisteredDescription": "La carta {level}/{number} ja no està registrada al servidor.",
   "KRIPTA.Level.FallbackName": "Nivell {level}",
   "KRIPTA.Level.MissingDescription": "El nivell és a l'inventari del jugador, però no és al catàleg actual del servidor.",
-
   "KRIPTA.Chat.BlobReadFailed": "No s'ha pogut llegir el BLOB",
   "KRIPTA.Chat.CardGivenTitle": "Carta lliurada",
   "KRIPTA.Chat.CardReceiveSubtitle": "El jugador {playerName} rep la carta {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Sol·licitud de carta escollida",
   "KRIPTA.Chat.RequestRandomTitle": "Sol·licitud de carta aleatòria",
   "KRIPTA.Chat.ShowCardTitle": "Ajuda de la carta",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Vincular jugador del servidor",
   "KRIPTA.Dialog.BindPlayer.Header": "Seleccionar jugador per a {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "usuari de Foundry",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Eliminar jugador",
   "KRIPTA.Dialog.Player.DeleteWarning": "Eliminar el jugador \"{playerName}\" és irreversible. Escriu \"{code}\" i confirma l'eliminació.",
   "KRIPTA.Dialog.Count.TotalCards": "total de cartes d'aquest tipus - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "level incorrecte per a {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "number incorrecte per a {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "level de carta incorrecte: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "error desconegut",
   "KRIPTA.Error.NameRequired": "El camp del nom és obligatori.",
   "KRIPTA.Error.RegistryDeleteReturned": "el servidor ha retornat el jugador al registre després d'eliminar-lo.",
-
   "KRIPTA.Notification.CardGiven": "Carta lliurada.",
   "KRIPTA.Notification.CardUsed": "La carta s'ha utilitzat i s'ha donat de baixa.",
   "KRIPTA.Notification.CardWrittenOff": "La carta s'ha donat de baixa.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "No s'ha pogut connectar amb el servidor. Comprova l'adreça, la disponibilitat del servidor i la configuració CORS/HTTPS.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "No s'ha pogut comprovar el servidor.",
   "KRIPTA.Notification.InvalidServerUrl": "Adreça del servidor incorrecta: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "L'enllaç del botó «Agrair a l'autor» no està configurat.",
   "KRIPTA.Notification.SettingsAccessDenied": "La secció de configuració «Cartes de Kripta» només és accessible per als rols «Director» i «Assistent del director».",
   "KRIPTA.Notification.ServerCheckFailed": "La comprovació del servidor ha fallat",
   "KRIPTA.Notification.TechUserReader": "Lector",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "No s'ha pogut actualitzar el jugador",
   "KRIPTA.Notification.PlayerDeleteFailed": "No s'ha pogut eliminar el jugador",
   "KRIPTA.Notification.CardRollFailed": "No s'ha pogut obtenir la carta.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Retirar carta",
   "KRIPTA.Dialog.TakeCard.Message": "El jugador {playerName} perdrà la carta {cardName}.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Donar carta"

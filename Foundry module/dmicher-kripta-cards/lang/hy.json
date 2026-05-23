@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Ձեր Foundry մասնակիցը կապված չէ Կրիպտայի քարտերի մոդուլի սերվերի խաղացողի հետ։ Դիմեք խաղավարին։",
   "KRIPTA.GMOnly": "Այս գործողությունը հասանելի է միայն խաղավարին։",
-
   "KRIPTA.Settings.ServerUrl.Name": "Սերվերի հասցե",
   "KRIPTA.Settings.TechAuthUsers.Name": "Տեխնիկական օգտատերեր",
   "KRIPTA.Settings.PlayerBindings.Name": "Foundry մասնակիցների կապերը սերվերի խաղացողների հետ",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Կրիպտայի քարտեր",
   "KRIPTA.Settings.Menu.Label": "Մոդուլի կարգավորում",
   "KRIPTA.Settings.Menu.Hint": "API-ի միացում և տեխնիկական օգտատերեր։",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Եթե դեռ չեք տեղադրել և կարգավորել մոդուլի բովանդակության սերվերը, անցեք ",
+  "KRIPTA.Settings.Help.ServerLink": "այս հղումով",
+  "KRIPTA.Settings.Help.AfterServerLink": "՝ դա անելու համար։ Արագ կարգավորման համար օգտագործեք ",
+  "KRIPTA.Settings.Help.DocumentationLink": "փաստաթղթերը",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": "։",
   "KRIPTA.Window.Catalog": "Քարտերի կատալոգ",
   "KRIPTA.Window.CardDetails": "Կատալոգի քարտ",
   "KRIPTA.Window.GiveCard": "Տալ քարտ",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Ստանալ քարտ",
   "KRIPTA.Window.Settings": "Կրիպտայի քարտեր - Կարգավորումներ",
   "KRIPTA.Window.UseCard": "Օգտագործել քարտը",
-
   "KRIPTA.Menu.Title": "Կրիպտայի քարտեր",
   "KRIPTA.Menu.Catalog": "Քարտերի կատալոգ",
   "KRIPTA.Menu.GetCard": "Ստանալ քարտ",
   "KRIPTA.Menu.MyCards": "Իմ քարտերը",
   "KRIPTA.Menu.Players": "Խաղացողների կառավարում",
-
   "KRIPTA.Label.Category": "Կատեգորիա",
   "KRIPTA.Label.Mode": "Ռեժիմ",
   "KRIPTA.Label.Card": "Քարտ",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Ընթերցող (Reader)",
   "KRIPTA.Label.Role": "Դեր",
   "KRIPTA.Label.Binding": "Կապ",
-
   "KRIPTA.Role.GM": "Խաղավար",
   "KRIPTA.Role.Player": "Խաղացող",
   "KRIPTA.Status.InGame": "խաղում է",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "քարտեր չկան",
   "KRIPTA.Binding.NotBound": "խաղացողը կապված չէ, ընտրեք խաղացող։",
   "KRIPTA.Binding.CardsCountHint": "Տրված քարտերի տեսակների քանակը (կրկնվողները հաշվի չեն առնվում)",
-
   "KRIPTA.Button.Add": "Ավելացնել",
   "KRIPTA.Button.Bind": "Կապել",
   "KRIPTA.Button.Cancel": "Չեղարկել",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Վերցնել",
   "KRIPTA.Button.TestAuth": "Ստուգել տեխնիկական օգտատերերին",
   "KRIPTA.Button.TestServer": "Ստուգել սերվերը",
-  "KRIPTA.Button.ThanksAuthor": "Շնորհակալություն հայտնել հեղինակին",
   "KRIPTA.Button.Unbind": "Անջատել կապը",
   "KRIPTA.Button.Use": "Օգտագործել",
   "KRIPTA.Button.Yes": "Այո",
-
   "KRIPTA.Mode.Manual": "Ընտրությամբ",
   "KRIPTA.Mode.Random": "Պատահական",
   "KRIPTA.Mode.Show": "Ցույց տալ",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Սալիկներ",
   "KRIPTA.Placeholder.Search": "Որոնում",
   "KRIPTA.Select.NotSelected": "-- ընտրված չէ --",
-
   "KRIPTA.Template.EmptyCatalog": "Սերվերում գրանցված կատեգորիաներ կամ քարտեր չկան։",
   "KRIPTA.Template.MyCardsTitle": "Խաղացողի քարտեր՝ {playerName}",
   "KRIPTA.Template.UseCardMissing": "Այս քարտը այլևս գրանցված չէ սերվերում։",
   "KRIPTA.Template.UseCardPrompt": "Կօգտագործվի քարտը՝",
-
   "KRIPTA.Card.FallbackName": "Քարտ {number}",
   "KRIPTA.Card.FallbackAddress": "Քարտ {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Քարտը {level}/{number} բացակայում է սերվերի ընթացիկ կատալոգում։",
   "KRIPTA.Card.NotRegisteredDescription": "Քարտը {level}/{number} այլևս գրանցված չէ սերվերում։",
   "KRIPTA.Level.FallbackName": "Մակարդակ {level}",
   "KRIPTA.Level.MissingDescription": "Մակարդակը կա խաղացողի գույքագրում, բայց բացակայում է սերվերի ընթացիկ կատալոգում։",
-
   "KRIPTA.Chat.BlobReadFailed": "Չհաջողվեց կարդալ BLOB-ը",
   "KRIPTA.Chat.CardGivenTitle": "Քարտը տրված է",
   "KRIPTA.Chat.CardReceiveSubtitle": "Խաղացող {playerName}-ը ստանում է {cardSubtitle} քարտը",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Ընտրված քարտի հարցում",
   "KRIPTA.Chat.RequestRandomTitle": "Պատահական քարտի հարցում",
   "KRIPTA.Chat.ShowCardTitle": "Քարտի տեղեկանք",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Կապել սերվերի խաղացողին",
   "KRIPTA.Dialog.BindPlayer.Header": "Ընտրել խաղացող {foundryUserName}-ի համար",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry օգտատեր",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Ջնջել խաղացողին",
   "KRIPTA.Dialog.Player.DeleteWarning": "\"{playerName}\" խաղացողի ջնջումը անշրջելի է։ Մուտքագրեք \"{code}\" և հաստատեք ջնջումը։",
   "KRIPTA.Dialog.Count.TotalCards": "այս տեսակի քարտերի ընդհանուր քանակը՝ {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "{context}-ի համար սխալ level՝ {level}",
   "KRIPTA.Error.InvalidCardNumber": "{context}-ի համար սխալ number՝ {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "քարտի սխալ level՝ {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "անհայտ սխալ",
   "KRIPTA.Error.NameRequired": "Անվան դաշտը պարտադիր է։",
   "KRIPTA.Error.RegistryDeleteReturned": "սերվերը ջնջումից հետո խաղացողին վերադարձրեց ռեեստրում։",
-
   "KRIPTA.Notification.CardGiven": "Քարտը տրված է։",
   "KRIPTA.Notification.CardUsed": "Քարտը օգտագործվել և դուրս է գրվել։",
   "KRIPTA.Notification.CardWrittenOff": "Քարտը դուրս է գրվել։",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Չհաջողվեց միանալ սերվերին։ Ստուգեք հասցեն, սերվերի հասանելիությունը և CORS/HTTPS կարգավորումները։",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Չհաջողվեց ստուգել սերվերը։",
   "KRIPTA.Notification.InvalidServerUrl": "Սերվերի սխալ հասցե՝ {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "«Շնորհակալություն հայտնել հեղինակին» կոճակի հղումը կարգավորված չէ։",
   "KRIPTA.Notification.SettingsAccessDenied": "«Կրիպտայի քարտեր» կարգավորումների բաժինը հասանելի է միայն «Վարող» և «Վարողի օգնական» դերերին։",
   "KRIPTA.Notification.ServerCheckFailed": "Սերվերի ստուգումը ձախողվեց",
   "KRIPTA.Notification.TechUserReader": "Ընթերցող",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Չհաջողվեց թարմացնել խաղացողին",
   "KRIPTA.Notification.PlayerDeleteFailed": "Չհաջողվեց ջնջել խաղացողին",
   "KRIPTA.Notification.CardRollFailed": "Չհաջողվեց ստանալ քարտը։",
-
   "KRIPTA.Dialog.TakeCard.Title": "Վերցնել քարտը",
   "KRIPTA.Dialog.TakeCard.Message": "Խաղացող {playerName}-ը կզրկվի {cardName} քարտից։",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Տալ քարտ"

@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "你的 Foundry 用户尚未在 Kripta Cards 模块中绑定服务器玩家。请联系游戏主持人。",
   "KRIPTA.GMOnly": "此操作仅游戏主持人可用。",
-
   "KRIPTA.Settings.ServerUrl.Name": "服务器地址",
   "KRIPTA.Settings.TechAuthUsers.Name": "技术用户",
   "KRIPTA.Settings.PlayerBindings.Name": "Foundry 用户与服务器玩家绑定",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta Cards",
   "KRIPTA.Settings.Menu.Label": "模块设置",
   "KRIPTA.Settings.Menu.Hint": "API 连接和技术用户。",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "如果你还没有为模块安装并配置内容服务器，请点击",
+  "KRIPTA.Settings.Help.ServerLink": "此链接",
+  "KRIPTA.Settings.Help.AfterServerLink": "完成操作。要快速配置，请使用",
+  "KRIPTA.Settings.Help.DocumentationLink": "文档",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": "。",
   "KRIPTA.Window.Catalog": "卡牌目录",
   "KRIPTA.Window.CardDetails": "目录卡牌",
   "KRIPTA.Window.GiveCard": "发放卡牌",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "请求卡牌",
   "KRIPTA.Window.Settings": "Kripta Cards - 设置",
   "KRIPTA.Window.UseCard": "使用卡牌",
-
   "KRIPTA.Menu.Title": "Kripta Cards",
   "KRIPTA.Menu.Catalog": "卡牌目录",
   "KRIPTA.Menu.GetCard": "请求卡牌",
   "KRIPTA.Menu.MyCards": "我的卡牌",
   "KRIPTA.Menu.Players": "管理玩家",
-
   "KRIPTA.Label.Category": "类别",
   "KRIPTA.Label.Mode": "模式",
   "KRIPTA.Label.Card": "卡牌",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Reader",
   "KRIPTA.Label.Role": "角色",
   "KRIPTA.Label.Binding": "绑定",
-
   "KRIPTA.Role.GM": "游戏主持人",
   "KRIPTA.Role.Player": "玩家",
   "KRIPTA.Status.InGame": "游戏中",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "没有卡牌",
   "KRIPTA.Binding.NotBound": "玩家未绑定，请选择玩家。",
   "KRIPTA.Binding.CardsCountHint": "已发放的卡牌类型数量，不包含重复项",
-
   "KRIPTA.Button.Add": "添加",
   "KRIPTA.Button.Bind": "绑定",
   "KRIPTA.Button.Cancel": "取消",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "收回",
   "KRIPTA.Button.TestAuth": "检查技术用户",
   "KRIPTA.Button.TestServer": "检查服务器",
-  "KRIPTA.Button.ThanksAuthor": "感谢作者",
   "KRIPTA.Button.Unbind": "解除绑定",
   "KRIPTA.Button.Use": "使用",
   "KRIPTA.Button.Yes": "是",
-
   "KRIPTA.Mode.Manual": "手动选择",
   "KRIPTA.Mode.Random": "随机",
   "KRIPTA.Mode.Show": "展示",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "图块",
   "KRIPTA.Placeholder.Search": "搜索",
   "KRIPTA.Select.NotSelected": "-- 未选择 --",
-
   "KRIPTA.Template.EmptyCatalog": "服务器上没有已注册的类别或卡牌。",
   "KRIPTA.Template.MyCardsTitle": "玩家卡牌：{playerName}",
   "KRIPTA.Template.UseCardMissing": "此卡牌已不再在服务器上注册。",
   "KRIPTA.Template.UseCardPrompt": "将使用此卡牌：",
-
   "KRIPTA.Card.FallbackName": "卡牌 {number}",
   "KRIPTA.Card.FallbackAddress": "卡牌 {level}/{number}",
   "KRIPTA.Card.MissingDescription": "卡牌 {level}/{number} 不在当前服务器目录中。",
   "KRIPTA.Card.NotRegisteredDescription": "卡牌 {level}/{number} 已不再在服务器上注册。",
   "KRIPTA.Level.FallbackName": "等级 {level}",
   "KRIPTA.Level.MissingDescription": "此等级存在于玩家库存中，但不在当前服务器目录中。",
-
   "KRIPTA.Chat.BlobReadFailed": "无法读取 blob",
   "KRIPTA.Chat.CardGivenTitle": "卡牌已发放",
   "KRIPTA.Chat.CardReceiveSubtitle": "玩家 {playerName} 获得卡牌 {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "指定卡牌请求",
   "KRIPTA.Chat.RequestRandomTitle": "随机卡牌请求",
   "KRIPTA.Chat.ShowCardTitle": "卡牌参考",
-
   "KRIPTA.Dialog.BindPlayer.Title": "绑定服务器玩家",
   "KRIPTA.Dialog.BindPlayer.Header": "为 {foundryUserName} 选择玩家",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry 用户",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "删除玩家",
   "KRIPTA.Dialog.Player.DeleteWarning": "删除玩家 \"{playerName}\" 后无法撤销。请输入 {code} 并确认删除。",
   "KRIPTA.Dialog.Count.TotalCards": "此类型卡牌总数 - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "{context} 的等级无效：{level}",
   "KRIPTA.Error.InvalidCardNumber": "{context} 的编号无效：{number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "卡牌等级无效：{level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "未知错误",
   "KRIPTA.Error.NameRequired": "api 400：Name 字段为必填项。",
   "KRIPTA.Error.RegistryDeleteReturned": "删除后服务器仍在登记表中返回了该玩家。",
-
   "KRIPTA.Notification.CardGiven": "卡牌已发放。",
   "KRIPTA.Notification.CardUsed": "卡牌已使用并消耗。",
   "KRIPTA.Notification.CardWrittenOff": "卡牌已移除。",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "无法连接到服务器。请检查地址、服务器可用性以及 CORS/HTTPS 设置。",
   "KRIPTA.Notification.ServerCheckFailedFallback": "无法检查服务器。",
   "KRIPTA.Notification.InvalidServerUrl": "服务器地址无效：{url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "\"感谢作者\" 按钮的链接未配置。",
   "KRIPTA.Notification.SettingsAccessDenied": "Kripta Cards 设置仅对游戏主持人和助理游戏主持人角色开放。",
   "KRIPTA.Notification.ServerCheckFailed": "服务器检查失败",
   "KRIPTA.Notification.TechUserReader": "Reader",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "无法更新玩家",
   "KRIPTA.Notification.PlayerDeleteFailed": "无法删除玩家",
   "KRIPTA.Notification.CardRollFailed": "无法获得卡牌。",
-
   "KRIPTA.Dialog.TakeCard.Title": "收回卡牌",
   "KRIPTA.Dialog.TakeCard.Message": "玩家 {playerName} 将失去卡牌 {cardName}。",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "发放卡牌"

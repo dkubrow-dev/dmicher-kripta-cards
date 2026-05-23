@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "आपका Foundry उपयोगकर्ता Kripta Cards मॉड्यूल में किसी सर्वर खिलाड़ी से लिंक नहीं है। कृपया गेम मास्टर से संपर्क करें।",
   "KRIPTA.GMOnly": "यह क्रिया केवल गेम मास्टर के लिए उपलब्ध है।",
-
   "KRIPTA.Settings.ServerUrl.Name": "सर्वर पता",
   "KRIPTA.Settings.TechAuthUsers.Name": "तकनीकी उपयोगकर्ता",
   "KRIPTA.Settings.PlayerBindings.Name": "Foundry उपयोगकर्ताओं और सर्वर खिलाड़ियों की लिंकिंग",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta Cards",
   "KRIPTA.Settings.Menu.Label": "मॉड्यूल सेटिंग्स",
   "KRIPTA.Settings.Menu.Hint": "API कनेक्शन और तकनीकी उपयोगकर्ता।",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "यदि आपने मॉड्यूल के लिए कंटेंट सर्वर अभी तक इंस्टॉल और कॉन्फ़िगर नहीं किया है, तो ऐसा करने के लिए ",
+  "KRIPTA.Settings.Help.ServerLink": "इस लिंक",
+  "KRIPTA.Settings.Help.AfterServerLink": " पर जाएँ। त्वरित कॉन्फ़िगरेशन के लिए ",
+  "KRIPTA.Settings.Help.DocumentationLink": "दस्तावेज़",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " का उपयोग करें।",
   "KRIPTA.Window.Catalog": "कार्ड कैटलॉग",
   "KRIPTA.Window.CardDetails": "कैटलॉग कार्ड",
   "KRIPTA.Window.GiveCard": "कार्ड दें",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "कार्ड अनुरोध करें",
   "KRIPTA.Window.Settings": "Kripta Cards - सेटिंग्स",
   "KRIPTA.Window.UseCard": "कार्ड उपयोग करें",
-
   "KRIPTA.Menu.Title": "Kripta Cards",
   "KRIPTA.Menu.Catalog": "कार्ड कैटलॉग",
   "KRIPTA.Menu.GetCard": "कार्ड अनुरोध करें",
   "KRIPTA.Menu.MyCards": "मेरे कार्ड",
   "KRIPTA.Menu.Players": "खिलाड़ी प्रबंधित करें",
-
   "KRIPTA.Label.Category": "श्रेणी",
   "KRIPTA.Label.Mode": "मोड",
   "KRIPTA.Label.Card": "कार्ड",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Reader",
   "KRIPTA.Label.Role": "भूमिका",
   "KRIPTA.Label.Binding": "लिंक",
-
   "KRIPTA.Role.GM": "गेम मास्टर",
   "KRIPTA.Role.Player": "खिलाड़ी",
   "KRIPTA.Status.InGame": "खेल में",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "कोई कार्ड नहीं",
   "KRIPTA.Binding.NotBound": "खिलाड़ी लिंक नहीं है, खिलाड़ी चुनें।",
   "KRIPTA.Binding.CardsCountHint": "जारी किए गए कार्ड प्रकारों की संख्या, डुप्लिकेट को छोड़कर",
-
   "KRIPTA.Button.Add": "जोड़ें",
   "KRIPTA.Button.Bind": "लिंक करें",
   "KRIPTA.Button.Cancel": "रद्द करें",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "ले लें",
   "KRIPTA.Button.TestAuth": "तकनीकी उपयोगकर्ता जाँचें",
   "KRIPTA.Button.TestServer": "सर्वर जाँचें",
-  "KRIPTA.Button.ThanksAuthor": "लेखक को धन्यवाद दें",
   "KRIPTA.Button.Unbind": "लिंक हटाएँ",
   "KRIPTA.Button.Use": "उपयोग करें",
   "KRIPTA.Button.Yes": "हाँ",
-
   "KRIPTA.Mode.Manual": "मैन्युअल रूप से चुनें",
   "KRIPTA.Mode.Random": "यादृच्छिक",
   "KRIPTA.Mode.Show": "दिखाएँ",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "टाइलें",
   "KRIPTA.Placeholder.Search": "खोजें",
   "KRIPTA.Select.NotSelected": "-- चयनित नहीं --",
-
   "KRIPTA.Template.EmptyCatalog": "सर्वर पर कोई पंजीकृत श्रेणी या कार्ड नहीं है।",
   "KRIPTA.Template.MyCardsTitle": "खिलाड़ी के कार्ड: {playerName}",
   "KRIPTA.Template.UseCardMissing": "यह कार्ड अब सर्वर पर पंजीकृत नहीं है।",
   "KRIPTA.Template.UseCardPrompt": "यह कार्ड उपयोग किया जाएगा:",
-
   "KRIPTA.Card.FallbackName": "कार्ड {number}",
   "KRIPTA.Card.FallbackAddress": "कार्ड {level}/{number}",
   "KRIPTA.Card.MissingDescription": "कार्ड {level}/{number} वर्तमान सर्वर कैटलॉग में नहीं है।",
   "KRIPTA.Card.NotRegisteredDescription": "कार्ड {level}/{number} अब सर्वर पर पंजीकृत नहीं है।",
   "KRIPTA.Level.FallbackName": "स्तर {level}",
   "KRIPTA.Level.MissingDescription": "यह स्तर खिलाड़ी की इन्वेंटरी में मौजूद है, लेकिन वर्तमान सर्वर कैटलॉग में नहीं है।",
-
   "KRIPTA.Chat.BlobReadFailed": "blob पढ़ने में विफल",
   "KRIPTA.Chat.CardGivenTitle": "कार्ड दिया गया",
   "KRIPTA.Chat.CardReceiveSubtitle": "खिलाड़ी {playerName} को कार्ड {cardSubtitle} मिलता है",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "चयनित कार्ड अनुरोध",
   "KRIPTA.Chat.RequestRandomTitle": "यादृच्छिक कार्ड अनुरोध",
   "KRIPTA.Chat.ShowCardTitle": "कार्ड संदर्भ",
-
   "KRIPTA.Dialog.BindPlayer.Title": "सर्वर खिलाड़ी लिंक करें",
   "KRIPTA.Dialog.BindPlayer.Header": "{foundryUserName} के लिए खिलाड़ी चुनें",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry उपयोगकर्ता",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "खिलाड़ी हटाएँ",
   "KRIPTA.Dialog.Player.DeleteWarning": "खिलाड़ी \"{playerName}\" को हटाना वापस नहीं किया जा सकता। {code} दर्ज करें और हटाने की पुष्टि करें।",
   "KRIPTA.Dialog.Count.TotalCards": "इस प्रकार के कुल कार्ड - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "{context} के लिए अमान्य स्तर: {level}",
   "KRIPTA.Error.InvalidCardNumber": "{context} के लिए अमान्य संख्या: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "अमान्य कार्ड स्तर: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "अज्ञात त्रुटि",
   "KRIPTA.Error.NameRequired": "api 400: Name फ़ील्ड आवश्यक है।",
   "KRIPTA.Error.RegistryDeleteReturned": "हटाने के बाद सर्वर ने खिलाड़ी को रजिस्टर में फिर लौटा दिया।",
-
   "KRIPTA.Notification.CardGiven": "कार्ड दिया गया।",
   "KRIPTA.Notification.CardUsed": "कार्ड उपयोग और खर्च किया गया।",
   "KRIPTA.Notification.CardWrittenOff": "कार्ड हटाया गया।",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "सर्वर से कनेक्ट नहीं हो सका। पता, सर्वर उपलब्धता और CORS/HTTPS सेटिंग्स जाँचें।",
   "KRIPTA.Notification.ServerCheckFailedFallback": "सर्वर की जाँच नहीं हो सकी।",
   "KRIPTA.Notification.InvalidServerUrl": "अमान्य सर्वर पता: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "\"लेखक को धन्यवाद दें\" बटन का लिंक कॉन्फ़िगर नहीं है।",
   "KRIPTA.Notification.SettingsAccessDenied": "Kripta Cards सेटिंग्स अनुभाग केवल गेम मास्टर और सहायक गेम मास्टर भूमिकाओं के लिए उपलब्ध है।",
   "KRIPTA.Notification.ServerCheckFailed": "सर्वर जाँच विफल",
   "KRIPTA.Notification.TechUserReader": "Reader",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "खिलाड़ी अपडेट नहीं किया जा सका",
   "KRIPTA.Notification.PlayerDeleteFailed": "खिलाड़ी हटाया नहीं जा सका",
   "KRIPTA.Notification.CardRollFailed": "कार्ड प्राप्त नहीं हो सका।",
-
   "KRIPTA.Dialog.TakeCard.Title": "कार्ड ले लें",
   "KRIPTA.Dialog.TakeCard.Message": "खिलाड़ी {playerName} कार्ड {cardName} खो देगा।",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "कार्ड दें"

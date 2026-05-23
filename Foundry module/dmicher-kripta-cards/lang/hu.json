@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "A Foundry-résztvevőd nincs összekapcsolva egy szerverjátékossal a Kripta kártyák modulban. Fordulj a játékmesterhez.",
   "KRIPTA.GMOnly": "Ez a művelet csak a játékmester számára érhető el.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Szerver címe",
   "KRIPTA.Settings.TechAuthUsers.Name": "Technikai felhasználók",
   "KRIPTA.Settings.PlayerBindings.Name": "Foundry-résztvevők összekapcsolása szerverjátékosokkal",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta kártyák",
   "KRIPTA.Settings.Menu.Label": "Modul beállítása",
   "KRIPTA.Settings.Menu.Hint": "API-kapcsolat és technikai felhasználók.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Ha még nem telepítette és nem állította be a modul tartalomszerverét, kövesse ",
+  "KRIPTA.Settings.Help.ServerLink": "ezt a hivatkozást",
+  "KRIPTA.Settings.Help.AfterServerLink": " a művelethez. A gyors beállításhoz használja a ",
+  "KRIPTA.Settings.Help.DocumentationLink": "dokumentációt",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Kártyakatalógus",
   "KRIPTA.Window.CardDetails": "Katalóguskártya",
   "KRIPTA.Window.GiveCard": "Kártya kiadása",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Kártya szerzése",
   "KRIPTA.Window.Settings": "Kripta kártyák - Beállítások",
   "KRIPTA.Window.UseCard": "Kártya használata",
-
   "KRIPTA.Menu.Title": "Kripta kártyák",
   "KRIPTA.Menu.Catalog": "Kártyakatalógus",
   "KRIPTA.Menu.GetCard": "Kártya szerzése",
   "KRIPTA.Menu.MyCards": "Saját kártyáim",
   "KRIPTA.Menu.Players": "Játékosok kezelése",
-
   "KRIPTA.Label.Category": "Kategória",
   "KRIPTA.Label.Mode": "Mód",
   "KRIPTA.Label.Card": "Kártya",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Olvasó (Reader)",
   "KRIPTA.Label.Role": "Szerep",
   "KRIPTA.Label.Binding": "Összekapcsolás",
-
   "KRIPTA.Role.GM": "Játékmester",
   "KRIPTA.Role.Player": "Játékos",
   "KRIPTA.Status.InGame": "játékban",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "nincs kártya",
   "KRIPTA.Binding.NotBound": "a játékos nincs összekapcsolva, válassz játékost.",
   "KRIPTA.Binding.CardsCountHint": "A kiadott kártyatípusok száma (az ismétlődők nélkül)",
-
   "KRIPTA.Button.Add": "Hozzáadás",
   "KRIPTA.Button.Bind": "Összekapcsolás",
   "KRIPTA.Button.Cancel": "Mégse",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Elvétel",
   "KRIPTA.Button.TestAuth": "Technikai felhasználók ellenőrzése",
   "KRIPTA.Button.TestServer": "Szerver ellenőrzése",
-  "KRIPTA.Button.ThanksAuthor": "Köszönet a szerzőnek",
   "KRIPTA.Button.Unbind": "Kapcsolat törlése",
   "KRIPTA.Button.Use": "Használat",
   "KRIPTA.Button.Yes": "Igen",
-
   "KRIPTA.Mode.Manual": "Választható",
   "KRIPTA.Mode.Random": "Véletlenszerű",
   "KRIPTA.Mode.Show": "Megjelenítés",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Csempék",
   "KRIPTA.Placeholder.Search": "Keresés",
   "KRIPTA.Select.NotSelected": "-- nincs kiválasztva --",
-
   "KRIPTA.Template.EmptyCatalog": "A szerveren nincs regisztrált kategória vagy kártya.",
   "KRIPTA.Template.MyCardsTitle": "Játékos kártyái: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Ez a kártya már nincs regisztrálva a szerveren.",
   "KRIPTA.Template.UseCardPrompt": "A következő kártya lesz használva:",
-
   "KRIPTA.Card.FallbackName": "Kártya {number}",
   "KRIPTA.Card.FallbackAddress": "Kártya {level}/{number}",
   "KRIPTA.Card.MissingDescription": "A(z) {level}/{number} kártya hiányzik a szerver aktuális katalógusából.",
   "KRIPTA.Card.NotRegisteredDescription": "A(z) {level}/{number} kártya már nincs regisztrálva a szerveren.",
   "KRIPTA.Level.FallbackName": "Szint {level}",
   "KRIPTA.Level.MissingDescription": "A szint szerepel a játékos készletében, de hiányzik a szerver aktuális katalógusából.",
-
   "KRIPTA.Chat.BlobReadFailed": "A BLOB beolvasása nem sikerült",
   "KRIPTA.Chat.CardGivenTitle": "Kártya kiadva",
   "KRIPTA.Chat.CardReceiveSubtitle": "{playerName} játékos megkapja a(z) {cardSubtitle} kártyát",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Kiválasztott kártya kérése",
   "KRIPTA.Chat.RequestRandomTitle": "Véletlen kártya kérése",
   "KRIPTA.Chat.ShowCardTitle": "Kártya súgója",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Szerverjátékos összekapcsolása",
   "KRIPTA.Dialog.BindPlayer.Header": "Játékos kiválasztása ehhez: {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry-felhasználó",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Játékos törlése",
   "KRIPTA.Dialog.Player.DeleteWarning": "A(z) \"{playerName}\" játékos törlése visszavonhatatlan. Írd be ezt: \"{code}\", majd erősítsd meg a törlést.",
   "KRIPTA.Dialog.Count.TotalCards": "ebből a típusból összesen ennyi kártya van - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "Érvénytelen level ehhez: {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "Érvénytelen number ehhez: {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "érvénytelen kártya-level: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "ismeretlen hiba",
   "KRIPTA.Error.NameRequired": "A név mező kötelező.",
   "KRIPTA.Error.RegistryDeleteReturned": "a szerver törlés után visszaadta a játékost a nyilvántartásban.",
-
   "KRIPTA.Notification.CardGiven": "A kártya kiadva.",
   "KRIPTA.Notification.CardUsed": "A kártya használva és leírva.",
   "KRIPTA.Notification.CardWrittenOff": "A kártya leírva.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Nem sikerült csatlakozni a szerverhez. Ellenőrizd a címet, a szerver elérhetőségét és a CORS/HTTPS beállításokat.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Nem sikerült ellenőrizni a szervert.",
   "KRIPTA.Notification.InvalidServerUrl": "Érvénytelen szervercím: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "A „Köszönet a szerzőnek” gomb hivatkozása nincs beállítva.",
   "KRIPTA.Notification.SettingsAccessDenied": "A „Kripta kártyák” beállítási rész csak a „Játékmester” és „Játékmester-asszisztens” szerepeknek érhető el.",
   "KRIPTA.Notification.ServerCheckFailed": "A szerver ellenőrzése sikertelen",
   "KRIPTA.Notification.TechUserReader": "Olvasó",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Nem sikerült frissíteni a játékost",
   "KRIPTA.Notification.PlayerDeleteFailed": "Nem sikerült törölni a játékost",
   "KRIPTA.Notification.CardRollFailed": "Nem sikerült kártyát szerezni.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Kártya elvétele",
   "KRIPTA.Dialog.TakeCard.Message": "{playerName} játékos elveszíti a(z) {cardName} kártyát.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Kártya kiadása"

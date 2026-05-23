@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Уэ уи Foundry къытетхащӀэ Крипта картэхэм я модулым серверым и игрокым къыхэкӀыпӀэ хуэпщӀа нэхъыщхьэ. ГъэмпӀэгъуэтыжьым пэжэгъу.",
   "KRIPTA.GMOnly": "Мы гъэхъуатэр гъэмпӀэгъуэтыжьым папщӀэ фӀэкӀа щыӀэ.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Серверым и адрес",
   "KRIPTA.Settings.TechAuthUsers.Name": "Техникэ хэрэглэгчхэр",
   "KRIPTA.Settings.PlayerBindings.Name": "Foundry къытетхащӀэхэр серверым и игрокхэмкӀэ къыхэкӀыпӀэ",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Крипта картэхэр",
   "KRIPTA.Settings.Menu.Label": "Модулым и настройкэ",
   "KRIPTA.Settings.Menu.Hint": "API-м къыхэкӀыпӀэ, техникэ хэрэглэгчхэр.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Модулым и контент-серверыр псори къызэралъхьагъэуи къызэрыгъэпсэлъэгъуэуи щымыӀэмэ, ар зэрагъэзэщӀэным папщӀэ ",
+  "KRIPTA.Settings.Help.ServerLink": "мы ссылкэм",
+  "KRIPTA.Settings.Help.AfterServerLink": " техьэ. Псэущхьэу къэгъэпсэлъэгъуэн папщӀэ ",
+  "KRIPTA.Settings.Help.DocumentationLink": "документацэм",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " фэдэӀу.",
   "KRIPTA.Window.Catalog": "Картэхэм я каталог",
   "KRIPTA.Window.CardDetails": "Каталогым и картэ",
   "KRIPTA.Window.GiveCard": "Картэ етын",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Картэ къэхьын",
   "KRIPTA.Window.Settings": "Крипта картэхэр - Настройкэхэр",
   "KRIPTA.Window.UseCard": "Картэр лъэпкъын",
-
   "KRIPTA.Menu.Title": "Крипта картэхэр",
   "KRIPTA.Menu.Catalog": "Картэхэм я каталог",
   "KRIPTA.Menu.GetCard": "Картэ къэхьын",
   "KRIPTA.Menu.MyCards": "Си картэхэр",
   "KRIPTA.Menu.Players": "ИгрокхэмкӀэ идарэ",
-
   "KRIPTA.Label.Category": "Категориэ",
   "KRIPTA.Label.Mode": "Режим",
   "KRIPTA.Label.Card": "Картэ",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Еджэ (Reader)",
   "KRIPTA.Label.Role": "Роль",
   "KRIPTA.Label.Binding": "КъыхэкӀыпӀэ",
-
   "KRIPTA.Role.GM": "ГъэмпӀэгъуэтыжь",
   "KRIPTA.Role.Player": "Игрок",
   "KRIPTA.Status.InGame": "гъэмпӀэгъуэтым",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "картэ щыӀэкъым",
   "KRIPTA.Binding.NotBound": "игрокыр къыхэкӀыпӀэ хуэпщӀа нэхъыщхьэ, игрокыр къыхэх.",
   "KRIPTA.Binding.CardsCountHint": "Етахэ картэхэм я теплъэхэр (зэхуэдэхэр хьисап къыхэхынкъым)",
-
   "KRIPTA.Button.Add": "Къытехьэ",
   "KRIPTA.Button.Bind": "КъыхэкӀыпӀэ хуэпщӀын",
   "KRIPTA.Button.Cancel": "Гъэунэхъын",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Къэщтэн",
   "KRIPTA.Button.TestAuth": "Техникэ хэрэглэгчхэр къызэрыкӀын",
   "KRIPTA.Button.TestServer": "Серверыр къызэрыкӀын",
-  "KRIPTA.Button.ThanksAuthor": "Авторым фӀыщӀэ хуэфащэ",
   "KRIPTA.Button.Unbind": "КъыхэкӀыпӀэр гъэунэхъын",
   "KRIPTA.Button.Use": "Лъэпкъын",
   "KRIPTA.Button.Yes": "Ауэ",
-
   "KRIPTA.Mode.Manual": "КъыхэхыкӀэ",
   "KRIPTA.Mode.Random": "Случайнэ",
   "KRIPTA.Mode.Show": "Къегъэлъагъуэн",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Плиткэхэр",
   "KRIPTA.Placeholder.Search": "Лъыхъуэн",
   "KRIPTA.Select.NotSelected": "-- къыхэхакъым --",
-
   "KRIPTA.Template.EmptyCatalog": "Серверым регистрациэ къыхэщӀа категориехэр я картэхэр щыӀэкъым.",
   "KRIPTA.Template.MyCardsTitle": "Игрокым и картэхэр: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Мы картэр серверым регистрациэ къыхэщӀа нэхъыщхьэ.",
   "KRIPTA.Template.UseCardPrompt": "Лъэпкъынущ картэр:",
-
   "KRIPTA.Card.FallbackName": "Картэ {number}",
   "KRIPTA.Card.FallbackAddress": "Картэ {level}/{number}",
   "KRIPTA.Card.MissingDescription": "{level}/{number} картэр серверым и уахътэ каталогым щыӀэкъым.",
   "KRIPTA.Card.NotRegisteredDescription": "{level}/{number} картэр серверым регистрациэ къыхэщӀа нэхъыщхьэ.",
   "KRIPTA.Level.FallbackName": "Даражэ {level}",
   "KRIPTA.Level.MissingDescription": "Даражэр игрокым и инвентарым щыӀэ, ауэ серверым и уахътэ каталогым щыӀэкъым.",
-
   "KRIPTA.Chat.BlobReadFailed": "BLOB еджэну къалъыхъуакъым",
   "KRIPTA.Chat.CardGivenTitle": "Картэ ета",
   "KRIPTA.Chat.CardReceiveSubtitle": "Игрок {playerName} {cardSubtitle} картэр къэхь",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Къыхэха картэ дэхъэ",
   "KRIPTA.Chat.RequestRandomTitle": "Случайнэ картэ дэхъэ",
   "KRIPTA.Chat.ShowCardTitle": "Картэм и псалъэжь",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Серверым и игрокыр къыхэкӀыпӀэ хуэпщӀын",
   "KRIPTA.Dialog.BindPlayer.Header": "{foundryUserName} папщӀэ игрок къыхэхын",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry хэрэглэгч",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Игрок гъэунэхъын",
   "KRIPTA.Dialog.Player.DeleteWarning": "\"{playerName}\" игрокыр гъэунэхъын зэхуэмыдэу къыщӀэкӀынукъым. \"{code}\" тхы, гъэунэхъыр къыхэщӀэкӀ.",
   "KRIPTA.Dialog.Count.TotalCards": "мы теплъэм и картэхэм я псори - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "{context} папщӀэ level къалъытэкъым: {level}",
   "KRIPTA.Error.InvalidCardNumber": "{context} папщӀэ number къалъытэкъым: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "картэм и level къалъытэкъым: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "къызэрымыгъэщӀэ хъуэхъу",
   "KRIPTA.Error.NameRequired": "ЦӀэм и майдэ щхьэхуит.",
   "KRIPTA.Error.RegistryDeleteReturned": "серверым гъэунэхъым къыздэкӀа нэужь игрокыр реестрым къыригъэжьата.",
-
   "KRIPTA.Notification.CardGiven": "Картэ ета.",
   "KRIPTA.Notification.CardUsed": "Картэ лъэпкъа, учетым къыщӀэубыда.",
   "KRIPTA.Notification.CardWrittenOff": "Картэ учетым къыщӀэубыда.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Серверым къыхэкӀыпӀэ къалъыхъуакъым. Адресыр, серверым и щыӀакӀэ, CORS/HTTPS настройкэхэр къызэрыкӀ.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Серверыр къызэрыкӀыну къалъыхъуакъым.",
   "KRIPTA.Notification.InvalidServerUrl": "Серверым и адрес къалъытэкъым: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "«Авторым фӀыщӀэ хуэфащэ» кнопкэм и ссылка настройкэ хъуакъым.",
   "KRIPTA.Notification.SettingsAccessDenied": "«Крипта картэхэр» настройкэхэм я разделыр «Ведущий»рэ «Ведущим и помощник»рэ ролхэм папщӀэ фӀэкӀа щыӀэ.",
   "KRIPTA.Notification.ServerCheckFailed": "Серверыр къызэрыкӀым къыщӀэкӀакъым",
   "KRIPTA.Notification.TechUserReader": "Еджэ",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Игрок къызэрыхьыну къалъыхъуакъым",
   "KRIPTA.Notification.PlayerDeleteFailed": "Игрок гъэунэхъыну къалъыхъуакъым",
   "KRIPTA.Notification.CardRollFailed": "Картэ къэхьыну къалъыхъуакъым.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Картэ къэщтэн",
   "KRIPTA.Dialog.TakeCard.Message": "Игрок {playerName} {cardName} картэм къикӀынущ.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Картэ етын"

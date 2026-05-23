@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Din Foundry-deltagare är inte kopplad till en serverspelare i modulen Kripta-kort. Kontakta spelledaren.",
   "KRIPTA.GMOnly": "Den här åtgärden är bara tillgänglig för spelledaren.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Serveradress",
   "KRIPTA.Settings.TechAuthUsers.Name": "Tekniska användare",
   "KRIPTA.Settings.PlayerBindings.Name": "Kopplingar mellan deltagare och serverspelare",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta-kort",
   "KRIPTA.Settings.Menu.Label": "Modulinställningar",
   "KRIPTA.Settings.Menu.Hint": "API-anslutning och tekniska användare.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Om du ännu inte har installerat och konfigurerat innehållsservern för modulen, följ ",
+  "KRIPTA.Settings.Help.ServerLink": "den här länken",
+  "KRIPTA.Settings.Help.AfterServerLink": " för att göra det. För snabb konfiguration, använd ",
+  "KRIPTA.Settings.Help.DocumentationLink": "dokumentationen",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Kortkatalog",
   "KRIPTA.Window.CardDetails": "Katalogkort",
   "KRIPTA.Window.GiveCard": "Ge kort",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Hämta kort",
   "KRIPTA.Window.Settings": "Kripta-kort - Inställningar",
   "KRIPTA.Window.UseCard": "Använd kort",
-
   "KRIPTA.Menu.Title": "Kripta-kort",
   "KRIPTA.Menu.Catalog": "Kortkatalog",
   "KRIPTA.Menu.GetCard": "Hämta kort",
   "KRIPTA.Menu.MyCards": "Mina kort",
   "KRIPTA.Menu.Players": "Hantera spelare",
-
   "KRIPTA.Label.Category": "Kategori",
   "KRIPTA.Label.Mode": "Läge",
   "KRIPTA.Label.Card": "Kort",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Läsare (Reader)",
   "KRIPTA.Label.Role": "Roll",
   "KRIPTA.Label.Binding": "Koppling",
-
   "KRIPTA.Role.GM": "Spelledare",
   "KRIPTA.Role.Player": "Spelare",
   "KRIPTA.Status.InGame": "i spel",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "inga kort",
   "KRIPTA.Binding.NotBound": "spelaren är inte kopplad, välj en spelare.",
   "KRIPTA.Binding.CardsCountHint": "Antal utdelade korttyper (dubbletter räknas inte)",
-
   "KRIPTA.Button.Add": "Lägg till",
   "KRIPTA.Button.Bind": "Koppla",
   "KRIPTA.Button.Cancel": "Avbryt",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Ta",
   "KRIPTA.Button.TestAuth": "Kontrollera tekniska användare",
   "KRIPTA.Button.TestServer": "Kontrollera servern",
-  "KRIPTA.Button.ThanksAuthor": "Tacka författaren",
   "KRIPTA.Button.Unbind": "Ta bort koppling",
   "KRIPTA.Button.Use": "Använd",
   "KRIPTA.Button.Yes": "Ja",
-
   "KRIPTA.Mode.Manual": "Valfri",
   "KRIPTA.Mode.Random": "Slumpmässig",
   "KRIPTA.Mode.Show": "Visa",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Brickor",
   "KRIPTA.Placeholder.Search": "Sök",
   "KRIPTA.Select.NotSelected": "-- inte vald --",
-
   "KRIPTA.Template.EmptyCatalog": "Det finns inga registrerade kategorier eller kort på servern.",
   "KRIPTA.Template.MyCardsTitle": "Spelarens kort: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Det här kortet är inte längre registrerat på servern.",
   "KRIPTA.Template.UseCardPrompt": "Följande kort kommer att användas:",
-
   "KRIPTA.Card.FallbackName": "Kort {number}",
   "KRIPTA.Card.FallbackAddress": "Kort {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Kortet {level}/{number} saknas i serverns aktuella katalog.",
   "KRIPTA.Card.NotRegisteredDescription": "Kortet {level}/{number} är inte längre registrerat på servern.",
   "KRIPTA.Level.FallbackName": "Nivå {level}",
   "KRIPTA.Level.MissingDescription": "Nivån finns i spelarens inventarium men saknas i serverns aktuella katalog.",
-
   "KRIPTA.Chat.BlobReadFailed": "Det gick inte att läsa BLOB",
   "KRIPTA.Chat.CardGivenTitle": "Kort utdelat",
   "KRIPTA.Chat.CardReceiveSubtitle": "Spelare {playerName} får kortet {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Begäran om valt kort",
   "KRIPTA.Chat.RequestRandomTitle": "Begäran om slumpkort",
   "KRIPTA.Chat.ShowCardTitle": "Kortinformation",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Koppla serverspelare",
   "KRIPTA.Dialog.BindPlayer.Header": "Välj spelare för {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry-användaren",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Ta bort spelare",
   "KRIPTA.Dialog.Player.DeleteWarning": "Borttagning av spelaren \"{playerName}\" kan inte ångras. Ange \"{code}\" och bekräfta borttagningen.",
   "KRIPTA.Dialog.Count.TotalCards": "totalt antal kort av den här typen - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "Ogiltig level för {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "Ogiltig number för {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "ogiltig kort-level: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "okänt fel",
   "KRIPTA.Error.NameRequired": "Namnfältet är obligatoriskt.",
   "KRIPTA.Error.RegistryDeleteReturned": "servern returnerade spelaren i registret efter borttagning.",
-
   "KRIPTA.Notification.CardGiven": "Kortet har delats ut.",
   "KRIPTA.Notification.CardUsed": "Kortet har använts och skrivits av.",
   "KRIPTA.Notification.CardWrittenOff": "Kortet har skrivits av.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Det gick inte att ansluta till servern. Kontrollera adressen, serverns tillgänglighet och CORS/HTTPS-inställningar.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Det gick inte att kontrollera servern.",
   "KRIPTA.Notification.InvalidServerUrl": "Ogiltig serveradress: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "Länken för knappen ”Tacka författaren” är inte konfigurerad.",
   "KRIPTA.Notification.SettingsAccessDenied": "Inställningsdelen ”Kripta-kort” är bara tillgänglig för rollerna ”Spelledare” och ”Assisterande spelledare”.",
   "KRIPTA.Notification.ServerCheckFailed": "Serverkontrollen misslyckades",
   "KRIPTA.Notification.TechUserReader": "Läsare",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Det gick inte att uppdatera spelaren",
   "KRIPTA.Notification.PlayerDeleteFailed": "Det gick inte att ta bort spelaren",
   "KRIPTA.Notification.CardRollFailed": "Det gick inte att hämta kortet.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Ta kort",
   "KRIPTA.Dialog.TakeCard.Message": "Spelare {playerName} kommer att fråntas kortet {cardName}.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Ge kort"
