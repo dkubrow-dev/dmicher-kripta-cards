@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Mtumiaji wako wa Foundry hajaunganishwa na Mchezaji wa Seva katika moduli ya Kadi za Kripta. Tafadhali wasiliana na Msimamizi wa Mchezo.",
   "KRIPTA.GMOnly": "Kitendo hiki kinapatikana kwa Msimamizi wa Mchezo pekee.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Anwani ya seva",
   "KRIPTA.Settings.TechAuthUsers.Name": "Watumiaji wa kiufundi",
   "KRIPTA.Settings.PlayerBindings.Name": "Miunganisho ya watumiaji wa Foundry na wachezaji wa seva",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kadi za Kripta",
   "KRIPTA.Settings.Menu.Label": "Mipangilio ya moduli",
   "KRIPTA.Settings.Menu.Hint": "Muunganisho wa API na watumiaji wa kiufundi.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Ikiwa bado hujasakinisha na kusanidi seva ya maudhui kwa moduli, fuata ",
+  "KRIPTA.Settings.Help.ServerLink": "kiungo hiki",
+  "KRIPTA.Settings.Help.AfterServerLink": " ili kufanya hivyo. Kwa usanidi wa haraka, tumia ",
+  "KRIPTA.Settings.Help.DocumentationLink": "nyaraka",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Katalogi ya Kadi",
   "KRIPTA.Window.CardDetails": "Kadi ya Katalogi",
   "KRIPTA.Window.GiveCard": "Toa Kadi",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Omba Kadi",
   "KRIPTA.Window.Settings": "Kadi za Kripta - Mipangilio",
   "KRIPTA.Window.UseCard": "Tumia Kadi",
-
   "KRIPTA.Menu.Title": "Kadi za Kripta",
   "KRIPTA.Menu.Catalog": "Katalogi ya Kadi",
   "KRIPTA.Menu.GetCard": "Omba Kadi",
   "KRIPTA.Menu.MyCards": "Kadi Zangu",
   "KRIPTA.Menu.Players": "Dhibiti Wachezaji",
-
   "KRIPTA.Label.Category": "Kategoria",
   "KRIPTA.Label.Mode": "Hali",
   "KRIPTA.Label.Card": "Kadi",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Msomaji",
   "KRIPTA.Label.Role": "Jukumu",
   "KRIPTA.Label.Binding": "Muunganisho",
-
   "KRIPTA.Role.GM": "Msimamizi wa Mchezo",
   "KRIPTA.Role.Player": "Mchezaji",
   "KRIPTA.Status.InGame": "mtandaoni",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "hakuna kadi",
   "KRIPTA.Binding.NotBound": "mchezaji hajaunganishwa, unganisha mchezaji.",
   "KRIPTA.Binding.CardsCountHint": "Idadi ya aina za kadi zilizotolewa, bila kuhesabu zilizorudiwa",
-
   "KRIPTA.Button.Add": "Ongeza",
   "KRIPTA.Button.Bind": "Unganisha",
   "KRIPTA.Button.Cancel": "Ghairi",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Ondoa",
   "KRIPTA.Button.TestAuth": "Kagua watumiaji wa kiufundi",
   "KRIPTA.Button.TestServer": "Kagua seva",
-  "KRIPTA.Button.ThanksAuthor": "Mshukuru mwandishi",
   "KRIPTA.Button.Unbind": "Tenganisha",
   "KRIPTA.Button.Use": "Tumia",
   "KRIPTA.Button.Yes": "Ndiyo",
-
   "KRIPTA.Mode.Manual": "Chagua mwenyewe",
   "KRIPTA.Mode.Random": "Nasibu",
   "KRIPTA.Mode.Show": "Onyesha",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Vigae",
   "KRIPTA.Placeholder.Search": "Tafuta",
   "KRIPTA.Select.NotSelected": "-- haijachaguliwa --",
-
   "KRIPTA.Template.EmptyCatalog": "Hakuna kategoria au kadi zilizosajiliwa kwenye seva.",
   "KRIPTA.Template.MyCardsTitle": "Kadi za mchezaji: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Kadi hii haijasajiliwa tena kwenye seva.",
   "KRIPTA.Template.UseCardPrompt": "Kadi hii itatumika:",
-
   "KRIPTA.Card.FallbackName": "Kadi {number}",
   "KRIPTA.Card.FallbackAddress": "Kadi {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Kadi {level}/{number} haipo kwenye katalogi ya sasa ya seva.",
   "KRIPTA.Card.NotRegisteredDescription": "Kadi {level}/{number} haijasajiliwa tena kwenye seva.",
   "KRIPTA.Level.FallbackName": "Kiwango {level}",
   "KRIPTA.Level.MissingDescription": "Kiwango hiki kipo kwenye hesabu ya mchezaji lakini hakipo kwenye katalogi ya sasa ya seva.",
-
   "KRIPTA.Chat.BlobReadFailed": "Imeshindikana kusoma blob",
   "KRIPTA.Chat.CardGivenTitle": "Kadi Imetolewa",
   "KRIPTA.Chat.CardReceiveSubtitle": "Mchezaji {playerName} anapokea kadi {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Ombi la Kadi Iliyochaguliwa",
   "KRIPTA.Chat.RequestRandomTitle": "Ombi la Kadi ya Nasibu",
   "KRIPTA.Chat.ShowCardTitle": "Rejeleo la Kadi",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Unganisha Mchezaji wa Seva",
   "KRIPTA.Dialog.BindPlayer.Header": "Chagua mchezaji kwa {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "mtumiaji wa Foundry",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Futa Mchezaji",
   "KRIPTA.Dialog.Player.DeleteWarning": "Kufuta mchezaji \"{playerName}\" hakuwezi kutenduliwa. Ingiza \"{code}\" na uthibitishe kufuta.",
   "KRIPTA.Dialog.Count.TotalCards": "jumla ya kadi za aina hii - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "Kiwango batili kwa {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "Nambari batili kwa {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "kiwango cha kadi si sahihi: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "hitilafu isiyojulikana",
   "KRIPTA.Error.NameRequired": "Sehemu ya Jina inahitajika.",
   "KRIPTA.Error.RegistryDeleteReturned": "seva ilimrudisha mchezaji kwenye rejista baada ya kufutwa.",
-
   "KRIPTA.Notification.CardGiven": "Kadi imetolewa.",
   "KRIPTA.Notification.CardUsed": "Kadi imetumika na kuondolewa.",
   "KRIPTA.Notification.CardWrittenOff": "Kadi imeondolewa.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Imeshindikana kuunganisha kwenye seva. Kagua anwani, upatikanaji wa seva, na mipangilio ya CORS/HTTPS.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Imeshindikana kukagua seva.",
   "KRIPTA.Notification.InvalidServerUrl": "Anwani batili ya seva: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "Kiungo cha kitufe cha \"Mshukuru mwandishi\" hakijasanidiwa.",
   "KRIPTA.Notification.SettingsAccessDenied": "Sehemu ya mipangilio ya Kadi za Kripta inapatikana tu kwa majukumu ya Msimamizi wa Mchezo na Msaidizi wa Msimamizi wa Mchezo.",
   "KRIPTA.Notification.ServerCheckFailed": "Ukaguzi wa seva umeshindwa",
   "KRIPTA.Notification.TechUserReader": "Msomaji",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Imeshindikana kusasisha mchezaji",
   "KRIPTA.Notification.PlayerDeleteFailed": "Imeshindikana kufuta mchezaji",
   "KRIPTA.Notification.CardRollFailed": "Imeshindikana kupokea kadi.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Ondoa Kadi",
   "KRIPTA.Dialog.TakeCard.Message": "Mchezaji {playerName} atapoteza kadi {cardName}.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Toa Kadi"

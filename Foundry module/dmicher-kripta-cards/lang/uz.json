@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Foundry foydalanuvchingiz Kripta Cards modulida server o'yinchisiga bog'lanmagan. Iltimos, O'yin Ustasiga murojaat qiling.",
   "KRIPTA.GMOnly": "Bu amal faqat O'yin Ustasi uchun mavjud.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Server manzili",
   "KRIPTA.Settings.TechAuthUsers.Name": "Texnik foydalanuvchilar",
   "KRIPTA.Settings.PlayerBindings.Name": "Foundry foydalanuvchilarini server o'yinchilariga bog'lash",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta Cards",
   "KRIPTA.Settings.Menu.Label": "Modul sozlamalari",
   "KRIPTA.Settings.Menu.Hint": "API ulanishi va texnik foydalanuvchilar.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Agar modul uchun kontent serverini hali o'rnatmagan va sozlamagan bo'lsangiz, buni qilish uchun ",
+  "KRIPTA.Settings.Help.ServerLink": "ushbu havolaga",
+  "KRIPTA.Settings.Help.AfterServerLink": " o'ting. Tez sozlash uchun ",
+  "KRIPTA.Settings.Help.DocumentationLink": "hujjatlardan",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " foydalaning.",
   "KRIPTA.Window.Catalog": "Kartalar katalogi",
   "KRIPTA.Window.CardDetails": "Katalog kartasi",
   "KRIPTA.Window.GiveCard": "Karta berish",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Karta so'rash",
   "KRIPTA.Window.Settings": "Kripta Cards - Sozlamalar",
   "KRIPTA.Window.UseCard": "Kartadan foydalanish",
-
   "KRIPTA.Menu.Title": "Kripta Cards",
   "KRIPTA.Menu.Catalog": "Kartalar katalogi",
   "KRIPTA.Menu.GetCard": "Karta so'rash",
   "KRIPTA.Menu.MyCards": "Mening kartalarim",
   "KRIPTA.Menu.Players": "O'yinchilarni boshqarish",
-
   "KRIPTA.Label.Category": "Toifa",
   "KRIPTA.Label.Mode": "Rejim",
   "KRIPTA.Label.Card": "Karta",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Reader",
   "KRIPTA.Label.Role": "Rol",
   "KRIPTA.Label.Binding": "Bog'lanish",
-
   "KRIPTA.Role.GM": "O'yin Ustasi",
   "KRIPTA.Role.Player": "O'yinchi",
   "KRIPTA.Status.InGame": "onlayn",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "karta yo'q",
   "KRIPTA.Binding.NotBound": "o'yinchi bog'lanmagan, o'yinchini bog'lang.",
   "KRIPTA.Binding.CardsCountHint": "Takrorlarsiz berilgan karta turlari soni",
-
   "KRIPTA.Button.Add": "Qo'shish",
   "KRIPTA.Button.Bind": "Bog'lash",
   "KRIPTA.Button.Cancel": "Bekor qilish",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Olib qo'yish",
   "KRIPTA.Button.TestAuth": "Texnik foydalanuvchilarni tekshirish",
   "KRIPTA.Button.TestServer": "Serverni tekshirish",
-  "KRIPTA.Button.ThanksAuthor": "Muallifga rahmat aytish",
   "KRIPTA.Button.Unbind": "Bog'lanishni uzish",
   "KRIPTA.Button.Use": "Foydalanish",
   "KRIPTA.Button.Yes": "Ha",
-
   "KRIPTA.Mode.Manual": "Qo'lda tanlash",
   "KRIPTA.Mode.Random": "Tasodifiy",
   "KRIPTA.Mode.Show": "Ko'rsatish",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Plitkalar",
   "KRIPTA.Placeholder.Search": "Qidirish",
   "KRIPTA.Select.NotSelected": "-- tanlanmagan --",
-
   "KRIPTA.Template.EmptyCatalog": "Serverda ro'yxatdan o'tgan toifalar yoki kartalar yo'q.",
   "KRIPTA.Template.MyCardsTitle": "O'yinchi kartalari: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Bu karta endi serverda ro'yxatdan o'tmagan.",
   "KRIPTA.Template.UseCardPrompt": "Ushbu karta ishlatiladi:",
-
   "KRIPTA.Card.FallbackName": "Karta {number}",
   "KRIPTA.Card.FallbackAddress": "Karta {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Karta {level}/{number} joriy server katalogida yo'q.",
   "KRIPTA.Card.NotRegisteredDescription": "Karta {level}/{number} endi serverda ro'yxatdan o'tmagan.",
   "KRIPTA.Level.FallbackName": "Daraja {level}",
   "KRIPTA.Level.MissingDescription": "Bu daraja o'yinchi inventarida mavjud, lekin joriy server katalogida yo'q.",
-
   "KRIPTA.Chat.BlobReadFailed": "blob o'qib bo'lmadi",
   "KRIPTA.Chat.CardGivenTitle": "Karta berildi",
   "KRIPTA.Chat.CardReceiveSubtitle": "O'yinchi {playerName} {cardSubtitle} kartasini oladi",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Tanlangan karta so'rovi",
   "KRIPTA.Chat.RequestRandomTitle": "Tasodifiy karta so'rovi",
   "KRIPTA.Chat.ShowCardTitle": "Karta ma'lumotnomasi",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Server o'yinchisini bog'lash",
   "KRIPTA.Dialog.BindPlayer.Header": "{foundryUserName} uchun o'yinchi tanlang",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry foydalanuvchisi",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "O'yinchini o'chirish",
   "KRIPTA.Dialog.Player.DeleteWarning": "\"{playerName}\" o'yinchisini o'chirishni qaytarib bo'lmaydi. \"{code}\" kiriting va o'chirishni tasdiqlang.",
   "KRIPTA.Dialog.Count.TotalCards": "ushbu turdagi jami kartalar - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "{context} uchun noto'g'ri daraja: {level}",
   "KRIPTA.Error.InvalidCardNumber": "{context} uchun noto'g'ri raqam: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "noto'g'ri karta darajasi: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "noma'lum xatolik",
   "KRIPTA.Error.NameRequired": "Name maydoni majburiy.",
   "KRIPTA.Error.RegistryDeleteReturned": "o'chirishdan keyin server o'yinchini reyestrda qaytardi.",
-
   "KRIPTA.Notification.CardGiven": "Karta berildi.",
   "KRIPTA.Notification.CardUsed": "Karta ishlatildi va sarflandi.",
   "KRIPTA.Notification.CardWrittenOff": "Karta olib tashlandi.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Serverga ulanib bo'lmadi. Manzilni, server mavjudligini va CORS/HTTPS sozlamalarini tekshiring.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Serverni tekshirib bo'lmadi.",
   "KRIPTA.Notification.InvalidServerUrl": "Noto'g'ri server manzili: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "\"Muallifga rahmat aytish\" tugmasi uchun havola sozlanmagan.",
   "KRIPTA.Notification.SettingsAccessDenied": "Kripta Cards sozlamalari bo'limi faqat O'yin Ustasi va Yordamchi O'yin Ustasi rollari uchun mavjud.",
   "KRIPTA.Notification.ServerCheckFailed": "Server tekshiruvi muvaffaqiyatsiz",
   "KRIPTA.Notification.TechUserReader": "Reader",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "O'yinchini yangilab bo'lmadi",
   "KRIPTA.Notification.PlayerDeleteFailed": "O'yinchini o'chirib bo'lmadi",
   "KRIPTA.Notification.CardRollFailed": "Karta olib bo'lmadi.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Kartani olib qo'yish",
   "KRIPTA.Dialog.TakeCard.Message": "O'yinchi {playerName} {cardName} kartasini yo'qotadi.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Karta berish"

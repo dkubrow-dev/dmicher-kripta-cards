@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Utilizatorul Foundry nu este legat de un jucător de pe server în modulul Kripta Cards. Contactează Maestrul de Joc.",
   "KRIPTA.GMOnly": "Această acțiune este disponibilă doar pentru Maestrul de Joc.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Adresa serverului",
   "KRIPTA.Settings.TechAuthUsers.Name": "Utilizatori tehnici",
   "KRIPTA.Settings.PlayerBindings.Name": "Legături între utilizatorii Foundry și jucătorii serverului",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta Cards",
   "KRIPTA.Settings.Menu.Label": "Setările modulului",
   "KRIPTA.Settings.Menu.Hint": "Conexiune API și utilizatori tehnici.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Dacă încă nu ați instalat și configurat serverul de conținut pentru modul, urmați ",
+  "KRIPTA.Settings.Help.ServerLink": "acest link",
+  "KRIPTA.Settings.Help.AfterServerLink": " pentru a face acest lucru. Pentru configurare rapidă, folosiți ",
+  "KRIPTA.Settings.Help.DocumentationLink": "documentația",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Catalog de cărți",
   "KRIPTA.Window.CardDetails": "Carte din catalog",
   "KRIPTA.Window.GiveCard": "Oferă carte",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Solicită carte",
   "KRIPTA.Window.Settings": "Kripta Cards - Setări",
   "KRIPTA.Window.UseCard": "Folosește cartea",
-
   "KRIPTA.Menu.Title": "Kripta Cards",
   "KRIPTA.Menu.Catalog": "Catalog de cărți",
   "KRIPTA.Menu.GetCard": "Solicită carte",
   "KRIPTA.Menu.MyCards": "Cărțile mele",
   "KRIPTA.Menu.Players": "Gestionare jucători",
-
   "KRIPTA.Label.Category": "Categorie",
   "KRIPTA.Label.Mode": "Mod",
   "KRIPTA.Label.Card": "Carte",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Reader",
   "KRIPTA.Label.Role": "Rol",
   "KRIPTA.Label.Binding": "Legătură",
-
   "KRIPTA.Role.GM": "Maestru de Joc",
   "KRIPTA.Role.Player": "Jucător",
   "KRIPTA.Status.InGame": "online",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "fără cărți",
   "KRIPTA.Binding.NotBound": "jucătorul nu este legat, leagă un jucător.",
   "KRIPTA.Binding.CardsCountHint": "Numărul tipurilor de cărți oferite, fără duplicate",
-
   "KRIPTA.Button.Add": "Adaugă",
   "KRIPTA.Button.Bind": "Leagă",
   "KRIPTA.Button.Cancel": "Anulează",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Ia",
   "KRIPTA.Button.TestAuth": "Verifică utilizatorii tehnici",
   "KRIPTA.Button.TestServer": "Verifică serverul",
-  "KRIPTA.Button.ThanksAuthor": "Mulțumește autorului",
   "KRIPTA.Button.Unbind": "Dezleagă",
   "KRIPTA.Button.Use": "Folosește",
   "KRIPTA.Button.Yes": "Da",
-
   "KRIPTA.Mode.Manual": "Alege manual",
   "KRIPTA.Mode.Random": "Aleator",
   "KRIPTA.Mode.Show": "Arată",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Dale",
   "KRIPTA.Placeholder.Search": "Caută",
   "KRIPTA.Select.NotSelected": "-- neselectat --",
-
   "KRIPTA.Template.EmptyCatalog": "Nu există categorii sau cărți înregistrate pe server.",
   "KRIPTA.Template.MyCardsTitle": "Cărțile jucătorului: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Această carte nu mai este înregistrată pe server.",
   "KRIPTA.Template.UseCardPrompt": "Această carte va fi folosită:",
-
   "KRIPTA.Card.FallbackName": "Carte {number}",
   "KRIPTA.Card.FallbackAddress": "Carte {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Cartea {level}/{number} lipsește din catalogul curent al serverului.",
   "KRIPTA.Card.NotRegisteredDescription": "Cartea {level}/{number} nu mai este înregistrată pe server.",
   "KRIPTA.Level.FallbackName": "Nivel {level}",
   "KRIPTA.Level.MissingDescription": "Acest nivel există în inventarul jucătorului, dar lipsește din catalogul curent al serverului.",
-
   "KRIPTA.Chat.BlobReadFailed": "Nu s-a putut citi blob",
   "KRIPTA.Chat.CardGivenTitle": "Carte oferită",
   "KRIPTA.Chat.CardReceiveSubtitle": "Jucătorul {playerName} primește cartea {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Solicitare de carte aleasă",
   "KRIPTA.Chat.RequestRandomTitle": "Solicitare de carte aleatorie",
   "KRIPTA.Chat.ShowCardTitle": "Referință carte",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Leagă jucătorul serverului",
   "KRIPTA.Dialog.BindPlayer.Header": "Alege un jucător pentru {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "utilizator Foundry",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Șterge jucător",
   "KRIPTA.Dialog.Player.DeleteWarning": "Ștergerea jucătorului \"{playerName}\" nu poate fi anulată. Introdu \"{code}\" și confirmă ștergerea.",
   "KRIPTA.Dialog.Count.TotalCards": "număr total de cărți de acest tip - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "Nivel nevalid pentru {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "Număr nevalid pentru {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "nivel de carte nevalid: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "eroare necunoscută",
   "KRIPTA.Error.NameRequired": "Câmpul Name este obligatoriu.",
   "KRIPTA.Error.RegistryDeleteReturned": "serverul a returnat jucătorul în registru după ștergere.",
-
   "KRIPTA.Notification.CardGiven": "Carte oferită.",
   "KRIPTA.Notification.CardUsed": "Carte folosită și consumată.",
   "KRIPTA.Notification.CardWrittenOff": "Carte eliminată.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Conectarea la server a eșuat. Verifică adresa, disponibilitatea serverului și setările CORS/HTTPS.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Nu s-a putut verifica serverul.",
   "KRIPTA.Notification.InvalidServerUrl": "Adresă de server nevalidă: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "Linkul pentru butonul \"Mulțumește autorului\" nu este configurat.",
   "KRIPTA.Notification.SettingsAccessDenied": "Secțiunea de setări Kripta Cards este disponibilă doar rolurilor Maestru de Joc și Asistent Maestru de Joc.",
   "KRIPTA.Notification.ServerCheckFailed": "Verificarea serverului a eșuat",
   "KRIPTA.Notification.TechUserReader": "Reader",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Nu s-a putut actualiza jucătorul",
   "KRIPTA.Notification.PlayerDeleteFailed": "Nu s-a putut șterge jucătorul",
   "KRIPTA.Notification.CardRollFailed": "Nu s-a putut primi cartea.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Ia cartea",
   "KRIPTA.Dialog.TakeCard.Message": "Jucătorul {playerName} va pierde cartea {cardName}.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Oferă carte"

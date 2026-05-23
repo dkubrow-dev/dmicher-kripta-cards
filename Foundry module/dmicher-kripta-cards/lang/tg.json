@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Иштирокчии Foundry-и шумо ба бозигари сервер дар модули Кортҳои Крипта пайваст нашудааст. Ба устоди бозӣ муроҷиат кунед.",
   "KRIPTA.GMOnly": "Ин амал танҳо барои устод дастрас аст.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Нишонии сервер",
   "KRIPTA.Settings.TechAuthUsers.Name": "Корбарони техникӣ",
   "KRIPTA.Settings.PlayerBindings.Name": "Пайвастҳои иштирокчиёни Foundry ба бозигарони сервер",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Кортҳои Крипта",
   "KRIPTA.Settings.Menu.Label": "Танзими модул",
   "KRIPTA.Settings.Menu.Hint": "Пайвастшавӣ ба API ва корбарони техникӣ.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Агар шумо ҳанӯз сервери мундариҷаро барои модул насб ва танзим накарда бошед, барои ин кор ",
+  "KRIPTA.Settings.Help.ServerLink": "ба ин пайванд",
+  "KRIPTA.Settings.Help.AfterServerLink": " гузаред. Барои танзими зуд аз ",
+  "KRIPTA.Settings.Help.DocumentationLink": "ҳуҷҷатҳо",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " истифода баред.",
   "KRIPTA.Window.Catalog": "Каталоги кортҳо",
   "KRIPTA.Window.CardDetails": "Корти каталог",
   "KRIPTA.Window.GiveCard": "Додани корт",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Гирифтани корт",
   "KRIPTA.Window.Settings": "Кортҳои Крипта - Танзимот",
   "KRIPTA.Window.UseCard": "Истифодаи корт",
-
   "KRIPTA.Menu.Title": "Кортҳои Крипта",
   "KRIPTA.Menu.Catalog": "Каталоги кортҳо",
   "KRIPTA.Menu.GetCard": "Гирифтани корт",
   "KRIPTA.Menu.MyCards": "Кортҳои ман",
   "KRIPTA.Menu.Players": "Идоракунии бозигарон",
-
   "KRIPTA.Label.Category": "Категория",
   "KRIPTA.Label.Mode": "Режим",
   "KRIPTA.Label.Card": "Корт",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Хонанда (Reader)",
   "KRIPTA.Label.Role": "Нақш",
   "KRIPTA.Label.Binding": "Пайваст",
-
   "KRIPTA.Role.GM": "Устод",
   "KRIPTA.Role.Player": "Бозигар",
   "KRIPTA.Status.InGame": "дар бозӣ",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "корт нест",
   "KRIPTA.Binding.NotBound": "бозигар пайваст нашудааст, бозигарро интихоб кунед.",
   "KRIPTA.Binding.CardsCountHint": "Шумораи намудҳои кортҳои додашуда (такрорҳоро ҳисоб намекунад)",
-
   "KRIPTA.Button.Add": "Илова кардан",
   "KRIPTA.Button.Bind": "Пайваст кардан",
   "KRIPTA.Button.Cancel": "Бекор кардан",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Гирифта партофтан",
   "KRIPTA.Button.TestAuth": "Санҷидани корбарони техникӣ",
   "KRIPTA.Button.TestServer": "Санҷидани сервер",
-  "KRIPTA.Button.ThanksAuthor": "Ба муаллиф ташаккур гуфтан",
   "KRIPTA.Button.Unbind": "Ҷудо кардан",
   "KRIPTA.Button.Use": "Истифода бурдан",
   "KRIPTA.Button.Yes": "Ҳа",
-
   "KRIPTA.Mode.Manual": "Бо интихоб",
   "KRIPTA.Mode.Random": "Тасодуфӣ",
   "KRIPTA.Mode.Show": "Нишон додан",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Плиткаҳо",
   "KRIPTA.Placeholder.Search": "Ҷустуҷӯ",
   "KRIPTA.Select.NotSelected": "-- интихоб нашудааст --",
-
   "KRIPTA.Template.EmptyCatalog": "Дар сервер категорияҳо ё кортҳои сабтшуда вуҷуд надоранд.",
   "KRIPTA.Template.MyCardsTitle": "Кортҳои бозигар: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Ин корт дигар дар сервер сабт нашудааст.",
   "KRIPTA.Template.UseCardPrompt": "Корти зерин истифода мешавад:",
-
   "KRIPTA.Card.FallbackName": "Корт {number}",
   "KRIPTA.Card.FallbackAddress": "Корт {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Корти {level}/{number} дар каталоги ҷории сервер вуҷуд надорад.",
   "KRIPTA.Card.NotRegisteredDescription": "Корти {level}/{number} дигар дар сервер сабт нашудааст.",
   "KRIPTA.Level.FallbackName": "Сатҳ {level}",
   "KRIPTA.Level.MissingDescription": "Сатҳ дар инвентари бозигар вуҷуд дорад, аммо дар каталоги ҷории сервер нест.",
-
   "KRIPTA.Chat.BlobReadFailed": "Хондани BLOB муяссар нашуд",
   "KRIPTA.Chat.CardGivenTitle": "Корт дода шуд",
   "KRIPTA.Chat.CardReceiveSubtitle": "Бозигар {playerName} корти {cardSubtitle}-ро мегирад",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Дархости корти интихобшуда",
   "KRIPTA.Chat.RequestRandomTitle": "Дархости корти тасодуфӣ",
   "KRIPTA.Chat.ShowCardTitle": "Маълумотномаи корт",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Пайваст кардани бозигари сервер",
   "KRIPTA.Dialog.BindPlayer.Header": "Интихоби бозигар барои {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "корбари Foundry",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Нест кардани бозигар",
   "KRIPTA.Dialog.Player.DeleteWarning": "Нест кардани бозигари \"{playerName}\" бебозгашт аст. \"{code}\"-ро ворид кунед ва несткуниро тасдиқ намоед.",
   "KRIPTA.Dialog.Count.TotalCards": "ҳамагӣ кортҳои ин намуд - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "level нодуруст барои {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "number нодуруст барои {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "level-и корт нодуруст аст: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "хатои номаълум",
   "KRIPTA.Error.NameRequired": "Майдони ном ҳатмист.",
   "KRIPTA.Error.RegistryDeleteReturned": "сервер пас аз несткунӣ бозигарро ба феҳрист баргардонд.",
-
   "KRIPTA.Notification.CardGiven": "Корт дода шуд.",
   "KRIPTA.Notification.CardUsed": "Корт истифода ва аз ҳисоб бароварда шуд.",
   "KRIPTA.Notification.CardWrittenOff": "Корт аз ҳисоб бароварда шуд.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Пайваст шудан ба сервер муяссар нашуд. Нишонӣ, дастрасии сервер ва танзимоти CORS/HTTPS-ро санҷед.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Санҷидани сервер муяссар нашуд.",
   "KRIPTA.Notification.InvalidServerUrl": "Нишонии сервер нодуруст аст: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "Пайванд барои тугмаи «Ба муаллиф ташаккур гуфтан» танзим нашудааст.",
   "KRIPTA.Notification.SettingsAccessDenied": "Бахши танзимоти «Кортҳои Крипта» танҳо барои нақшҳои «Устод» ва «Ёвари устод» дастрас аст.",
   "KRIPTA.Notification.ServerCheckFailed": "Санҷиши сервер ноком шуд",
   "KRIPTA.Notification.TechUserReader": "Хонанда",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Навсозии бозигар муяссар нашуд",
   "KRIPTA.Notification.PlayerDeleteFailed": "Нест кардани бозигар муяссар нашуд",
   "KRIPTA.Notification.CardRollFailed": "Гирифтани корт муяссар нашуд.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Гирифта партофтани корт",
   "KRIPTA.Dialog.TakeCard.Message": "Бозигар {playerName} аз корти {cardName} маҳрум мешавад.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Додани корт"

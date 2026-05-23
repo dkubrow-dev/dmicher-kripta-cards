@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Váš účastník Foundry není v modulu Karty Krypty propojen s hráčem serveru. Obraťte se na pána hry.",
   "KRIPTA.GMOnly": "Tato akce je dostupná pouze pánovi hry.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Adresa serveru",
   "KRIPTA.Settings.TechAuthUsers.Name": "Techničtí uživatelé",
   "KRIPTA.Settings.PlayerBindings.Name": "Propojení účastníků s hráči serveru",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Karty Krypty",
   "KRIPTA.Settings.Menu.Label": "Nastavení modulu",
   "KRIPTA.Settings.Menu.Hint": "Připojení k API a techničtí uživatelé.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Pokud jste ještě nenainstalovali a nenastavili server obsahu pro modul, přejděte na ",
+  "KRIPTA.Settings.Help.ServerLink": "tento odkaz",
+  "KRIPTA.Settings.Help.AfterServerLink": ", kde to můžete udělat. Pro rychlé nastavení použijte ",
+  "KRIPTA.Settings.Help.DocumentationLink": "dokumentaci",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Katalog karet",
   "KRIPTA.Window.CardDetails": "Karta katalogu",
   "KRIPTA.Window.GiveCard": "Vydat kartu",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Získat kartu",
   "KRIPTA.Window.Settings": "Karty Krypty - Nastavení",
   "KRIPTA.Window.UseCard": "Použít kartu",
-
   "KRIPTA.Menu.Title": "Karty Krypty",
   "KRIPTA.Menu.Catalog": "Katalog karet",
   "KRIPTA.Menu.GetCard": "Získat kartu",
   "KRIPTA.Menu.MyCards": "Moje karty",
   "KRIPTA.Menu.Players": "Správa hráčů",
-
   "KRIPTA.Label.Category": "Kategorie",
   "KRIPTA.Label.Mode": "Režim",
   "KRIPTA.Label.Card": "Karta",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Čtenář (Reader)",
   "KRIPTA.Label.Role": "Role",
   "KRIPTA.Label.Binding": "Propojení",
-
   "KRIPTA.Role.GM": "Pán hry",
   "KRIPTA.Role.Player": "Hráč",
   "KRIPTA.Status.InGame": "ve hře",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "žádné karty",
   "KRIPTA.Binding.NotBound": "hráč není propojen, vyberte hráče.",
   "KRIPTA.Binding.CardsCountHint": "Počet vydaných typů karet (bez opakovaných)",
-
   "KRIPTA.Button.Add": "Přidat",
   "KRIPTA.Button.Bind": "Propojit",
   "KRIPTA.Button.Cancel": "Zrušit",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Odebrat",
   "KRIPTA.Button.TestAuth": "Zkontrolovat technické uživatele",
   "KRIPTA.Button.TestServer": "Zkontrolovat server",
-  "KRIPTA.Button.ThanksAuthor": "Poděkovat autorovi",
   "KRIPTA.Button.Unbind": "Zrušit propojení",
   "KRIPTA.Button.Use": "Použít",
   "KRIPTA.Button.Yes": "Ano",
-
   "KRIPTA.Mode.Manual": "Na výběr",
   "KRIPTA.Mode.Random": "Náhodná",
   "KRIPTA.Mode.Show": "Zobrazit",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Dlaždice",
   "KRIPTA.Placeholder.Search": "Hledat",
   "KRIPTA.Select.NotSelected": "-- není vybráno --",
-
   "KRIPTA.Template.EmptyCatalog": "Na serveru nejsou žádné registrované kategorie ani karty.",
   "KRIPTA.Template.MyCardsTitle": "Karty hráče: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Tato karta již není registrována na serveru.",
   "KRIPTA.Template.UseCardPrompt": "Bude použita karta:",
-
   "KRIPTA.Card.FallbackName": "Karta {number}",
   "KRIPTA.Card.FallbackAddress": "Karta {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Karta {level}/{number} chybí v aktuálním katalogu serveru.",
   "KRIPTA.Card.NotRegisteredDescription": "Karta {level}/{number} již není registrována na serveru.",
   "KRIPTA.Level.FallbackName": "Úroveň {level}",
   "KRIPTA.Level.MissingDescription": "Úroveň je v inventáři hráče, ale chybí v aktuálním katalogu serveru.",
-
   "KRIPTA.Chat.BlobReadFailed": "Nepodařilo se přečíst BLOB",
   "KRIPTA.Chat.CardGivenTitle": "Karta vydána",
   "KRIPTA.Chat.CardReceiveSubtitle": "Hráč {playerName} získává kartu {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Žádost o vybranou kartu",
   "KRIPTA.Chat.RequestRandomTitle": "Žádost o náhodnou kartu",
   "KRIPTA.Chat.ShowCardTitle": "Nápověda ke kartě",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Propojit hráče serveru",
   "KRIPTA.Dialog.BindPlayer.Header": "Vybrat hráče pro {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "uživatele Foundry",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Smazat hráče",
   "KRIPTA.Dialog.Player.DeleteWarning": "Smazání hráče \"{playerName}\" je nevratné. Zadejte \"{code}\" a potvrďte smazání.",
   "KRIPTA.Dialog.Count.TotalCards": "celkem karet tohoto typu - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "Neplatný level pro {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "Neplatný number pro {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "neplatný level karty: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "neznámá chyba",
   "KRIPTA.Error.NameRequired": "Pole názvu je povinné.",
   "KRIPTA.Error.RegistryDeleteReturned": "server po smazání vrátil hráče do registru.",
-
   "KRIPTA.Notification.CardGiven": "Karta vydána.",
   "KRIPTA.Notification.CardUsed": "Karta byla použita a odepsána.",
   "KRIPTA.Notification.CardWrittenOff": "Karta odepsána.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Nepodařilo se připojit k serveru. Zkontrolujte adresu, dostupnost serveru a nastavení CORS/HTTPS.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Nepodařilo se zkontrolovat server.",
   "KRIPTA.Notification.InvalidServerUrl": "Neplatná adresa serveru: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "Odkaz pro tlačítko „Poděkovat autorovi“ není nastaven.",
   "KRIPTA.Notification.SettingsAccessDenied": "Sekce nastavení „Karty Krypty“ je dostupná pouze rolím „Vedoucí“ a „Asistent vedoucího“.",
   "KRIPTA.Notification.ServerCheckFailed": "Kontrola serveru selhala",
   "KRIPTA.Notification.TechUserReader": "Čtenář",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Nepodařilo se aktualizovat hráče",
   "KRIPTA.Notification.PlayerDeleteFailed": "Nepodařilo se smazat hráče",
   "KRIPTA.Notification.CardRollFailed": "Nepodařilo se získat kartu.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Odebrat kartu",
   "KRIPTA.Dialog.TakeCard.Message": "Hráč {playerName} přijde o kartu {cardName}.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Vydat kartu"

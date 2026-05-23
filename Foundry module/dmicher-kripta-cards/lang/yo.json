@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Olùlò Foundry rẹ kò tíì so mọ́ Ẹlẹ́ṣeré Sáfà nínú mójúùlù Kaadi Kripta. Jọ̀wọ́ kan sí Olùdarí Ere.",
   "KRIPTA.GMOnly": "Ìṣe yìí wà fún Olùdarí Ere nìkan.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Àdírẹ́sì sáfà",
   "KRIPTA.Settings.TechAuthUsers.Name": "Àwọn olùlò imọ̀-ẹ̀rọ",
   "KRIPTA.Settings.PlayerBindings.Name": "Ìsọ̀kan olùlò Foundry sí ẹlẹ́ṣeré sáfà",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Àwọn Kaadi Kripta",
   "KRIPTA.Settings.Menu.Label": "Ètò mójúùlù",
   "KRIPTA.Settings.Menu.Hint": "Ìsopọ̀ API àti àwọn olùlò imọ̀-ẹ̀rọ.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Tí o kò bá tíì fi olupin àkóónú fún modulu náà sílẹ̀ tí o sì túnto rẹ̀, tẹle ",
+  "KRIPTA.Settings.Help.ServerLink": "ìjápọ̀ yìí",
+  "KRIPTA.Settings.Help.AfterServerLink": " láti ṣe bẹ́ẹ̀. Fún ìtòlẹ́sẹẹsẹ yára, lo ",
+  "KRIPTA.Settings.Help.DocumentationLink": "àkọsílẹ̀ ìtọ́nisọ́nà",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Kátálọ́ọ̀gù Kaadi",
   "KRIPTA.Window.CardDetails": "Kaadi Kátálọ́ọ̀gù",
   "KRIPTA.Window.GiveCard": "Fúnni ní Kaadi",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Béèrè Kaadi",
   "KRIPTA.Window.Settings": "Àwọn Kaadi Kripta - Ètò",
   "KRIPTA.Window.UseCard": "Lo Kaadi",
-
   "KRIPTA.Menu.Title": "Àwọn Kaadi Kripta",
   "KRIPTA.Menu.Catalog": "Kátálọ́ọ̀gù Kaadi",
   "KRIPTA.Menu.GetCard": "Béèrè Kaadi",
   "KRIPTA.Menu.MyCards": "Àwọn Kaadi Mi",
   "KRIPTA.Menu.Players": "Ṣàkóso Àwọn Ẹlẹ́ṣeré",
-
   "KRIPTA.Label.Category": "Ẹ̀ka",
   "KRIPTA.Label.Mode": "Móòdù",
   "KRIPTA.Label.Card": "Kaadi",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Olùkà",
   "KRIPTA.Label.Role": "Ipa",
   "KRIPTA.Label.Binding": "Ìsọ̀kan",
-
   "KRIPTA.Role.GM": "Olùdarí Ere",
   "KRIPTA.Role.Player": "Ẹlẹ́ṣeré",
   "KRIPTA.Status.InGame": "lórí ayélujára",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "kò sí kaadi",
   "KRIPTA.Binding.NotBound": "ẹlẹ́ṣeré kò tíì so mọ́, so ẹlẹ́ṣeré kan.",
   "KRIPTA.Binding.CardsCountHint": "Ìye irú kaadi tí a fúnni, láìka àwọn tí ó tún ṣe",
-
   "KRIPTA.Button.Add": "Fi kún",
   "KRIPTA.Button.Bind": "So mọ́",
   "KRIPTA.Button.Cancel": "Fagilé",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Yọ kúrò",
   "KRIPTA.Button.TestAuth": "Ṣàyẹ̀wò àwọn olùlò imọ̀-ẹ̀rọ",
   "KRIPTA.Button.TestServer": "Ṣàyẹ̀wò sáfà",
-  "KRIPTA.Button.ThanksAuthor": "Dúpẹ́ lọ́wọ́ onkọ̀wé",
   "KRIPTA.Button.Unbind": "Yọ ìsọ̀kan",
   "KRIPTA.Button.Use": "Lo",
   "KRIPTA.Button.Yes": "Bẹ́ẹ̀ni",
-
   "KRIPTA.Mode.Manual": "Yan pẹ̀lú ọwọ́",
   "KRIPTA.Mode.Random": "Láìlétò",
   "KRIPTA.Mode.Show": "Fihàn",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Àwọn tile",
   "KRIPTA.Placeholder.Search": "Wá",
   "KRIPTA.Select.NotSelected": "-- a kò yan --",
-
   "KRIPTA.Template.EmptyCatalog": "Kò sí ẹ̀ka tàbí kaadi tí a forúkọ sí lórí sáfà.",
   "KRIPTA.Template.MyCardsTitle": "Àwọn kaadi ẹlẹ́ṣeré: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Kaadi yìí kò sí ní ìforúkọsílẹ̀ sáfà mọ́.",
   "KRIPTA.Template.UseCardPrompt": "A ó lo kaadi yìí:",
-
   "KRIPTA.Card.FallbackName": "Kaadi {number}",
   "KRIPTA.Card.FallbackAddress": "Kaadi {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Kaadi {level}/{number} kò sí nínú kátálọ́ọ̀gù sáfà lọwọlọwọ.",
   "KRIPTA.Card.NotRegisteredDescription": "Kaadi {level}/{number} kò sí ní ìforúkọsílẹ̀ sáfà mọ́.",
   "KRIPTA.Level.FallbackName": "Ìpele {level}",
   "KRIPTA.Level.MissingDescription": "Ìpele yìí wà nínú àkójọ ohun ẹlẹ́ṣeré, ṣùgbọ́n kò sí nínú kátálọ́ọ̀gù sáfà lọwọlọwọ.",
-
   "KRIPTA.Chat.BlobReadFailed": "Kò ṣeé ka blob",
   "KRIPTA.Chat.CardGivenTitle": "A Ti Fúnni Ní Kaadi",
   "KRIPTA.Chat.CardReceiveSubtitle": "Ẹlẹ́ṣeré {playerName} gba kaadi {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Ìbéèrè Kaadi Tí A Yan",
   "KRIPTA.Chat.RequestRandomTitle": "Ìbéèrè Kaadi Láìlétò",
   "KRIPTA.Chat.ShowCardTitle": "Ìtọ́kasí Kaadi",
-
   "KRIPTA.Dialog.BindPlayer.Title": "So Ẹlẹ́ṣeré Sáfà Mọ́",
   "KRIPTA.Dialog.BindPlayer.Header": "Yan ẹlẹ́ṣeré fún {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "olùlò Foundry",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Paarẹ Ẹlẹ́ṣeré",
   "KRIPTA.Dialog.Player.DeleteWarning": "Pípaarẹ ẹlẹ́ṣeré \"{playerName}\" kò le yí padà. Tẹ \"{code}\" kí o sì jẹ́risi pípaarẹ.",
   "KRIPTA.Dialog.Count.TotalCards": "àpapọ̀ kaadi irú yìí - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "Ìpele tí kò tọ́ fún {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "Nọ́ńbà tí kò tọ́ fún {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "ìpele kaadi tí kò tọ́: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "àṣìṣe tí a kò mọ̀",
   "KRIPTA.Error.NameRequired": "A nílò ààyè Orúkọ.",
   "KRIPTA.Error.RegistryDeleteReturned": "sáfà dá ẹlẹ́ṣeré padà sí ìforúkọsílẹ̀ lẹ́yìn pípaarẹ.",
-
   "KRIPTA.Notification.CardGiven": "A ti fúnni ní kaadi.",
   "KRIPTA.Notification.CardUsed": "A ti lo kaadi, a sì ti ná a.",
   "KRIPTA.Notification.CardWrittenOff": "A ti yọ kaadi kúrò.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Kò ṣeé sopọ̀ mọ́ sáfà. Ṣàyẹ̀wò àdírẹ́sì, wíwà sáfà, àti ètò CORS/HTTPS.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Kò ṣeé ṣàyẹ̀wò sáfà.",
   "KRIPTA.Notification.InvalidServerUrl": "Àdírẹ́sì sáfà tí kò tọ́: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "A kò tíì ṣètò ìjápọ̀ fún bọtìnì \"Dúpẹ́ lọ́wọ́ onkọ̀wé\".",
   "KRIPTA.Notification.SettingsAccessDenied": "Ẹ̀ka ètò Kaadi Kripta wà fún àwọn ipa Olùdarí Ere àti Olùrànlọ́wọ́ Olùdarí Ere nìkan.",
   "KRIPTA.Notification.ServerCheckFailed": "Ìyẹ̀wò sáfà kùnà",
   "KRIPTA.Notification.TechUserReader": "Olùkà",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Kò ṣeé ṣe àfikún tuntun sí ẹlẹ́ṣeré",
   "KRIPTA.Notification.PlayerDeleteFailed": "Kò ṣeé pa ẹlẹ́ṣeré rẹ́",
   "KRIPTA.Notification.CardRollFailed": "Kò ṣeé gba kaadi.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Yọ Kaadi Kúrò",
   "KRIPTA.Dialog.TakeCard.Message": "Ẹlẹ́ṣeré {playerName} yóò pàdánù kaadi {cardName}.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Fúnni ní Kaadi"

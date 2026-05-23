@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Dein Foundry-Benutzer ist im Modul Kripta Cards nicht mit einem Server-Spieler verknüpft. Bitte wende dich an die Spielleitung.",
   "KRIPTA.GMOnly": "Diese Aktion ist nur für die Spielleitung verfügbar.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Serveradresse",
   "KRIPTA.Settings.TechAuthUsers.Name": "Technische Benutzer",
   "KRIPTA.Settings.PlayerBindings.Name": "Verknüpfungen von Foundry-Benutzern mit Server-Spielern",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta Cards",
   "KRIPTA.Settings.Menu.Label": "Moduleinstellungen",
   "KRIPTA.Settings.Menu.Hint": "API-Verbindung und technische Benutzer.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Wenn Sie den Content-Server für das Modul noch nicht installiert und eingerichtet haben, folgen Sie ",
+  "KRIPTA.Settings.Help.ServerLink": "diesem Link",
+  "KRIPTA.Settings.Help.AfterServerLink": ", um dies zu tun. Für die schnelle Einrichtung verwenden Sie die ",
+  "KRIPTA.Settings.Help.DocumentationLink": "Dokumentation",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Kartenkatalog",
   "KRIPTA.Window.CardDetails": "Katalogkarte",
   "KRIPTA.Window.GiveCard": "Karte geben",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Karte anfordern",
   "KRIPTA.Window.Settings": "Kripta Cards - Einstellungen",
   "KRIPTA.Window.UseCard": "Karte verwenden",
-
   "KRIPTA.Menu.Title": "Kripta Cards",
   "KRIPTA.Menu.Catalog": "Kartenkatalog",
   "KRIPTA.Menu.GetCard": "Karte anfordern",
   "KRIPTA.Menu.MyCards": "Meine Karten",
   "KRIPTA.Menu.Players": "Spieler verwalten",
-
   "KRIPTA.Label.Category": "Kategorie",
   "KRIPTA.Label.Mode": "Modus",
   "KRIPTA.Label.Card": "Karte",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Reader",
   "KRIPTA.Label.Role": "Rolle",
   "KRIPTA.Label.Binding": "Verknüpfung",
-
   "KRIPTA.Role.GM": "Spielleitung",
   "KRIPTA.Role.Player": "Spieler",
   "KRIPTA.Status.InGame": "im Spiel",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "keine Karten",
   "KRIPTA.Binding.NotBound": "Spieler ist nicht verknüpft, wähle einen Spieler.",
   "KRIPTA.Binding.CardsCountHint": "Anzahl ausgegebener Kartentypen, Duplikate nicht mitgezählt",
-
   "KRIPTA.Button.Add": "Hinzufügen",
   "KRIPTA.Button.Bind": "Verknüpfen",
   "KRIPTA.Button.Cancel": "Abbrechen",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Entziehen",
   "KRIPTA.Button.TestAuth": "Technische Benutzer prüfen",
   "KRIPTA.Button.TestServer": "Server prüfen",
-  "KRIPTA.Button.ThanksAuthor": "Autor danken",
   "KRIPTA.Button.Unbind": "Verknüpfung lösen",
   "KRIPTA.Button.Use": "Verwenden",
   "KRIPTA.Button.Yes": "Ja",
-
   "KRIPTA.Mode.Manual": "Manuell auswählen",
   "KRIPTA.Mode.Random": "Zufällig",
   "KRIPTA.Mode.Show": "Zeigen",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Kacheln",
   "KRIPTA.Placeholder.Search": "Suchen",
   "KRIPTA.Select.NotSelected": "-- nicht ausgewählt --",
-
   "KRIPTA.Template.EmptyCatalog": "Auf dem Server sind keine Kategorien oder Karten registriert.",
   "KRIPTA.Template.MyCardsTitle": "Karten von Spieler: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Diese Karte ist nicht mehr auf dem Server registriert.",
   "KRIPTA.Template.UseCardPrompt": "Diese Karte wird verwendet:",
-
   "KRIPTA.Card.FallbackName": "Karte {number}",
   "KRIPTA.Card.FallbackAddress": "Karte {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Karte {level}/{number} fehlt im aktuellen Serverkatalog.",
   "KRIPTA.Card.NotRegisteredDescription": "Karte {level}/{number} ist nicht mehr auf dem Server registriert.",
   "KRIPTA.Level.FallbackName": "Stufe {level}",
   "KRIPTA.Level.MissingDescription": "Diese Stufe existiert im Inventar des Spielers, fehlt aber im aktuellen Serverkatalog.",
-
   "KRIPTA.Chat.BlobReadFailed": "Blob konnte nicht gelesen werden",
   "KRIPTA.Chat.CardGivenTitle": "Karte gegeben",
   "KRIPTA.Chat.CardReceiveSubtitle": "Spieler {playerName} erhält Karte {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Anforderung einer ausgewählten Karte",
   "KRIPTA.Chat.RequestRandomTitle": "Anforderung einer zufälligen Karte",
   "KRIPTA.Chat.ShowCardTitle": "Kartenreferenz",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Server-Spieler verknüpfen",
   "KRIPTA.Dialog.BindPlayer.Header": "Spieler für {foundryUserName} auswählen",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry-Benutzer",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Spieler löschen",
   "KRIPTA.Dialog.Player.DeleteWarning": "Das Löschen von Spieler \"{playerName}\" kann nicht rückgängig gemacht werden. Gib {code} ein und bestätige das Löschen.",
   "KRIPTA.Dialog.Count.TotalCards": "Gesamtzahl der Karten dieses Typs - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "Ungültige Stufe für {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "Ungültige Nummer für {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "ungültige Kartenstufe: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "unbekannter Fehler",
   "KRIPTA.Error.NameRequired": "api 400: Das Feld Name ist erforderlich.",
   "KRIPTA.Error.RegistryDeleteReturned": "der Server hat den Spieler nach dem Löschen wieder im Register zurückgegeben.",
-
   "KRIPTA.Notification.CardGiven": "Karte gegeben.",
   "KRIPTA.Notification.CardUsed": "Karte verwendet und ausgegeben.",
   "KRIPTA.Notification.CardWrittenOff": "Karte entfernt.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Verbindung zum Server fehlgeschlagen. Prüfe Adresse, Serververfügbarkeit und CORS/HTTPS-Einstellungen.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Server konnte nicht geprüft werden.",
   "KRIPTA.Notification.InvalidServerUrl": "Ungültige Serveradresse: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "Der Link für die Schaltfläche \"Autor danken\" ist nicht konfiguriert.",
   "KRIPTA.Notification.SettingsAccessDenied": "Der Einstellungsbereich von Kripta Cards ist nur für die Rollen Spielleitung und Assistierende Spielleitung verfügbar.",
   "KRIPTA.Notification.ServerCheckFailed": "Serverprüfung fehlgeschlagen",
   "KRIPTA.Notification.TechUserReader": "Reader",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Spieler konnte nicht aktualisiert werden",
   "KRIPTA.Notification.PlayerDeleteFailed": "Spieler konnte nicht gelöscht werden",
   "KRIPTA.Notification.CardRollFailed": "Karte konnte nicht empfangen werden.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Karte entziehen",
   "KRIPTA.Dialog.TakeCard.Message": "Spieler {playerName} verliert Karte {cardName}.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Karte geben"

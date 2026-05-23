@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Һеҙҙең Foundry ҡатнашыусыһы Крипта карточкалары модулендә сервер уйынсыһына бәйләнмәгән. Уйын оҫтаһына мөрәжәғәт итегеҙ.",
   "KRIPTA.GMOnly": "Был ғәмәл тик уйын оҫтаһына ғына мөмкин.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Сервер адресы",
   "KRIPTA.Settings.TechAuthUsers.Name": "Техник ҡулланыусылар",
   "KRIPTA.Settings.PlayerBindings.Name": "Ҡатнашыусыларҙы сервер уйынсыларына бәйләү",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Крипта карточкалары",
   "KRIPTA.Settings.Menu.Label": "Модулде көйләү",
   "KRIPTA.Settings.Menu.Hint": "API-ға тоташыу һәм техник ҡулланыусылар.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Әгәр модуль өсөн контент серверын әле ҡуймаған һәм көйләмәгән булһағыҙ, быны эшләү өсөн ",
+  "KRIPTA.Settings.Help.ServerLink": "ошо һылтанмаға",
+  "KRIPTA.Settings.Help.AfterServerLink": " күсегеҙ. Тиҙ көйләү өсөн ",
+  "KRIPTA.Settings.Help.DocumentationLink": "документацияны",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " ҡулланығыҙ.",
   "KRIPTA.Window.Catalog": "Карточкалар каталогы",
   "KRIPTA.Window.CardDetails": "Каталог карточкаһы",
   "KRIPTA.Window.GiveCard": "Карточка биреү",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Карточка алыу",
   "KRIPTA.Window.Settings": "Крипта карточкалары - Көйләүҙәр",
   "KRIPTA.Window.UseCard": "Карточканы ҡулланыу",
-
   "KRIPTA.Menu.Title": "Крипта карточкалары",
   "KRIPTA.Menu.Catalog": "Карточкалар каталогы",
   "KRIPTA.Menu.GetCard": "Карточка алыу",
   "KRIPTA.Menu.MyCards": "Минең карточкалар",
   "KRIPTA.Menu.Players": "Уйынсылар менән идара итеү",
-
   "KRIPTA.Label.Category": "Категория",
   "KRIPTA.Label.Mode": "Режим",
   "KRIPTA.Label.Card": "Карточка",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Уҡыусы (Reader)",
   "KRIPTA.Label.Role": "Роль",
   "KRIPTA.Label.Binding": "Бәйләнеш",
-
   "KRIPTA.Role.GM": "Уйын оҫтаһы",
   "KRIPTA.Role.Player": "Уйынсы",
   "KRIPTA.Status.InGame": "уйында",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "карточкалар юҡ",
   "KRIPTA.Binding.NotBound": "уйынсы бәйләнмәгән, уйынсыны һайлағыҙ.",
   "KRIPTA.Binding.CardsCountHint": "Бирелгән карточка төрҙәре һаны (ҡабатланғандар иҫәпләнмәй)",
-
   "KRIPTA.Button.Add": "Өҫтәү",
   "KRIPTA.Button.Bind": "Бәйләү",
   "KRIPTA.Button.Cancel": "Кире ҡағыу",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Алып ҡуйыу",
   "KRIPTA.Button.TestAuth": "Техник ҡулланыусыларҙы тикшереү",
   "KRIPTA.Button.TestServer": "Серверҙы тикшереү",
-  "KRIPTA.Button.ThanksAuthor": "Авторға рәхмәт әйтеү",
   "KRIPTA.Button.Unbind": "Бәйләнеште өҙөү",
   "KRIPTA.Button.Use": "Ҡулланыу",
   "KRIPTA.Button.Yes": "Эйе",
-
   "KRIPTA.Mode.Manual": "Һайлап",
   "KRIPTA.Mode.Random": "Осраҡлы",
   "KRIPTA.Mode.Show": "Күрһىتىү",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Плиткалар",
   "KRIPTA.Placeholder.Search": "Эҙләү",
   "KRIPTA.Select.NotSelected": "-- һайланмаған --",
-
   "KRIPTA.Template.EmptyCatalog": "Серверҙа теркәлгән категориялар йәки карточкалар юҡ.",
   "KRIPTA.Template.MyCardsTitle": "Уйынсы карточкалары: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Был карточка серверҙа инде теркәлмәгән.",
   "KRIPTA.Template.UseCardPrompt": "Түбәндәге карточка ҡулланыласаҡ:",
-
   "KRIPTA.Card.FallbackName": "Карточка {number}",
   "KRIPTA.Card.FallbackAddress": "Карточка {level}/{number}",
   "KRIPTA.Card.MissingDescription": "{level}/{number} карточкаһы серверҙың ағымдағы каталогында юҡ.",
   "KRIPTA.Card.NotRegisteredDescription": "{level}/{number} карточкаһы серверҙа инде теркәлмәгән.",
   "KRIPTA.Level.FallbackName": "Кимәл {level}",
   "KRIPTA.Level.MissingDescription": "Кимәл уйынсы инвентарында бар, ләкин серверҙың ағымдағы каталогында юҡ.",
-
   "KRIPTA.Chat.BlobReadFailed": "BLOB уҡып булманы",
   "KRIPTA.Chat.CardGivenTitle": "Карточка бирелде",
   "KRIPTA.Chat.CardReceiveSubtitle": "{playerName} уйынсыһы {cardSubtitle} карточкаһын ала",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Һайланған карточка һорауы",
   "KRIPTA.Chat.RequestRandomTitle": "Осраҡлы карточка һорауы",
   "KRIPTA.Chat.ShowCardTitle": "Карточка белешмәһе",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Сервер уйынсыһын бәйләү",
   "KRIPTA.Dialog.BindPlayer.Header": "{foundryUserName} өсөн уйынсы һайлау",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry ҡулланыусыһы",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Уйынсыны юйыу",
   "KRIPTA.Dialog.Player.DeleteWarning": "\"{playerName}\" уйынсыһын юйыу кире ҡайтарылмай. \"{code}\" индерегеҙ һәм юйыуҙы раҫлағыҙ.",
   "KRIPTA.Dialog.Count.TotalCards": "был төр карточкаларҙың дөйөм һаны - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "{context} өсөн level дөрөҫ түгел: {level}",
   "KRIPTA.Error.InvalidCardNumber": "{context} өсөн number дөрөҫ түгел: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "карточканың level дөрөҫ түгел: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "билдәһеҙ хата",
   "KRIPTA.Error.NameRequired": "Исем яланы мотлаҡ.",
   "KRIPTA.Error.RegistryDeleteReturned": "сервер юйғандан һуң уйынсыны реестрға кире ҡайтарҙы.",
-
   "KRIPTA.Notification.CardGiven": "Карточка бирелде.",
   "KRIPTA.Notification.CardUsed": "Карточка ҡулланылды һәм иҫәптән сығарылды.",
   "KRIPTA.Notification.CardWrittenOff": "Карточка иҫәптән сығарылды.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Серверға тоташып булманы. Адресты, серверҙың эшләүен һәм CORS/HTTPS көйләүҙәрен тикшерегеҙ.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Серверҙы тикшереп булманы.",
   "KRIPTA.Notification.InvalidServerUrl": "Сервер адресы дөрөҫ түгел: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "«Авторға рәхмәт әйтеү» төймәһе өсөн һылтанма көйләнмәгән.",
   "KRIPTA.Notification.SettingsAccessDenied": "«Крипта карточкалары» көйләүҙәре бүлеге тик «Алып барыусы» һәм «Алып барыусы ярҙамсыһы» ролдәренә генә мөмкин.",
   "KRIPTA.Notification.ServerCheckFailed": "Серверҙы тикшереү уңышһыҙ булды",
   "KRIPTA.Notification.TechUserReader": "Уҡыусы",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Уйынсыны яңыртып булманы",
   "KRIPTA.Notification.PlayerDeleteFailed": "Уйынсыны юйып булманы",
   "KRIPTA.Notification.CardRollFailed": "Карточка алып булманы.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Карточканы алыу",
   "KRIPTA.Dialog.TakeCard.Message": "{playerName} уйынсыһы {cardName} карточкаһынан мәхрүм ителәсәк.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Карточка биреү"

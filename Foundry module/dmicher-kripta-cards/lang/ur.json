@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "آپ کا Foundry صارف Kripta Cards ماڈیول میں کسی سرور کھلاڑی سے منسلک نہیں ہے۔ براہ کرم گیم ماسٹر سے رابطہ کریں۔",
   "KRIPTA.GMOnly": "یہ کارروائی صرف گیم ماسٹر کے لیے دستیاب ہے۔",
-
   "KRIPTA.Settings.ServerUrl.Name": "سرور کا پتہ",
   "KRIPTA.Settings.TechAuthUsers.Name": "تکنیکی صارفین",
   "KRIPTA.Settings.PlayerBindings.Name": "Foundry صارفین اور سرور کھلاڑیوں کی وابستگیاں",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta Cards",
   "KRIPTA.Settings.Menu.Label": "ماڈیول ترتیبات",
   "KRIPTA.Settings.Menu.Hint": "API کنکشن اور تکنیکی صارفین۔",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "اگر آپ نے ماڈیول کے لیے مواد کا سرور ابھی تک انسٹال اور ترتیب نہیں دیا ہے، تو ایسا کرنے کے لیے ",
+  "KRIPTA.Settings.Help.ServerLink": "اس لنک",
+  "KRIPTA.Settings.Help.AfterServerLink": " پر جائیں۔ فوری ترتیب کے لیے ",
+  "KRIPTA.Settings.Help.DocumentationLink": "دستاویزات",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " استعمال کریں۔",
   "KRIPTA.Window.Catalog": "کارڈ کیٹلاگ",
   "KRIPTA.Window.CardDetails": "کیٹلاگ کارڈ",
   "KRIPTA.Window.GiveCard": "کارڈ دیں",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "کارڈ کی درخواست",
   "KRIPTA.Window.Settings": "Kripta Cards - ترتیبات",
   "KRIPTA.Window.UseCard": "کارڈ استعمال کریں",
-
   "KRIPTA.Menu.Title": "Kripta Cards",
   "KRIPTA.Menu.Catalog": "کارڈ کیٹلاگ",
   "KRIPTA.Menu.GetCard": "کارڈ کی درخواست",
   "KRIPTA.Menu.MyCards": "میرے کارڈ",
   "KRIPTA.Menu.Players": "کھلاڑیوں کا انتظام",
-
   "KRIPTA.Label.Category": "زمرہ",
   "KRIPTA.Label.Mode": "موڈ",
   "KRIPTA.Label.Card": "کارڈ",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Reader",
   "KRIPTA.Label.Role": "کردار",
   "KRIPTA.Label.Binding": "وابستگی",
-
   "KRIPTA.Role.GM": "گیم ماسٹر",
   "KRIPTA.Role.Player": "کھلاڑی",
   "KRIPTA.Status.InGame": "آن لائن",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "کوئی کارڈ نہیں",
   "KRIPTA.Binding.NotBound": "کھلاڑی منسلک نہیں ہے، کھلاڑی کو منسلک کریں۔",
   "KRIPTA.Binding.CardsCountHint": "دی گئی کارڈ اقسام کی تعداد، تکرار کے بغیر",
-
   "KRIPTA.Button.Add": "شامل کریں",
   "KRIPTA.Button.Bind": "منسلک کریں",
   "KRIPTA.Button.Cancel": "منسوخ",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "واپس لیں",
   "KRIPTA.Button.TestAuth": "تکنیکی صارفین چیک کریں",
   "KRIPTA.Button.TestServer": "سرور چیک کریں",
-  "KRIPTA.Button.ThanksAuthor": "مصنف کا شکریہ ادا کریں",
   "KRIPTA.Button.Unbind": "وابستگی ختم کریں",
   "KRIPTA.Button.Use": "استعمال کریں",
   "KRIPTA.Button.Yes": "ہاں",
-
   "KRIPTA.Mode.Manual": "دستی انتخاب",
   "KRIPTA.Mode.Random": "تصادفی",
   "KRIPTA.Mode.Show": "دکھائیں",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "ٹائلز",
   "KRIPTA.Placeholder.Search": "تلاش",
   "KRIPTA.Select.NotSelected": "-- منتخب نہیں --",
-
   "KRIPTA.Template.EmptyCatalog": "سرور پر کوئی رجسٹرڈ زمرہ یا کارڈ موجود نہیں۔",
   "KRIPTA.Template.MyCardsTitle": "کھلاڑی کے کارڈ: {playerName}",
   "KRIPTA.Template.UseCardMissing": "یہ کارڈ اب سرور پر رجسٹرڈ نہیں ہے۔",
   "KRIPTA.Template.UseCardPrompt": "یہ کارڈ استعمال کیا جائے گا:",
-
   "KRIPTA.Card.FallbackName": "کارڈ {number}",
   "KRIPTA.Card.FallbackAddress": "کارڈ {level}/{number}",
   "KRIPTA.Card.MissingDescription": "کارڈ {level}/{number} موجودہ سرور کیٹلاگ میں موجود نہیں۔",
   "KRIPTA.Card.NotRegisteredDescription": "کارڈ {level}/{number} اب سرور پر رجسٹرڈ نہیں ہے۔",
   "KRIPTA.Level.FallbackName": "سطح {level}",
   "KRIPTA.Level.MissingDescription": "یہ سطح کھلاڑی کی انوینٹری میں موجود ہے، لیکن موجودہ سرور کیٹلاگ میں موجود نہیں۔",
-
   "KRIPTA.Chat.BlobReadFailed": "blob پڑھنے میں ناکامی",
   "KRIPTA.Chat.CardGivenTitle": "کارڈ دے دیا گیا",
   "KRIPTA.Chat.CardReceiveSubtitle": "کھلاڑی {playerName} کو کارڈ {cardSubtitle} ملتا ہے",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "منتخب کارڈ کی درخواست",
   "KRIPTA.Chat.RequestRandomTitle": "تصادفی کارڈ کی درخواست",
   "KRIPTA.Chat.ShowCardTitle": "کارڈ حوالہ",
-
   "KRIPTA.Dialog.BindPlayer.Title": "سرور کھلاڑی منسلک کریں",
   "KRIPTA.Dialog.BindPlayer.Header": "{foundryUserName} کے لیے کھلاڑی منتخب کریں",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry صارف",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "کھلاڑی حذف کریں",
   "KRIPTA.Dialog.Player.DeleteWarning": "کھلاڑی \"{playerName}\" کو حذف کرنا واپس نہیں کیا جا سکتا۔ \"{code}\" درج کریں اور حذف کرنے کی تصدیق کریں۔",
   "KRIPTA.Dialog.Count.TotalCards": "اس قسم کے کل کارڈ - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "{context} کے لیے غلط سطح: {level}",
   "KRIPTA.Error.InvalidCardNumber": "{context} کے لیے غلط نمبر: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "غلط کارڈ سطح: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "نامعلوم خرابی",
   "KRIPTA.Error.NameRequired": "Name فیلڈ لازمی ہے۔",
   "KRIPTA.Error.RegistryDeleteReturned": "حذف کرنے کے بعد سرور نے کھلاڑی کو رجسٹری میں واپس کر دیا۔",
-
   "KRIPTA.Notification.CardGiven": "کارڈ دے دیا گیا۔",
   "KRIPTA.Notification.CardUsed": "کارڈ استعمال اور خرچ ہو گیا۔",
   "KRIPTA.Notification.CardWrittenOff": "کارڈ ہٹا دیا گیا۔",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "سرور سے کنکشن ناکام۔ پتہ، سرور کی دستیابی، اور CORS/HTTPS ترتیبات چیک کریں۔",
   "KRIPTA.Notification.ServerCheckFailedFallback": "سرور چیک نہیں ہو سکا۔",
   "KRIPTA.Notification.InvalidServerUrl": "غلط سرور پتہ: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "\"مصنف کا شکریہ ادا کریں\" بٹن کا لنک ترتیب نہیں دیا گیا۔",
   "KRIPTA.Notification.SettingsAccessDenied": "Kripta Cards ترتیبات کا حصہ صرف گیم ماسٹر اور اسسٹنٹ گیم ماسٹر کرداروں کے لیے دستیاب ہے۔",
   "KRIPTA.Notification.ServerCheckFailed": "سرور چیک ناکام",
   "KRIPTA.Notification.TechUserReader": "Reader",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "کھلاڑی اپ ڈیٹ کرنے میں ناکامی",
   "KRIPTA.Notification.PlayerDeleteFailed": "کھلاڑی حذف کرنے میں ناکامی",
   "KRIPTA.Notification.CardRollFailed": "کارڈ وصول کرنے میں ناکامی۔",
-
   "KRIPTA.Dialog.TakeCard.Title": "کارڈ واپس لیں",
   "KRIPTA.Dialog.TakeCard.Message": "کھلاڑی {playerName} کارڈ {cardName} کھو دے گا۔",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "کارڈ دیں"

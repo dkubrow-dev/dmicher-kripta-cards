@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "የFoundry ተጠቃሚዎ በKripta Cards ሞጁል ውስጥ ከሰርቨር ተጫዋች ጋር አልተገናኘም። እባክዎ የጨዋታ መሪውን ያነጋግሩ።",
   "KRIPTA.GMOnly": "ይህ እርምጃ ለጨዋታ መሪው ብቻ ይገኛል።",
-
   "KRIPTA.Settings.ServerUrl.Name": "የሰርቨር አድራሻ",
   "KRIPTA.Settings.TechAuthUsers.Name": "ቴክኒካዊ ተጠቃሚዎች",
   "KRIPTA.Settings.PlayerBindings.Name": "የFoundry ተጠቃሚዎችን ከሰርቨር ተጫዋቾች ጋር ማገናኘት",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "የKripta ካርዶች",
   "KRIPTA.Settings.Menu.Label": "የሞጁል ቅንብሮች",
   "KRIPTA.Settings.Menu.Hint": "የAPI ግንኙነት እና ቴክኒካዊ ተጠቃሚዎች።",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "ለሞጁሉ የይዘት አገልጋይ ገና ካልጫኑ እና ካላዋቀሩ፣ ",
+  "KRIPTA.Settings.Help.ServerLink": "ይህን አገናኝ",
+  "KRIPTA.Settings.Help.AfterServerLink": " ይከተሉ። ለፈጣን ማዋቀር ",
+  "KRIPTA.Settings.Help.DocumentationLink": "ሰነዱን",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " ይጠቀሙ።",
   "KRIPTA.Window.Catalog": "የካርድ ካታሎግ",
   "KRIPTA.Window.CardDetails": "የካታሎግ ካርድ",
   "KRIPTA.Window.GiveCard": "ካርድ ስጥ",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "ካርድ ጠይቅ",
   "KRIPTA.Window.Settings": "የKripta ካርዶች - ቅንብሮች",
   "KRIPTA.Window.UseCard": "ካርድ ተጠቀም",
-
   "KRIPTA.Menu.Title": "የKripta ካርዶች",
   "KRIPTA.Menu.Catalog": "የካርድ ካታሎግ",
   "KRIPTA.Menu.GetCard": "ካርድ ጠይቅ",
   "KRIPTA.Menu.MyCards": "የእኔ ካርዶች",
   "KRIPTA.Menu.Players": "ተጫዋቾችን አስተዳድር",
-
   "KRIPTA.Label.Category": "ምድብ",
   "KRIPTA.Label.Mode": "ሁነታ",
   "KRIPTA.Label.Card": "ካርድ",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "አንባቢ",
   "KRIPTA.Label.Role": "ሚና",
   "KRIPTA.Label.Binding": "ግንኙነት",
-
   "KRIPTA.Role.GM": "የጨዋታ መሪ",
   "KRIPTA.Role.Player": "ተጫዋች",
   "KRIPTA.Status.InGame": "በመስመር ላይ",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "ካርዶች የሉም",
   "KRIPTA.Binding.NotBound": "ተጫዋች አልተገናኘም፣ ተጫዋች ያገናኙ።",
   "KRIPTA.Binding.CardsCountHint": "የተሰጡ የካርድ አይነቶች ብዛት፣ የተደጋገሙትን ሳይጨምር",
-
   "KRIPTA.Button.Add": "ጨምር",
   "KRIPTA.Button.Bind": "አገናኝ",
   "KRIPTA.Button.Cancel": "ሰርዝ",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "አስወግድ",
   "KRIPTA.Button.TestAuth": "ቴክኒካዊ ተጠቃሚዎችን ፈትሽ",
   "KRIPTA.Button.TestServer": "ሰርቨርን ፈትሽ",
-  "KRIPTA.Button.ThanksAuthor": "ደራሲውን አመስግን",
   "KRIPTA.Button.Unbind": "ግንኙነት አቋርጥ",
   "KRIPTA.Button.Use": "ተጠቀም",
   "KRIPTA.Button.Yes": "አዎ",
-
   "KRIPTA.Mode.Manual": "በእጅ ምረጥ",
   "KRIPTA.Mode.Random": "በዘፈቀደ",
   "KRIPTA.Mode.Show": "አሳይ",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "ሰቆች",
   "KRIPTA.Placeholder.Search": "ፈልግ",
   "KRIPTA.Select.NotSelected": "-- አልተመረጠም --",
-
   "KRIPTA.Template.EmptyCatalog": "በሰርቨሩ ላይ የተመዘገቡ ምድቦች ወይም ካርዶች የሉም።",
   "KRIPTA.Template.MyCardsTitle": "የተጫዋች ካርዶች: {playerName}",
   "KRIPTA.Template.UseCardMissing": "ይህ ካርድ ከእንግዲህ በሰርቨሩ ላይ አልተመዘገበም።",
   "KRIPTA.Template.UseCardPrompt": "ይህ ካርድ ይጠቀማል:",
-
   "KRIPTA.Card.FallbackName": "ካርድ {number}",
   "KRIPTA.Card.FallbackAddress": "ካርድ {level}/{number}",
   "KRIPTA.Card.MissingDescription": "ካርድ {level}/{number} በአሁኑ የሰርቨር ካታሎግ ውስጥ የለም።",
   "KRIPTA.Card.NotRegisteredDescription": "ካርድ {level}/{number} ከእንግዲህ በሰርቨሩ ላይ አልተመዘገበም።",
   "KRIPTA.Level.FallbackName": "ደረጃ {level}",
   "KRIPTA.Level.MissingDescription": "ይህ ደረጃ በተጫዋቹ ንብረት ውስጥ አለ፣ ግን በአሁኑ የሰርቨር ካታሎግ ውስጥ የለም።",
-
   "KRIPTA.Chat.BlobReadFailed": "blob ማንበብ አልተሳካም",
   "KRIPTA.Chat.CardGivenTitle": "ካርድ ተሰጥቷል",
   "KRIPTA.Chat.CardReceiveSubtitle": "ተጫዋች {playerName} ካርድ {cardSubtitle} ይቀበላል",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "የተመረጠ ካርድ ጥያቄ",
   "KRIPTA.Chat.RequestRandomTitle": "የዘፈቀደ ካርድ ጥያቄ",
   "KRIPTA.Chat.ShowCardTitle": "የካርድ ማጣቀሻ",
-
   "KRIPTA.Dialog.BindPlayer.Title": "የሰርቨር ተጫዋች አገናኝ",
   "KRIPTA.Dialog.BindPlayer.Header": "ለ{foundryUserName} ተጫዋች ምረጥ",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "የFoundry ተጠቃሚ",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "ተጫዋች ሰርዝ",
   "KRIPTA.Dialog.Player.DeleteWarning": "ተጫዋች \"{playerName}\" መሰረዝ መመለስ አይቻልም። \"{code}\" ያስገቡ እና ስረዛውን ያረጋግጡ።",
   "KRIPTA.Dialog.Count.TotalCards": "የዚህ አይነት ጠቅላላ ካርዶች - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "ለ{context} የማይሰራ ደረጃ: {level}",
   "KRIPTA.Error.InvalidCardNumber": "ለ{context} የማይሰራ ቁጥር: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "የማይሰራ የካርድ ደረጃ: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "ያልታወቀ ስህተት",
   "KRIPTA.Error.NameRequired": "የስም መስክ ያስፈልጋል።",
   "KRIPTA.Error.RegistryDeleteReturned": "ሰርቨሩ ከስረዛ በኋላ ተጫዋቹን በመዝገቡ ውስጥ መልሶታል።",
-
   "KRIPTA.Notification.CardGiven": "ካርድ ተሰጥቷል።",
   "KRIPTA.Notification.CardUsed": "ካርድ ተጠቅሟል እና ተወግዷል።",
   "KRIPTA.Notification.CardWrittenOff": "ካርድ ተወግዷል።",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "ከሰርቨሩ ጋር መገናኘት አልተሳካም። አድራሻውን፣ የሰርቨር ተገኝነትን እና የCORS/HTTPS ቅንብሮችን ይፈትሹ።",
   "KRIPTA.Notification.ServerCheckFailedFallback": "ሰርቨሩን መፈተሽ አልተሳካም።",
   "KRIPTA.Notification.InvalidServerUrl": "የማይሰራ የሰርቨር አድራሻ: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "የ\"ደራሲውን አመስግን\" አዝራር አገናኝ አልተዋቀረም።",
   "KRIPTA.Notification.SettingsAccessDenied": "የKripta Cards ቅንብሮች ክፍል ለጨዋታ መሪ እና ለረዳት የጨዋታ መሪ ሚናዎች ብቻ ይገኛል።",
   "KRIPTA.Notification.ServerCheckFailed": "የሰርቨር ፍተሻ አልተሳካም",
   "KRIPTA.Notification.TechUserReader": "አንባቢ",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "ተጫዋች ማዘመን አልተሳካም",
   "KRIPTA.Notification.PlayerDeleteFailed": "ተጫዋች መሰረዝ አልተሳካም",
   "KRIPTA.Notification.CardRollFailed": "ካርድ መቀበል አልተሳካም።",
-
   "KRIPTA.Dialog.TakeCard.Title": "ካርድ አስወግድ",
   "KRIPTA.Dialog.TakeCard.Message": "ተጫዋች {playerName} ካርድ {cardName} ያጣል።",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "ካርድ ስጥ"

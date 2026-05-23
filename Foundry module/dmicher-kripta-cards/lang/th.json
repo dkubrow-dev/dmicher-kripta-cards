@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "ผู้ใช้ Foundry ของคุณยังไม่ได้เชื่อมกับผู้เล่นบนเซิร์ฟเวอร์ในโมดูล Kripta Cards โปรดติดต่อ Game Master",
   "KRIPTA.GMOnly": "การกระทำนี้ใช้ได้เฉพาะ Game Master เท่านั้น",
-
   "KRIPTA.Settings.ServerUrl.Name": "ที่อยู่เซิร์ฟเวอร์",
   "KRIPTA.Settings.TechAuthUsers.Name": "ผู้ใช้ทางเทคนิค",
   "KRIPTA.Settings.PlayerBindings.Name": "การเชื่อมผู้ใช้ Foundry กับผู้เล่นบนเซิร์ฟเวอร์",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta Cards",
   "KRIPTA.Settings.Menu.Label": "การตั้งค่าโมดูล",
   "KRIPTA.Settings.Menu.Hint": "การเชื่อมต่อ API และผู้ใช้ทางเทคนิค",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "หากคุณยังไม่ได้ติดตั้งและกำหนดค่าเซิร์ฟเวอร์เนื้อหาสำหรับโมดูล ให้ไปที่",
+  "KRIPTA.Settings.Help.ServerLink": "ลิงก์นี้",
+  "KRIPTA.Settings.Help.AfterServerLink": "เพื่อดำเนินการ สำหรับการตั้งค่าอย่างรวดเร็ว ให้ใช้",
+  "KRIPTA.Settings.Help.DocumentationLink": "เอกสารประกอบ",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "แคตตาล็อกการ์ด",
   "KRIPTA.Window.CardDetails": "การ์ดในแคตตาล็อก",
   "KRIPTA.Window.GiveCard": "มอบการ์ด",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "ขอการ์ด",
   "KRIPTA.Window.Settings": "Kripta Cards - การตั้งค่า",
   "KRIPTA.Window.UseCard": "ใช้การ์ด",
-
   "KRIPTA.Menu.Title": "Kripta Cards",
   "KRIPTA.Menu.Catalog": "แคตตาล็อกการ์ด",
   "KRIPTA.Menu.GetCard": "ขอการ์ด",
   "KRIPTA.Menu.MyCards": "การ์ดของฉัน",
   "KRIPTA.Menu.Players": "จัดการผู้เล่น",
-
   "KRIPTA.Label.Category": "หมวดหมู่",
   "KRIPTA.Label.Mode": "โหมด",
   "KRIPTA.Label.Card": "การ์ด",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Reader",
   "KRIPTA.Label.Role": "บทบาท",
   "KRIPTA.Label.Binding": "การเชื่อม",
-
   "KRIPTA.Role.GM": "Game Master",
   "KRIPTA.Role.Player": "ผู้เล่น",
   "KRIPTA.Status.InGame": "ออนไลน์",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "ไม่มีการ์ด",
   "KRIPTA.Binding.NotBound": "ผู้เล่นยังไม่ได้เชื่อม โปรดเชื่อมผู้เล่น",
   "KRIPTA.Binding.CardsCountHint": "จำนวนประเภทการ์ดที่มอบแล้ว โดยไม่นับรายการซ้ำ",
-
   "KRIPTA.Button.Add": "เพิ่ม",
   "KRIPTA.Button.Bind": "เชื่อม",
   "KRIPTA.Button.Cancel": "ยกเลิก",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "นำออก",
   "KRIPTA.Button.TestAuth": "ตรวจสอบผู้ใช้ทางเทคนิค",
   "KRIPTA.Button.TestServer": "ตรวจสอบเซิร์ฟเวอร์",
-  "KRIPTA.Button.ThanksAuthor": "ขอบคุณผู้สร้าง",
   "KRIPTA.Button.Unbind": "ยกเลิกการเชื่อม",
   "KRIPTA.Button.Use": "ใช้",
   "KRIPTA.Button.Yes": "ใช่",
-
   "KRIPTA.Mode.Manual": "เลือกเอง",
   "KRIPTA.Mode.Random": "สุ่ม",
   "KRIPTA.Mode.Show": "แสดง",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "ไทล์",
   "KRIPTA.Placeholder.Search": "ค้นหา",
   "KRIPTA.Select.NotSelected": "-- ยังไม่ได้เลือก --",
-
   "KRIPTA.Template.EmptyCatalog": "ไม่มีหมวดหมู่หรือการ์ดที่ลงทะเบียนไว้บนเซิร์ฟเวอร์",
   "KRIPTA.Template.MyCardsTitle": "การ์ดของผู้เล่น: {playerName}",
   "KRIPTA.Template.UseCardMissing": "การ์ดนี้ไม่ได้ลงทะเบียนบนเซิร์ฟเวอร์อีกต่อไป",
   "KRIPTA.Template.UseCardPrompt": "จะใช้การ์ดนี้:",
-
   "KRIPTA.Card.FallbackName": "การ์ด {number}",
   "KRIPTA.Card.FallbackAddress": "การ์ด {level}/{number}",
   "KRIPTA.Card.MissingDescription": "การ์ด {level}/{number} ไม่มีอยู่ในแคตตาล็อกเซิร์ฟเวอร์ปัจจุบัน",
   "KRIPTA.Card.NotRegisteredDescription": "การ์ด {level}/{number} ไม่ได้ลงทะเบียนบนเซิร์ฟเวอร์อีกต่อไป",
   "KRIPTA.Level.FallbackName": "เลเวล {level}",
   "KRIPTA.Level.MissingDescription": "เลเวลนี้มีอยู่ในคลังของผู้เล่น แต่ไม่มีอยู่ในแคตตาล็อกเซิร์ฟเวอร์ปัจจุบัน",
-
   "KRIPTA.Chat.BlobReadFailed": "อ่าน blob ไม่สำเร็จ",
   "KRIPTA.Chat.CardGivenTitle": "มอบการ์ดแล้ว",
   "KRIPTA.Chat.CardReceiveSubtitle": "ผู้เล่น {playerName} ได้รับการ์ด {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "คำขอการ์ดที่เลือก",
   "KRIPTA.Chat.RequestRandomTitle": "คำขอการ์ดสุ่ม",
   "KRIPTA.Chat.ShowCardTitle": "อ้างอิงการ์ด",
-
   "KRIPTA.Dialog.BindPlayer.Title": "เชื่อมผู้เล่นเซิร์ฟเวอร์",
   "KRIPTA.Dialog.BindPlayer.Header": "เลือกผู้เล่นสำหรับ {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "ผู้ใช้ Foundry",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "ลบผู้เล่น",
   "KRIPTA.Dialog.Player.DeleteWarning": "การลบผู้เล่น \"{playerName}\" ไม่สามารถย้อนกลับได้ ป้อน \"{code}\" และยืนยันการลบ",
   "KRIPTA.Dialog.Count.TotalCards": "จำนวนการ์ดทั้งหมดของประเภทนี้ - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "เลเวลไม่ถูกต้องสำหรับ {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "หมายเลขไม่ถูกต้องสำหรับ {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "เลเวลการ์ดไม่ถูกต้อง: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "ข้อผิดพลาดที่ไม่รู้จัก",
   "KRIPTA.Error.NameRequired": "ต้องกรอกฟิลด์ Name",
   "KRIPTA.Error.RegistryDeleteReturned": "เซิร์ฟเวอร์ส่งผู้เล่นกลับมาในทะเบียนหลังจากลบแล้ว",
-
   "KRIPTA.Notification.CardGiven": "มอบการ์ดแล้ว",
   "KRIPTA.Notification.CardUsed": "ใช้และใช้หมดการ์ดแล้ว",
   "KRIPTA.Notification.CardWrittenOff": "นำการ์ดออกแล้ว",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ ตรวจสอบที่อยู่ ความพร้อมใช้งานของเซิร์ฟเวอร์ และการตั้งค่า CORS/HTTPS",
   "KRIPTA.Notification.ServerCheckFailedFallback": "ตรวจสอบเซิร์ฟเวอร์ไม่สำเร็จ",
   "KRIPTA.Notification.InvalidServerUrl": "ที่อยู่เซิร์ฟเวอร์ไม่ถูกต้อง: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "ยังไม่ได้กำหนดค่าลิงก์สำหรับปุ่ม \"ขอบคุณผู้สร้าง\"",
   "KRIPTA.Notification.SettingsAccessDenied": "ส่วนการตั้งค่า Kripta Cards ใช้ได้เฉพาะบทบาท Game Master และ Assistant Game Master",
   "KRIPTA.Notification.ServerCheckFailed": "การตรวจสอบเซิร์ฟเวอร์ล้มเหลว",
   "KRIPTA.Notification.TechUserReader": "Reader",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "อัปเดตผู้เล่นไม่สำเร็จ",
   "KRIPTA.Notification.PlayerDeleteFailed": "ลบผู้เล่นไม่สำเร็จ",
   "KRIPTA.Notification.CardRollFailed": "รับการ์ดไม่สำเร็จ",
-
   "KRIPTA.Dialog.TakeCard.Title": "นำการ์ดออก",
   "KRIPTA.Dialog.TakeCard.Message": "ผู้เล่น {playerName} จะเสียการ์ด {cardName}",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "มอบการ์ด"

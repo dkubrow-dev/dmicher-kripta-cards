@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Foundry колдонуучуңуз Kripta Cards модулунда сервер оюнчусу менен байланыштырылган эмес. Оюн устасына кайрылыңыз.",
   "KRIPTA.GMOnly": "Бул аракет оюн устасына гана жеткиликтүү.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Сервер дареги",
   "KRIPTA.Settings.TechAuthUsers.Name": "Техникалык колдонуучулар",
   "KRIPTA.Settings.PlayerBindings.Name": "Foundry колдонуучуларын сервер оюнчуларына байланыштыруу",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Kripta Cards",
   "KRIPTA.Settings.Menu.Label": "Модуль жөндөөлөрү",
   "KRIPTA.Settings.Menu.Hint": "API байланышы жана техникалык колдонуучулар.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Эгер модуль үчүн контент серверин али орнотуп жана жөндөп бүтө элек болсоңуз, муну жасоо үчүн ",
+  "KRIPTA.Settings.Help.ServerLink": "бул шилтемеге",
+  "KRIPTA.Settings.Help.AfterServerLink": " өтүңүз. Ыкчам жөндөө үчүн ",
+  "KRIPTA.Settings.Help.DocumentationLink": "документацияны",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " колдонуңуз.",
   "KRIPTA.Window.Catalog": "Карталар каталогу",
   "KRIPTA.Window.CardDetails": "Каталог картасы",
   "KRIPTA.Window.GiveCard": "Карта берүү",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Карта суроо",
   "KRIPTA.Window.Settings": "Kripta Cards - Жөндөөлөр",
   "KRIPTA.Window.UseCard": "Картаны колдонуу",
-
   "KRIPTA.Menu.Title": "Kripta Cards",
   "KRIPTA.Menu.Catalog": "Карталар каталогу",
   "KRIPTA.Menu.GetCard": "Карта суроо",
   "KRIPTA.Menu.MyCards": "Менин карталарым",
   "KRIPTA.Menu.Players": "Оюнчуларды башкаруу",
-
   "KRIPTA.Label.Category": "Категория",
   "KRIPTA.Label.Mode": "Режим",
   "KRIPTA.Label.Card": "Карта",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Reader",
   "KRIPTA.Label.Role": "Рол",
   "KRIPTA.Label.Binding": "Байланыш",
-
   "KRIPTA.Role.GM": "Оюн устасы",
   "KRIPTA.Role.Player": "Оюнчу",
   "KRIPTA.Status.InGame": "онлайн",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "карта жок",
   "KRIPTA.Binding.NotBound": "оюнчу байланыштырылган эмес, оюнчуну байланыштырыңыз.",
   "KRIPTA.Binding.CardsCountHint": "Кайталоолорду эсептебегенде берилген карта түрлөрүнүн саны",
-
   "KRIPTA.Button.Add": "Кошуу",
   "KRIPTA.Button.Bind": "Байлоо",
   "KRIPTA.Button.Cancel": "Жокко чыгаруу",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Алуу",
   "KRIPTA.Button.TestAuth": "Техникалык колдонуучуларды текшерүү",
   "KRIPTA.Button.TestServer": "Серверди текшерүү",
-  "KRIPTA.Button.ThanksAuthor": "Авторго ыраазычылык билдирүү",
   "KRIPTA.Button.Unbind": "Байланышты үзүү",
   "KRIPTA.Button.Use": "Колдонуу",
   "KRIPTA.Button.Yes": "Ооба",
-
   "KRIPTA.Mode.Manual": "Кол менен тандоо",
   "KRIPTA.Mode.Random": "Кокус",
   "KRIPTA.Mode.Show": "Көрсөтүү",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Плиткалар",
   "KRIPTA.Placeholder.Search": "Издөө",
   "KRIPTA.Select.NotSelected": "-- тандалган эмес --",
-
   "KRIPTA.Template.EmptyCatalog": "Серверде катталган категориялар же карталар жок.",
   "KRIPTA.Template.MyCardsTitle": "Оюнчунун карталары: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Бул карта мындан ары серверде катталган эмес.",
   "KRIPTA.Template.UseCardPrompt": "Бул карта колдонулат:",
-
   "KRIPTA.Card.FallbackName": "Карта {number}",
   "KRIPTA.Card.FallbackAddress": "Карта {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Карта {level}/{number} учурдагы сервер каталогунда жок.",
   "KRIPTA.Card.NotRegisteredDescription": "Карта {level}/{number} мындан ары серверде катталган эмес.",
   "KRIPTA.Level.FallbackName": "Деңгээл {level}",
   "KRIPTA.Level.MissingDescription": "Бул деңгээл оюнчунун инвентарында бар, бирок учурдагы сервер каталогунда жок.",
-
   "KRIPTA.Chat.BlobReadFailed": "blob окулбады",
   "KRIPTA.Chat.CardGivenTitle": "Карта берилди",
   "KRIPTA.Chat.CardReceiveSubtitle": "Оюнчу {playerName} {cardSubtitle} картасын алат",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Тандалган карта суроосу",
   "KRIPTA.Chat.RequestRandomTitle": "Кокус карта суроосу",
   "KRIPTA.Chat.ShowCardTitle": "Карта маалымдамасы",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Сервер оюнчусун байлоо",
   "KRIPTA.Dialog.BindPlayer.Header": "{foundryUserName} үчүн оюнчу тандаңыз",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry колдонуучусу",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Оюнчуну өчүрүү",
   "KRIPTA.Dialog.Player.DeleteWarning": "\"{playerName}\" оюнчусун өчүрүү артка кайтарылбайт. \"{code}\" киргизип, өчүрүүнү ырастаңыз.",
   "KRIPTA.Dialog.Count.TotalCards": "бул түрдөгү жалпы карталар - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "{context} үчүн туура эмес деңгээл: {level}",
   "KRIPTA.Error.InvalidCardNumber": "{context} үчүн туура эмес номер: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "туура эмес карта деңгээли: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "белгисиз ката",
   "KRIPTA.Error.NameRequired": "Name талаасы милдеттүү.",
   "KRIPTA.Error.RegistryDeleteReturned": "өчүрүлгөндөн кийин сервер оюнчуну реестрде кайтарды.",
-
   "KRIPTA.Notification.CardGiven": "Карта берилди.",
   "KRIPTA.Notification.CardUsed": "Карта колдонулду жана сарпталды.",
   "KRIPTA.Notification.CardWrittenOff": "Карта алынып салынды.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Серверге туташуу мүмкүн болгон жок. Даректи, сервер жеткиликтүүлүгүн жана CORS/HTTPS жөндөөлөрүн текшериңиз.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Сервер текшерилген жок.",
   "KRIPTA.Notification.InvalidServerUrl": "Туура эмес сервер дареги: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "\"Авторго ыраазычылык билдирүү\" баскычы үчүн шилтеме жөндөлгөн эмес.",
   "KRIPTA.Notification.SettingsAccessDenied": "Kripta Cards жөндөөлөрү бөлүмү Оюн устасы жана Оюн устасынын жардамчысы ролдору үчүн гана жеткиликтүү.",
   "KRIPTA.Notification.ServerCheckFailed": "Сервер текшерүүсү ишке ашкан жок",
   "KRIPTA.Notification.TechUserReader": "Reader",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Оюнчуну жаңыртуу мүмкүн болгон жок",
   "KRIPTA.Notification.PlayerDeleteFailed": "Оюнчуну өчүрүү мүмкүн болгон жок",
   "KRIPTA.Notification.CardRollFailed": "Карта алуу мүмкүн болгон жок.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Картаны алуу",
   "KRIPTA.Dialog.TakeCard.Message": "Оюнчу {playerName} {cardName} картасын жоготот.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Карта берүү"

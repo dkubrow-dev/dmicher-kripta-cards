@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Хьан Foundry декъашхо Криптан карташ модулехь серверехь ловзархочунца дӀахӀоттина дац. Ловзар хьехархочунга хьажа.",
   "KRIPTA.GMOnly": "ХӀара гӀуллакх ловзар хьехархочунна мара дӀахьош дац.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Сервер адрес",
   "KRIPTA.Settings.TechAuthUsers.Name": "Технически лелархой",
   "KRIPTA.Settings.PlayerBindings.Name": "Foundry декъашхойн серверехь ловзархошца дӀахӀоттамаш",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Криптан карташ",
   "KRIPTA.Settings.Menu.Label": "Модуль нисдар",
   "KRIPTA.Settings.Menu.Hint": "API-ца зӀе латтор а, технически лелархой а.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Нагахь шу модулан контент-сервер хӀинца а дӀаяздина а, гӀирсина а дацахь, иза дан ",
+  "KRIPTA.Settings.Help.ServerLink": "хӀокху ссылкехь",
+  "KRIPTA.Settings.Help.AfterServerLink": " дӀагӀо. Сиха гӀирсинарна ",
+  "KRIPTA.Settings.Help.DocumentationLink": "документаци",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": " пайда эца.",
   "KRIPTA.Window.Catalog": "Картийн каталог",
   "KRIPTA.Window.CardDetails": "Каталоган карта",
   "KRIPTA.Window.GiveCard": "Карта ло",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Карта эца",
   "KRIPTA.Window.Settings": "Криптан карташ - Нисдарш",
   "KRIPTA.Window.UseCard": "Карта лело",
-
   "KRIPTA.Menu.Title": "Криптан карташ",
   "KRIPTA.Menu.Catalog": "Картийн каталог",
   "KRIPTA.Menu.GetCard": "Карта эца",
   "KRIPTA.Menu.MyCards": "Сан карташ",
   "KRIPTA.Menu.Players": "Ловзархойн урхалла",
-
   "KRIPTA.Label.Category": "Категори",
   "KRIPTA.Label.Mode": "Режим",
   "KRIPTA.Label.Card": "Карта",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Дешархо (Reader)",
   "KRIPTA.Label.Role": "Роль",
   "KRIPTA.Label.Binding": "ДӀахӀоттам",
-
   "KRIPTA.Role.GM": "Ловзар хьехархо",
   "KRIPTA.Role.Player": "Ловзархо",
   "KRIPTA.Status.InGame": "ловзарехь",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "карташ яц",
   "KRIPTA.Binding.NotBound": "ловзархо дӀахӀоттина вац, ловзархо харжа.",
   "KRIPTA.Binding.CardsCountHint": "Елла картийн тайпанийн дуькъал (цхьана хилараш лоруш дац)",
-
   "KRIPTA.Button.Add": "ТӀетоха",
   "KRIPTA.Button.Bind": "ДӀахӀотта",
   "KRIPTA.Button.Cancel": "Юхадаккха",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Эца",
   "KRIPTA.Button.TestAuth": "Технически лелархой талла",
   "KRIPTA.Button.TestServer": "Сервер талла",
-  "KRIPTA.Button.ThanksAuthor": "Авторна баркалла ала",
   "KRIPTA.Button.Unbind": "ДӀахӀоттам дӀабаккха",
   "KRIPTA.Button.Use": "Лело",
   "KRIPTA.Button.Yes": "ХӀаъ",
-
   "KRIPTA.Mode.Manual": "Харжамца",
   "KRIPTA.Mode.Random": "Гучудаьлла",
   "KRIPTA.Mode.Show": "Гайта",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Плиткаш",
   "KRIPTA.Placeholder.Search": "Лаха",
   "KRIPTA.Select.NotSelected": "-- харжина дац --",
-
   "KRIPTA.Template.EmptyCatalog": "Серверехь регистраци йина категореш я карташ яц.",
   "KRIPTA.Template.MyCardsTitle": "Ловзархочун карташ: {playerName}",
   "KRIPTA.Template.UseCardMissing": "ХӀара карта серверехь кхин регистраци йина яц.",
   "KRIPTA.Template.UseCardPrompt": "Лело йина хир ю карта:",
-
   "KRIPTA.Card.FallbackName": "Карта {number}",
   "KRIPTA.Card.FallbackAddress": "Карта {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Карта {level}/{number} серверийн карарчу каталогехь яц.",
   "KRIPTA.Card.NotRegisteredDescription": "Карта {level}/{number} серверехь кхин регистраци йина яц.",
   "KRIPTA.Level.FallbackName": "Барам {level}",
   "KRIPTA.Level.MissingDescription": "Барам ловзархочун инвентарехь бу, амма серверийн карарчу каталогехь бац.",
-
   "KRIPTA.Chat.BlobReadFailed": "BLOB деша ца хилла",
   "KRIPTA.Chat.CardGivenTitle": "Карта елла",
   "KRIPTA.Chat.CardReceiveSubtitle": "Ловзархо {playerName} {cardSubtitle} карта оьцу",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Харжина карта дехар",
   "KRIPTA.Chat.RequestRandomTitle": "Гучудаьлла карта дехар",
   "KRIPTA.Chat.ShowCardTitle": "Картийн гӀо",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Серверехь ловзархо дӀахӀотта",
   "KRIPTA.Dialog.BindPlayer.Header": "{foundryUserName} учун ловзархо харжа",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "Foundry лелархо",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Ловзархо дӀаваккха",
   "KRIPTA.Dialog.Player.DeleteWarning": "\"{playerName}\" ловзархо дӀаваккхар юха хийца ца лору. \"{code}\" язде а, дӀаваккхар тӀечӀагӀде.",
   "KRIPTA.Dialog.Count.TotalCards": "хӀокху тайпанан карташ дерриг - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "{context} учун level нийса дац: {level}",
   "KRIPTA.Error.InvalidCardNumber": "{context} учун number нийса дац: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "картийн level нийса дац: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "девзаш доцу гӀалат",
   "KRIPTA.Error.NameRequired": "ЦӀеран майда тӀедожийна ду.",
   "KRIPTA.Error.RegistryDeleteReturned": "серверо дӀаваккхарна тӀаьхьа ловзархо реестре юха гайтина.",
-
   "KRIPTA.Notification.CardGiven": "Карта елла.",
   "KRIPTA.Notification.CardUsed": "Карта лелийна а, учетан дӀаяккхина а.",
   "KRIPTA.Notification.CardWrittenOff": "Карта учетан дӀаяккхина.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Серверца зӀе латто ца хилла. Адрес, сервер болх а, CORS/HTTPS нисдарш а талла.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Сервер талла ца хилла.",
   "KRIPTA.Notification.InvalidServerUrl": "Сервер адрес нийса дац: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "«Авторна баркалла ала» кнопкан хьажорг нисдина дац.",
   "KRIPTA.Notification.SettingsAccessDenied": "«Криптан карташ» нисдарш дакъа «Ведущий» а, «Ведущин гӀоьнча» а ролашна мара дац.",
   "KRIPTA.Notification.ServerCheckFailed": "Сервер таллар кхиам боцуш хилира",
   "KRIPTA.Notification.TechUserReader": "Дешархо",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Ловзархо керла вуьккхина ца хилла",
   "KRIPTA.Notification.PlayerDeleteFailed": "Ловзархо дӀаваккха ца хилла",
   "KRIPTA.Notification.CardRollFailed": "Карта эца ца хилла.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Карта эца",
   "KRIPTA.Dialog.TakeCard.Message": "Ловзархо {playerName} {cardName} картаца дӀакъовлур ву.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Карта ло"
