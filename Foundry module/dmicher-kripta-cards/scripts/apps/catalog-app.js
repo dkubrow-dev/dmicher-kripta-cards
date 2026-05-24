@@ -6,7 +6,7 @@ import { buildCardSubtitle, createKriptaChatMessage } from "../helpers/chat.js";
 import { chooseBoundUserDialog } from "./dialogs.js";
 import { formatCardNameFallback, localize } from "../helpers/lang.js";
 import { getBindings, getUiPrefs, notifyError, notifyWarn, setUiPref } from "../helpers/utils.js";
-import { sanitizeCardHtml, stripHtml, truncateHtmlDescription } from "../helpers/html-sanitizer.js";
+import { sanitizeCardHtml, sanitizeLevelDescriptionHtml, stripHtml, truncateHtmlDescription } from "../helpers/html-sanitizer.js";
 
 const WINDOW_MIN_WIDTH = 450;
 const SIDEBAR_MIN_WIDTH = 200;
@@ -36,6 +36,15 @@ function buildCatalogFallbackMeta(card) {
     number: Number(card?.number),
     name: String(card?.name ?? formatCardNameFallback(card?.number ?? "")),
     description: String(card?.description ?? "")
+  };
+}
+
+function normalizeLevel(level) {
+  const description = String(level?.description ?? "");
+  return {
+    ...level,
+    descriptionText: stripHtml(description),
+    descriptionHtml: sanitizeLevelDescriptionHtml(description)
   };
 }
 
@@ -141,7 +150,7 @@ export class KriptaCatalogApp extends Application {
   }
 
   async getData() {
-    this.levels = await KriptaApiClient.getLevelsList();
+    this.levels = (await KriptaApiClient.getLevelsList()).map(normalizeLevel);
     if (!this.levels.length) return { emptyState: true };
 
     if (

@@ -6,7 +6,7 @@ import { KriptaRequestCardDialog } from "./request-card-dialog.js";
 import { KriptaUseCardDialog } from "./use-card-dialog.js";
 import { format, formatCardNameFallback, formatMissingCardDescription, formatMissingLevelName, localize } from "../helpers/lang.js";
 import { escapeHtml, getUiPrefs, notifyError, notifyInfo, notifyWarn, setUiPref } from "../helpers/utils.js";
-import { sanitizeCardHtml, stripHtml, truncateHtmlDescription } from "../helpers/html-sanitizer.js";
+import { sanitizeCardHtml, sanitizeLevelDescriptionHtml, stripHtml, truncateHtmlDescription } from "../helpers/html-sanitizer.js";
 
 const MISSING_CARD_CACHE = new Set();
 
@@ -29,6 +29,15 @@ function isValidOwnedCard(card) {
   return Number.isInteger(level) && level >= 0 &&
     Number.isInteger(number) && number >= 0 &&
     Number.isFinite(count) && count > 0;
+}
+
+function normalizeLevel(level) {
+  const description = String(level?.description ?? "");
+  return {
+    ...level,
+    descriptionText: stripHtml(description),
+    descriptionHtml: sanitizeLevelDescriptionHtml(description)
+  };
 }
 
 function buildMissingMeta(item) {
@@ -134,7 +143,7 @@ export class KriptaMyCardsApp extends Application {
         description: localize("Level.MissingDescription")
       }));
 
-    this.levels = [...serverLevels, ...extraLevels].sort((a, b) => Number(a.id) - Number(b.id));
+    this.levels = [...serverLevels, ...extraLevels].sort((a, b) => Number(a.id) - Number(b.id)).map(normalizeLevel);
     if (!this.levels.length) {
       return { emptyState: true };
     }

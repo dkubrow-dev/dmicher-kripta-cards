@@ -68,6 +68,14 @@
   box-shadow: inset 0 0 0 1px rgba(212, 154, 67, 0.3);
 }
 
+.dmicher-kripta-cards .kripta-level-description p {
+  margin: 0 0 0.35rem;
+}
+
+.dmicher-kripta-cards .kripta-level-description p:last-child {
+  margin-bottom: 0;
+}
+
 .dmicher-kripta-cards .kripta-table-list {
   display: flex;
   flex-direction: column;

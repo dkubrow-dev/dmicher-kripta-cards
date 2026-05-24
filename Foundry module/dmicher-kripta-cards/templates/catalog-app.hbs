@@ -5,7 +5,7 @@
   <aside class="kripta-browser__sidebar">
     <div class="kripta-browser__sidebar-scroll">
       {{#each levels}}
-      <button type="button" class="kripta-level-button {{#if isActive}}is-active{{/if}}" data-level-id="{{id}}" title="{{description}}">
+      <button type="button" class="kripta-level-button {{#if isActive}}is-active{{/if}}" data-level-id="{{id}}" title="{{descriptionText}}">
         {{name}}
       </button>
       {{/each}}
@@ -19,7 +19,7 @@
       <header class="kripta-browser__header">
         <div>
           <h2>{{activeLevel.name}}</h2>
-          <div class="notes">{{activeLevel.description}}</div>
+          <div class="notes kripta-level-description">{{{activeLevel.descriptionHtml}}}</div>
         </div>
         <div class="kripta-browser__toolbar">
           <input type="text" name="search" value="{{search}}" placeholder="{{localize 'KRIPTA.Placeholder.Search'}}">

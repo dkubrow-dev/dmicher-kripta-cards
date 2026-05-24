@@ -109,6 +109,7 @@ const SAFE_CARD_CSS_PROPERTIES = [
 ];
 
 const SAFE_CARD_CSS_DISPLAY_VALUES = new Set(["block", "inline", "inline-block", "list-item", "none"]);
+const SAFE_LEVEL_DESCRIPTION_TAGS = new Set(["p", "b", "u", "i", "sup", "sub"]);
 
 function sanitizeClassList(value) {
   return String(value ?? "")
@@ -266,6 +267,50 @@ export function sanitizeCardHtml(value) {
 
     const clone = document.createElement(tagName);
     sanitizeCardElementAttributes(node, clone, tagName);
+    parent.appendChild(clone);
+
+    for (const child of Array.from(node.childNodes)) {
+      appendSafeNode(child, clone);
+    }
+  };
+
+  for (const child of Array.from(source.content.childNodes)) {
+    appendSafeNode(child, target.content);
+  }
+
+  return target.innerHTML;
+}
+
+export function sanitizeLevelDescriptionHtml(value) {
+  const raw = String(value ?? "");
+  if (!raw) return "";
+
+  if (typeof document === "undefined" || typeof document.createElement !== "function") {
+    return escapeHtml(stripHtml(raw));
+  }
+
+  const source = document.createElement("template");
+  source.innerHTML = stripDangerousHtmlBlocks(raw);
+
+  const target = document.createElement("template");
+
+  const appendSafeNode = (node, parent) => {
+    if (node.nodeType === 3) {
+      parent.appendChild(document.createTextNode(node.textContent ?? ""));
+      return;
+    }
+
+    if (node.nodeType !== 1) return;
+
+    const tagName = node.tagName.toLowerCase();
+    if (!SAFE_LEVEL_DESCRIPTION_TAGS.has(tagName)) {
+      for (const child of Array.from(node.childNodes)) {
+        appendSafeNode(child, parent);
+      }
+      return;
+    }
+
+    const clone = document.createElement(tagName);
     parent.appendChild(clone);
 
     for (const child of Array.from(node.childNodes)) {
