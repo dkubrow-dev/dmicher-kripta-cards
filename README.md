@@ -41,7 +41,7 @@
 
 Основные файлы после публикации:
 
-- `KriptaCardsWebServer.exe` - исполняемый файл сервера для Windows.
+- `KriptaCardsWebServer.dll` - точка входа сервера для запуска через установленный .NET Runtime.
 - `appsettings.json` - настройки пользователей, CORS и адреса прослушивания.
 - `README.md` - справка сервера, доступная также по `/readme`.
 - `Content/CardsReg.json` - реестр карточек.
@@ -129,7 +129,7 @@ The server is an ASP.NET Core application that runs separately from Foundry VTT 
 
 Published server files include:
 
-- `KriptaCardsWebServer.exe` - server executable for Windows.
+- `KriptaCardsWebServer.dll` - server entry point for the installed .NET Runtime.
 - `appsettings.json` - users, CORS, and listening URL settings.
 - `README.md` - server help, also available at `/readme`.
 - `Content/CardsReg.json` - card registry.
@@ -194,7 +194,7 @@ Licensed under the Apache License 2.0.
 
 发布后的服务器文件包括：
 
-- `KriptaCardsWebServer.exe`：Windows 服务器可执行文件。
+- `KriptaCardsWebServer.dll`：通过已安装 .NET Runtime 启动的服务器入口点。
 - `appsettings.json`：用户、CORS 和监听地址设置。
 - `README.md`：服务器说明，也可通过 `/readme` 查看。
 - `Content/CardsReg.json`：卡牌注册表。
@@ -259,7 +259,7 @@ El servidor es una aplicación ASP.NET Core que se ejecuta por separado de Found
 
 Los archivos publicados del servidor incluyen:
 
-- `KriptaCardsWebServer.exe` - ejecutable del servidor para Windows.
+- `KriptaCardsWebServer.dll` - punto de entrada del servidor para ejecutarlo con .NET Runtime instalado.
 - `appsettings.json` - configuración de usuarios, CORS y URL de escucha.
 - `README.md` - ayuda del servidor, también disponible en `/readme`.
 - `Content/CardsReg.json` - registro de cartas.
@@ -324,7 +324,7 @@ Licenciado bajo Apache License 2.0.
 
 公開版のサーバーファイルには次のものが含まれます。
 
-- `KriptaCardsWebServer.exe` - Windows 用サーバー実行ファイル。
+- `KriptaCardsWebServer.dll` - インストール済みの .NET Runtime で起動するサーバーのエントリーポイント。
 - `appsettings.json` - ユーザー、CORS、待受 URL の設定。
 - `README.md` - サーバーのヘルプ。`/readme` からも表示できます。
 - `Content/CardsReg.json` - カード登録ファイル。

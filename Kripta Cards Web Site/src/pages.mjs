@@ -652,7 +652,7 @@ function renderServerDocs(locale, h) {
       <p>${isRu
         ? "Запустите сервер из его рабочей папки:"
         : "Start the server from its working folder:"}</p>
-      ${h.codeBlock(`.\\KriptaCardsWebServer.exe`, "powershell")}
+      ${h.codeBlock(`dotnet KriptaCardsWebServer.dll`, "powershell")}
       <p>${isRu
         ? "После запуска проверьте в браузере:"
         : "After startup, check these URLs in a browser:"}</p>

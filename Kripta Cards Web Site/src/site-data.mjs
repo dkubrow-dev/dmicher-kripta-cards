@@ -151,11 +151,11 @@ export const catalogs = {
           "aiStatus": "not-applicable",
           "files": [
               {
-                  "label": "Windows x64 ZIP",
-                  "href": "/files/server/kripta-cards-content-server-1.1.1-win-x64.zip",
+                  "label": "Server ZIP",
+                  "href": "/files/server/kripta-cards-content-server-1.1.1.zip",
                   "storage": "local",
-                  "size": "4.5 MB",
-                  "sha256": "2b9cc1ff9888de5872af4a5a1f222a438d4c118a3e483960d54275cc83b01068"
+                  "size": "35.3 MB",
+                  "sha256": "db90ca99d8e04af980768f80de6d6dfe477649f61f50b0c771afc0cf68cbeab1"
               }
           ],
           "notes": {
