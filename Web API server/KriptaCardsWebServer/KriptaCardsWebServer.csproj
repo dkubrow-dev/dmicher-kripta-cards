@@ -13,8 +13,8 @@
 		<AssemblyName>KriptaCardsWebServer</AssemblyName>
 		<Authors>dmicher abathur kubrow</Authors>
 		<Company>dmicher abathur kubrow</Company>
-		<Version>1.1.0</Version>
-		<InformationalVersion>1.1.0</InformationalVersion>
+		<Version>1.1.1</Version>
+		<InformationalVersion>1.1.1</InformationalVersion>
 		<Copyright>Copyright (c) 2026 dmicher abathur kubrow</Copyright>
 	</PropertyGroup>
 
@@ -24,22 +24,33 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	  <NoWarn>1701;1702;CA1873;CA2254</NoWarn>
+	  <DebugType>none</DebugType>
+	  <DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="Content\CardsReg.json" />
+	  <Content Remove="Content\Cards\**\*" />
+	  <Content Remove="appsettings.Development.json" />
 	  <None Remove="Content\artifacts\docs\KriptaCardsWebServer.xml" />
+	  <None Remove="appsettings.Development.json" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Content Include="Content\artifacts\docs\KriptaCardsWebServer.xml">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="README.md">
+	  <Content Include="..\..\Cards sets\test-pack\CardsReg.json">
+	    <Link>Content\CardsReg.json</Link>
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 	  </Content>
-	  <Content Include="..\..\Cards sets\kripta-cards\Cards\**\*">
+	  <Content Include="..\..\Cards sets\test-pack\Cards\**\*">
 	    <Link>Content\Cards\%(RecursiveDir)%(Filename)%(Extension)</Link>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Include="README.md">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 	  </Content>

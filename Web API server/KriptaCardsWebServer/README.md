@@ -24,7 +24,7 @@
 
 После публикации рядом с приложением должны находиться:
 
-- `KriptaCardsWebServer.exe` - исполняемый файл сервера для Windows;
+- `KriptaCardsWebServer.dll` - точка входа сервера для запуска через установленный .NET Runtime;
 - `appsettings.json` - настройки сервера;
 - `README.md` - этот файл, доступный через `/readme`;
 - `nlog.config` - настройки логирования;
@@ -118,10 +118,10 @@ Content/
 - для каждой карточки есть ровно одно подходящее изображение;
 - у сервера есть права на запись в `Content/SQLite`.
 
-Запуск из консоли Windows:
+Запуск из консоли:
 
 ```powershell
-.\KriptaCardsWebServer.exe
+dotnet KriptaCardsWebServer.dll
 ```
 
 После запуска доступны:

@@ -1,7 +1,6 @@
 {
   "KRIPTA.NoBinding": "Ваш Участник Foundry не привязан к Игроку Сервера в модуле Карточки крипты. Обратитесь к мастеру игры.",
   "KRIPTA.GMOnly": "Это действие доступно только мастеру.",
-
   "KRIPTA.Settings.ServerUrl.Name": "Адрес сервера",
   "KRIPTA.Settings.TechAuthUsers.Name": "Тех.пользователи",
   "KRIPTA.Settings.PlayerBindings.Name": "Привязки участников к игрокам сервера",
@@ -9,7 +8,11 @@
   "KRIPTA.Settings.Menu.Name": "Карточки Крипты",
   "KRIPTA.Settings.Menu.Label": "Настройка модуля",
   "KRIPTA.Settings.Menu.Hint": "Подключение к API и технические пользователи.",
-
+  "KRIPTA.Settings.Help.BeforeServerLink": "Если вы ещё не установили и не настроили сервер контента для модуля, пройдите ",
+  "KRIPTA.Settings.Help.ServerLink": "по ссылке",
+  "KRIPTA.Settings.Help.AfterServerLink": ", чтобы сделать это. Для быстрой настройки воспользуйтесь ",
+  "KRIPTA.Settings.Help.DocumentationLink": "документацией",
+  "KRIPTA.Settings.Help.AfterDocumentationLink": ".",
   "KRIPTA.Window.Catalog": "Каталог карточек",
   "KRIPTA.Window.CardDetails": "Карточка каталога",
   "KRIPTA.Window.GiveCard": "Выдать карточку",
@@ -19,13 +22,11 @@
   "KRIPTA.Window.RequestCard": "Получить карточку",
   "KRIPTA.Window.Settings": "Карточки Крипты - Настройки",
   "KRIPTA.Window.UseCard": "Использовать карточку",
-
   "KRIPTA.Menu.Title": "Карточки крипты",
   "KRIPTA.Menu.Catalog": "Каталог карточек",
   "KRIPTA.Menu.GetCard": "Получить карточку",
   "KRIPTA.Menu.MyCards": "Мои карточки",
   "KRIPTA.Menu.Players": "Управление игроками",
-
   "KRIPTA.Label.Category": "Категория",
   "KRIPTA.Label.Mode": "Режим",
   "KRIPTA.Label.Card": "Карточка",
@@ -42,7 +43,6 @@
   "KRIPTA.Label.Reader": "Читатель (Reader)",
   "KRIPTA.Label.Role": "Роль",
   "KRIPTA.Label.Binding": "Привязка",
-
   "KRIPTA.Role.GM": "Мастер",
   "KRIPTA.Role.Player": "Игрок",
   "KRIPTA.Status.InGame": "в игре",
@@ -51,7 +51,6 @@
   "KRIPTA.Binding.NoCards": "нет карт",
   "KRIPTA.Binding.NotBound": "игрок не привязан, выберите игрока.",
   "KRIPTA.Binding.CardsCountHint": "Количество выданных типов карт (не учитывает повторяющиеся)",
-
   "KRIPTA.Button.Add": "Добавить",
   "KRIPTA.Button.Bind": "Привязать",
   "KRIPTA.Button.Cancel": "Отмена",
@@ -72,11 +71,9 @@
   "KRIPTA.Button.Take": "Забрать",
   "KRIPTA.Button.TestAuth": "Проверить тех.пользователей",
   "KRIPTA.Button.TestServer": "Проверить сервер",
-  "KRIPTA.Button.ThanksAuthor": "Сказать спасибо автору",
   "KRIPTA.Button.Unbind": "Отвязать",
   "KRIPTA.Button.Use": "Использовать",
   "KRIPTA.Button.Yes": "Да",
-
   "KRIPTA.Mode.Manual": "На выбор",
   "KRIPTA.Mode.Random": "Случайная",
   "KRIPTA.Mode.Show": "Показать",
@@ -85,19 +82,16 @@
   "KRIPTA.View.Tiles": "Плитки",
   "KRIPTA.Placeholder.Search": "Поиск",
   "KRIPTA.Select.NotSelected": "-- не выбран --",
-
   "KRIPTA.Template.EmptyCatalog": "На сервере нет зарегистрированных категорий или карточек.",
   "KRIPTA.Template.MyCardsTitle": "Карточки игрока: {playerName}",
   "KRIPTA.Template.UseCardMissing": "Эта карточка больше не зарегистрирована на сервере.",
   "KRIPTA.Template.UseCardPrompt": "Будет использована карта:",
-
   "KRIPTA.Card.FallbackName": "Карточка {number}",
   "KRIPTA.Card.FallbackAddress": "Карта {level}/{number}",
   "KRIPTA.Card.MissingDescription": "Карточка {level}/{number} отсутствует в текущем каталоге сервера.",
   "KRIPTA.Card.NotRegisteredDescription": "Карточка {level}/{number} больше не зарегистрирована на сервере.",
   "KRIPTA.Level.FallbackName": "Уровень {level}",
   "KRIPTA.Level.MissingDescription": "Уровень присутствует в инвентаре игрока, но отсутствует в текущем каталоге сервера.",
-
   "KRIPTA.Chat.BlobReadFailed": "Не удалось прочитать BLOB",
   "KRIPTA.Chat.CardGivenTitle": "Выдана карточка",
   "KRIPTA.Chat.CardReceiveSubtitle": "Игрок {playerName} получает карточку {cardSubtitle}",
@@ -112,7 +106,6 @@
   "KRIPTA.Chat.RequestManualTitle": "Запрос выбранной карты",
   "KRIPTA.Chat.RequestRandomTitle": "Запрос случайной карты",
   "KRIPTA.Chat.ShowCardTitle": "Справка по карте",
-
   "KRIPTA.Dialog.BindPlayer.Title": "Привязать игрока сервера",
   "KRIPTA.Dialog.BindPlayer.Header": "Выбрать игрока для {foundryUserName}",
   "KRIPTA.Dialog.BindPlayer.DefaultFoundryUser": "пользователя Foundry",
@@ -121,7 +114,6 @@
   "KRIPTA.Dialog.Player.DeleteTitle": "Удалить игрока",
   "KRIPTA.Dialog.Player.DeleteWarning": "Удаление игрока \"{playerName}\" необратимо. Введите \"{code}\" и подтвердите удаление.",
   "KRIPTA.Dialog.Count.TotalCards": "всего карточек этого типа - {max}",
-
   "KRIPTA.Error.InvalidCardLevel": "Некорректный level для {context}: {level}",
   "KRIPTA.Error.InvalidCardNumber": "Некорректный number для {context}: {number}",
   "KRIPTA.Error.InvalidLocalCardLevel": "некорректный level карточки: {level}",
@@ -141,7 +133,6 @@
   "KRIPTA.Error.Unknown": "неизвестная ошибка",
   "KRIPTA.Error.NameRequired": "Поле имени обязательно.",
   "KRIPTA.Error.RegistryDeleteReturned": "сервер вернул игрока в реестре после удаления.",
-
   "KRIPTA.Notification.CardGiven": "Карточка выдана.",
   "KRIPTA.Notification.CardUsed": "Карточка использована и списана.",
   "KRIPTA.Notification.CardWrittenOff": "Карточка списана.",
@@ -155,7 +146,6 @@
   "KRIPTA.Notification.ServerConnectionFailed": "Не удалось подключиться к серверу. Проверьте адрес, доступность сервера и настройки CORS/HTTPS.",
   "KRIPTA.Notification.ServerCheckFailedFallback": "Не удалось проверить сервер.",
   "KRIPTA.Notification.InvalidServerUrl": "Некорректный адрес сервера: {url}",
-  "KRIPTA.Notification.AuthorThanksUrlMissing": "Ссылка для кнопки «Сказать спасибо автору» не настроена.",
   "KRIPTA.Notification.SettingsAccessDenied": "Раздел настроек «Карточки крипты» доступен только ролям «Ведущий» и «Ассистент ведущего».",
   "KRIPTA.Notification.ServerCheckFailed": "Проверка сервера не удалась",
   "KRIPTA.Notification.TechUserReader": "Читатель",
@@ -180,7 +170,6 @@
   "KRIPTA.Notification.PlayerUpdateFailed": "Не удалось обновить игрока",
   "KRIPTA.Notification.PlayerDeleteFailed": "Не удалось удалить игрока",
   "KRIPTA.Notification.CardRollFailed": "Не удалось получить карточку.",
-
   "KRIPTA.Dialog.TakeCard.Title": "Забрать карточку",
   "KRIPTA.Dialog.TakeCard.Message": "Игрок {playerName} будет лишён карточки {cardName}.",
   "KRIPTA.Dialog.ChooseBoundUser.Title": "Выдать карточку"

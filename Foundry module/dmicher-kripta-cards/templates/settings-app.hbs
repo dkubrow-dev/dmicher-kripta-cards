@@ -1,4 +1,10 @@
 <form class="kripta-sheet-form">
+  <p class="kripta-settings-help">
+    {{localize 'KRIPTA.Settings.Help.BeforeServerLink'}}
+    <a href="{{serverDownloadUrl}}" target="_blank" rel="noopener noreferrer">{{localize 'KRIPTA.Settings.Help.ServerLink'}}</a>{{localize 'KRIPTA.Settings.Help.AfterServerLink'}}
+    <a href="{{serverDocumentationUrl}}" target="_blank" rel="noopener noreferrer">{{localize 'KRIPTA.Settings.Help.DocumentationLink'}}</a>{{localize 'KRIPTA.Settings.Help.AfterDocumentationLink'}}
+  </p>
+
   <div class="form-group">
     <label>{{localize 'KRIPTA.Label.ServerUrl'}}</label>
     <input type="text" name="serverUrl" value="{{serverUrl}}" autocomplete="off">
@@ -41,11 +47,6 @@
     <button type="button" data-action="test-auth">
       <i class="fas fa-user-check"></i>
       {{localize 'KRIPTA.Button.TestAuth'}}
-    </button>
-
-    <button type="button" data-action="thanks-author">
-      <i class="fas fa-hand-holding-heart"></i>
-      {{localize 'KRIPTA.Button.ThanksAuthor'}}
     </button>
 
     <button type="submit" class="default">

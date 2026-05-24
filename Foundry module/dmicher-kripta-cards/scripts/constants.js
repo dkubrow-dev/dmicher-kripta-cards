@@ -28,4 +28,4 @@ export const DEFAULT_UI_PREFS = {
 
 export const TEMPLATE_ROOT = `modules/${MODULE_ID}/templates`;
 
-export const AUTHOR_THANKS_URL = "https://boosty.to/dmicher";
+export const RELEASES_SITE_URL = "https://kripta-cards.dmicher.su";
