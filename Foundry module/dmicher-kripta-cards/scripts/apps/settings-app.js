@@ -1,5 +1,12 @@
 import { KriptaApiClient } from "../api/client.js";
-import { MODULE_ID, RELEASES_SITE_URL, TEMPLATE_ROOT } from "../constants.js";
+import {
+  AUTHOR_THANKS_URL,
+  DOCUMENTATION_FILES,
+  DOCUMENTATION_ROOT,
+  MODULE_ID,
+  SERVER_DOWNLOAD_URL,
+  TEMPLATE_ROOT
+} from "../constants.js";
 import { format, localize } from "../helpers/lang.js";
 import { getServerUrl, getTechUsers, notifyError, notifyInfo, notifyWarn, setServerUrl, setTechUsers } from "../helpers/utils.js";
 
@@ -44,27 +51,24 @@ function formatTechUserCheckError(stageLabel, fallback) {
   return `${stageLabel}: ${fallback}`;
 }
 
-function getSiteLocale() {
+function getDocumentationLocale() {
   const lang = String(game.i18n?.lang ?? "en").toLowerCase();
   return lang.startsWith("ru") ? "ru" : "en";
 }
 
-function getModuleVersion() {
-  return String(game.modules.get(MODULE_ID)?.version ?? "").trim();
+function buildDocumentationUrl(documentName) {
+  return `${DOCUMENTATION_ROOT}/${documentName}-${getDocumentationLocale()}.pdf`;
 }
 
-function buildReleasesSiteUrl(path, params = {}) {
-  const baseUrl = String(RELEASES_SITE_URL ?? "").trim();
-  const url = new URL(path, baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`);
+function openAuthorThanksPage() {
+  const url = String(AUTHOR_THANKS_URL ?? "").trim();
 
-  for (const [key, value] of Object.entries(params)) {
-    const normalizedValue = String(value ?? "").trim();
-    if (normalizedValue) {
-      url.searchParams.set(key, normalizedValue);
-    }
+  if (!url) {
+    ui.notifications.warn(localize("Notification.AuthorThanksUrlMissing"));
+    return;
   }
 
-  return url.toString();
+  window.open(url, "_blank", "noopener,noreferrer");
 }
 
 export class KriptaSettingsApp extends FormApplication {
@@ -95,8 +99,10 @@ export class KriptaSettingsApp extends FormApplication {
     const users = getTechUsers();
     return {
       serverUrl: getServerUrl(),
-      serverDownloadUrl: buildReleasesSiteUrl(`/${getSiteLocale()}/downloads/server/`, { moduleVersion: getModuleVersion() }),
-      serverDocumentationUrl: buildReleasesSiteUrl(`/${getSiteLocale()}/docs/server/`),
+      serverDownloadUrl: SERVER_DOWNLOAD_URL,
+      serverSetupDocumentationUrl: buildDocumentationUrl(DOCUMENTATION_FILES.SERVER_SETUP),
+      cardSetDocumentationUrl: buildDocumentationUrl(DOCUMENTATION_FILES.CARD_SET_CREATION),
+      localizationDocumentationUrl: buildDocumentationUrl(DOCUMENTATION_FILES.LOCALIZATION_CREATION),
       writerId: users.writer?.id ?? "",
       writerKey: users.writer?.key ?? "",
       readerId: users.reader?.id ?? "",
@@ -106,6 +112,11 @@ export class KriptaSettingsApp extends FormApplication {
 
   activateListeners(html) {
     super.activateListeners(html);
+
+    html.find('[data-action="thanks-author"]').on("click", (event) => {
+      event.preventDefault();
+      openAuthorThanksPage();
+    });
 
     html.find('[data-action="test-server"]').on("click", async (event) => {
       event.preventDefault();

@@ -2,7 +2,7 @@
 
 **Kripta Cards Web API Server** - серверная часть модуля **Карточки Крипты** для Foundry VTT.
 
-Версия сервера: **1.1.0**.
+Версия сервера: **1.1.2**.
 
 Автор: **dmicher abathur kubrow**.
 

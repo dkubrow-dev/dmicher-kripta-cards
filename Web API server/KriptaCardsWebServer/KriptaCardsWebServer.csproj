@@ -13,8 +13,8 @@
 		<AssemblyName>KriptaCardsWebServer</AssemblyName>
 		<Authors>dmicher abathur kubrow</Authors>
 		<Company>dmicher abathur kubrow</Company>
-		<Version>1.1.1</Version>
-		<InformationalVersion>1.1.1</InformationalVersion>
+		<Version>1.1.2</Version>
+		<InformationalVersion>1.1.2</InformationalVersion>
 		<Copyright>Copyright (c) 2026 dmicher abathur kubrow</Copyright>
 	</PropertyGroup>
 
@@ -40,12 +40,11 @@
 	  <Content Include="Content\artifacts\docs\KriptaCardsWebServer.xml">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="..\..\Cards sets\test-pack\CardsReg.json">
-	    <Link>Content\CardsReg.json</Link>
+	  <Content Include="Content\CardsReg.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 	  </Content>
-	  <Content Include="..\..\Cards sets\test-pack\Cards\**\*">
+	  <Content Include="StarterContent\Cards\**\*">
 	    <Link>Content\Cards\%(RecursiveDir)%(Filename)%(Extension)</Link>
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

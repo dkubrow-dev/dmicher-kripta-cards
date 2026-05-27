@@ -2,7 +2,7 @@
 
 **Карточки Крипты** - модуль Foundry VTT для работы с игровыми карточками, которые хранятся на отдельном сервере **Kripta Cards Web API Server**.
 
-Версия модуля: **1.1.0**.
+Версия модуля: **1.1.2**.
 
 Автор: **dmicher abathur kubrow**.
 
@@ -10,7 +10,7 @@
 
 - Foundry VTT: `13+`.
 - Проверенная совместимость: `14`.
-- Запущенный и настроенный **Kripta Cards Web API Server** версии `1.1.0`.
+- Запущенный и настроенный **Kripta Cards Web API Server** версии `1.1.2`.
 
 Модуль не является самостоятельным хранилищем карточек. Он работает как интерфейс к серверу.
 
@@ -19,7 +19,7 @@
 Для установки через Foundry VTT используйте URL манифеста релиза:
 
 ```text
-https://github.com/dkubrow-dev/kripta-cards/releases/latest/download/module.json
+https://raw.githubusercontent.com/dkubrow-dev/dmicher-kripta-cards/main/Foundry%20module/dmicher-kripta-cards/module.json
 ```
 
 Для ручной установки распакуйте архив модуля в папку модулей Foundry VTT так, чтобы `module.json` находился в корне папки `dmicher-kripta-cards`.
@@ -150,7 +150,7 @@ https://github.com/dkubrow-dev/kripta-cards/releases/latest/download/module.json
 
 Foundry автоматически выбирает подходящий файл локализации по языку интерфейса Foundry VTT.
 
-В версии `1.1.0` добавлены локализации интерфейса на множество языков, включая русский, английский, упрощенный китайский, испанский, французский, немецкий, японский, корейский и другие.
+В публикацию модуля входят проверенные локализации интерфейса на русский и английский языки.
 
 ## Изображения Карточек
 

@@ -2,7 +2,9 @@
   <p class="kripta-settings-help">
     {{localize 'KRIPTA.Settings.Help.BeforeServerLink'}}
     <a href="{{serverDownloadUrl}}" target="_blank" rel="noopener noreferrer">{{localize 'KRIPTA.Settings.Help.ServerLink'}}</a>{{localize 'KRIPTA.Settings.Help.AfterServerLink'}}
-    <a href="{{serverDocumentationUrl}}" target="_blank" rel="noopener noreferrer">{{localize 'KRIPTA.Settings.Help.DocumentationLink'}}</a>{{localize 'KRIPTA.Settings.Help.AfterDocumentationLink'}}
+    <a href="{{serverSetupDocumentationUrl}}" target="_blank" rel="noopener noreferrer">{{localize 'KRIPTA.Settings.Help.ServerSetupDocumentationLink'}}</a>{{localize 'KRIPTA.Settings.Help.BetweenDocumentationLinks'}}
+    <a href="{{cardSetDocumentationUrl}}" target="_blank" rel="noopener noreferrer">{{localize 'KRIPTA.Settings.Help.CardSetDocumentationLink'}}</a>{{localize 'KRIPTA.Settings.Help.BetweenDocumentationLinks'}}
+    <a href="{{localizationDocumentationUrl}}" target="_blank" rel="noopener noreferrer">{{localize 'KRIPTA.Settings.Help.LocalizationDocumentationLink'}}</a>{{localize 'KRIPTA.Settings.Help.AfterDocumentationLink'}}
   </p>
 
   <div class="form-group">
@@ -47,6 +49,11 @@
     <button type="button" data-action="test-auth">
       <i class="fas fa-user-check"></i>
       {{localize 'KRIPTA.Button.TestAuth'}}
+    </button>
+
+    <button type="button" data-action="thanks-author">
+      <i class="fas fa-hand-holding-heart"></i>
+      {{localize 'KRIPTA.Button.ThanksAuthor'}}
     </button>
 
     <button type="submit" class="default">
