@@ -26,7 +26,7 @@
 Для установки через Foundry VTT используйте URL манифеста:
 
 ```text
-https://raw.githubusercontent.com/dkubrow-dev/dmicher-kripta-cards/main/Foundry%20module/dmicher-kripta-cards/module.json
+https://github.com/dkubrow-dev/dmicher-kripta-cards/releases/latest/download/module.json
 ```
 
 Для ручной установки распакуйте архив модуля в папку модулей Foundry VTT так, чтобы `module.json` находился в корне папки `dmicher-kripta-cards`.
@@ -146,7 +146,7 @@ Links to these documents are shown in the module settings window.
 Manifest URL:
 
 ```text
-https://raw.githubusercontent.com/dkubrow-dev/dmicher-kripta-cards/main/Foundry%20module/dmicher-kripta-cards/module.json
+https://github.com/dkubrow-dev/dmicher-kripta-cards/releases/latest/download/module.json
 ```
 
 For manual installation, extract the module archive into the Foundry VTT modules folder so that `module.json` is in the root of the `dmicher-kripta-cards` folder.

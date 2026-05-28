@@ -45,7 +45,7 @@
 Для установки через манифест:
 
 ```text
-https://raw.githubusercontent.com/dkubrow-dev/dmicher-kripta-cards/main/Foundry%20module/dmicher-kripta-cards/module.json
+https://github.com/dkubrow-dev/dmicher-kripta-cards/releases/latest/download/module.json
 ```
 
 ## Контент
@@ -121,7 +121,7 @@ In short:
 Manifest URL:
 
 ```text
-https://raw.githubusercontent.com/dkubrow-dev/dmicher-kripta-cards/main/Foundry%20module/dmicher-kripta-cards/module.json
+https://github.com/dkubrow-dev/dmicher-kripta-cards/releases/latest/download/module.json
 ```
 
 ## Content
