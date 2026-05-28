@@ -15,6 +15,7 @@
 		<Company>dmicher abathur kubrow</Company>
 		<Version>1.1.2</Version>
 		<InformationalVersion>1.1.2</InformationalVersion>
+		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 		<Copyright>Copyright (c) 2026 dmicher abathur kubrow</Copyright>
 	</PropertyGroup>
 
@@ -34,6 +35,8 @@
 	  <Content Remove="appsettings.Development.json" />
 	  <None Remove="Content\artifacts\docs\KriptaCardsWebServer.xml" />
 	  <None Remove="appsettings.Development.json" />
+	  <None Remove="install-windows-service.bat" />
+	  <None Remove="uninstall-windows-service.bat" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -50,6 +53,14 @@
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 	  </Content>
 	  <Content Include="README.md">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Include="install-windows-service.bat">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Include="uninstall-windows-service.bat">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 	  </Content>
