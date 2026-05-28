@@ -51,13 +51,8 @@ function formatTechUserCheckError(stageLabel, fallback) {
   return `${stageLabel}: ${fallback}`;
 }
 
-function getDocumentationLocale() {
-  const lang = String(game.i18n?.lang ?? "en").toLowerCase();
-  return lang.startsWith("ru") ? "ru" : "en";
-}
-
 function buildDocumentationUrl(documentName) {
-  return `${DOCUMENTATION_ROOT}/${documentName}-${getDocumentationLocale()}.pdf`;
+  return `${DOCUMENTATION_ROOT}/${documentName}.pdf`;
 }
 
 function openAuthorThanksPage() {
@@ -100,9 +95,8 @@ export class KriptaSettingsApp extends FormApplication {
     return {
       serverUrl: getServerUrl(),
       serverDownloadUrl: SERVER_DOWNLOAD_URL,
-      serverSetupDocumentationUrl: buildDocumentationUrl(DOCUMENTATION_FILES.SERVER_SETUP),
-      cardSetDocumentationUrl: buildDocumentationUrl(DOCUMENTATION_FILES.CARD_SET_CREATION),
-      localizationDocumentationUrl: buildDocumentationUrl(DOCUMENTATION_FILES.LOCALIZATION_CREATION),
+      setupGuideDocumentationUrl: buildDocumentationUrl(DOCUMENTATION_FILES.SETUP_GUIDE),
+      contentCreationDocumentationUrl: buildDocumentationUrl(DOCUMENTATION_FILES.CONTENT_CREATION_GUIDE),
       writerId: users.writer?.id ?? "",
       writerKey: users.writer?.key ?? "",
       readerId: users.reader?.id ?? "",

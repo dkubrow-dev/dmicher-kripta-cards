@@ -1,4 +1,4 @@
-{
+﻿{
   "Levels": [
     {
       "Id": 0,
@@ -16,57 +16,49 @@
       "Level": 0,
       "Number": 0,
       "Name": "Введение",
-      "Description": "<p>Это карточка один.<br />Напишите в ней, что вам будет угодно: условия, при которых карточка может быть использована игроком, а при каких не может быть, как именно можно использовать карточку, какие ресурсы дополнительно надо потратить. Также укажите, какие бонусы даёт карточка. Этот текст появится в описаниях карточки.</p>",
-      "ImagePath": "scroll"
+      "Description": "<p>Это карточка один.<br />Напишите в ней, что вам будет угодно: условия, при которых карточка может быть использована игроком, а при каких не может быть, как именно можно использовать карточку, какие ресурсы дополнительно надо потратить. Также укажите, какие бонусы даёт карточка. Этот текст появится в описаниях карточки.</p>"
     },
     {
       "Level": 0,
       "Number": 1,
       "Name": "Контент карточек",
-      "Description": "<p>Ну, собственно, то же самое, что и первая: описание, что как делать.<br />Набор карточек, поставляемый с сервером в базовой комплектации, является тестовым. Он полностью отвечает политике Foundry VTT в области использования ИИ.<br />Вы можете создавать собственные наборы карточек и подключать их к серверу в соответствии с документацией модуля.</p>",
-      "ImagePath": "poision"
+      "Description": "<p>Ну, собственно, то же самое, что и первая: описание, что как делать.<br />Набор карточек, поставляемый с сервером в базовой комплектации - тестовый. Он полностью отвечает политике Foundry VTT в области использования ИИ.<br />Вы можете создавать собственные карточки или использовать наборы, созданные сообществом. <br />Подробности вы можете прочесть в документации (смотри окно настроек модуля).</p>"
     },
     {
       "Level": 0,
       "Number": 2,
-      "Name": "Переводы на другие языки",
-      "Description": "<p>Третья карточка и ещё одна подсказка.<br />В базовой версии модуля поставляются локализации интерфейса на русский и английский языки, выполненные носителем языка или проверенные компетентным человеком после машинного перевода.<br />Инструкция по созданию собственных локализаций поставляется вместе с модулем.</p>",
-      "ImagePath": "books"
+      "Name": "HTML",
+      "Description": "<p>Третья карточка, и ещё одна подсказка.<br />В описании карточек вы можете использовать базовую HTML разметку: теги p, br, b, u, I, sup, sub.</p>"
     },
     {
       "Level": 0,
       "Number": 3,
       "Name": "Авторы и благодарности",
-      "Description": "<p>Автор модуля - dmicher abathur kubrow. Буду рад, если вы подпишетесь на обновления: boosty.to/dmicher.</p>",
-      "ImagePath": "pen and ink"
+      "Description": "<p>Автор модуля - dmicher abathur kubrow. Буду раз, если вы подпишетесь на обновление на boosty.to/dmicher</p>"
     },
     {
       "Level": 1,
       "Number": 0,
       "Name": "Introduction",
-      "Description": "<p>This is card one.<br />Write whatever you want on it: the conditions under which the card can and cannot be used, how exactly the card can be used, and what additional resources must be spent. Also indicate the bonuses the card provides. This text will appear in the card descriptions.</p>",
-      "ImagePath": "scroll"
+      "Description": "<p>This is card one.<br />Write whatever you want on it: the conditions under which the card can and cannot be used, how exactly the card can be used, and what additional resources must be spent. Also indicate the bonuses the card provides. This text will appear in the card descriptions.</p>"
     },
     {
       "Level": 1,
       "Number": 1,
       "Name": "Card Content",
-      "Description": "<p>Well, basically the same as the first one: a description of what to do.<br />The card set included with the basic server is a test set. It fully complies with Foundry VTT&#39;s AI policy.<br />You can create your own card sets and connect them to the server according to the module documentation.</p>",
-      "ImagePath": "poision"
+      "Description": "<p>Well, basically the same as the first one: a description of what to do.<br />The card set included with the basic server is a test set. It fully complies with Foundry VTT&#39;s AI policy.<br />You can create your own cards or use sets created by the community.<br />You can read more in the documentation (see the module settings window).</p>"
     },
     {
       "Level": 1,
       "Number": 2,
       "Name": "Translations into other languages",
-      "Description": "<p>The third card, and one more hint.<br />The basic module includes Russian and English interface localizations written by a native speaker or checked by a competent person after machine translation.<br />The module includes a guide for creating your own localizations.</p>",
-      "ImagePath": "books"
+      "Description": "<p>Third card, and one more hint.<br />In card descriptions, you can use basic HTML markup: p, br, b, u, I, sup, and sub tags.</p>"
     },
     {
       "Level": 1,
       "Number": 3,
       "Name": "Credits and Thanks",
-      "Description": "<p>The module&#39;s author is dmicher abathur kubrow. I&#39;ll be happy to help if you subscribe to updates at boosty.to/dmicher.</p>",
-      "ImagePath": "pen and ink"
+      "Description": "<p>The module&#39;s author is dmicher abathur kubrow. I&#39;ll be happy to help if you subscribe to updates at boosty.to/dmicher.</p>"
     }
   ]
 }

@@ -32,7 +32,6 @@ export const SERVER_DOWNLOAD_URL = "https://github.com/dkubrow-dev/dmicher-kript
 export const AUTHOR_THANKS_URL = "https://boosty.to/dmicher";
 export const DOCUMENTATION_ROOT = `modules/${MODULE_ID}/assets/docs`;
 export const DOCUMENTATION_FILES = Object.freeze({
-  SERVER_SETUP: "server-setup",
-  CARD_SET_CREATION: "card-set-creation",
-  LOCALIZATION_CREATION: "localization-creation"
+  SETUP_GUIDE: "setup-guide",
+  CONTENT_CREATION_GUIDE: "content-creation-guide"
 });
