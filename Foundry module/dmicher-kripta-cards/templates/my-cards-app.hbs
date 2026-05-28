@@ -59,6 +59,8 @@
           {{#if descriptionPreviewHtml}}<div class="notes kripta-card-tile__description">{{{descriptionPreviewHtml}}}</div>{{/if}}
           <div class="kripta-inline-actions">
             <button type="button" data-action="use">{{localize 'KRIPTA.Button.Use'}}</button>
+            <button type="button" data-action="info">{{localize 'KRIPTA.Button.Info'}}</button>
+            {{#if ../isGM}}<button type="button" data-action="take">{{localize 'KRIPTA.Button.Take'}}</button>{{/if}}
           </div>
         </article>
         {{/each}}
