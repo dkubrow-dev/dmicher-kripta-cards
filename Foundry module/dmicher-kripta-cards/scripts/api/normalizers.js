@@ -99,6 +99,8 @@ export function normalizePlayersList(value) {
     return {
       guid: String(firstOf(source, ["guid", "Guid", "id", "Id"], "")),
       name: String(firstOf(source, ["name", "Name"], "")),
+      login: String(firstOf(source, ["login", "Login"], "")),
+      pin: String(firstOf(source, ["pin", "Pin"], "")),
       comment: String(firstOf(source, ["comment", "Comment", "comments", "Comments"], "")),
       cardsCount: Number(
         firstOf(
@@ -158,6 +160,7 @@ export function normalizePlayersInfo(value) {
     return {
       guid: String(firstOf(source, ["guid", "Guid", "id", "Id"], "")),
       name: String(firstOf(source, ["name", "Name"], "")),
+      login: String(firstOf(source, ["login", "Login"], "")),
       comment: String(firstOf(source, ["comment", "Comment", "comments", "Comments"], "")),
       playerCards: ensureArray(nestedCards).map(normalizePlayerCard)
     };

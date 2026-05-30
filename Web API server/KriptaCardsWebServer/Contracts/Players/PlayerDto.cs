@@ -20,6 +20,11 @@ public sealed record PlayerDto
     public string? Name { get; set; }
 
     /// <summary>
+    /// Логин пользователя для входа на сервер
+    /// </summary>
+    public string? Login { get; set; }
+
+    /// <summary>
     /// Комментарии пользователя
     /// </summary>
     public string? Comments { get; set; }

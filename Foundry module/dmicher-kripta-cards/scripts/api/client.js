@@ -229,10 +229,14 @@ export class KriptaApiClient {
     return normalizePlayersInfo(raw);
   }
 
-  static async addPlayer(name, comment = "") {
+  static async addPlayer(name, comment = "", login = "", pin = "") {
     const body = objectWithoutUndefined({
       Name: name,
       name,
+      Login: login,
+      login,
+      Pin: pin,
+      pin,
       Comment: comment,
       comment
     });
@@ -243,7 +247,7 @@ export class KriptaApiClient {
     });
   }
 
-  static async updatePlayer(guid, name, comment = "") {
+  static async updatePlayer(guid, name, comment = "", login = "", pin = "") {
     const query = objectWithoutUndefined({
       Guid: guid,
       guid,
@@ -258,6 +262,10 @@ export class KriptaApiClient {
     const body = objectWithoutUndefined({
       Name: name,
       name,
+      Login: login,
+      login,
+      Pin: pin,
+      pin,
       Comment: comment,
       comment
     });
@@ -278,6 +286,47 @@ export class KriptaApiClient {
       method: "DELETE",
       query,
       headers: { "Content-Type": undefined }
+    });
+  }
+
+  static async getPlayerPin(guid) {
+    const query = objectWithoutUndefined({
+      playerGuid: guid,
+      PlayerGuid: guid,
+      guid,
+      Guid: guid,
+      id: guid,
+      Id: guid
+    });
+
+    const raw = await this.request(ROLES.WRITER, "/api/PlayersCards/getPlayerPin", {
+      method: "GET",
+      query,
+      headers: { "Content-Type": undefined }
+    });
+
+    return String(raw?.pin ?? raw?.Pin ?? "");
+  }
+
+  static async updatePlayerPin(guid, pin) {
+    const query = objectWithoutUndefined({
+      playerGuid: guid,
+      PlayerGuid: guid,
+      guid,
+      Guid: guid,
+      id: guid,
+      Id: guid
+    });
+
+    const body = objectWithoutUndefined({
+      Pin: pin,
+      pin
+    });
+
+    return this.request(ROLES.WRITER, "/api/PlayersCards/updatePlayerPin", {
+      method: "POST",
+      query,
+      body
     });
   }
 

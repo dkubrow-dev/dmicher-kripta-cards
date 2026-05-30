@@ -3,6 +3,7 @@ import { MODULE_ID, TEMPLATE_ROOT, VIEW_MODES } from "../constants.js";
 import { countPromptDialog } from "./dialogs.js";
 import { KriptaCardDetailsApp } from "./card-details-app.js";
 import { KriptaRequestCardDialog } from "./request-card-dialog.js";
+import { KriptaServerAccessApp } from "./server-access-app.js";
 import { KriptaUseCardDialog } from "./use-card-dialog.js";
 import { format, formatCardNameFallback, formatMissingCardDescription, formatMissingLevelName, localize } from "../helpers/lang.js";
 import { escapeHtml, getUiPrefs, notifyError, notifyInfo, notifyWarn, setUiPref } from "../helpers/utils.js";
@@ -269,6 +270,30 @@ export class KriptaMyCardsApp extends Application {
     });
 
     html.find('[data-action="refresh"]').on("click", () => this.render());
+
+    html.find('[data-action="server"]').on("click", async () => {
+      const playerGuid = String(this.playerGuid ?? "").trim();
+      if (!playerGuid) {
+        return notifyWarn(localize("NoBinding"));
+      }
+
+      try {
+        const players = await KriptaApiClient.getPlayersList();
+        const serverPlayer = players.find((player) => String(player.guid ?? "").trim() === playerGuid);
+        if (!serverPlayer) {
+          return notifyWarn(localize("Notification.BoundServerPlayerNotFound"));
+        }
+
+        new KriptaServerAccessApp({
+          playerGuid,
+          ownerFoundryUserId: this.ownerFoundryUserId,
+          foundryUserName: this.playerName,
+          serverPlayer
+        }).render(true);
+      } catch (error) {
+        notifyError(error, localize("Notification.ServerAccessOpenFailed"));
+      }
+    });
 
     html.find('[data-action="request"]').on("click", () => {
       new KriptaRequestCardDialog({

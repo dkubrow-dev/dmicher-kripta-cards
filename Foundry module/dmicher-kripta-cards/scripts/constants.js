@@ -28,7 +28,7 @@ export const DEFAULT_UI_PREFS = {
 
 export const TEMPLATE_ROOT = `modules/${MODULE_ID}/templates`;
 
-export const SERVER_DOWNLOAD_URL = "https://github.com/dkubrow-dev/dmicher-kripta-cards/releases/download/1.1.2/kripta-cards-content-server-1.1.2.zip";
+export const SERVER_DOWNLOAD_URL = "https://github.com/dkubrow-dev/dmicher-kripta-cards/releases/download/1.2.0/kripta-cards-content-server-1.2.0.zip";
 export const AUTHOR_THANKS_URL = "https://boosty.to/dmicher";
 export const DOCUMENTATION_ROOT = `modules/${MODULE_ID}/assets/docs`;
 export const DOCUMENTATION_FILES = Object.freeze({

@@ -69,6 +69,7 @@ public class PlayersCardsController(IPlayersCardsService playersService, ILogger
             {
                 Guid = playerEntity.Id.ToString(),
                 Name = playerEntity.Name,
+                Login = playerEntity.Login,
                 Comments = playerEntity.Comments,
                 CardDtos = [.. playerEntity.Cards
                     .Select(cardEntity => new PlayersCardDto
@@ -104,11 +105,12 @@ public class PlayersCardsController(IPlayersCardsService playersService, ILogger
     {
         try
         {
-            PlayerEntity playerEntity = await _players.AddPlayerAsync(newPlayer.Name, newPlayer.Comment);
+            PlayerEntity playerEntity = await _players.AddPlayerAsync(newPlayer.Name, newPlayer.Comment, newPlayer.Login, newPlayer.Pin);
             PlayerDto playerDto = new()
             { 
                 Guid = playerEntity.Id.ToString(),
                 Name = playerEntity.Name,
+                Login = playerEntity.Login,
                 Comments = playerEntity.Comments,
                 CardDtos = [.. playerEntity.Cards.Select(cardEntity =>
                 {
@@ -149,9 +151,67 @@ public class PlayersCardsController(IPlayersCardsService playersService, ILogger
     {
         try
         {
-            await _players.UpdatePlayerAsync(playerGuid, newPlayer.Name, newPlayer.Comment);
+            await _players.UpdatePlayerAsync(playerGuid, newPlayer.Name, newPlayer.Comment, newPlayer.Login, newPlayer.Pin);
             _logger.LogWarning($"User updated. Guid: {playerGuid}, new-name: {newPlayer.Name}, new-comment: {newPlayer.Comment}.");
             return Ok();
+        }
+        catch (Exception ex)
+        {
+            string message = "Internal server exception. ";
+            _logger.LogError(message, ex);
+            return BadRequest(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// (Writer) Возвращает пин-код игрока по идентификатору пользователя
+    /// </summary>
+    /// <param name="playerGuid">Идентификатор игрока</param>
+    [HttpGet("getPlayerPin")]
+    [Base64Authorize(UserRoles.Writer)]
+    [ProducesResponseType<PlayerPinDto>(StatusCodes.Status200OK)]
+    [ProducesResponseType<UnauthorizedObjectResult>(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType<ObjectResult>(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType<NotFoundObjectResult>(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<PlayerPinDto>> GetPlayerPin(Guid playerGuid)
+    {
+        string? pin = await _players.GetPlayerPinAsync(playerGuid);
+        if (pin == null)
+        {
+            return NotFound("Player is not registered.");
+        }
+
+        return Ok(new PlayerPinDto
+        {
+            Guid = playerGuid.ToString(),
+            Pin = pin
+        });
+    }
+
+    /// <summary>
+    /// (Writer) Изменяет пин-код игрока по идентификатору пользователя
+    /// </summary>
+    /// <param name="playerGuid">Идентификатор игрока</param>
+    /// <param name="request">Новый пин-код</param>
+    [HttpPost("updatePlayerPin")]
+    [Base64Authorize(UserRoles.Writer)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType<UnauthorizedObjectResult>(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType<ObjectResult>(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType<NotFoundObjectResult>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<BadRequestObjectResult>(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> UpdatePlayerPin(Guid playerGuid, [FromBody] PlayerPinRequest request)
+    {
+        try
+        {
+            await _players.UpdatePlayerPinAsync(playerGuid, request.Pin);
+            _logger.LogWarning($"User pin updated. Guid: {playerGuid}.");
+            return Ok();
+        }
+        catch (ArgumentException ex)
+        {
+            _logger.LogError(ex, "Player pin update failed.");
+            return BadRequest(ex.Message);
         }
         catch (Exception ex)
         {

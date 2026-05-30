@@ -9,6 +9,10 @@ namespace KriptaCards.WebApi.Contracts.Players;
 /// </summary>
 /// <param name="Name">Имя нового пользователя</param>
 /// <param name="Comment">Комментарий для пользователя</param>
+/// <param name="Login">Логин пользователя для входа на сервер</param>
+/// <param name="Pin">Пятизначный пин-код пользователя для входа на сервер</param>
 public sealed record PlayerRequest(
     string Name,
-    string? Comment = null);
+    string? Comment = null,
+    string? Login = null,
+    string? Pin = null);

@@ -41,6 +41,8 @@ string sqlitePathDirectory = Path.Combine(AppContext.BaseDirectory, "Content", "
 Directory.CreateDirectory(sqlitePathDirectory);
 builder.Services.AddDbContext<PlayersDbContext>(options => options.UseSqlite($"Data Source={Path.Combine(sqlitePathDirectory, "players.db")}"));
 builder.Services.AddScoped<IPlayersCardsService>(x => new SqlitePlayersCardsService(x.GetRequiredService<PlayersDbContext>(), cardCatalogService));
+builder.Services.AddScoped<IPlayerSessionService, SqlitePlayerSessionService>();
+builder.Services.AddScoped<PlayersDbInitializer>();
 
 string[] corsAllowedOrigins = builder.Configuration
     .GetSection("Cors:AllowedOrigins")
@@ -93,8 +95,8 @@ WebApplication app = builder.Build();
 
 using (IServiceScope scope = app.Services.CreateScope())
 {
-    PlayersDbContext dbContext = scope.ServiceProvider.GetRequiredService<PlayersDbContext>();
-    await dbContext.Database.EnsureCreatedAsync();
+    PlayersDbInitializer dbInitializer = scope.ServiceProvider.GetRequiredService<PlayersDbInitializer>();
+    await dbInitializer.InitializeAsync();
 }
 
 app.MapGet("/readme", async () =>
@@ -131,8 +133,9 @@ app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
     options.DocumentTitle = "Kripta Cards Web API";
+    options.RoutePrefix = "swagger";
 });
-app.MapGet("/", () => Results.Redirect("/swagger"));
+app.MapKriptaSite();
 
 app.UseRouting();
 app.UseCors("FoundryCors");

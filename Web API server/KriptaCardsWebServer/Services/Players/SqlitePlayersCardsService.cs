@@ -38,9 +38,21 @@ public class SqlitePlayersCardsService(PlayersDbContext dbContext, ICardCatalogS
         {
             Guid = playerEntity.Id.ToString(),
             Name = playerEntity.Name,
+            Login = playerEntity.Login,
+            Pin = playerEntity.Pin,
             Comments = playerEntity.Comments,
             CardsCount = playerEntity.Cards.Count
         })];
+
+    /// <summary>
+    /// Получить список логинов игроков для входа на сайт
+    /// </summary>
+    public List<string> GetPlayerLogins => [.. _dbContext.Players
+        .AsNoTracking()
+        .Select(playerEntity => playerEntity.Login ?? string.Empty)
+        .Where(login => login != string.Empty)
+        .Distinct()
+        .OrderBy(login => login)];
 
     /// <summary>
     /// Выдаёт подробные данные по одному указанному игроку
@@ -54,24 +66,50 @@ public class SqlitePlayersCardsService(PlayersDbContext dbContext, ICardCatalogS
             .SingleOrDefaultAsync(x => x.Id == guid);
 
     /// <summary>
+    /// Найти игрока по логину и пин-коду для входа на сайт
+    /// </summary>
+    public async Task<PlayerEntity?> GetPlayerByLoginAndPinAsync(string login, string pin)
+    {
+        string normalizedLogin = PlayerCredentials.NormalizeLogin(login);
+        string normalizedPin = PlayerCredentials.NormalizePin(pin);
+
+        if (!PlayerCredentials.IsValidLogin(normalizedLogin) || !PlayerCredentials.IsValidPin(normalizedPin))
+        {
+            return null;
+        }
+
+        return await _dbContext.Players
+            .AsNoTracking()
+            .Include(x => x.Cards)
+            .FirstOrDefaultAsync(x => x.Login == normalizedLogin && x.Pin == normalizedPin);
+    }
+
+    /// <summary>
     /// (асинхронно) Добавляет игрока в базу данных
     /// </summary>
     /// <param name="name">(обязательно) имя</param>
     /// <param name="comment">(опционально) комментарий</param>
+    /// <param name="login">(опционально) логин для сайта</param>
+    /// <param name="pin">(опционально) пин-код для сайта</param>
     /// <returns>Объект игрока в контексте БД</returns>
     /// <exception cref="ArgumentNullException">Имя обязательно для записи</exception>
     /// <remarks>Не проверяет уникальность имени (можно завести несколько одинаковых имён "мастер" для разрых игр)</remarks>
-    public async Task<PlayerEntity> AddPlayerAsync(string name, string? comment = null)
+    public async Task<PlayerEntity> AddPlayerAsync(string name, string? comment = null, string? login = null, string? pin = null)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
             throw new ArgumentNullException(nameof(name));
         }
 
+        string normalizedLogin = await NormalizeOrGenerateLoginAsync(login);
+        string normalizedPin = NormalizeOrGeneratePin(pin);
+
         PlayerEntity newPlayer = new()
         {
             Id = Guid.NewGuid(),
             Name = name,
+            Login = normalizedLogin,
+            Pin = normalizedPin,
             Comments = comment
         };
 
@@ -87,7 +125,9 @@ public class SqlitePlayersCardsService(PlayersDbContext dbContext, ICardCatalogS
     /// <param name="guid">Идентификатор игрока</param>
     /// <param name="newName">Новое имя игрока</param>
     /// <param name="newComment">Новый комментарий для игрока</param>
-    public async Task UpdatePlayerAsync(Guid guid, string? newName = null, string? newComment = null)
+    /// <param name="newLogin">Новый логин игрока для сайта</param>
+    /// <param name="newPin">Новый пин-код игрока для сайта</param>
+    public async Task UpdatePlayerAsync(Guid guid, string? newName = null, string? newComment = null, string? newLogin = null, string? newPin = null)
     {
         PlayerEntity? playerToUpdate = await _dbContext.Players.SingleOrDefaultAsync(x => x.Id == guid);
         if (playerToUpdate == null)
@@ -100,11 +140,71 @@ public class SqlitePlayersCardsService(PlayersDbContext dbContext, ICardCatalogS
             playerToUpdate.Name = newName;
         }
 
-        if (!string.IsNullOrWhiteSpace(newComment))
+        playerToUpdate.Comments = newComment;
+
+        string normalizedLogin = PlayerCredentials.NormalizeLogin(newLogin);
+        if (!string.IsNullOrWhiteSpace(normalizedLogin))
         {
-            playerToUpdate.Comments = newComment;
+            if (!PlayerCredentials.IsValidLogin(normalizedLogin))
+            {
+                throw new ArgumentException("Player login is invalid.", nameof(newLogin));
+            }
+
+            playerToUpdate.Login = normalizedLogin;
+        }
+        else if (string.IsNullOrWhiteSpace(playerToUpdate.Login))
+        {
+            playerToUpdate.Login = await NormalizeOrGenerateLoginAsync(null);
         }
 
+        string normalizedPin = PlayerCredentials.NormalizePin(newPin);
+        if (!string.IsNullOrWhiteSpace(normalizedPin))
+        {
+            if (!PlayerCredentials.IsValidPin(normalizedPin))
+            {
+                throw new ArgumentException("Player pin must contain five digits and must not be 00000.", nameof(newPin));
+            }
+
+            playerToUpdate.Pin = normalizedPin;
+        }
+        else if (string.IsNullOrWhiteSpace(playerToUpdate.Pin))
+        {
+            playerToUpdate.Pin = PlayerCredentials.GeneratePin();
+        }
+
+        await _dbContext.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Получить пин-код игрока
+    /// </summary>
+    public async Task<string?> GetPlayerPinAsync(Guid guid)
+    {
+        PlayerEntity? player = await _dbContext.Players
+            .AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Id == guid);
+
+        return player?.Pin;
+    }
+
+    /// <summary>
+    /// Изменить пин-код игрока
+    /// </summary>
+    public async Task UpdatePlayerPinAsync(Guid guid, string pin)
+    {
+        string normalizedPin = PlayerCredentials.NormalizePin(pin);
+        if (!PlayerCredentials.IsValidPin(normalizedPin))
+        {
+            throw new ArgumentException("Player pin must contain five digits and must not be 00000.", nameof(pin));
+        }
+
+        PlayerEntity? playerToUpdate = await _dbContext.Players.SingleOrDefaultAsync(x => x.Id == guid);
+        if (playerToUpdate == null)
+        {
+            throw new ArgumentException($"No player with id {guid} found.", nameof(guid));
+        }
+
+        playerToUpdate.Pin = normalizedPin;
         await _dbContext.SaveChangesAsync();
     }
 
@@ -123,6 +223,48 @@ public class SqlitePlayersCardsService(PlayersDbContext dbContext, ICardCatalogS
 
         _dbContext.Players.Remove(playerToDelete);
         await _dbContext.SaveChangesAsync();
+    }
+
+    private async Task<string> NormalizeOrGenerateLoginAsync(string? login)
+    {
+        string normalizedLogin = PlayerCredentials.NormalizeLogin(login);
+        if (!string.IsNullOrWhiteSpace(normalizedLogin))
+        {
+            if (!PlayerCredentials.IsValidLogin(normalizedLogin))
+            {
+                throw new ArgumentException("Player login is invalid.", nameof(login));
+            }
+
+            return normalizedLogin;
+        }
+
+        for (int attempt = 0; attempt < 20; attempt++)
+        {
+            string generatedLogin = PlayerCredentials.GenerateLogin();
+            bool exists = await _dbContext.Players.AnyAsync(x => x.Login == generatedLogin);
+            if (!exists)
+            {
+                return generatedLogin;
+            }
+        }
+
+        return PlayerCredentials.GenerateLogin();
+    }
+
+    private static string NormalizeOrGeneratePin(string? pin)
+    {
+        string normalizedPin = PlayerCredentials.NormalizePin(pin);
+        if (string.IsNullOrWhiteSpace(normalizedPin))
+        {
+            return PlayerCredentials.GeneratePin();
+        }
+
+        if (!PlayerCredentials.IsValidPin(normalizedPin))
+        {
+            throw new ArgumentException("Player pin must contain five digits and must not be 00000.", nameof(pin));
+        }
+
+        return normalizedPin;
     }
 
     /// <summary>

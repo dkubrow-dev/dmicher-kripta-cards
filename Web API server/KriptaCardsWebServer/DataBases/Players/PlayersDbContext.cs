@@ -23,6 +23,11 @@ public sealed class PlayersDbContext(DbContextOptions<PlayersDbContext> options)
     public DbSet<PlayersCardEntity> Cards => Set<PlayersCardEntity>();
 
     /// <summary>
+    /// Сессионные ключи входа игроков на сервер
+    /// </summary>
+    public DbSet<PlayerSessionEntity> PlayerSessions => Set<PlayerSessionEntity>();
+
+    /// <summary>
     /// Строит модель в базе даннхых
     /// </summary>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,8 +44,18 @@ public sealed class PlayersDbContext(DbContextOptions<PlayersDbContext> options)
                 .IsRequired()
                 .HasMaxLength(250);
 
+            entity.Property(x => x.Login)
+                .IsRequired()
+                .HasMaxLength(250);
+
+            entity.Property(x => x.Pin)
+                .IsRequired()
+                .HasMaxLength(5);
+
             entity.Property(x => x.Comments)
                 .HasMaxLength(10_000);
+
+            entity.HasIndex(x => x.Login);
         });
 
         modelBuilder.Entity<PlayersCardEntity>(entity =>
@@ -66,6 +81,32 @@ public sealed class PlayersDbContext(DbContextOptions<PlayersDbContext> options)
 
             entity.HasOne(x => x.Owner)
                 .WithMany(x => x.Cards)
+                .HasForeignKey(x => x.PlayerId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<PlayerSessionEntity>(entity =>
+        {
+            entity.ToTable("player_sessions");
+            entity.HasKey(x => x.Id);
+
+            entity.Property(x => x.Id)
+                .ValueGeneratedNever();
+
+            entity.Property(x => x.PlayerId)
+                .IsRequired();
+
+            entity.Property(x => x.CreatedAtUtc)
+                .IsRequired();
+
+            entity.Property(x => x.ExpiresAtUtc)
+                .IsRequired();
+
+            entity.HasIndex(x => x.PlayerId);
+            entity.HasIndex(x => x.ExpiresAtUtc);
+
+            entity.HasOne(x => x.Owner)
+                .WithMany(x => x.Sessions)
                 .HasForeignKey(x => x.PlayerId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
