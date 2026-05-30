@@ -3,6 +3,24 @@ import { format, localize } from "../helpers/lang.js";
 
 const { DialogV2 } = foundry.applications.api;
 
+export function generatePlayerPin() {
+  return String(Math.floor(Math.random() * 99999) + 1).padStart(5, "0");
+}
+
+export function generatePlayerLogin() {
+  return `player-${String(Math.floor(Math.random() * 1000000)).padStart(6, "0")}`;
+}
+
+export function isValidPlayerPin(pin) {
+  const value = String(pin ?? "").trim();
+  return /^\d{5}$/.test(value) && value !== "00000";
+}
+
+export function isValidPlayerLogin(login) {
+  const value = String(login ?? "").trim();
+  return value.length > 0 && value.length <= 250;
+}
+
 async function waitDialog(config, fallback = null) {
   try {
     return await DialogV2.wait({
@@ -142,6 +160,9 @@ export async function chooseServerPlayerDialog(players, currentGuid = "", foundr
 }
 
 export async function addEditPlayerDialog(player = null) {
+  const login = String(player?.login ?? "").trim() || generatePlayerLogin();
+  const pin = String(player?.pin ?? "").trim() || generatePlayerPin();
+
   return waitDialog({
     window: {
       title: player ? localize("Dialog.Player.EditTitle") : localize("Dialog.Player.AddTitle")
@@ -194,6 +215,72 @@ export async function addEditPlayerDialog(player = null) {
             style="
               display: block;
               width: 100%;
+              margin: 0 0 14px 0;
+            "
+          >
+            <label
+              style="
+                display: block;
+                width: 100%;
+                margin: 0 0 8px 0;
+              "
+            >${localize("Label.Login")}</label>
+
+            <input
+              type="text"
+              name="login"
+              value="${escapeHtml(login)}"
+              maxlength="250"
+              required
+              style="
+                display: block;
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+              "
+            >
+          </div>
+
+          <div
+            class="form-group"
+            style="
+              display: block;
+              width: 100%;
+              margin: 0 0 14px 0;
+            "
+          >
+            <label
+              style="
+                display: block;
+                width: 100%;
+                margin: 0 0 8px 0;
+              "
+            >${localize("Label.Pin")}</label>
+
+            <input
+              type="text"
+              name="pin"
+              value="${escapeHtml(pin)}"
+              maxlength="5"
+              pattern="\\d{5}"
+              required
+              inputmode="numeric"
+              style="
+                display: block;
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+              "
+            >
+          </div>
+
+          <div
+            class="form-group"
+            style="
+              display: block;
+              width: 100%;
               margin: 0;
             "
           >
@@ -231,6 +318,8 @@ export async function addEditPlayerDialog(player = null) {
         callback: (_event, button) => ({
           action: "confirm",
           name: String(button.form?.elements?.name?.value ?? "").trim(),
+          login: String(button.form?.elements?.login?.value ?? "").trim(),
+          pin: String(button.form?.elements?.pin?.value ?? "").trim(),
           comment: String(button.form?.elements?.comment?.value ?? "").trim()
         })
       },
@@ -241,6 +330,46 @@ export async function addEditPlayerDialog(player = null) {
       }
     ]
   }, { action: "cancel" });
+}
+
+export async function changePinDialog(currentPin = "") {
+  return waitDialog({
+    window: {
+      title: localize("Dialog.Pin.EditTitle")
+    },
+    content: `
+      <form class="kripta-inline-form" onsubmit="return false;">
+        <div class="form-group">
+          <label>${localize("Label.Pin")}</label>
+          <input
+            type="text"
+            name="pin"
+            value="${escapeHtml(String(currentPin ?? "").trim() || generatePlayerPin())}"
+            maxlength="5"
+            pattern="\\d{5}"
+            inputmode="numeric"
+            required
+          >
+        </div>
+      </form>
+    `,
+    buttons: [
+      {
+        action: "confirm",
+        label: localize("Button.SaveChanges"),
+        default: true,
+        callback: (_event, button) => ({
+          action: "confirm",
+          pin: String(button.form?.elements?.pin?.value ?? "").trim()
+        })
+      },
+      {
+        action: "cancel",
+        label: localize("Button.Cancel"),
+        callback: () => ({ action: "cancel", pin: null })
+      }
+    ]
+  }, { action: "cancel", pin: null });
 }
 
 export async function deletePlayerDialog(player) {

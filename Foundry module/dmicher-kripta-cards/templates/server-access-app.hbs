@@ -1,0 +1,20 @@
+<section class="kripta-server-access">
+  <b>{{localize 'KRIPTA.Label.ServerLink'}}:</b>
+  {{#if hasServerUrl}}
+  <a href="{{serverUrl}}" target="_blank" rel="noreferrer noopener">{{serverUrl}}</a>
+  {{else}}
+  <span class="notes">{{localize 'KRIPTA.Error.MissingServerUrl'}}</span>
+  {{/if}}<br />
+  <b>{{localize 'KRIPTA.Label.Login'}}:</b> {{serverLogin}}<br />
+  <b>{{localize 'KRIPTA.Label.Pin'}}:</b> <span class="kripta-server-access__pin">{{pin}}</span><button
+    type="button"
+    class="kripta-server-access__icon-button"
+    data-action="copy-pin"
+    title="{{localize 'KRIPTA.Button.CopyPin'}}"
+    aria-label="{{localize 'KRIPTA.Button.CopyPin'}}">⧉</button><button
+    type="button"
+    class="kripta-server-access__icon-button"
+    data-action="change-pin"
+    title="{{localize 'KRIPTA.Button.ChangePin'}}"
+    aria-label="{{localize 'KRIPTA.Button.ChangePin'}}">✎</button>
+</section>

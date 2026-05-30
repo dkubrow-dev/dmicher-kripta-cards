@@ -1,6 +1,6 @@
 import { KriptaApiClient } from "../api/client.js";
 import { MODULE_ID, TEMPLATE_ROOT } from "../constants.js";
-import { addEditPlayerDialog, deletePlayerDialog } from "./dialogs.js";
+import { addEditPlayerDialog, deletePlayerDialog, isValidPlayerLogin, isValidPlayerPin } from "./dialogs.js";
 import { localize } from "../helpers/lang.js";
 import { notifyError, notifyInfo } from "../helpers/utils.js";
 
@@ -45,6 +45,8 @@ async function fetchPlayersUntilDeleted(guid, attempts = 5, delayMs = 250) {
 function validatePlayerPayload(payload) {
   const name = String(payload?.name ?? "").trim();
   if (!name) return localize("Error.NameRequired");
+  if (!isValidPlayerLogin(payload?.login)) return localize("Error.LoginRequired");
+  if (!isValidPlayerPin(payload?.pin)) return localize("Error.PinInvalid");
   return "";
 }
 
@@ -134,6 +136,8 @@ export class KriptaPlayerRegistryApp extends Application {
 
       const payload = {
         name: dialogResult.name,
+        login: dialogResult.login,
+        pin: dialogResult.pin,
         comment: dialogResult.comment
       };
 
@@ -145,7 +149,7 @@ export class KriptaPlayerRegistryApp extends Application {
       }
 
       try {
-        await KriptaApiClient.addPlayer(payload.name, payload.comment);
+        await KriptaApiClient.addPlayer(payload.name, payload.comment, payload.login, payload.pin);
         notifyInfo(localize("Notification.PlayerAdded"));
         this.onChange();
         this.render();
@@ -163,6 +167,8 @@ export class KriptaPlayerRegistryApp extends Application {
 
       const payload = {
         name: dialogResult.name,
+        login: dialogResult.login,
+        pin: dialogResult.pin,
         comment: dialogResult.comment
       };
 
@@ -174,7 +180,7 @@ export class KriptaPlayerRegistryApp extends Application {
       }
 
       try {
-        await KriptaApiClient.updatePlayer(player.guid, payload.name, payload.comment);
+        await KriptaApiClient.updatePlayer(player.guid, payload.name, payload.comment, payload.login, payload.pin);
         this.selectedGuid = player.guid;
         notifyInfo(localize("Notification.PlayerUpdated"));
         this.onChange();

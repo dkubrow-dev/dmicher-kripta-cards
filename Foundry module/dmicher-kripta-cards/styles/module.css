@@ -222,6 +222,34 @@
   margin-inline: auto;
 }
 
+.dmicher-kripta-cards .kripta-server-access {
+  line-height: 1.2;
+  padding: 4px 8px;
+}
+
+.dmicher-kripta-cards .kripta-server-access a,
+.dmicher-kripta-cards .kripta-server-access .notes {
+  overflow-wrap: anywhere;
+}
+
+.dmicher-kripta-cards .kripta-server-access__pin {
+  font-family: monospace;
+  font-weight: 700;
+}
+
+.dmicher-kripta-cards .kripta-server-access__icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  margin-left: 5px;
+  padding: 0;
+  vertical-align: middle;
+  line-height: 1;
+}
+
 .dmicher-kripta-cards .kripta-empty-state,
 .dmicher-kripta-cards .kripta-danger-note,
 .dmicher-kripta-cards .kripta-spent-note {

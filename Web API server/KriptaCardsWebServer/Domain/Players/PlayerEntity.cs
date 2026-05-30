@@ -20,6 +20,16 @@ public sealed record PlayerEntity
     public string? Name { get; set; }
 
     /// <summary>
+    /// Имя пользователя для входа непосредственно на сервер
+    /// </summary>
+    public string? Login { get; set; }
+
+    /// <summary>
+    /// Пятизначный пин-код пользователя для входа непосредственно на сервер
+    /// </summary>
+    public string? Pin { get; set; }
+
+    /// <summary>
     /// Комментарий
     /// </summary>
     public string? Comments { get; set; }
@@ -28,4 +38,9 @@ public sealed record PlayerEntity
     /// Карточки, выданные игроку
     /// </summary>
     public ICollection<PlayersCardEntity> Cards { get; set; } = [];
+
+    /// <summary>
+    /// Сессионные ключи входа игрока на сервер
+    /// </summary>
+    public ICollection<PlayerSessionEntity> Sessions { get; set; } = [];
 }

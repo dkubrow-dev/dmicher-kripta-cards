@@ -20,6 +20,16 @@ public class PlayerGridRowDto
     public string? Name { get; set; }
 
     /// <summary>
+    /// Логин пользователя для входа на сервер
+    /// </summary>
+    public string? Login { get; set; }
+
+    /// <summary>
+    /// Пятизначный пин-код пользователя для входа на сервер
+    /// </summary>
+    public string? Pin { get; set; }
+
+    /// <summary>
     /// Количество уникальных карточек, выданных игроку
     /// </summary>
     /// <remarks>Карточки могут повторяться</remarks>
